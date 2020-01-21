@@ -12,10 +12,17 @@ export default class DomElement extends HTMLElement implements IDomElement {
      */
     protected connectedCallback(): void {
         this.connected = true;
+        this.initialize();
     }
 
-    protected connectedToDom(): void {
+    protected initialize(): void {
         // override in sub classes
+        // console.log('DomElement initialize()');
+    }
+
+    protected commitProperties(): void {
+        // override
+        // console.log('DomElement commitProperties()', this);
     }
 
     /**
@@ -23,10 +30,6 @@ export default class DomElement extends HTMLElement implements IDomElement {
      */
     protected disconnectedCallback(): void {
         this.connected = false;
-    }
-
-    protected disconnectedFromDom(): void {
-        // override in sub classes
     }
 
     public dispatchEventWith(typeArg: string, payload: unknown = null): void {
@@ -48,11 +51,6 @@ export default class DomElement extends HTMLElement implements IDomElement {
             return;
         }
         this._connected = value;
-        if (value) {
-            this.connectedToDom();
-        } else {
-            this.disconnectedFromDom();
-        }
     }
 
     public get connected(): boolean {
@@ -65,14 +63,10 @@ export default class DomElement extends HTMLElement implements IDomElement {
         if (!this.propertiesInvalid) {
             this.propertiesInvalid = true;
             setTimeout(() => {
+                this.propertiesInvalid = false;
                 this.commitProperties();
             }, 0);
         }
-    }
-
-    protected commitProperties(): void {
-        // override
-        console.log('DomElement commitProperties()', this);
     }
 }
 customElements.define('dom-element', DomElement);

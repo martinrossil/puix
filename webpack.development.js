@@ -5,7 +5,7 @@ module.exports = {
     mode: 'development',
     devtool: 'inline-source-map',
     entry: {
-        PuiApp: './src/elements/PositionElement.ts',
+        PuiApp: './src/elements/DisplayContainer.ts',
     },
     output: {
         filename: '[name].[contenthash].js',
