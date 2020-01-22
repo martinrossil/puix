@@ -19,16 +19,27 @@ export default class SizeElement extends PositionElement implements ISizeElement
             this._heightChanged = false;
             this.style.width = this.width + 'px';
             this.style.height = this.height + 'px';
-            return;
-        }
-        if (this._widthChanged) {
+        } else if (this._widthChanged) {
             this._widthChanged = false;
             this.style.width = this.width + 'px';
-            return;
-        }
-        if (this._heightChanged) {
+        } else if (this._heightChanged) {
             this._heightChanged = false;
             this.style.height = this.height + 'px';
+        }
+        if (this._actualWidthChanged && this._actualHeightChanged) {
+            this._actualWidthChanged = false;
+            this._actualHeightChanged = false;
+            this.style.width = this.actualWidth + 'px';
+            this.style.height = this.actualHeight + 'px';
+            this.dispatchEventWith('actualSizeChanged');
+        } else if (this._actualWidthChanged) {
+            this._actualWidthChanged = false;
+            this.style.width = this.actualWidth + 'px';
+            this.dispatchEventWith('actualWidthChanged');
+        } else if (this._actualHeightChanged) {
+            this._actualHeightChanged = false;
+            this.style.height = this.actualHeight + 'px';
+            this.dispatchEventWith('actualHeightChanged');
         }
     }
 
@@ -65,6 +76,41 @@ export default class SizeElement extends PositionElement implements ISizeElement
 
     public get height(): number {
         return this._height;
+    }
+
+    public setActualSize(width: number, height: number): void {
+        this.actualWidth = width;
+        this.actualHeight = height;
+    }
+
+    private _actualWidth = 0;
+    private _actualWidthChanged = false;
+    public set actualWidth(value: number) {
+        if (this._actualWidth === value) {
+            return;
+        }
+        this._actualWidth = value;
+        this._actualWidthChanged = true;
+        this.invalidateProperties();
+    }
+
+    public get actualWidth(): number {
+        return this._actualWidth;
+    }
+
+    private _actualHeight = 0;
+    private _actualHeightChanged = false;
+    public set actualHeight(value: number) {
+        if (this._actualHeight === value) {
+            return;
+        }
+        this._actualHeight = value;
+        this._actualHeightChanged = true;
+        this.invalidateProperties();
+    }
+
+    public get actualHeight(): number {
+        return this._actualHeight;
     }
 }
 customElements.define('size-element', SizeElement);
