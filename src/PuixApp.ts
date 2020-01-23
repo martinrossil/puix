@@ -28,6 +28,8 @@ export default class PuixApp extends ApplicationContainer {
         blueBox.y = 25;
         container.addElement(blueBox);
         this.addElement(container);
+
+        // Testing commits
     }
 }
 customElements.define('puix-app', PuixApp);
