@@ -10,27 +10,14 @@ export default class DisplayContainer extends DisplayElement implements IDisplay
     protected initialize(): void {
         super.initialize();
         console.log('DisplayContainer initialize()');
-        this.backgroundColor = 'red';
-        this.opacity = 0.5;
-        const greenBox: IDisplayElement = new DisplayElement();
-        greenBox.setSize(300, 50);
-        greenBox.x = 25;
-        greenBox.backgroundColor = 'green';
-        greenBox.opacity = 0.5;
-        this.addElement(greenBox);
-        const blueBox: IDisplayElement = new DisplayElement();
-        blueBox.setSize(50, 300);
-        blueBox.backgroundColor = 'blue';
-        blueBox.opacity = 0.5;
-        blueBox.y = 25;
-        this.addElement(blueBox);
+        // Make invalidateACtualSize public and call from layouts after laying out elements!!!!
     }
 
     protected commitProperties(): void {
         super.commitProperties();
         console.log('DisplayContainer commitProperties()');
-        if (this._invalidateActualSizeChanged) {
-            this._invalidateActualSizeChanged = false;
+        if (this._actualSizeInvalid) {
+            this._actualSizeInvalid = false;
             this.setActualSizeFromElements();
         }
     }
@@ -82,7 +69,7 @@ export default class DisplayContainer extends DisplayElement implements IDisplay
 
     public addElement(element: IDisplayElement): void {
         this.elements.push(element);
-        this.invalidateActualSize = true;
+        this.actualSizeInvalid = true;
         this.appendChild(element as unknown as Node);
         this.invalidateProperties();
     }
@@ -92,19 +79,17 @@ export default class DisplayContainer extends DisplayElement implements IDisplay
         return this._elements;
     }
 
-    private _invalidateActualSize = false;
-    private _invalidateActualSizeChanged = false;
-    protected set invalidateActualSize(value: boolean) {
-        if (this._invalidateActualSize === value) {
+    private _actualSizeInvalid = false;
+    protected set actualSizeInvalid(value: boolean) {
+        if (this._actualSizeInvalid === value) {
             return;
         }
-        this._invalidateActualSize = true;
-        this._invalidateActualSizeChanged = true;
+        this._actualSizeInvalid = true;
         this.invalidateProperties();
     }
 
-    protected get invalidateActualSize(): boolean {
-        return this._invalidateActualSize;
+    protected get actualSizeInvalid(): boolean {
+        return this._actualSizeInvalid;
     }
 }
 customElements.define('display-container', DisplayContainer);

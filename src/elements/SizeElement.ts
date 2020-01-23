@@ -13,33 +13,17 @@ export default class SizeElement extends PositionElement implements ISizeElement
 
     protected commitProperties(): void {
         super.commitProperties();
-        // console.log('SizeElement commitProperties()', this);
-        if (this._widthChanged && this._heightChanged) {
-            this._widthChanged = false;
-            this._heightChanged = false;
-            this.style.width = this.width + 'px';
-            this.style.height = this.height + 'px';
-        } else if (this._widthChanged) {
-            this._widthChanged = false;
-            this.style.width = this.width + 'px';
-        } else if (this._heightChanged) {
-            this._heightChanged = false;
-            this.style.height = this.height + 'px';
-        }
         if (this._actualWidthChanged && this._actualHeightChanged) {
             this._actualWidthChanged = false;
             this._actualHeightChanged = false;
             this.style.width = this.actualWidth + 'px';
             this.style.height = this.actualHeight + 'px';
-            this.dispatchEventWith('actualSizeChanged');
         } else if (this._actualWidthChanged) {
             this._actualWidthChanged = false;
             this.style.width = this.actualWidth + 'px';
-            this.dispatchEventWith('actualWidthChanged');
         } else if (this._actualHeightChanged) {
             this._actualHeightChanged = false;
             this.style.height = this.actualHeight + 'px';
-            this.dispatchEventWith('actualHeightChanged');
         }
     }
 
@@ -49,14 +33,12 @@ export default class SizeElement extends PositionElement implements ISizeElement
     }
 
     private _width = 0;
-    private _widthChanged = false;
     public set width(value: number) {
         if (this._width === value) {
             return;
         }
         this._width = value;
-        this._widthChanged = true;
-        this.invalidateProperties();
+        this.actualWidth = value;
     }
 
     public get width(): number {
@@ -64,14 +46,12 @@ export default class SizeElement extends PositionElement implements ISizeElement
     }
 
     private _height = 0;
-    private _heightChanged = false;
     public set height(value: number) {
         if (this._height === value) {
             return;
         }
         this._height = value;
-        this._heightChanged = true;
-        this.invalidateProperties();
+        this.actualHeight = value;
     }
 
     public get height(): number {
