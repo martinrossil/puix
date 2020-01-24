@@ -6,24 +6,19 @@ export default class SizeElement extends PositionElement implements ISizeElement
         super();
     }
 
-    protected initialize(): void {
-        super.initialize();
-        // console.log('SizeElement initialize()');
+    protected updateDisplay(actualWidth: number, actualHeight: number): void {
+        // override
+        console.log('updateDisplay()', actualWidth, actualHeight);
     }
 
     protected commitProperties(): void {
         super.commitProperties();
-        if (this._actualWidthChanged && this._actualHeightChanged) {
+        if (this._actualWidthChanged || this._actualHeightChanged) {
             this._actualWidthChanged = false;
             this._actualHeightChanged = false;
             this.style.width = this.actualWidth + 'px';
             this.style.height = this.actualHeight + 'px';
-        } else if (this._actualWidthChanged) {
-            this._actualWidthChanged = false;
-            this.style.width = this.actualWidth + 'px';
-        } else if (this._actualHeightChanged) {
-            this._actualHeightChanged = false;
-            this.style.height = this.actualHeight + 'px';
+            this.updateDisplay(this.actualWidth, this.actualHeight);
         }
     }
 
@@ -38,7 +33,12 @@ export default class SizeElement extends PositionElement implements ISizeElement
             return;
         }
         this._width = value;
-        this.actualWidth = value;
+        if (this._actualWidth === value) {
+            return;
+        }
+        this._actualWidth = value;
+        this._actualWidthChanged = true;
+        this.invalidateProperties();
     }
 
     public get width(): number {
@@ -51,7 +51,12 @@ export default class SizeElement extends PositionElement implements ISizeElement
             return;
         }
         this._height = value;
-        this.actualHeight = value;
+        if (this._actualHeight === value) {
+            return;
+        }
+        this._actualHeight = value;
+        this._actualHeightChanged = true;
+        this.invalidateProperties();
     }
 
     public get height(): number {

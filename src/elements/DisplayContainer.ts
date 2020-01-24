@@ -9,13 +9,11 @@ export default class DisplayContainer extends DisplayElement implements IDisplay
 
     protected initialize(): void {
         super.initialize();
-        console.log('DisplayContainer initialize()');
         // Make invalidateACtualSize public and call from layouts after laying out elements!!!!
     }
 
     protected commitProperties(): void {
         super.commitProperties();
-        console.log('DisplayContainer commitProperties()');
         if (this._actualSizeInvalid) {
             this._actualSizeInvalid = false;
             this.setActualSizeFromElements();
@@ -23,7 +21,6 @@ export default class DisplayContainer extends DisplayElement implements IDisplay
     }
 
     protected setActualSizeFromElements(): void {
-        console.log('setActualSizeFromElements', this.width, this.height);
         if (this.width === 0 && this.height === 0) {
             this.calculateActualSize();
         } else if (this.width === 0 && this.height !== 0) {

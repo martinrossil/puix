@@ -6,14 +6,8 @@ export default class DisplayElement extends SizeElement implements IDisplayEleme
         super();
     }
 
-    protected initialize(): void {
-        super.initialize();
-        // console.log('DisplayElement initialize()');
-    }
-
     protected commitProperties(): void {
         super.commitProperties();
-        // console.log('DisplayElement commitProperties()', this);
         if (this._backgroundColorChanged) {
             this._backgroundColorChanged = false;
             this.style.backgroundColor = this.backgroundColor;

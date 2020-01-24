@@ -12,8 +12,12 @@ export default class DomElement extends HTMLElement implements IDomElement {
      */
     protected connectedCallback(): void {
         this.connected = true;
-        this.initialize();
+        if (!this.initialized) {
+            this.initialize();
+        }
     }
+
+    protected initialized = false;
 
     protected initialize(): void {
         // override in sub classes
