@@ -3,6 +3,7 @@ import IDisplayContainer from './interfaces/IDisplayContainer';
 import IDisplayElement from './interfaces/IDisplayElement';
 import DisplayElement from './elements/DisplayElement';
 import DisplayContainer from './elements/DisplayContainer';
+import AnchorLayout from './layouts/AnchorLayout';
 
 export default class PuixApp extends ApplicationContainer {
     public constructor() {
@@ -28,7 +29,8 @@ export default class PuixApp extends ApplicationContainer {
         blueBox.y = 25;
         container.addElement(blueBox);
         this.addElement(container);
-
+        this.layout = new AnchorLayout();
+        // this.layout = null;
         // Testing commits
     }
 }

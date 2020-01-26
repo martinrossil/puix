@@ -12,5 +12,10 @@ export default class ApplicationContainer extends LayoutContainer {
         });
         this.setSize(window.innerWidth, window.innerHeight);
     }
+
+    protected internalSizeInvalidChanged(): void {
+        super.internalSizeInvalidChanged();
+        console.log('ApplicationContainer internalSizeInvalidChanged()');
+    }
 }
 customElements.define('application-container', ApplicationContainer);

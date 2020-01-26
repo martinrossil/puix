@@ -1,32 +1,19 @@
 import SizeElement from './SizeElement';
 import IDisplayElement from '../interfaces/IDisplayElement';
+import ISizeElement from '../interfaces/ISizeElement';
 
 export default class DisplayElement extends SizeElement implements IDisplayElement {
     public constructor() {
         super();
     }
 
-    protected commitProperties(): void {
-        super.commitProperties();
-        if (this._backgroundColorChanged) {
-            this._backgroundColorChanged = false;
-            this.style.backgroundColor = this.backgroundColor;
-        }
-        if (this._opacityChanged) {
-            this._opacityChanged = false;
-            this.style.opacity = this.opacity.toString();
-        }
-    }
-
     private _backgroundColor = '';
-    private _backgroundColorChanged = false;
     public set backgroundColor(value: string) {
         if (this._backgroundColor === value) {
             return;
         }
         this._backgroundColor = value;
-        this._backgroundColorChanged = true;
-        this.invalidateProperties();
+        this.style.backgroundColor = value;
     }
 
     public get backgroundColor(): string {
@@ -34,18 +21,28 @@ export default class DisplayElement extends SizeElement implements IDisplayEleme
     }
 
     private _opacity = 1;
-    private _opacityChanged = false;
     public set opacity(value: number) {
         if (this._opacity === value) {
             return;
         }
         this._opacity = value;
-        this._opacityChanged = true;
-        this.invalidateProperties();
+        this.style.opacity = value.toString();
     }
 
     public get opacity(): number {
         return this._opacity;
+    }
+
+    private _parent: ISizeElement | null = null;
+    public set parent(value: ISizeElement | null) {
+        if (this._parent === value) {
+            return;
+        }
+        this._parent = value;
+    }
+
+    public get parent(): ISizeElement | null {
+        return this._parent;
     }
 }
 customElements.define('display-element', DisplayElement);

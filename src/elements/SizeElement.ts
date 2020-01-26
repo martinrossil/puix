@@ -14,12 +14,25 @@ export default class SizeElement extends PositionElement implements ISizeElement
     protected commitProperties(): void {
         super.commitProperties();
         if (this._actualWidthChanged || this._actualHeightChanged) {
-            this._actualWidthChanged = false;
-            this._actualHeightChanged = false;
-            this.style.width = this.actualWidth + 'px';
-            this.style.height = this.actualHeight + 'px';
-            this.updateDisplay(this.actualWidth, this.actualHeight);
+            this.actualSizeChanged();
         }
+        if (this._internalSizeInvalidChanged) {
+            this._internalSizeInvalid = false;
+            this._internalSizeInvalidChanged = false;
+            this.internalSizeInvalidChanged();
+        }
+    }
+
+    protected actualSizeChanged(): void {
+        this._actualWidthChanged = false;
+        this._actualHeightChanged = false;
+        this.style.width = this.actualWidth + 'px';
+        this.style.height = this.actualHeight + 'px';
+        this.updateDisplay(this.actualWidth, this.actualHeight);
+    }
+
+    protected internalSizeInvalidChanged(): void {
+        // override
     }
 
     public setSize(width: number, height: number): void {
@@ -96,6 +109,21 @@ export default class SizeElement extends PositionElement implements ISizeElement
 
     public get actualHeight(): number {
         return this._actualHeight;
+    }
+
+    private _internalSizeInvalid = false;
+    private _internalSizeInvalidChanged = false;
+    public set internalSizeInvalid(value: boolean) {
+        if (this._internalSizeInvalid === value) {
+            return;
+        }
+        this._internalSizeInvalid = true;
+        this._internalSizeInvalidChanged = true;
+        this.invalidateProperties();
+    }
+
+    public get internalSizeInvalid(): boolean {
+        return this._internalSizeInvalid;
     }
 }
 customElements.define('size-element', SizeElement);
