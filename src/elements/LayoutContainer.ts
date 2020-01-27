@@ -7,16 +7,6 @@ export default class LayoutContainer extends DisplayContainer implements ILayout
         super();
     }
 
-    protected internalSizeInvalidChanged(): void {
-        super.internalSizeInvalidChanged();
-        console.log('LayoutContainer internalSizeInvalidChanged()');
-        if (this.layout) {
-            this.layout.updateLayout(this);
-        } else {
-            this.setActualSizeFromElements();
-        }
-    }
-
     protected commitProperties(): void {
         super.commitProperties();
         if (this._layoutChanged) {

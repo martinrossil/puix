@@ -7,5 +7,7 @@ export default interface ISizeElement extends IPositionElement {
     setActualSize(width: number, height: number): void;
     actualWidth: number;
     actualHeight: number;
-    internalSizeInvalid: boolean;
+    setInternalSize(width: number, height: number): void;
+    internalWidth: number;
+    internalHeight: number;
 }

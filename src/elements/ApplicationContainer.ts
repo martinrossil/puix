@@ -1,6 +1,6 @@
-import LayoutContainer from './LayoutContainer';
+import DisplayContainer from './DisplayContainer';
 
-export default class ApplicationContainer extends LayoutContainer {
+export default class ApplicationContainer extends DisplayContainer {
     public constructor() {
         super();
     }

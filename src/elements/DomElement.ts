@@ -20,6 +20,8 @@ export default class DomElement extends HTMLElement implements IDomElement {
     protected initialized = false;
 
     protected initialize(): void {
+        this.initialized = true;
+        this.invalidateProperties();
         // override in sub classes
         // console.log('DomElement initialize()');
     }
@@ -64,6 +66,9 @@ export default class DomElement extends HTMLElement implements IDomElement {
     protected propertiesInvalid = false;
 
     protected invalidateProperties(): void {
+        if (!this.initialized) {
+            return;
+        }
         if (!this.propertiesInvalid) {
             this.propertiesInvalid = true;
             setTimeout(() => {

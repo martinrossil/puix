@@ -18,20 +18,21 @@ export default class DisplayContainer extends DisplayElement implements IDisplay
     protected internalSizeInvalidChanged(): void {
         super.internalSizeInvalidChanged();
         console.log('DisplayContainer internalSizeInvalidChanged()');
-        this.setActualSizeFromElements();
+        this.setInternalSizeFromElements();
     }
 
-    protected setActualSizeFromElements(): void {
-        if (this.width === 0 && this.height === 0) {
-            this.calculateActualSize();
-        } else if (this.width === 0 && this.height !== 0) {
-            this.calculateActualWidth();
-        } else if (this.width !== 0 && this.height === 0) {
-            this.calculateActualHeight();
+    protected setInternalSizeFromElements(): void {
+        if (Number.isNaN(this.width) && Number.isNaN(this.height)) {
+            this.calculateInternalSize();
+        } else if (Number.isNaN(this.width) && !Number.isNaN(this.height)) {
+            this.calculateInternalWidth();
+        } else if (!Number.isNaN(this.width) && Number.isNaN(this.height)) {
+            this.calculateInternalHeight();
         }
     }
 
-    protected calculateActualSize(): void {
+    protected calculateInternalSize(): void {
+        console.log('DisplayContainer calculateInternalSize()');
         let width = 0;
         let height = 0;
         for (const element of this.elements) {
@@ -43,10 +44,10 @@ export default class DisplayContainer extends DisplayElement implements IDisplay
             }
         }
         this.setActualSize(width, height);
-        this.parent.internalSizeInvalid = true;
     }
 
-    protected calculateActualWidth(): void {
+    protected calculateInternalWidth(): void {
+        console.log('DisplayContainer calculateInternalWidth()');
         let width = 0;
         for (const element of this.elements) {
             if (width < element.actualX + element.actualWidth) {
@@ -54,10 +55,10 @@ export default class DisplayContainer extends DisplayElement implements IDisplay
             }
         }
         this.actualWidth = width;
-        this.parent.internalSizeInvalid = true;
     }
 
-    protected calculateActualHeight(): void {
+    protected calculateInternalHeight(): void {
+        console.log('DisplayContainer calculateInternalHeight()');
         let height = 0;
         for (const element of this.elements) {
             if (height < element.actualY + element.actualHeight) {
@@ -65,14 +66,12 @@ export default class DisplayContainer extends DisplayElement implements IDisplay
             }
         }
         this.actualHeight = height;
-        this.parent.internalSizeInvalid = true;
     }
 
     public addElement(element: IDisplayElement): void {
-        element.parent = this;
         this.elements.push(element);
-        this.internalSizeInvalid = true;
         this.appendChild(element as unknown as Node);
+        this.internalSizeInvalid = true;
     }
 
     private _elements: IDisplayElement[] = [];
