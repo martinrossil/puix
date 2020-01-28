@@ -9,6 +9,14 @@ export default class DisplayContainer extends DisplayElement implements IDisplay
 
     protected initialize(): void {
         super.initialize();
+        this.addEventListener('internalSizeChanged', this.elementInternalSizeChanged as EventListener);
+    }
+
+    protected elementInternalSizeChanged(e: CustomEvent): void {
+        if (e.target !== this) {
+            e.stopPropagation();
+            console.log(this, 'elementInternalSizeChanged');
+        }
     }
 
     protected commitProperties(): void {
@@ -44,6 +52,7 @@ export default class DisplayContainer extends DisplayElement implements IDisplay
             }
         }
         this.setActualSize(width, height);
+        this.dispatchEventWith('internalSizeChanged');
     }
 
     protected calculateInternalWidth(): void {
@@ -55,6 +64,7 @@ export default class DisplayContainer extends DisplayElement implements IDisplay
             }
         }
         this.actualWidth = width;
+        this.dispatchEventWith('internalSizeChanged');
     }
 
     protected calculateInternalHeight(): void {
@@ -66,6 +76,7 @@ export default class DisplayContainer extends DisplayElement implements IDisplay
             }
         }
         this.actualHeight = height;
+        this.dispatchEventWith('internalSizeChanged');
     }
 
     public addElement(element: IDisplayElement): void {

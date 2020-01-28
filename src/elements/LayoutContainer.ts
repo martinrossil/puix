@@ -19,13 +19,13 @@ export default class LayoutContainer extends DisplayContainer implements ILayout
         if (this.layout) {
             this.layout.updateLayout(this);
         } else {
-            this.setActualSizeFromElements();
+            this.setInternalSizeFromElements();
         }
     }
 
     private _layout: ILayout | null = null;
     private _layoutChanged = false;
-    public set layout(value: ILayout) {
+    public set layout(value: ILayout | null) {
         if (this._layout === value) {
             return;
         }
@@ -34,7 +34,7 @@ export default class LayoutContainer extends DisplayContainer implements ILayout
         this.invalidateProperties();
     }
 
-    public get layout(): ILayout {
+    public get layout(): ILayout | null {
         return this._layout;
     }
 }
