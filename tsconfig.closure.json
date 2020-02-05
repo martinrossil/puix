@@ -1,0 +1,19 @@
+{
+    "compilerOptions":
+    {
+        "baseUrl": "./src",
+        "target": "esnext",
+        "module": "esnext",
+        "sourceMap": false,
+        "strict": true,
+        "strictNullChecks": true,
+        "outDir": "ts"
+    },
+    "exclude": 
+    [
+        "node_modules",
+        "tests",
+        "interfaces",
+        "**/interfaces/**"
+    ]
+}
