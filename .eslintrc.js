@@ -10,7 +10,6 @@ module.exports = {
     plugins: ['@typescript-eslint'],
     extends: [
         'plugin:@typescript-eslint/recommended',
-        "airbnb-typescript/base",
         'standard'
     ],
     rules: {
@@ -31,7 +30,6 @@ module.exports = {
         "@typescript-eslint/interface-name-prefix": "off",
         "no-useless-constructor": "off",
         "no-restricted-syntax": "off", // so we can use for of loop instead if Array iterator
-        "no-plusplus": "off",
-        "no-param-reassign": "off"
+        "no-plusplus": "off"
     }
 }
