@@ -1,1 +1,7 @@
-export const greet = (): void => console.log('Hello, world!');
+import IEventDispatcher from './interfaces/IEventDispatcher';
+import EventDispatcherElement from './core/EventDispatcherElement';
+
+export {
+    IEventDispatcher,
+    EventDispatcherElement
+}
