@@ -12,7 +12,11 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: '12.x'
-      - run: npm run lint
+      - name: Run ESLint
+          uses: ninosaurus/eslint-check@v5
+          with:
+            eslint-config-path: "./eslintrc.js"
+            custom-directory: "./src"
       - run: npm t
       - run: npm i
       - run: npm run build
