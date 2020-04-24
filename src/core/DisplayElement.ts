@@ -1,4 +1,4 @@
-import { SizeElement } from '../index';
+import SizeElement from '../core/SizeElement';
 import IDisplayElement from '../interfaces/IDisplayElement';
 
 export default class DisplayElement extends SizeElement implements IDisplayElement {
