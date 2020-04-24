@@ -11,7 +11,7 @@
     "roll-dev": "rollup -c rollup.development.js --watch",
     "serve-dev": "live-server --open=./development",
     "build": "rollup -c",
-    "lint": "eslint 'src/**/*.ts'",
+    "lint": "eslint src/**/*.ts",
     "test": "karma start"
   },
   "repository": {
