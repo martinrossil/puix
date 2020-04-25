@@ -4,6 +4,7 @@
   "description": "Pure UI framework",
   "main": "dist/index.cjs.js",
   "module": "dist/index.es.js",
+  "types": "dist/index.d.ts",
   "files": [
     "dist"
   ],
