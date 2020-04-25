@@ -2,11 +2,11 @@
   "name": "puix",
   "version": "0.1.1",
   "description": "Pure UI framework",
+  "main": "dist/index.cjs.js",
   "module": "dist/index.es.js",
   "files": [
     "dist"
   ],
-  "types": "dist/index.d.ts",
   "scripts": {
     "roll-dev": "rollup -c rollup.development.js --watch",
     "serve-dev": "live-server --open=./development",
@@ -47,6 +47,9 @@
     "live-server": "^1.2.1",
     "mocha": "^6.2.3",
     "rollup": "^2.7.2",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-peer-deps-external": "^2.2.2",
     "rollup-plugin-typescript2": "^0.27.0",
     "typescript": "^3.8.3"
   }
