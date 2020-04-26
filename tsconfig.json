@@ -1,21 +1,10 @@
 /* eslint-disable */
 {
     "compilerOptions": {
-        /* "outDir": "dist",
-        "module": "ESNext",
-        "target": "ES5",
-        "sourceMap": true,
-        "allowJs": false,
         "declaration": true,
-        "moduleResolution": "Node",
-        "strictNullChecks": true,
-        "strict": true,
-        "esModuleInterop": true
-    } */
-        // "declaration": true,
-        // "declarationDir": "./dist",
+        "declarationDir": "./dist",
         "module": "esnext",
-        "target": "ES5",
+        "target": "esnext",
         "outDir": "./dist",
         "noImplicitAny": true,
         "strict": true,
