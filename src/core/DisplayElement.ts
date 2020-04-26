@@ -21,8 +21,16 @@ export default class DisplayElement extends SizeElement implements IDisplayEleme
     private _opacity = 1;
 
     public set opacity(value: number) {
-        this._opacity = value;
-        this.style.opacity = value.toString();
+        if (isNaN(value)) {
+            this._opacity = 1;
+        } else if (value < 0) {
+            this._opacity = 0;
+        } else if (value > 1) {
+            this._opacity = 1;
+        } else {
+            this._opacity = value;
+        }
+        this.style.opacity = this._opacity.toString();
     }
 
     public get opacity(): number {
