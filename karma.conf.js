@@ -14,6 +14,7 @@ module.exports = function karma(config) {
         ],
         preprocessors: {
             '**/*.ts': 'karma-typescript',
+            'src/**/*.ts': 'coverage'
         },
         plugins: [
             'karma-typescript',
@@ -22,14 +23,16 @@ module.exports = function karma(config) {
             'karma-chai',
             'karma-coverage-istanbul-reporter',
             'karma-spec-reporter',
+            'karma-coverage'
         ],
         reporters: [
             'spec',
             'coverage-istanbul',
             'karma-typescript',
+            'coverage'
         ],
         coverageIstanbulReporter: {
-            reports: ['text-summary'],
+            reports: ['text-summary', 'lcov'],
             dir: path.join(__dirname, 'coverage'),
         },
         karmaTypescriptConfig: {
