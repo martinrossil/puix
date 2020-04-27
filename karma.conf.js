@@ -10,7 +10,8 @@ module.exports = function karma(config) {
         ],
         files: [
             { pattern: 'src/**/*.ts', include: true },
-            { pattern: 'tests/**/*.ts', include: true },
+            { pattern: 'tests/**/*.ts', include: true }
+            // { pattern: 'tests/IEventDispatcher.spec.ts', include: true }
         ],
         preprocessors: {
             '**/*.ts': 'karma-typescript',
