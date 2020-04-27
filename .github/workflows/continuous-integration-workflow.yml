@@ -1,32 +1,43 @@
 name: Publish NPM
-# This workflow is triggered on pushes to the repository.
+
 on:
-  release:
-    types: [published]
+  push:
+    tags:
+    - '*'
 
 jobs:
   build:
+
     name: Publish NPM
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v2
+
       - name: Setup Node 12.x
         uses: actions/setup-node@v1
         with:
           node-version: '12.x'
           registry-url: https://registry.npmjs.org/
+
       - name: Install dependencies
         run: npm install
+
       - name: Lint source files
         run: npm run lint
+
       - name: Run test suite     
         run: npm test
+
       - name: Push Coveralls
         uses: coverallsapp/github-action@master
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Build library
         run: npm run build
+
       - name: Publish NPM
         run: npm publish --access public
         env:
