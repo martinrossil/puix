@@ -1,16 +1,14 @@
 name: Publish NPM
-
+# This workflow is triggered on pushes to the repository.
 on:
-  push:
-    tags:
-    - '*'
+  release:
+    types: [published]
 
 jobs:
   build:
 
     name: Publish NPM
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout
         uses: actions/checkout@v2
