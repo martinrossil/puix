@@ -1,5 +1,4 @@
 name: Publish NPM
-# This workflow is triggered on pushes to the repository.
 on:
   release:
     types: [published]
