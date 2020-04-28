@@ -13,7 +13,6 @@ export default class LifeCycleElement extends EventDispatcherElement implements 
      * contents have been fully parsed.
      */
     public connectedCallback(): void {
-        console.log(this.name, 'connectedCallback()');
         this.connected = true;
         if (!this.initialized) {
             this.initialized = true;
@@ -23,12 +22,10 @@ export default class LifeCycleElement extends EventDispatcherElement implements 
     }
 
     public initialize(): void {
-        console.log(this.name, 'initialize()');
         // override
     }
 
     public invalidateProperties(): void {
-        console.log(this.name, 'invalidateProperties()');
         if (!this.hasPropertiesChanged) {
             this.hasPropertiesChanged = true;
             if (this.initialized && this.connected) {
@@ -39,14 +36,12 @@ export default class LifeCycleElement extends EventDispatcherElement implements 
     }
 
     public validatePropertiesLater(): void {
-        console.log(this.name, 'validateLater()');
         setTimeout(() => {
             this.commitProperties();
         }, 0);
     }
 
     public commitProperties(): void {
-        console.log(this.name, 'commitProperties()');
         this.hasPropertiesChanged = false;
         // override
     }
