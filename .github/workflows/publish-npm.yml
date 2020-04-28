@@ -21,17 +21,6 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Lint source files
-        run: npm run lint
-
-      - name: Run test suite     
-        run: npm test
-
-      - name: Push Coveralls
-        uses: coverallsapp/github-action@master
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Build library
         run: npm run build
 
