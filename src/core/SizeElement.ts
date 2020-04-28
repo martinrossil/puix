@@ -33,6 +33,8 @@ export default class SizeElement extends PositionElement implements ISizeElement
     protected actualSizeChanged(): void {
         this._actualWidthChanged = false;
         this._actualHeightChanged = false;
+        this.style.width = this.actualWidth + 'px';
+        this.style.height = this.actualHeight + 'px';
         console.log(this.name, 'actualSizeChanged()', this.actualWidth, this.actualHeight);
     }
 
