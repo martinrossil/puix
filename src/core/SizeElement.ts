@@ -111,6 +111,8 @@ export default class SizeElement extends PositionElement implements ISizeElement
             if (this._maxWidth !== Infinity) {
                 this._maxWidth = Infinity;
             }
+        } else if (value < 0) {
+            this._maxWidth = 0;
         } else if (this._maxWidth !== value) {
             this._maxWidth = value;
         }
@@ -136,11 +138,11 @@ export default class SizeElement extends PositionElement implements ISizeElement
         } else if (this._minHeight !== value) {
             this._minHeight = value;
         }
-        if (this._maxHeight < this._minWidth) {
-            this._maxHeight = this._minWidth;
+        if (this._maxHeight < this._minHeight) {
+            this._maxHeight = this._minHeight;
         }
-        if (this.actualHeight < this._minWidth) {
-            this.actualHeight = this._minWidth;
+        if (this.actualHeight < this._minHeight) {
+            this.actualHeight = this._minHeight;
         }
     }
 
@@ -191,6 +193,8 @@ export default class SizeElement extends PositionElement implements ISizeElement
             if (this._maxHeight !== Infinity) {
                 this._maxHeight = Infinity;
             }
+        } else if (value < 0) {
+            this._maxHeight = 0;
         } else if (this._maxHeight !== value) {
             this._maxHeight = value;
         }
