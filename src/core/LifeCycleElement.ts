@@ -38,13 +38,6 @@ export default class LifeCycleElement extends EventDispatcherElement implements 
         // override
     }
 
-    public validateProperties(): void {
-        console.log(this.name, 'validateProperties()');
-        if (this.hasPropertiesChanged) {
-            this.commitProperties();
-        }
-    }
-
     public validatePropertiesLater(): void {
         console.log(this.name, 'validateLater()');
         setTimeout(() => {

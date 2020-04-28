@@ -1,6 +1,6 @@
-import SizeElement from './core/SizeElement';
+import DisplayElement from './core/DisplayElement';
 
-export default class PuixDev extends SizeElement {
+export default class PuixDev extends DisplayElement {
     public constructor() {
         super();
         this.name = 'PuixDev';
@@ -11,6 +11,7 @@ export default class PuixDev extends SizeElement {
         super.initialize();
         console.log(this.name, 'initialize()');
         this.move(25, 50);
+        this.backgroundColor = 'red';
         // this.setSize(100, 100);
         this.minWidth = 200;
         this.maxHeight = 200;

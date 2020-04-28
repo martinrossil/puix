@@ -5,7 +5,6 @@ export default interface ILifeCycleElement extends IEventDispatcher {
     disconnectedCallback(): void;
     initialize(): void;
     invalidateProperties(): void;
-    validateProperties(): void;
     validatePropertiesLater(): void;
     commitProperties(): void;
     dispose(): void;
