@@ -9,9 +9,6 @@ export default class SizeElement extends PositionElement implements ISizeElement
 
     public commitProperties(): void {
         super.commitProperties();
-        console.log(this.name, 'commitProperties()');
-        // console.log(this.name, 'width', this.minWidth, this.width, this.maxWidth, this.actualWidth);
-        // console.log(this.name, 'height', this.minHeight, this.height, this.maxHeight, this.actualHeight);
         if (this._actualWidthChanged || this._actualHeightChanged) {
             this.actualSizeChanged();
         }
@@ -35,13 +32,11 @@ export default class SizeElement extends PositionElement implements ISizeElement
         this._actualHeightChanged = false;
         this.style.width = this.actualWidth + 'px';
         this.style.height = this.actualHeight + 'px';
-        console.log(this.name, 'actualSizeChanged()', this.actualWidth, this.actualHeight);
     }
 
     protected sizeChanged(): void {
         this._widthChanged = false;
         this._heightChanged = false;
-        console.log(this.name, 'sizeChanged()', this.width, this.height);
     }
 
     private _minWidth = 0;

@@ -9,9 +9,7 @@ export default class PositionElement extends LifeCycleElement implements IPositi
 
     public commitProperties(): void {
         super.commitProperties();
-        console.log(this.name, 'commitProperties()');
         if (this._xChanged || this._yChanged) {
-            console.log(this.name, 'x or y changed');
             this._xChanged = false;
             this._yChanged = false;
             this.style.transform = 'translate(' + this.x + 'px, ' + this.y + 'px)';
@@ -19,7 +17,6 @@ export default class PositionElement extends LifeCycleElement implements IPositi
     }
 
     public move(x: number, y: number): void {
-        console.log(this.name, 'move()', x, y);
         this.x = x;
         this.y = y;
     }
@@ -28,7 +25,6 @@ export default class PositionElement extends LifeCycleElement implements IPositi
     private _xChanged = false;
 
     public set x(value: number) {
-        console.log(this.name, 'set x()', value);
         if (isNaN(value)) {
             if (this._x !== 0) {
                 this._x = 0;
@@ -50,7 +46,6 @@ export default class PositionElement extends LifeCycleElement implements IPositi
     private _yChanged = false;
 
     public set y(value: number) {
-        console.log(this.name, 'set y()', value);
         if (isNaN(value)) {
             if (this._y !== 0) {
                 this._y = 0;
