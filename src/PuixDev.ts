@@ -1,18 +1,21 @@
+import DisplayContainer from './core/DisplayContainer';
+import IDisplayElement from './interfaces/IDisplayElement';
 import DisplayElement from './core/DisplayElement';
 
-export default class PuixDev extends DisplayElement {
+export default class PuixDev extends DisplayContainer {
     public constructor() {
         super();
         this.name = 'PuixDev';
-    }
-
-    public initialize(): void {
-        super.initialize();
-        this.move(25, 50);
+        console.log(this.name, 'super()');
         this.backgroundColor = 'red';
-        this.minWidth = 200;
-        this.maxHeight = 200;
-        this.setSize(100, 100);
+        const d: IDisplayElement = new DisplayElement();
+        d.setSize(300, 50);
+        d.backgroundColor = 'green';
+        this.addElement(d);
+        const d2: IDisplayElement = new DisplayElement();
+        d2.setSize(50, 300);
+        d2.backgroundColor = 'blue';
+        this.addElement(d2);
     }
 }
 customElements.define('puix-dev', PuixDev);

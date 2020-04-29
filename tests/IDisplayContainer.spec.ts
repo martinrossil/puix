@@ -7,10 +7,13 @@ import DisplayElement from '../src/core/DisplayElement';
 
 const displayContainer: IDisplayContainer = new DisplayContainer();
 const child1: IDisplayElement = new DisplayElement();
+child1.setSize(300, 50);
 const child2: IDisplayElement = new DisplayElement();
+child2.setSize(50, 300);
 const elements: IDisplayElement[] = [child1, child2];
+document.body.appendChild(displayContainer as unknown as Node);
 
-describe('IDisplayElement interface', () => {
+describe('IDisplayContainer interface', () => {
     describe('default values', () => {
         it('default children length should be 0', () => {
             assert.strictEqual(displayContainer.children.length, 0);
@@ -32,6 +35,12 @@ describe('IDisplayElement interface', () => {
         it('given children.length is 0, when addElements([child1, child2]), children.length should be 2', () => {
             displayContainer.addElements(elements);
             assert.strictEqual(displayContainer.children.length, 2);
+        });
+    });
+    describe('resizing from children', () => {
+        it('given displayContainer width and height is NaN, container should resize from children', () => {
+            assert.strictEqual(displayContainer.actualWidth, 300);
+            assert.strictEqual(displayContainer.actualHeight, 300);
         });
     });
 });

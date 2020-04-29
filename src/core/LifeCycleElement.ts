@@ -12,59 +12,15 @@ export default class LifeCycleElement extends EventDispatcherElement implements 
      * This will happen each time the node is moved, and may happen before the element's
      * contents have been fully parsed.
      */
-    public connectedCallback(): void {
+    protected connectedCallback(): void {
         this.connected = true;
-        if (!this.initialized) {
-            this.initialized = true;
-            this.initialize();
-            // this.commitProperties();
-        }
-    }
-
-    public initialize(): void {
-        // override
-    }
-
-    public invalidateProperties(): void {
-        if (!this.hasPropertiesChanged) {
-            this.hasPropertiesChanged = true;
-            if (this.initialized && this.connected) {
-                this.validatePropertiesLater();
-            }
-        }
-        // override
-    }
-
-    public validatePropertiesLater(): void {
-        setTimeout(() => {
-            this.commitProperties();
-        }, 0);
-    }
-
-    public commitProperties(): void {
-        this.hasPropertiesChanged = false;
-        // override
     }
 
     /**
      * Invoked each time the custom element is disconnected from the document's DOM.
      */
-    public disconnectedCallback(): void {
+    protected disconnectedCallback(): void {
         this.connected = false;
-    }
-
-    public dispose(): void {
-        // override
-    }
-
-    private _initialized = false;
-
-    public set initialized(value: boolean) {
-        this._initialized = value;
-    }
-
-    public get initialized(): boolean {
-        return this._initialized;
     }
 
     /**
@@ -81,16 +37,6 @@ export default class LifeCycleElement extends EventDispatcherElement implements 
 
     public get connected(): boolean {
         return this._connected;
-    }
-
-    private _hasPropertiesChanged = false;
-
-    public set hasPropertiesChanged(value: boolean) {
-        this._hasPropertiesChanged = value;
-    }
-
-    public get hasPropertiesChanged(): boolean {
-        return this._hasPropertiesChanged;
     }
 }
 customElements.define('lifecycle-element', LifeCycleElement);

@@ -1,7 +1,10 @@
 import ILifeCycleElement from './ILifeCycleElement';
 
 export default interface IPositionElement extends ILifeCycleElement {
-    move(x: number, y: number): void;
+    setPosition(x: number, y: number): void;
+    setActualPosition(x: number, y: number): void;
     x: number;
     y: number;
+    actualX: number;
+    actualY: number;
 }

@@ -7,19 +7,15 @@ export default class SizeElement extends PositionElement implements ISizeElement
         this.name = 'SizeElement';
     }
 
-    public commitProperties(): void {
-        super.commitProperties();
-        if (this._actualWidthChanged || this._actualHeightChanged) {
-            this.actualSizeChanged();
-        }
-        if (this._widthChanged || this._heightChanged) {
-            this.sizeChanged();
-        }
+    protected connectedCallback(): void {
+        super.connectedCallback();
+        this.invalidateDisplay();
     }
 
     public setSize(width: number, height: number): void {
         this.width = width;
         this.height = height;
+        this.invalidateDisplay();
     }
 
     public setActualSize(width: number, height: number): void {
@@ -27,16 +23,15 @@ export default class SizeElement extends PositionElement implements ISizeElement
         this.actualHeight = height;
     }
 
-    protected actualSizeChanged(): void {
-        this._actualWidthChanged = false;
-        this._actualHeightChanged = false;
-        this.style.width = this.actualWidth + 'px';
-        this.style.height = this.actualHeight + 'px';
+    protected invalidateDisplay(): void {
+        if (this.connected) {
+            this.updateDisplay(this.width, this.height);
+        }
     }
 
-    protected sizeChanged(): void {
-        this._widthChanged = false;
-        this._heightChanged = false;
+    protected updateDisplay(width: number, height: number): void {
+        // override
+        console.log(this.name, 'updateDisplay', width, height);
     }
 
     private _minWidth = 0;
@@ -62,7 +57,6 @@ export default class SizeElement extends PositionElement implements ISizeElement
     }
 
     private _width = NaN;
-    private _widthChanged = false;
 
     public set width(value: number) {
         if (isNaN(this._width) && isNaN(value)) {
@@ -71,18 +65,13 @@ export default class SizeElement extends PositionElement implements ISizeElement
         if (this._width !== value) {
             if (isNaN(this._width) && !isNaN(value)) {
                 this._width = this.getConstrainedWidth(value);
-                this._widthChanged = true;
-                this.invalidateProperties();
             } else if (!isNaN(this._width) && isNaN(value)) {
-                this._width = value;
-                this._widthChanged = true;
-                this.invalidateProperties();
+                this._width = NaN;
             } else {
                 this._width = this.getConstrainedWidth(value);
-                this._widthChanged = true;
-                this.invalidateProperties();
             }
-            this.actualWidth = this.width;
+            this.actualWidth = this._width;
+            this.invalidateDisplay();
         }
     }
 
@@ -146,7 +135,6 @@ export default class SizeElement extends PositionElement implements ISizeElement
     }
 
     private _height = NaN;
-    private _heightChanged = false;
 
     public set height(value: number) {
         if (isNaN(this._height) && isNaN(value)) {
@@ -155,16 +143,13 @@ export default class SizeElement extends PositionElement implements ISizeElement
         if (this._height !== value) {
             if (isNaN(this._height) && !isNaN(value)) {
                 this._height = this.getConstrainedHeight(value);
-                this._heightChanged = true;
-                this.invalidateProperties();
             } else if (!isNaN(this._height) && isNaN(value)) {
-                this._height = value;
-                this._heightChanged = true;
-                this.invalidateProperties();
+                this._height = NaN;
             } else {
                 this._height = this.getConstrainedHeight(value);
             }
-            this.actualHeight = this.height;
+            this.actualHeight = this._height;
+            this.invalidateDisplay();
         }
     }
 
@@ -206,19 +191,16 @@ export default class SizeElement extends PositionElement implements ISizeElement
     }
 
     private _actualWidth = 0;
-    private _actualWidthChanged = false;
 
     public set actualWidth(value: number) {
         if (isNaN(value)) {
             if (this._actualWidth !== this.minWidth) {
                 this._actualWidth = this.minWidth;
-                this._actualWidthChanged = true;
-                this.invalidateProperties();
+                this.style.width = this._actualWidth + 'px';
             }
         } else if (this._actualWidth !== value) {
             this._actualWidth = this.getConstrainedWidth(value);
-            this._actualWidthChanged = true;
-            this.invalidateProperties();
+            this.style.width = this._actualWidth + 'px';
         }
     }
 
@@ -227,19 +209,16 @@ export default class SizeElement extends PositionElement implements ISizeElement
     }
 
     private _actualHeight = 0;
-    private _actualHeightChanged = false;
 
     public set actualHeight(value: number) {
         if (isNaN(value)) {
             if (this._actualHeight !== this.minHeight) {
                 this._actualHeight = this.minHeight;
-                this._actualHeightChanged = true;
-                this.invalidateProperties();
+                this.style.height = this._actualHeight + 'px';
             }
         } else if (this._actualHeight !== value) {
             this._actualHeight = this.getConstrainedHeight(value);
-            this._actualHeightChanged = true;
-            this.invalidateProperties();
+            this.style.height = this._actualHeight + 'px';
         }
     }
 
