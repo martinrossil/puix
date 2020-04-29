@@ -17,9 +17,9 @@ export default class DisplayContainer extends DisplayElement implements IDisplay
     protected invalidateActualSize(): void {
         if (isNaN(this.width) && isNaN(this.height)) {
             this.setActualSizeFromChildren();
-        } else if (isNaN(this.width)) {
+        } else if (isNaN(this.width) && !isNaN(this.height)) {
             this.setActualWidthFromChildren();
-        } else if (isNaN(this.height)) {
+        } else if (!isNaN(this.width) && isNaN(this.height)) {
             this.setActualHeightFromChildren();
         }
     }
@@ -48,8 +48,8 @@ export default class DisplayContainer extends DisplayElement implements IDisplay
         const len = this.children.length;
         for (let i = 0; i < len; i++) {
             const element: IDisplayElement = this.children.item(i) as unknown as IDisplayElement;
-            if (maxWidth < element.x + element.actualWidth) {
-                maxWidth = element.x + element.actualWidth;
+            if (maxWidth < element.actualX + element.actualWidth) {
+                maxWidth = element.actualX + element.actualWidth;
             }
         }
         if (this.actualWidth !== maxWidth) {
@@ -63,8 +63,8 @@ export default class DisplayContainer extends DisplayElement implements IDisplay
         const len = this.children.length;
         for (let i = 0; i < len; i++) {
             const element = this.children.item(i) as unknown as IDisplayElement;
-            if (maxHeight < element.y + element.actualHeight) {
-                maxHeight = element.y + element.actualHeight;
+            if (maxHeight < element.actualY + element.actualHeight) {
+                maxHeight = element.actualY + element.actualHeight;
             }
         }
         if (this.actualHeight !== maxHeight) {

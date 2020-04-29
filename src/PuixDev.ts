@@ -6,6 +6,7 @@ export default class PuixDev extends DisplayContainer {
     public constructor() {
         super();
         this.name = 'PuixDev';
+        this.width = 200;
         console.log(this.name, 'super()');
         this.backgroundColor = 'red';
         const d: IDisplayElement = new DisplayElement();

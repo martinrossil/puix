@@ -42,5 +42,21 @@ describe('IDisplayContainer interface', () => {
             assert.strictEqual(displayContainer.actualWidth, 300);
             assert.strictEqual(displayContainer.actualHeight, 300);
         });
+        it('when removeElement(), container should resize from children', () => {
+            displayContainer.removeElement(child2)
+            assert.strictEqual(displayContainer.actualWidth, 300);
+            assert.strictEqual(displayContainer.actualHeight, 50);
+        });
+        it('when container.width = 200, only resize actualHeight from children', () => {
+            displayContainer.width = 200;
+            assert.strictEqual(displayContainer.actualWidth, 200);
+            assert.strictEqual(displayContainer.actualHeight, 50);
+        });
+        it('when container.height = 200 and container.width = NaN, only resize actualWidth from children', () => {
+            displayContainer.height = 200;
+            displayContainer.width = NaN;
+            assert.strictEqual(displayContainer.actualWidth, 300);
+            assert.strictEqual(displayContainer.actualHeight, 200);
+        });
     });
 });
