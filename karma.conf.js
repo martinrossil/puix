@@ -12,6 +12,7 @@ module.exports = function karma(config) {
             { pattern: 'src/**/*.ts', include: true },
             { pattern: 'tests/**/*.ts', include: true }
             // { pattern: 'tests/IEventDispatcher.spec.ts', include: true }
+            // { pattern: 'tests/IDisplayContainer.spec.ts' }
         ],
         preprocessors: {
             '**/*.ts': 'karma-typescript',
