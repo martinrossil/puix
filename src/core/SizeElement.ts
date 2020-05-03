@@ -25,13 +25,12 @@ export default class SizeElement extends PositionElement implements ISizeElement
 
     protected invalidateDisplay(): void {
         if (this.connected) {
-            this.updateDisplay(this.width, this.height);
+            this.updateDisplay();
         }
     }
 
-    protected updateDisplay(width: number, height: number): void {
+    protected updateDisplay(): void {
         // override
-        console.log(this.name, 'updateDisplay', width, height);
     }
 
     private _minWidth = 0;

@@ -1,5 +1,7 @@
 import SizeElement from '../core/SizeElement';
 import IDisplayElement from '../interfaces/IDisplayElement';
+import ILayoutData from '../interfaces/ILayoutData';
+import Events from '../enums/Events';
 
 export default class DisplayElement extends SizeElement implements IDisplayElement {
     public constructor() {
@@ -35,6 +37,24 @@ export default class DisplayElement extends SizeElement implements IDisplayEleme
 
     public get opacity(): number {
         return this._opacity;
+    }
+
+    private _layoutData: ILayoutData | null = null;
+
+    public set layoutData(value: ILayoutData | null) {
+        if (this._layoutData !== value) {
+            this._layoutData = value;
+            if (this._layoutData) {
+                this._layoutData.hostElement = this;
+            }
+            if (this.connected) {
+                this.dispatchEventWith(Events.LAYOUT_DATA_CHANGED, this);
+            }
+        }
+    }
+
+    public get layoutData(): ILayoutData | null {
+        return this._layoutData;
     }
 }
 customElements.define('display-element', DisplayElement);

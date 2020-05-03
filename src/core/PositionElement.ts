@@ -77,6 +77,11 @@ export default class PositionElement extends LifeCycleElement implements IPositi
                 this._actualY = 0;
                 this.updateTransform();
             }
+        } else {
+            if (this._actualY !== value) {
+                this._actualY = value;
+                this.updateTransform();
+            }
         }
     }
 
