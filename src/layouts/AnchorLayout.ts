@@ -25,7 +25,6 @@ export default class AnchorLayout extends BaseLayout {
     }
 
     protected setActualSizeFromChildren(container: ILayoutContainer): void {
-        console.log(this.name, 'setSizeFromChildrenAndLayout()');
         const len = container.children.length;
         let width = 0;
         let height = 0;
@@ -51,7 +50,6 @@ export default class AnchorLayout extends BaseLayout {
     }
 
     protected setActualWidthFromChildren(container: ILayoutContainer): void {
-        console.log(this.name, 'setWidthFromChildrenAndLayout()');
         const len = container.children.length;
         let width = 0;
         let element: IDisplayElement;
@@ -70,7 +68,6 @@ export default class AnchorLayout extends BaseLayout {
     }
 
     protected setActualHeightFromChildren(container: ILayoutContainer): void {
-        console.log(this.name, 'setHeightFromChildrenAndLayout()');
         const len = container.children.length;
         let height = 0;
         let element: IDisplayElement;
@@ -107,7 +104,7 @@ export default class AnchorLayout extends BaseLayout {
                 return 0;
             } else {
                 if (!isNaN(layoutData.left) && !isNaN(layoutData.right)) {
-                    return layoutData.left + element.actualWidth + layoutData.right;
+                    return (layoutData.left + element.actualWidth + layoutData.right);
                 }
                 if (!isNaN(layoutData.left) && isNaN(layoutData.right)) {
                     return layoutData.left + element.actualWidth;
@@ -118,7 +115,7 @@ export default class AnchorLayout extends BaseLayout {
                 return element.actualWidth;
             }
         } else {
-            return element.actualX + element.actualWidth;
+            return element.actualWidth;
         }
     }
 
@@ -152,12 +149,11 @@ export default class AnchorLayout extends BaseLayout {
                 return element.actualHeight;
             }
         } else {
-            return element.actualY + element.actualHeight;
+            return element.actualHeight;
         }
     }
 
     protected layoutChildren(container: ILayoutContainer, hasActualSizeChanged: boolean): void {
-        console.log(this.name, 'layoutChildren()', container.children.length);
         const len = container.children.length;
         const availableWidth = container.actualWidth - this.paddingLeft - this.paddingRight;
         const availableHeight = container.actualHeight - this.paddingTop - this.paddingBottom;

@@ -10,7 +10,6 @@ export default class BaseLayout extends EventDispatcher implements ILayout {
 
     public updateLayout(container: ILayoutContainer): void {
         this.container = container;
-        console.log(this.name, 'updateLayout()');
     }
 
     protected invalidateLayout(): void {
@@ -35,32 +34,27 @@ export default class BaseLayout extends EventDispatcher implements ILayout {
 
     public set padding(value) {
         if (isNaN(value)) {
-            if (this._padding !== 0) {
-                this._padding = 0;
+            this._padding = 0;
                 this._paddingLeft = 0;
                 this._paddingTop = 0;
                 this._paddingRight = 0;
                 this._paddingBottom = 0;
                 this.invalidateLayout();
-            }
         } else if (this._padding !== value) {
             if (value < 0) {
-                if (this._padding !== 0) {
-                    this._padding = 0;
-                    this._paddingLeft = 0;
-                    this._paddingTop = 0;
-                    this._paddingRight = 0;
-                    this._paddingBottom = 0;
-                    this.invalidateLayout();
-                }
+                this._padding = 0;
+                this._paddingLeft = 0;
+                this._paddingTop = 0;
+                this._paddingRight = 0;
+                this._paddingBottom = 0;
             } else {
                 this._padding = value;
                 this._paddingLeft = value;
                 this._paddingTop = value;
                 this._paddingRight = value;
                 this._paddingBottom = value;
-                this.invalidateLayout();
             }
+            this.invalidateLayout();
         }
     }
 
@@ -160,12 +154,10 @@ export default class BaseLayout extends EventDispatcher implements ILayout {
 
     public set gap(value: number) {
         if (isNaN(value)) {
-            if (this._gap !== 0) {
-                this._gap = 0;
-                this._horizontalGap = 0;
-                this._verticalGap = 0;
-                this.invalidateLayout();
-            }
+            this._gap = 0;
+            this._horizontalGap = 0;
+            this._verticalGap = 0;
+            this.invalidateLayout();
         } else if (this._gap !== value) {
             if (value < 0) {
                 this._gap = 0;
