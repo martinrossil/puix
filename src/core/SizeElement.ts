@@ -1,5 +1,6 @@
 import PositionElement from './PositionElement';
 import ISizeElement from '../interfaces/ISizeElement';
+import Events from '../enums/Events';
 
 export default class SizeElement extends PositionElement implements ISizeElement {
     public constructor() {
@@ -71,6 +72,9 @@ export default class SizeElement extends PositionElement implements ISizeElement
             }
             this.actualWidth = this._width;
             this.invalidateDisplay();
+            if (this.connected) {
+                this.dispatchEventWith(Events.WIDTH_CHANGED);
+            }
         }
     }
 
@@ -149,6 +153,9 @@ export default class SizeElement extends PositionElement implements ISizeElement
             }
             this.actualHeight = this._height;
             this.invalidateDisplay();
+            if (this.connected) {
+                this.dispatchEventWith(Events.HEIGHT_CHANGED);
+            }
         }
     }
 

@@ -46,9 +46,10 @@ export default class DisplayElement extends SizeElement implements IDisplayEleme
             this._layoutData = value;
             if (this._layoutData) {
                 this._layoutData.hostElement = this;
+            } else {
             }
             if (this.connected) {
-                this.dispatchEventWith(Events.LAYOUT_DATA_CHANGED, this);
+                this.dispatchEventWith(Events.LAYOUT_DATA_CHANGED);
             }
         }
     }

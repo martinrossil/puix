@@ -8,10 +8,12 @@ export default class LayoutContainer extends DisplayContainer implements ILayout
         super();
         this.name = 'LayoutContainer';
         this.invalidateDisplay = this.invalidateDisplay.bind(this);
-        this.addEventListener(Events.LAYOUT_DATA_CHANGED, this.layoutDataChanged as EventListener);
+        this.addEventListener(Events.LAYOUT_DATA_CHANGED, this.childElementChanged as EventListener);
+        this.addEventListener(Events.WIDTH_CHANGED, this.childElementChanged as EventListener);
+        this.addEventListener(Events.HEIGHT_CHANGED, this.childElementChanged as EventListener);
     }
 
-    protected layoutDataChanged(e: CustomEvent): void {
+    protected childElementChanged(e: CustomEvent): void {
         if (e.target !== this) {
             e.stopImmediatePropagation();
             this.invalidateDisplay();

@@ -172,50 +172,44 @@ export default class AnchorLayout extends BaseLayout {
     }
 
     protected setElementSize(w: number, h: number, element: IDisplayElement, layoutData: IAnchorLayoutData): void {
-        if (layoutData instanceof AnchorLayoutData) {
-            if (isNaN(element.width)) {
-                if (!isNaN(layoutData.percentWidth)) {
-                    element.actualWidth = w * layoutData.percentWidth / 100;
-                } else if (!isNaN(layoutData.left) && !isNaN(layoutData.right)) {
-                    element.actualWidth = w - layoutData.left - layoutData.right;
-                }
+        if (isNaN(element.width)) {
+            if (!isNaN(layoutData.percentWidth)) {
+                element.actualWidth = w * layoutData.percentWidth / 100;
+            } else if (!isNaN(layoutData.left) && !isNaN(layoutData.right)) {
+                element.actualWidth = w - layoutData.left - layoutData.right;
             }
-            if (isNaN(element.height)) {
-                if (!isNaN(layoutData.percentHeight)) {
-                    element.actualHeight = h * layoutData.percentHeight / 100;
-                } else if (!isNaN(layoutData.top) && !isNaN(layoutData.bottom)) {
-                    element.actualHeight = h - layoutData.top - layoutData.bottom;
-                }
+        }
+        if (isNaN(element.height)) {
+            if (!isNaN(layoutData.percentHeight)) {
+                element.actualHeight = h * layoutData.percentHeight / 100;
+            } else if (!isNaN(layoutData.top) && !isNaN(layoutData.bottom)) {
+                element.actualHeight = h - layoutData.top - layoutData.bottom;
             }
         }
     }
 
     protected setElementPosition(w: number, h: number, element: IDisplayElement, layoutData: IAnchorLayoutData): void {
-        if (layoutData instanceof AnchorLayoutData) {
-            if (!isNaN(layoutData.horizontalCenter)) {
-                element.actualX = (w * 0.5 - layoutData.horizontalCenter) - (element.actualWidth * 0.5);
-            } else if (!isNaN(layoutData.left) && !isNaN(layoutData.right)) {
-                element.actualX = this.paddingLeft + layoutData.left + (w - layoutData.left - layoutData.right) * 0.5 - (element.actualWidth * 0.5);
-            } else if (!isNaN(layoutData.left) && isNaN(layoutData.right)) {
-                element.actualX = this.paddingLeft + layoutData.left;
-            } else if (isNaN(layoutData.left) && !isNaN(layoutData.right)) {
-                element.actualX = w + this.paddingLeft - layoutData.right - element.actualWidth;
-            } else {
-                element.actualX = this.paddingLeft;
-            }
-            if (!isNaN(layoutData.verticalCenter)) {
-                element.actualY = (h * 0.5 - layoutData.verticalCenter) - (element.actualHeight * 0.5);
-            } else if (!isNaN(layoutData.top) && !isNaN(layoutData.bottom)) {
-                element.actualY = this.paddingTop + layoutData.top + (h - layoutData.top - layoutData.bottom) * 0.5 - (element.actualHeight * 0.5);
-            } else if (!isNaN(layoutData.top) && isNaN(layoutData.bottom)) {
-                element.actualY = this.paddingTop + layoutData.top;
-            } else if (isNaN(layoutData.top) && !isNaN(layoutData.bottom)) {
-                element.actualY = h + this.paddingTop - layoutData.bottom - element.actualHeight;
-            } else {
-                element.actualY = this.paddingTop;
-            }
+        if (!isNaN(layoutData.horizontalCenter)) {
+            element.actualX = (w * 0.5 - layoutData.horizontalCenter) - (element.actualWidth * 0.5);
+        } else if (!isNaN(layoutData.left) && !isNaN(layoutData.right)) {
+            element.actualX = this.paddingLeft + layoutData.left + (w - layoutData.left - layoutData.right) * 0.5 - (element.actualWidth * 0.5);
+        } else if (!isNaN(layoutData.left) && isNaN(layoutData.right)) {
+            element.actualX = this.paddingLeft + layoutData.left;
+        } else if (isNaN(layoutData.left) && !isNaN(layoutData.right)) {
+            element.actualX = w + this.paddingLeft - layoutData.right - element.actualWidth;
         } else {
-            element.setActualPosition(this.paddingLeft + element.actualX, this.paddingTop + element.actualY);
+            element.actualX = this.paddingLeft;
+        }
+        if (!isNaN(layoutData.verticalCenter)) {
+            element.actualY = (h * 0.5 - layoutData.verticalCenter) - (element.actualHeight * 0.5);
+        } else if (!isNaN(layoutData.top) && !isNaN(layoutData.bottom)) {
+            element.actualY = this.paddingTop + layoutData.top + (h - layoutData.top - layoutData.bottom) * 0.5 - (element.actualHeight * 0.5);
+        } else if (!isNaN(layoutData.top) && isNaN(layoutData.bottom)) {
+            element.actualY = this.paddingTop + layoutData.top;
+        } else if (isNaN(layoutData.top) && !isNaN(layoutData.bottom)) {
+            element.actualY = h + this.paddingTop - layoutData.bottom - element.actualHeight;
+        } else {
+            element.actualY = this.paddingTop;
         }
     }
 }
