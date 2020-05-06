@@ -1,6 +1,6 @@
-import LayoutContainer from './core/LayoutContainer';
+import ApplicationElement from './core/ApplicationElement';
 
-export default class PuixDev extends LayoutContainer {
+export default class PuixDev extends ApplicationElement {
     public constructor() {
         super();
         this.name = 'PuixDev';
