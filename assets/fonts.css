@@ -1,0 +1,21 @@
+@font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('montserrat-normal-danish.woff2') format('woff2'), url('montserrat-normal-danish.woff') format('woff');
+}
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('montserrat-bold-danish.woff2') format('woff2'), url('montserrat-bold-danish.woff') format('woff');
+}
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url('montserrat-black-danish.woff2') format('woff2'), url('montserrat-black-danish.woff') format('woff');
+}

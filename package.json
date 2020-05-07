@@ -8,12 +8,12 @@
     "dist"
   ],
   "scripts": {
+    "test:watch": "karma start --auto-watch=true --single-run=false",
     "dev:watch": "rollup -c rollup.development.js --watch",
     "dev:serve": "live-server --open=./development",
-    "build": "rollup -c",
     "lint": "eslint src/**/*",
     "test": "karma start",
-    "test:watch": "karma start --auto-watch=true --single-run=false"
+    "build": "rollup -c"
   },
   "repository": {
     "type": "git",
@@ -49,8 +49,9 @@
     "live-server": "^1.2.1",
     "mocha": "^6.2.3",
     "rollup": "^2.7.6",
+    "rollup-plugin-clear": "^2.0.7",
+    "rollup-plugin-copy": "^3.3.0",
     "rollup-plugin-node-resolve": "^5.2.0",
-    "rollup-plugin-peer-deps-external": "^2.2.2",
     "rollup-plugin-typescript2": "^0.27.0",
     "typescript": "^3.8.3"
   }
