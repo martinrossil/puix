@@ -1,4 +1,4 @@
-import DisplayElement from './DisplayElement';
+import DisplayElement from '../core/DisplayElement';
 import IDisplayContainer from '../interfaces/IDisplayContainer';
 import IDisplayElement from '../interfaces/IDisplayElement';
 import Events from '../enums/Events';

@@ -8,8 +8,8 @@
     "dist"
   ],
   "scripts": {
-    "roll-dev": "rollup -c rollup.development.js --watch",
-    "serve-dev": "live-server --open=./development",
+    "dev:watch": "rollup -c rollup.development.js --watch",
+    "dev:serve": "live-server --open=./development",
     "build": "rollup -c",
     "lint": "eslint src/**/*",
     "test": "karma start",
@@ -49,7 +49,6 @@
     "live-server": "^1.2.1",
     "mocha": "^6.2.3",
     "rollup": "^2.7.6",
-    "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-peer-deps-external": "^2.2.2",
     "rollup-plugin-typescript2": "^0.27.0",

@@ -4,7 +4,7 @@ import { describe, it, beforeEach } from 'mocha';
 import ILayoutContainer from '../src/interfaces/ILayoutContainer';
 import IDisplayElement from '../src/interfaces/IDisplayElement';
 import IAnchorLayoutData from '../src/interfaces/IAnchorLayoutData';
-import LayoutContainer from '../src/core/LayoutContainer';
+import LayoutContainer from '../src/containers/LayoutContainer';
 import DisplayElement from '../src/core/DisplayElement';
 import AnchorLayout from '../src/layouts/AnchorLayout';
 import AnchorLayoutData from '../src/layouts/AnchorLayoutData';

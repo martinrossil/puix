@@ -3,7 +3,7 @@ import { describe, it, beforeEach } from 'mocha';
 import ILayout from '../src/interfaces/ILayout';
 import BaseLayout from '../src/layouts/BaseLayout';
 import ILayoutContainer from '../src/interfaces/ILayoutContainer';
-import LayoutContainer from '../src/core/LayoutContainer';
+import LayoutContainer from '../src/containers/LayoutContainer';
 
 const layoutContainer: ILayoutContainer = new LayoutContainer();
 const baseLayout: ILayout = new BaseLayout();

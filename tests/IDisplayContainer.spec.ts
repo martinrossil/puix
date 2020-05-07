@@ -1,7 +1,7 @@
 import { assert } from 'chai';
 import { describe, it } from 'mocha';
 import IDisplayContainer from '../src/interfaces/IDisplayContainer';
-import DisplayContainer from '../src/core/DisplayContainer';
+import DisplayContainer from '../src/containers/DisplayContainer';
 import IDisplayElement from '../src/interfaces/IDisplayElement';
 import DisplayElement from '../src/core/DisplayElement';
 
