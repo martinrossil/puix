@@ -1,6 +1,4 @@
 import DisplayContainer from './DisplayContainer';
-import Events from '../enums/Events';
-import Overflow from '../enums/Overflow';
 
 export default class ApplicationElement extends DisplayContainer {
     public constructor() {
@@ -9,16 +7,16 @@ export default class ApplicationElement extends DisplayContainer {
         document.body.style.setProperty('position', 'absolute');
         document.body.style.setProperty('-webkit-overflow-scrolling', 'touch');
         document.body.style.setProperty('margin', '0');
-        window.addEventListener(Events.RESIZE, () => {
+        window.addEventListener('resize', () => {
             this.setSize(window.innerWidth, window.innerHeight);
         });
         this.setSize(window.innerWidth, window.innerHeight);
-        this.overflow = Overflow.HIDDEN;
+        this.overflow = 'hidden';
     }
 
     protected connectedCallback(): void {
         super.connectedCallback();
-        this.dispatchEventWith(Events.APPLICATION_COMPLETE);
+        this.dispatchEventWith('applicationComplete');
     }
 
     public set backgroundColor(value: string) {

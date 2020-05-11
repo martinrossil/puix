@@ -1,12 +1,11 @@
-import Overflow from '../enums/Overflow';
 import ILayoutElement from './ILayoutElement';
 
 export default interface IDisplayElement extends ILayoutElement {
     backgroundColor: string;
     opacity: number;
-    overflow: Overflow;
-    overflowHorizontal: Overflow;
-    overflowVertical: Overflow;
+    overflow: string;
+    overflowHorizontal: string;
+    overflowVertical: string;
     interactive: boolean;
     cornerRadius: number;
     z: number;

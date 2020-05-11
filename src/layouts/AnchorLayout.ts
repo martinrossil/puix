@@ -1,6 +1,5 @@
 import BaseLayout from './BaseLayout';
 import IDisplayContainer from '../interfaces/IDisplayContainer';
-import Events from '../enums/Events';
 import ILayoutElement from '../interfaces/ILayoutElement';
 
 export default class AnchorLayout extends BaseLayout {
@@ -96,7 +95,7 @@ export default class AnchorLayout extends BaseLayout {
         maxHeight = this.paddingTop + maxHeight + this.paddingBottom;
         if (container.actualWidth !== maxWidth || container.actualHeight !== maxHeight) {
             container.setActualSize(maxWidth, maxHeight);
-            container.dispatchEventWith(Events.INTERNAL_SIZE_CHANGED, container);
+            container.dispatchEventWith('internalSizeChanged', container);
         }
     }
 
@@ -116,7 +115,7 @@ export default class AnchorLayout extends BaseLayout {
         maxWidth = this.paddingLeft + maxWidth + this.paddingRight;
         if (container.actualWidth !== maxWidth) {
             container.actualWidth = maxWidth;
-            container.dispatchEventWith(Events.INTERNAL_SIZE_CHANGED, container);
+            container.dispatchEventWith('internalSizeChanged', container);
         }
     }
 
@@ -136,7 +135,7 @@ export default class AnchorLayout extends BaseLayout {
         maxHeight = this.paddingTop + maxHeight + this.paddingBottom;
         if (container.actualHeight !== maxHeight) {
             container.actualHeight = maxHeight;
-            container.dispatchEventWith(Events.INTERNAL_SIZE_CHANGED, container);
+            container.dispatchEventWith('internalSizeChanged', container);
         }
     }
 }

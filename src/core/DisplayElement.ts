@@ -1,5 +1,4 @@
 import IDisplayElement from '../interfaces/IDisplayElement';
-import Overflow from '../enums/Overflow';
 import LayoutElement from './LayoutElement';
 
 export default class DisplayElement extends LayoutElement implements IDisplayElement {
@@ -63,9 +62,9 @@ export default class DisplayElement extends LayoutElement implements IDisplayEle
         return this._interactive;
     }
 
-    private _overflow: Overflow = Overflow.VISIBLE;
+    private _overflow = 'visible';
 
-    public set overflow(value: Overflow) {
+    public set overflow(value: string) {
         if (this._overflow !== value) {
             this._overflow = value;
             this._overflowHorizontal = value;
@@ -74,33 +73,33 @@ export default class DisplayElement extends LayoutElement implements IDisplayEle
         }
     }
 
-    public get overflow(): Overflow {
+    public get overflow(): string {
         return this._overflow;
     }
 
-    private _overflowHorizontal: Overflow = Overflow.VISIBLE;
+    private _overflowHorizontal = 'visible';
 
-    public set overflowHorizontal(value: Overflow) {
+    public set overflowHorizontal(value: string) {
         if (this._overflowHorizontal !== value) {
             this._overflowHorizontal = value;
             this.style.overflowX = value;
         }
     }
 
-    public get overflowHorizontal(): Overflow {
+    public get overflowHorizontal(): string {
         return this._overflowHorizontal;
     }
 
-    private _overflowVertical: Overflow = Overflow.VISIBLE;
+    private _overflowVertical = 'visible';
 
-    public set overflowVertical(value: Overflow) {
+    public set overflowVertical(value: string) {
         if (this._overflowVertical !== value) {
             this._overflowVertical = value;
             this.style.overflowY = value;
         }
     }
 
-    public get overflowVertical(): Overflow {
+    public get overflowVertical(): string {
         return this._overflowVertical;
     }
 

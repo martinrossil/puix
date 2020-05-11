@@ -1,6 +1,5 @@
 import BaseLayout from './BaseLayout';
 import IDisplayContainer from '../interfaces/IDisplayContainer';
-import Events from '../enums/Events';
 
 export default class InternalSizeLayout extends BaseLayout {
     public constructor() {
@@ -71,7 +70,7 @@ export default class InternalSizeLayout extends BaseLayout {
         maxHeight = this.paddingTop + maxHeight + this.paddingBottom;
         if (container.actualWidth !== maxWidth || container.actualHeight !== maxHeight) {
             container.setActualSize(maxWidth, maxHeight);
-            container.dispatchEventWith(Events.INTERNAL_SIZE_CHANGED, container);
+            container.dispatchEventWith('internalSizeChanged', container);
         }
     }
 
@@ -92,7 +91,7 @@ export default class InternalSizeLayout extends BaseLayout {
         }
         if (container.actualWidth !== maxWidth) {
             container.actualWidth = maxWidth;
-            container.dispatchEventWith(Events.INTERNAL_SIZE_CHANGED, container);
+            container.dispatchEventWith('internalSizeChanged', container);
         }
     }
 
@@ -113,7 +112,7 @@ export default class InternalSizeLayout extends BaseLayout {
         }
         if (container.actualHeight !== maxHeight) {
             container.actualHeight = maxHeight;
-            container.dispatchEventWith(Events.INTERNAL_SIZE_CHANGED, container);
+            container.dispatchEventWith('internalSizeChanged', container);
         }
     }
 }

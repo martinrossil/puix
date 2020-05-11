@@ -1,12 +1,8 @@
 import DisplayElement from '../core/DisplayElement';
 import ITextElement from '../interfaces/ITextElement';
-import FontWeight from '../enums/FontWeight';
 import IFontDescription from '../interfaces/IFontDescription';
 import ITextRenderer from '../interfaces/ITextRenderer';
 import TextRenderer from './TextRenderer';
-import WhiteSpace from '../enums/WhiteSpace';
-import TextOverflow from '../enums/TextOverflow';
-import Events from '../enums/Events';
 
 export default class TextElement extends DisplayElement implements ITextElement {
     public constructor() {
@@ -14,8 +10,7 @@ export default class TextElement extends DisplayElement implements ITextElement 
         this.name = 'TextElement';
         this.appendChild(this.textRenderer as unknown as Node);
         this.interactive = false;
-        // this.backgroundColor = 'hsla(0, 75%, 45%, 0.2)';
-        this.addEventListener(Events.INTERNAL_SIZE_CHANGED, this.textRendererInternalSizeChanged as EventListener);
+        this.addEventListener('internalSizeChanged', this.textRendererInternalSizeChanged as EventListener);
     }
 
     protected connectedCallback(): void {
@@ -50,13 +45,13 @@ export default class TextElement extends DisplayElement implements ITextElement 
         this.textRenderer.y = offsetY + capHeight * this.fontDescription.verticalOffset;
         if (isNaN(this.width) && isNaN(this.height)) {
             this.setActualSize(this.textRenderer.scrollWidth, this.textRenderer.scrollHeight - padding);
-            this.dispatchEventWith(Events.INTERNAL_SIZE_CHANGED, this);
+            this.dispatchEventWith('internalSizeChanged', this);
         } else if (isNaN(this.width) && !isNaN(this.height)) {
             this.actualWidth = this.textRenderer.scrollWidth;
-            this.dispatchEventWith(Events.INTERNAL_SIZE_CHANGED, this);
+            this.dispatchEventWith('internalSizeChanged', this);
         } else if (!isNaN(this.width) && isNaN(this.height)) {
             this.actualHeight = this.textRenderer.scrollHeight - padding;
-            this.dispatchEventWith(Events.INTERNAL_SIZE_CHANGED, this);
+            this.dispatchEventWith('internalSizeChanged', this);
         }
     }
 
@@ -90,11 +85,11 @@ export default class TextElement extends DisplayElement implements ITextElement 
      * The font-weight CSS property sets the weight (or boldness) of the font.
      * The weights available depend on the font-family you are using.
      */
-    public set fontWeight(value: FontWeight) {
+    public set fontWeight(value: number) {
         this.textRenderer.fontWeight = value;
     }
 
-    public get fontWeight(): FontWeight {
+    public get fontWeight(): number {
         return this.textRenderer.fontWeight;
     }
 
@@ -120,11 +115,11 @@ export default class TextElement extends DisplayElement implements ITextElement 
         return this.textRenderer.fontDescription;
     }
 
-    public set whiteSpace(value: WhiteSpace) {
+    public set whiteSpace(value: string) {
         this.textRenderer.whiteSpace = value;
     }
 
-    public get whiteSpace(): WhiteSpace {
+    public get whiteSpace(): string {
         return this.textRenderer.whiteSpace;
     }
 
@@ -144,11 +139,11 @@ export default class TextElement extends DisplayElement implements ITextElement 
         return this.textRenderer.letterSpacing;
     }
 
-    public set textOverflow(value: TextOverflow) {
+    public set textOverflow(value: string) {
         this.textRenderer.textOverflow = value;
     }
 
-    public get textOverflow(): TextOverflow {
+    public get textOverflow(): string {
         return this.textRenderer.textOverflow;
     }
 

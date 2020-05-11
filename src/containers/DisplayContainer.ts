@@ -1,6 +1,5 @@
 import DisplayElement from '../core/DisplayElement';
 import IDisplayContainer from '../interfaces/IDisplayContainer';
-import Events from '../enums/Events';
 import ILayoutElement from '../interfaces/ILayoutElement';
 import LayoutElement from '../core/LayoutElement';
 import ILayout from '../interfaces/ILayout';
@@ -10,8 +9,8 @@ export default class DisplayContainer extends DisplayElement implements IDisplay
     public constructor() {
         super();
         this.name = 'DisplayContainer';
-        this.addEventListener(Events.INTERNAL_SIZE_CHANGED, this.childElementInternalSizeChanged as EventListener);
-        this.addEventListener(Events.LAYOUT_DATA_CHANGED, this.layoutDataChanged as EventListener);
+        this.addEventListener('internalSizeChanged', this.childElementInternalSizeChanged as EventListener);
+        this.addEventListener('layoutDataChanged', this.layoutDataChanged as EventListener);
     }
 
     public elements: ILayoutElement[] = [];

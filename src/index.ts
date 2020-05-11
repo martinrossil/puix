@@ -18,14 +18,6 @@ import Theme from './design/Theme';
 // elements
 import IconElement from './elements/IconElement';
 
-// enums
-import Events from './enums/Events';
-import FontWeight from './enums/FontWeight';
-import Icon from './enums/Icon';
-import Overflow from './enums/Overflow';
-import TextOverflow from './enums/TextOverflow';
-import WhiteSpace from './enums/WhiteSpace';
-
 // interfaces
 import IColor from './interfaces/IColor';
 import IDisplayContainer from './interfaces/IDisplayContainer';
@@ -74,14 +66,6 @@ export {
 
     // elements
     IconElement,
-
-    // enums
-    Events,
-    FontWeight,
-    Icon,
-    Overflow,
-    TextOverflow,
-    WhiteSpace,
 
     // interfaces
     IColor,

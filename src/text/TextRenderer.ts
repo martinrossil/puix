@@ -1,11 +1,6 @@
 import DisplayElement from '../core/DisplayElement';
 import ITextRenderer from '../interfaces/ITextRenderer';
-import FontWeight from '../enums/FontWeight';
 import IFontDescription from '../interfaces/IFontDescription';
-import Overflow from '../enums/Overflow';
-import WhiteSpace from '../enums/WhiteSpace';
-import TextOverflow from '../enums/TextOverflow';
-import Events from '../enums/Events';
 import Theme from '../design/Theme';
 
 export default class TextRenderer extends DisplayElement implements ITextRenderer {
@@ -14,7 +9,7 @@ export default class TextRenderer extends DisplayElement implements ITextRendere
         this.name = 'TextRenderer';
         this.style.fontFamily = this.fontFamily;
         this.style.lineHeight = this.lineHeight.toString();
-        this.style.fontWeight = this.fontWeight;
+        this.style.fontWeight = this.fontWeight.toString();
     }
 
     protected connectedCallback(): void {
@@ -31,13 +26,13 @@ export default class TextRenderer extends DisplayElement implements ITextRendere
     protected setActualSizeFromText(): void {
         if (isNaN(this.width) && isNaN(this.height)) {
             this.setActualSize(this.scrollWidth, this.scrollHeight);
-            this.dispatchEventWith(Events.INTERNAL_SIZE_CHANGED, this);
+            this.dispatchEventWith('internalSizeChanged', this);
         } else if (isNaN(this.width) && !isNaN(this.height)) {
             this.actualWidth = this.scrollWidth;
-            this.dispatchEventWith(Events.INTERNAL_SIZE_CHANGED, this);
+            this.dispatchEventWith('internalSizeChanged', this);
         } else if (!isNaN(this.width) && isNaN(this.height)) {
             this.actualHeight = this.scrollHeight;
-            this.dispatchEventWith(Events.INTERNAL_SIZE_CHANGED, this);
+            this.dispatchEventWith('internalSizeChanged', this);
         }
     }
 
@@ -79,21 +74,21 @@ export default class TextRenderer extends DisplayElement implements ITextRendere
         return this._fontSize;
     }
 
-    private _fontWeight: FontWeight = FontWeight.NORMAL;
+    private _fontWeight = 400;
 
     /**
      * The font-weight CSS property sets the weight (or boldness) of the font.
      * The weights available depend on the font-family you are using.
      */
-    public set fontWeight(value: FontWeight) {
+    public set fontWeight(value: number) {
         if (this._fontWeight !== value) {
             this._fontWeight = value;
-            this.style.fontWeight = value;
+            this.style.fontWeight = value.toString();
             this.invalidateInternalSize();
         }
     }
 
-    public get fontWeight(): FontWeight {
+    public get fontWeight(): number {
         return this._fontWeight;
     }
 
@@ -144,12 +139,12 @@ export default class TextRenderer extends DisplayElement implements ITextRendere
         return this._fontDescription;
     }
 
-    private _whiteSpace: WhiteSpace = WhiteSpace.NORMAL;
+    private _whiteSpace = 'normal';
 
     /**
      * The white-space CSS property sets how white space inside an element is handled.
      */
-    public set whiteSpace(value: WhiteSpace) {
+    public set whiteSpace(value: string) {
         if (this._whiteSpace !== value) {
             this._whiteSpace = value;
             this.style.whiteSpace = value;
@@ -157,7 +152,7 @@ export default class TextRenderer extends DisplayElement implements ITextRendere
         }
     }
 
-    public get whiteSpace(): WhiteSpace {
+    public get whiteSpace(): string {
         return this._whiteSpace;
     }
 
@@ -194,13 +189,13 @@ export default class TextRenderer extends DisplayElement implements ITextRendere
         if (this._truncate !== value) {
             this._truncate = value;
             if (value) {
-                this.whiteSpace = WhiteSpace.NO_WRAP;
-                this.overflow = Overflow.HIDDEN;
-                this.textOverflow = TextOverflow.ELLIPSIS;
+                this.whiteSpace = 'nowrap';
+                this.overflow = 'hidden';
+                this.textOverflow = 'ellipsis';
             } else {
-                this.whiteSpace = WhiteSpace.NORMAL;
-                this.overflow = Overflow.VISIBLE;
-                this.textOverflow = TextOverflow.CLIP;
+                this.whiteSpace = 'normal';
+                this.overflow = 'visible';
+                this.textOverflow = 'clip';
             }
             this.invalidateInternalSize();
         }
@@ -210,16 +205,16 @@ export default class TextRenderer extends DisplayElement implements ITextRendere
         return this._truncate;
     }
 
-    private _textOverflow: TextOverflow = TextOverflow.CLIP;
+    private _textOverflow = 'clip';
 
-    public set textOverflow(value: TextOverflow) {
+    public set textOverflow(value: string) {
         if (this._textOverflow !== value) {
             this._textOverflow = value;
             this.style.textOverflow = value;
         }
     }
 
-    public get textOverflow(): TextOverflow {
+    public get textOverflow(): string {
         return this._textOverflow;
     }
 }
