@@ -1,6 +1,5 @@
 import DisplayElement from '../core/DisplayElement';
 import ITextRenderer from '../interfaces/ITextRenderer';
-import Values from '../enums/Values';
 import FontWeight from '../enums/FontWeight';
 import IFontDescription from '../interfaces/IFontDescription';
 import Overflow from '../enums/Overflow';
@@ -42,7 +41,7 @@ export default class TextRenderer extends DisplayElement implements ITextRendere
         }
     }
 
-    private _text: string = Values.EMPTY;
+    private _text = '';
 
     public set text(value: string) {
         if (this._text !== value) {
@@ -66,12 +65,12 @@ export default class TextRenderer extends DisplayElement implements ITextRendere
         if (isNaN(value)) {
             if (this._fontSize !== 16) {
                 this._fontSize = 16;
-                this.style.fontSize = value + Values.PX;
+                this.style.fontSize = value + 'px';
                 this.invalidateInternalSize();
             }
         } else {
             this._fontSize = value;
-            this.style.fontSize = value + Values.PX;
+            this.style.fontSize = value + 'px';
             this.invalidateInternalSize();
         }
     }
@@ -180,7 +179,7 @@ export default class TextRenderer extends DisplayElement implements ITextRendere
     public set letterSpacing(value) {
         if (this._letterSpacing !== value) {
             this._letterSpacing = value;
-            this.style.letterSpacing = value + Values.PX;
+            this.style.letterSpacing = value + 'px';
             this.invalidateInternalSize();
         }
     }

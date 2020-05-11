@@ -1,7 +1,5 @@
 import DisplayElement from '../core/DisplayElement';
 import ISvgElement from '../interfaces/ISvgElement';
-import Styles from '../enums/Styles';
-import Values from '../enums/Values';
 
 export default class SvgElement extends DisplayElement implements ISvgElement {
     public constructor() {
@@ -19,15 +17,15 @@ export default class SvgElement extends DisplayElement implements ISvgElement {
     }
 
     protected updateSvgAttributes(): void {
-        this.svg.setAttribute(Styles.WIDTH, this.actualWidth.toString());
-        this.svg.setAttribute(Styles.HEIGHT, this.actualHeight.toString());
-        this.svg.setAttribute(Styles.VIEW_BOX, this.viewBox.left + ' ' + this.viewBox.top + ' ' + this.viewBox.width + ' ' + this.viewBox.height);
-        this.path.setAttribute(Styles.FILL, this.fillColor);
-        this.path.setAttribute(Styles.FILL_OPACITY, this.fillOpacity.toString());
-        this.path.setAttribute(Styles.STROKE_WIDTH, this.strokeWidth.toString());
-        this.path.setAttribute(Styles.STROKE, this.strokeColor);
-        this.path.setAttribute(Styles.STROKE_OPACITY, this.strokeOpacity.toString());
-        this.path.setAttribute(Styles.D, this.pathData);
+        this.svg.setAttribute('width', this.actualWidth.toString());
+        this.svg.setAttribute('height', this.actualHeight.toString());
+        this.svg.setAttribute('viewBox', this.viewBox.left + ' ' + this.viewBox.top + ' ' + this.viewBox.width + ' ' + this.viewBox.height);
+        this.path.setAttribute('fill', this.fillColor);
+        this.path.setAttribute('fill-opacity', this.fillOpacity.toString());
+        this.path.setAttribute('stroke-width', this.strokeWidth.toString());
+        this.path.setAttribute('stroke', this.strokeColor);
+        this.path.setAttribute('stroke-opacity', this.strokeOpacity.toString());
+        this.path.setAttribute('d', this.pathData);
     }
 
     private _svg: SVGSVGElement = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
@@ -42,7 +40,7 @@ export default class SvgElement extends DisplayElement implements ISvgElement {
         return this._path;
     }
 
-    private _pathData: string = Values.EMPTY;
+    private _pathData = '';
 
     public set pathData(value: string) {
         if (this._pathData !== value) {
@@ -68,7 +66,7 @@ export default class SvgElement extends DisplayElement implements ISvgElement {
         return this._viewBox;
     }
 
-    private _strokeColor: string = Values.EMPTY;
+    private _strokeColor = '';
 
     public set strokeColor(value: string) {
         if (this._strokeColor !== value) {
@@ -111,7 +109,7 @@ export default class SvgElement extends DisplayElement implements ISvgElement {
         return this._strokeOpacity;
     }
 
-    private _fillColor: string = Values.EMPTY;
+    private _fillColor = '';
 
     public set fillColor(value: string) {
         if (this._fillColor !== value) {

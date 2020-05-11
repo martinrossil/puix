@@ -1,6 +1,4 @@
 import IDisplayElement from '../interfaces/IDisplayElement';
-import Styles from '../enums/Styles';
-import Values from '../enums/Values';
 import Overflow from '../enums/Overflow';
 import LayoutElement from './LayoutElement';
 
@@ -45,21 +43,19 @@ export default class DisplayElement extends LayoutElement implements IDisplayEle
     public set interactive(value: boolean) {
         this._interactive = value;
         if (value) {
-            this.style.pointerEvents = Values.EMPTY;
-            this.style.setProperty(Styles.WEBKIT_USER_SELECT, Values.AUTO);
-            this.style.setProperty(Styles.KHTML_USER_SELECT, Values.AUTO);
-            this.style.setProperty(Styles.MOZ_USER_SELECT, Values.AUTO);
-            this.style.setProperty(Styles.MS_USER_SELECT, Values.AUTO);
-            this.style.setProperty(Styles.O_USER_SELECT, Values.AUTO);
-            this.style.setProperty(Styles.USER_SELECT, Values.AUTO);
+            this.style.pointerEvents = '';
+            this.style.setProperty('-webkit-user-select', 'auto');
+            this.style.setProperty('-khtml-user-select', 'auto');
+            this.style.setProperty('-moz-user-select', 'auto');
+            this.style.setProperty('-ms-user-select', 'auto');
+            this.style.setProperty('user-select', 'auto');
         } else {
-            this.style.pointerEvents = Values.NONE;
-            this.style.setProperty(Styles.WEBKIT_USER_SELECT, Values.NONE);
-            this.style.setProperty(Styles.KHTML_USER_SELECT, Values.NONE);
-            this.style.setProperty(Styles.MOZ_USER_SELECT, Values.NONE);
-            this.style.setProperty(Styles.MS_USER_SELECT, Values.NONE);
-            this.style.setProperty(Styles.O_USER_SELECT, Values.NONE);
-            this.style.setProperty(Styles.USER_SELECT, Values.NONE);
+            this.style.pointerEvents = 'none';
+            this.style.setProperty('-webkit-user-select', 'none');
+            this.style.setProperty('-khtml-user-select', 'none');
+            this.style.setProperty('-moz-user-select', 'none');
+            this.style.setProperty('-ms-user-select', 'none');
+            this.style.setProperty('user-select', 'none');
         }
     }
 
@@ -114,7 +110,7 @@ export default class DisplayElement extends LayoutElement implements IDisplayEle
         if (isNaN(value)) {
             if (this._z !== 0) {
                 this._z = 0;
-                this.style.boxShadow = Values.NONE;
+                this.style.boxShadow = 'none';
             }
         } else if (this._z !== value) {
             let shadow = '';
@@ -147,7 +143,7 @@ export default class DisplayElement extends LayoutElement implements IDisplayEle
             }
         } else if (this._cornerRadius !== value) {
             this._cornerRadius = value;
-            this.style.borderRadius = value + Values.PX;
+            this.style.borderRadius = value + 'px';
         }
     }
 

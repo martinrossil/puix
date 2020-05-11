@@ -23,9 +23,7 @@ import Events from './enums/Events';
 import FontWeight from './enums/FontWeight';
 import Icon from './enums/Icon';
 import Overflow from './enums/Overflow';
-import Styles from './enums/Styles';
 import TextOverflow from './enums/TextOverflow';
-import Values from './enums/Values';
 import WhiteSpace from './enums/WhiteSpace';
 
 // interfaces
@@ -82,9 +80,7 @@ export {
     FontWeight,
     Icon,
     Overflow,
-    Styles,
     TextOverflow,
-    Values,
     WhiteSpace,
 
     // interfaces

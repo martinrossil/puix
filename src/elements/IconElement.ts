@@ -1,5 +1,4 @@
 import IIconElement from '../interfaces/IIconElement';
-import Values from '../enums/Values';
 import SvgElement from '../svg/SvgElement';
 
 export default class IconElement extends SvgElement implements IIconElement {
@@ -9,7 +8,7 @@ export default class IconElement extends SvgElement implements IIconElement {
         this.setSize(24, 24);
     }
 
-    private _icon: string = Values.EMPTY;
+    private _icon = '';
 
     public set icon(value: string) {
         if (this._icon !== value) {
@@ -22,7 +21,7 @@ export default class IconElement extends SvgElement implements IIconElement {
         return this._icon;
     }
 
-    private _color: string = Values.EMPTY;
+    private _color = '';
 
     public set color(value: string) {
         if (this._color !== value) {

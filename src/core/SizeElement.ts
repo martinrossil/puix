@@ -1,6 +1,5 @@
 import PositionElement from './PositionElement';
 import ISizeElement from '../interfaces/ISizeElement';
-import Values from '../enums/Values';
 
 export default class SizeElement extends PositionElement implements ISizeElement {
     public constructor() {
@@ -210,11 +209,11 @@ export default class SizeElement extends PositionElement implements ISizeElement
         if (isNaN(value)) {
             if (this._actualWidth !== this.minWidth) {
                 this._actualWidth = this.minWidth;
-                this.style.width = this._actualWidth + Values.PX;
+                this.style.width = this._actualWidth + 'px';
             }
         } else if (this._actualWidth !== value) {
             this._actualWidth = this.getConstrainedWidth(value);
-            this.style.width = this._actualWidth + Values.PX;
+            this.style.width = this._actualWidth + 'px';
         }
     }
 
@@ -228,11 +227,11 @@ export default class SizeElement extends PositionElement implements ISizeElement
         if (isNaN(value)) {
             if (this._actualHeight !== this.minHeight) {
                 this._actualHeight = this.minHeight;
-                this.style.height = this._actualHeight + Values.PX;
+                this.style.height = this._actualHeight + 'px';
             }
         } else if (this._actualHeight !== value) {
             this._actualHeight = this.getConstrainedHeight(value);
-            this.style.height = this._actualHeight + Values.PX;
+            this.style.height = this._actualHeight + 'px';
         }
     }
 
