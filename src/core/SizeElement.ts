@@ -1,6 +1,6 @@
 import PositionElement from './PositionElement';
 import ISizeElement from '../interfaces/ISizeElement';
-import Events from '../enums/Events';
+import Values from '../enums/Values';
 
 export default class SizeElement extends PositionElement implements ISizeElement {
     public constructor() {
@@ -10,12 +10,30 @@ export default class SizeElement extends PositionElement implements ISizeElement
 
     protected connectedCallback(): void {
         super.connectedCallback();
-        this.invalidateDisplay();
+        this.updateDisplay();
     }
 
     public setSize(width: number, height: number): void {
-        this.width = width;
-        this.height = height;
+        if (this._width !== width) {
+            if (isNaN(this._width) && !isNaN(width)) {
+                this._width = this.getConstrainedWidth(width);
+            } else if (!isNaN(this._width) && isNaN(width)) {
+                this._width = NaN;
+            } else {
+                this._width = this.getConstrainedWidth(width);
+            }
+            this.actualWidth = this._width;
+        }
+        if (this._height !== height) {
+            if (isNaN(this._height) && !isNaN(height)) {
+                this._height = this.getConstrainedHeight(height);
+            } else if (!isNaN(this._height) && isNaN(height)) {
+                this._height = NaN;
+            } else {
+                this._height = this.getConstrainedHeight(height);
+            }
+            this.actualHeight = this._height;
+        }
         this.invalidateDisplay();
     }
 
@@ -25,6 +43,7 @@ export default class SizeElement extends PositionElement implements ISizeElement
     }
 
     protected invalidateDisplay(): void {
+        // console.log(this.name, 'invalidateDisplay()');
         if (this.connected) {
             this.updateDisplay();
         }
@@ -32,6 +51,7 @@ export default class SizeElement extends PositionElement implements ISizeElement
 
     protected updateDisplay(): void {
         // override
+        // console.log(this.name, 'updateDisplay()');
     }
 
     private _minWidth = 0;
@@ -59,9 +79,6 @@ export default class SizeElement extends PositionElement implements ISizeElement
     private _width = NaN;
 
     public set width(value: number) {
-        if (isNaN(this._width) && isNaN(value)) {
-            return;
-        }
         if (this._width !== value) {
             if (isNaN(this._width) && !isNaN(value)) {
                 this._width = this.getConstrainedWidth(value);
@@ -72,9 +89,6 @@ export default class SizeElement extends PositionElement implements ISizeElement
             }
             this.actualWidth = this._width;
             this.invalidateDisplay();
-            if (this.connected) {
-                this.dispatchEventWith(Events.WIDTH_CHANGED);
-            }
         }
     }
 
@@ -140,9 +154,6 @@ export default class SizeElement extends PositionElement implements ISizeElement
     private _height = NaN;
 
     public set height(value: number) {
-        if (isNaN(this._height) && isNaN(value)) {
-            return;
-        }
         if (this._height !== value) {
             if (isNaN(this._height) && !isNaN(value)) {
                 this._height = this.getConstrainedHeight(value);
@@ -153,9 +164,6 @@ export default class SizeElement extends PositionElement implements ISizeElement
             }
             this.actualHeight = this._height;
             this.invalidateDisplay();
-            if (this.connected) {
-                this.dispatchEventWith(Events.HEIGHT_CHANGED);
-            }
         }
     }
 
@@ -202,11 +210,11 @@ export default class SizeElement extends PositionElement implements ISizeElement
         if (isNaN(value)) {
             if (this._actualWidth !== this.minWidth) {
                 this._actualWidth = this.minWidth;
-                this.style.width = this._actualWidth + 'px';
+                this.style.width = this._actualWidth + Values.PX;
             }
         } else if (this._actualWidth !== value) {
             this._actualWidth = this.getConstrainedWidth(value);
-            this.style.width = this._actualWidth + 'px';
+            this.style.width = this._actualWidth + Values.PX;
         }
     }
 
@@ -220,11 +228,11 @@ export default class SizeElement extends PositionElement implements ISizeElement
         if (isNaN(value)) {
             if (this._actualHeight !== this.minHeight) {
                 this._actualHeight = this.minHeight;
-                this.style.height = this._actualHeight + 'px';
+                this.style.height = this._actualHeight + Values.PX;
             }
         } else if (this._actualHeight !== value) {
             this._actualHeight = this.getConstrainedHeight(value);
-            this.style.height = this._actualHeight + 'px';
+            this.style.height = this._actualHeight + Values.PX;
         }
     }
 

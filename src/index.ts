@@ -1,19 +1,27 @@
 // containers
 import ApplicationElement from './containers/ApplicationElement';
 import DisplayContainer from './containers/DisplayContainer';
-import LayoutContainer from './containers/LayoutContainer';
 
 // core
 import DisplayElement from './core/DisplayElement';
 import EventDispatcher from './core/EventDispatcher';
 import EventDispatcherElement from './core/EventDispatcherElement';
+import LayoutElement from './core/LayoutElement';
 import LifeCycleElement from './core/LifeCycleElement';
 import PositionElement from './core/PositionElement';
 import SizeElement from './core/SizeElement';
 
+// design
+import Color from './design/Color';
+import Theme from './design/Theme';
+
+// elements
+import IconElement from './elements/IconElement';
+
 // enums
 import Events from './enums/Events';
 import FontWeight from './enums/FontWeight';
+import Icon from './enums/Icon';
 import Overflow from './enums/Overflow';
 import Styles from './enums/Styles';
 import TextOverflow from './enums/TextOverflow';
@@ -21,25 +29,27 @@ import Values from './enums/Values';
 import WhiteSpace from './enums/WhiteSpace';
 
 // interfaces
-import IAnchorLayoutData from './interfaces/IAnchorLayoutData';
+import IColor from './interfaces/IColor';
 import IDisplayContainer from './interfaces/IDisplayContainer';
 import IDisplayElement from './interfaces/IDisplayElement';
 import IEventDispatcher from './interfaces/IEventDispatcher';
 import IFontDescription from './interfaces/IFontDescription';
 import ILayout from './interfaces/ILayout';
-import ILayoutContainer from './interfaces/ILayoutContainer';
-import ILayoutData from './interfaces/ILayoutData';
+import ILayoutElement from './interfaces/ILayoutElement';
 import ILifeCycleElement from './interfaces/ILifeCycleElement';
 import IPositionElement from './interfaces/IPositionElement';
 import ISizeElement from './interfaces/ISizeElement';
+import ISvgElement from './interfaces/ISvgElement';
 import ITextElement from './interfaces/ITextElement';
 import ITextRenderer from './interfaces/ITextRenderer';
 
 // layouts
 import AnchorLayout from './layouts/AnchorLayout';
-import AnchorLayoutData from './layouts/AnchorLayoutData';
 import BaseLayout from './layouts/BaseLayout';
-import LayoutData from './layouts/LayoutData';
+import InternalSizeLayout from './layouts/InternalSizeLayout';
+
+// svg
+import SvgElement from './svg/SvgElement';
 
 // text
 import FontDescription from './text/FontDescription';
@@ -50,19 +60,27 @@ export {
     // containers
     ApplicationElement,
     DisplayContainer,
-    LayoutContainer,
 
     // core
     DisplayElement,
     EventDispatcher,
     EventDispatcherElement,
+    LayoutElement,
     LifeCycleElement,
     PositionElement,
     SizeElement,
 
+    // design
+    Color,
+    Theme,
+
+    // elements
+    IconElement,
+
     // enums
     Events,
     FontWeight,
+    Icon,
     Overflow,
     Styles,
     TextOverflow,
@@ -70,25 +88,27 @@ export {
     WhiteSpace,
 
     // interfaces
-    IAnchorLayoutData,
+    IColor,
     IDisplayContainer,
     IDisplayElement,
     IEventDispatcher,
     IFontDescription,
     ILayout,
-    ILayoutContainer,
-    ILayoutData,
+    ILayoutElement,
     ILifeCycleElement,
     IPositionElement,
     ISizeElement,
+    ISvgElement,
     ITextElement,
     ITextRenderer,
 
     // layouts
     AnchorLayout,
-    AnchorLayoutData,
     BaseLayout,
-    LayoutData,
+    InternalSizeLayout,
+
+    // svg
+    SvgElement,
 
     // text
     FontDescription,

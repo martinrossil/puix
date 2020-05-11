@@ -2,13 +2,13 @@ import { assert } from 'chai';
 import { describe, it, beforeEach } from 'mocha';
 import ILayout from '../src/interfaces/ILayout';
 import BaseLayout from '../src/layouts/BaseLayout';
-import ILayoutContainer from '../src/interfaces/ILayoutContainer';
-import LayoutContainer from '../src/containers/LayoutContainer';
+import IDisplayContainer from '../src/interfaces/IDisplayContainer';
+import DisplayContainer from '../src/containers/DisplayContainer';
 
-const layoutContainer: ILayoutContainer = new LayoutContainer();
+const displayContainer: IDisplayContainer = new DisplayContainer();
 const baseLayout: ILayout = new BaseLayout();
-layoutContainer.layout = baseLayout;
-document.body.appendChild(layoutContainer as unknown as Node);
+displayContainer.layout = baseLayout;
+document.body.appendChild(displayContainer as unknown as Node);
 
 describe('ILayout interface', () => {
     describe('default values', () => {

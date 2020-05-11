@@ -8,6 +8,15 @@ enum Styles {
     MOZ_USER_SELECT = '-moz-user-select',
     MS_USER_SELECT = '-ms-user-select',
     O_USER_SELECT = '-o-user-select',
-    USER_SELECT = 'user-select'
+    USER_SELECT = 'user-select',
+    WIDTH = 'width',
+    HEIGHT = 'height',
+    VIEW_BOX = 'viewBox',
+    D = 'd',
+    FILL = 'fill',
+    FILL_OPACITY = 'fill-opacity',
+    STROKE_WIDTH = 'stroke-width',
+    STROKE = 'stroke',
+    STROKE_OPACITY = 'stroke-opacity'
 }
 export default Styles;

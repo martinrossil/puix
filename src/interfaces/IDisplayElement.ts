@@ -1,13 +1,13 @@
-import ISizeElement from './ISizeElement';
-import ILayoutData from './ILayoutData';
 import Overflow from '../enums/Overflow';
+import ILayoutElement from './ILayoutElement';
 
-export default interface IDisplayElement extends ISizeElement {
+export default interface IDisplayElement extends ILayoutElement {
     backgroundColor: string;
     opacity: number;
-    layoutData: ILayoutData | null;
     overflow: Overflow;
     overflowHorizontal: Overflow;
     overflowVertical: Overflow;
     interactive: boolean;
+    cornerRadius: number;
+    z: number;
 }

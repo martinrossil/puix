@@ -1,33 +1,21 @@
-import EventDispatcher from '../core/EventDispatcher';
 import ILayout from '../interfaces/ILayout';
-import ILayoutContainer from '../interfaces/ILayoutContainer';
+import IDisplayContainer from '../interfaces/IDisplayContainer';
 
-export default class BaseLayout extends EventDispatcher implements ILayout {
+export default class BaseLayout implements ILayout {
     public constructor() {
-        super();
         this.name = 'BaseLayout';
     }
 
-    public updateLayout(container: ILayoutContainer): void {
+    public updateLayout(container: IDisplayContainer): void {
         this.container = container;
     }
 
+    protected container: IDisplayContainer | null = null;
+
     protected invalidateLayout(): void {
-        if (this.container) {
-            if (this.container.connected) {
-                this.updateLayout(this.container);
-            }
+        if (this.container && this.container.connected) {
+            this.updateLayout(this.container);
         }
-    }
-
-    private _container: ILayoutContainer | null = null;
-
-    protected set container(value: ILayoutContainer | null) {
-        this._container = value;
-    }
-
-    protected get container(): ILayoutContainer | null {
-        return this._container;
     }
 
     private _padding = 0;
@@ -218,5 +206,15 @@ export default class BaseLayout extends EventDispatcher implements ILayout {
 
     public get verticalGap(): number {
         return this._verticalGap;
+    }
+
+    private _name = '';
+
+    public set name(value: string) {
+        this._name = value;
+    }
+
+    public get name(): string {
+        return this._name;
     }
 }

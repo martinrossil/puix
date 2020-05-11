@@ -1,8 +1,11 @@
 import IDisplayElement from '../interfaces/IDisplayElement';
+import ILayoutElement from './ILayoutElement';
+import { ILayout } from '../index';
 
 export default interface IDisplayContainer extends IDisplayElement {
-    addElement(element: IDisplayElement): void;
-    addElements(elements: IDisplayElement[]): void;
-    removeElement(element: IDisplayElement): void;
-    readonly children: HTMLCollection;
+    addElement(element: ILayoutElement): void;
+    addElements(elements: ILayoutElement[]): void;
+    removeElement(element: ILayoutElement): void;
+    elements: ILayoutElement[];
+    layout: ILayout;
 }

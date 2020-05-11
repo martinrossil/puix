@@ -1,62 +1,16 @@
 import BaseLayout from './BaseLayout';
 import IDisplayContainer from '../interfaces/IDisplayContainer';
 import Events from '../enums/Events';
-import ILayoutElement from '../interfaces/ILayoutElement';
 
-export default class AnchorLayout extends BaseLayout {
+export default class InternalSizeLayout extends BaseLayout {
     public constructor() {
         super();
-        this.name = 'AnchorLayout';
+        this.name = 'InternalSizeLayout';
     }
 
     public updateLayout(container: IDisplayContainer): void {
         super.updateLayout(container);
         this.invalidateActualContainerSize(container);
-        this.layoutChildren(container);
-    }
-
-    protected layoutChildren(container: IDisplayContainer): void {
-        const availableWidth = container.actualWidth - this.paddingLeft - this.paddingRight;
-        const availableHeight = container.actualHeight - this.paddingTop - this.paddingBottom;
-        const elements: ILayoutElement[] = container.elements;
-        for (const element of elements) {
-            this.setElementSize(availableWidth, availableHeight, element);
-            this.setElementPosition(availableWidth, availableHeight, element);
-        }
-    }
-
-    protected setElementSize(w: number, h: number, element: ILayoutElement): void {
-        if (isNaN(element.width)) {
-            if (!isNaN(element.percentWidth)) {
-                element.actualWidth = w * element.percentWidth / 100;
-            }
-        }
-        if (isNaN(element.height)) {
-            if (!isNaN(element.percentHeight)) {
-                element.actualHeight = h * element.percentHeight / 100;
-            }
-        }
-    }
-
-    protected setElementPosition(w: number, h: number, element: ILayoutElement): void {
-        if (!isNaN(element.horizontalCenter)) {
-            element.actualX = w * 0.5 - element.actualWidth * 0.5 + element.horizontalCenter;
-        } else if (!isNaN(element.x)) {
-            element.actualX = this.paddingLeft + element.x;
-        } else if (!isNaN(element.percentWidth)) {
-            element.actualX = this.paddingLeft + w * 0.5 - element.actualWidth * 0.5;
-        } else {
-            element.actualX = this.paddingLeft;
-        }
-        if (!isNaN(element.verticalCenter)) {
-            element.actualY = h * 0.5 - element.actualHeight * 0.5 + element.verticalCenter;
-        } else if (!isNaN(element.y)) {
-            element.actualY = this.paddingTop + element.y;
-        } else if (!isNaN(element.percentHeight)) {
-            element.actualY = this.paddingTop + h * 0.5 - element.actualHeight * 0.5;
-        } else {
-            element.actualY = this.paddingTop;
-        }
     }
 
     protected invalidateActualContainerSize(container: IDisplayContainer): void {
@@ -66,6 +20,23 @@ export default class AnchorLayout extends BaseLayout {
             this.setActualWidthFromChildren(container);
         } else if (!isNaN(container.width) && isNaN(container.height)) {
             this.setActualHeightFromChildren(container);
+        } else {
+            this.offsetChildrenFromPadding(container);
+        }
+    }
+
+    protected offsetChildrenFromPadding(container: IDisplayContainer): void {
+        for (const element of container.elements) {
+            if (!isNaN(element.x)) {
+                element.actualX = this.paddingLeft + element.x;
+            } else {
+                element.actualX = this.paddingLeft;
+            }
+            if (!isNaN(element.y)) {
+                element.actualY = this.paddingTop + element.y;
+            } else {
+                element.actualY = this.paddingTop;
+            }
         }
     }
 
@@ -77,19 +48,23 @@ export default class AnchorLayout extends BaseLayout {
                 if (maxWidth < element.x + element.actualWidth) {
                     maxWidth = element.x + element.actualWidth;
                 }
+                element.actualX = this.paddingLeft + element.x;
             } else {
                 if (maxWidth < element.actualWidth) {
                     maxWidth = element.actualWidth;
                 }
+                element.actualX = this.paddingLeft;
             }
             if (!isNaN(element.y)) {
                 if (maxHeight < element.y + element.actualHeight) {
                     maxHeight = element.y + element.actualHeight;
                 }
+                element.actualY = this.paddingTop + element.y;
             } else {
                 if (maxHeight < element.actualHeight) {
                     maxHeight = element.actualHeight;
                 }
+                element.actualY = this.paddingTop;
             }
         }
         maxWidth = this.paddingLeft + maxWidth + this.paddingRight;
@@ -107,13 +82,14 @@ export default class AnchorLayout extends BaseLayout {
                 if (maxWidth < element.x + element.actualWidth) {
                     maxWidth = element.x + element.actualWidth;
                 }
+                element.actualX = this.paddingLeft + element.x;
             } else {
                 if (maxWidth < element.actualWidth) {
                     maxWidth = element.actualWidth;
                 }
+                element.actualX = this.paddingLeft;
             }
         }
-        maxWidth = this.paddingLeft + maxWidth + this.paddingRight;
         if (container.actualWidth !== maxWidth) {
             container.actualWidth = maxWidth;
             container.dispatchEventWith(Events.INTERNAL_SIZE_CHANGED, container);
@@ -127,13 +103,14 @@ export default class AnchorLayout extends BaseLayout {
                 if (maxHeight < element.y + element.actualHeight) {
                     maxHeight = element.y + element.actualHeight;
                 }
+                element.actualY = this.paddingTop + element.y;
             } else {
                 if (maxHeight < element.actualHeight) {
                     maxHeight = element.actualHeight;
                 }
+                element.actualY = this.paddingTop;
             }
         }
-        maxHeight = this.paddingTop + maxHeight + this.paddingBottom;
         if (container.actualHeight !== maxHeight) {
             container.actualHeight = maxHeight;
             container.dispatchEventWith(Events.INTERNAL_SIZE_CHANGED, container);

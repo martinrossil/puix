@@ -14,7 +14,7 @@ export default class TextElement extends DisplayElement implements ITextElement 
         this.name = 'TextElement';
         this.appendChild(this.textRenderer as unknown as Node);
         this.interactive = false;
-        this.backgroundColor = 'hsla(0, 75%, 45%, 0.2)';
+        // this.backgroundColor = 'hsla(0, 75%, 45%, 0.2)';
         this.addEventListener(Events.INTERNAL_SIZE_CHANGED, this.textRendererInternalSizeChanged as EventListener);
     }
 
@@ -32,7 +32,6 @@ export default class TextElement extends DisplayElement implements ITextElement 
 
     protected updateDisplay(): void {
         super.updateDisplay();
-        console.log(this.name, 'updateDisplay()', this.actualWidth, this.actualHeight);
         this.textRenderer.setSize(this.width, this.height);
     }
 

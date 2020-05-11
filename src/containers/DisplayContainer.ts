@@ -1,106 +1,74 @@
 import DisplayElement from '../core/DisplayElement';
 import IDisplayContainer from '../interfaces/IDisplayContainer';
-import IDisplayElement from '../interfaces/IDisplayElement';
 import Events from '../enums/Events';
+import ILayoutElement from '../interfaces/ILayoutElement';
+import LayoutElement from '../core/LayoutElement';
+import ILayout from '../interfaces/ILayout';
+import InternalSizeLayout from '../layouts/InternalSizeLayout';
 
 export default class DisplayContainer extends DisplayElement implements IDisplayContainer {
     public constructor() {
         super();
         this.name = 'DisplayContainer';
-        this.addEventListener(Events.INTERNAL_SIZE_CHANGED, this.internalSizeChanged as EventListener);
+        this.addEventListener(Events.INTERNAL_SIZE_CHANGED, this.childElementInternalSizeChanged as EventListener);
+        this.addEventListener(Events.LAYOUT_DATA_CHANGED, this.layoutDataChanged as EventListener);
     }
 
-    protected internalSizeChanged(e: CustomEvent): void {
+    public elements: ILayoutElement[] = [];
+
+    protected childElementInternalSizeChanged(e: CustomEvent): void {
         if (e.target !== this) {
             e.stopImmediatePropagation();
-            console.log(this.name, 'internalSizeChanged()');
+            this.invalidateDisplay();
+        }
+    }
+
+    protected layoutDataChanged(e: CustomEvent): void {
+        if (e.target !== this) {
+            e.stopImmediatePropagation();
+            this.invalidateDisplay();
         }
     }
 
     protected updateDisplay(): void {
         super.updateDisplay();
-        this.invalidateActualSize();
+        this.layout.updateLayout(this);
     }
 
-    protected invalidateActualSize(): void {
-        if (isNaN(this.width) && isNaN(this.height)) {
-            this.setActualSizeFromChildren();
-        } else if (isNaN(this.width) && !isNaN(this.height)) {
-            this.setActualWidthFromChildren();
-        } else if (!isNaN(this.width) && isNaN(this.height)) {
-            this.setActualHeightFromChildren();
-        }
-    }
-
-    protected setActualSizeFromChildren(): void {
-        let maxWidth = 0;
-        let maxHeight = 0;
-        const len = this.children.length;
-        for (let i = 0; i < len; i++) {
-            const element = this.children.item(i) as unknown as IDisplayElement;
-            if (maxWidth < element.actualX + element.actualWidth) {
-                maxWidth = element.actualX + element.actualWidth;
-            }
-            if (maxHeight < element.actualY + element.actualHeight) {
-                maxHeight = element.actualY + element.actualHeight;
-            }
-        }
-        if (this.actualWidth !== maxWidth || this.actualHeight !== maxHeight) {
-            this.setActualSize(maxWidth, maxHeight);
-            this.dispatchEventWith(Events.INTERNAL_SIZE_CHANGED, this);
-        }
-    }
-
-    protected setActualWidthFromChildren(): void {
-        let maxWidth = 0;
-        const len = this.children.length;
-        for (let i = 0; i < len; i++) {
-            const element: IDisplayElement = this.children.item(i) as unknown as IDisplayElement;
-            if (maxWidth < element.actualX + element.actualWidth) {
-                maxWidth = element.actualX + element.actualWidth;
-            }
-        }
-        if (this.actualWidth !== maxWidth) {
-            this.actualWidth = maxWidth;
-            this.dispatchEventWith(Events.INTERNAL_SIZE_CHANGED, this);
-        }
-    }
-
-    protected setActualHeightFromChildren(): void {
-        let maxHeight = 0;
-        const len = this.children.length;
-        for (let i = 0; i < len; i++) {
-            const element = this.children.item(i) as unknown as IDisplayElement;
-            if (maxHeight < element.actualY + element.actualHeight) {
-                maxHeight = element.actualY + element.actualHeight;
-            }
-        }
-        if (this.actualHeight !== maxHeight) {
-            this.actualHeight = maxHeight;
-            this.dispatchEventWith(Events.INTERNAL_SIZE_CHANGED, this);
-        }
-    }
-
-    public addElement(element: IDisplayElement): void {
+    public addElement(element: ILayoutElement): void {
+        this.elements.push(element);
         this.appendChild(element as unknown as Node);
         this.invalidateDisplay();
     }
 
-    public removeElement(element: IDisplayElement): void {
-        this.removeChild(element as DisplayElement);
+    public removeElement(element: ILayoutElement): void {
+        const start: number = this.elements.indexOf(element);
+        this.elements.splice(start, 1);
+        this.removeChild(element as LayoutElement);
         this.invalidateDisplay();
     }
 
-    public addElements(elements: IDisplayElement[]): void {
+    public addElements(elements: ILayoutElement[]): void {
         const frag: DocumentFragment = document.createDocumentFragment();
-        const len = elements.length;
-        let element: IDisplayElement;
-        for (let i = 0; i < len; i++) {
-            element = elements[i];
-            frag.appendChild(element as DisplayElement);
+        for (const element of elements) {
+            this.elements.push(element);
+            frag.appendChild(element as LayoutElement);
         }
         this.appendChild(frag);
         this.invalidateDisplay();
+    }
+
+    private _layout: ILayout = new InternalSizeLayout();
+
+    public set layout(value: ILayout) {
+        if (this._layout !== value) {
+            this._layout = value;
+            this.invalidateDisplay();
+        }
+    }
+
+    public get layout(): ILayout {
+        return this._layout;
     }
 }
 customElements.define('display-container', DisplayContainer);

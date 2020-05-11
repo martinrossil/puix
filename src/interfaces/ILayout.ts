@@ -1,8 +1,7 @@
-import ILayoutContainer from './ILayoutContainer';
-import IEventDispatcher from './IEventDispatcher';
+import IDisplayContainer from './IDisplayContainer';
 
-export default interface ILayout extends IEventDispatcher {
-    updateLayout(container: ILayoutContainer): void;
+export default interface ILayout {
+    updateLayout(container: IDisplayContainer): void;
     padding: number;
     paddingLeft: number;
     paddingTop: number;
@@ -11,4 +10,5 @@ export default interface ILayout extends IEventDispatcher {
     gap: number;
     horizontalGap: number;
     verticalGap: number;
+    name: string;
 }

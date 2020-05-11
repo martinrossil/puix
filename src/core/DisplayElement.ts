@@ -1,12 +1,10 @@
-import SizeElement from '../core/SizeElement';
 import IDisplayElement from '../interfaces/IDisplayElement';
-import ILayoutData from '../interfaces/ILayoutData';
-import Events from '../enums/Events';
 import Styles from '../enums/Styles';
 import Values from '../enums/Values';
 import Overflow from '../enums/Overflow';
+import LayoutElement from './LayoutElement';
 
-export default class DisplayElement extends SizeElement implements IDisplayElement {
+export default class DisplayElement extends LayoutElement implements IDisplayElement {
     public constructor() {
         super();
         this.name = 'DisplayElement';
@@ -40,25 +38,6 @@ export default class DisplayElement extends SizeElement implements IDisplayEleme
 
     public get opacity(): number {
         return this._opacity;
-    }
-
-    private _layoutData: ILayoutData | null = null;
-
-    public set layoutData(value: ILayoutData | null) {
-        if (this._layoutData !== value) {
-            this._layoutData = value;
-            if (this._layoutData) {
-                this._layoutData.hostElement = this;
-            } else {
-            }
-            if (this.connected) {
-                this.dispatchEventWith(Events.LAYOUT_DATA_CHANGED);
-            }
-        }
-    }
-
-    public get layoutData(): ILayoutData | null {
-        return this._layoutData;
     }
 
     private _interactive = true;
@@ -127,6 +106,53 @@ export default class DisplayElement extends SizeElement implements IDisplayEleme
 
     public get overflowVertical(): Overflow {
         return this._overflowVertical;
+    }
+
+    private _z = 0;
+
+    public set z(value: number) {
+        if (isNaN(value)) {
+            if (this._z !== 0) {
+                this._z = 0;
+                this.style.boxShadow = Values.NONE;
+            }
+        } else if (this._z !== value) {
+            let shadow = '';
+            if (value < 0) {
+                shadow = 'inset ';
+            }
+            shadow += '0 ' + Math.floor(Math.pow(Math.abs(value), 2)) + 'px ';
+            shadow += Math.floor(Math.pow(Math.abs(value), 2.5)) + 'px ';
+            shadow += Math.floor(Math.pow(Math.abs(value), 1.1)) + 'px ';
+            shadow += 'rgba(0, 0, 0, 0.' + Math.round(Math.pow(Math.abs(value), 0.5) * 10) + '),';
+            shadow += ' 0 ' + Math.round(Math.pow(Math.abs(1.8), Math.abs(value))) + 'px ';
+            shadow += Math.round(Math.pow(Math.abs(1.9), Math.abs(value))) + 'px ';
+            shadow += -Math.abs(value) + 'px ';
+            shadow += 'rgba(0, 0, 0, 0.05)';
+            this.style.boxShadow = shadow;
+        }
+    }
+
+    public get z(): number {
+        return this._z;
+    }
+
+    private _cornerRadius = 0;
+
+    public set cornerRadius(value: number) {
+        if (isNaN(value) || value < 0) {
+            if (this._cornerRadius !== 0) {
+                this._cornerRadius = 0;
+                this.style.borderRadius = '0';
+            }
+        } else if (this._cornerRadius !== value) {
+            this._cornerRadius = value;
+            this.style.borderRadius = value + Values.PX;
+        }
+    }
+
+    public get cornerRadius(): number {
+        return this._cornerRadius;
     }
 }
 customElements.define('display-element', DisplayElement);

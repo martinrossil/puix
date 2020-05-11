@@ -3,11 +3,11 @@ import ITextRenderer from '../interfaces/ITextRenderer';
 import Values from '../enums/Values';
 import FontWeight from '../enums/FontWeight';
 import IFontDescription from '../interfaces/IFontDescription';
-import FontDescription from './FontDescription';
 import Overflow from '../enums/Overflow';
 import WhiteSpace from '../enums/WhiteSpace';
 import TextOverflow from '../enums/TextOverflow';
 import Events from '../enums/Events';
+import Theme from '../design/Theme';
 
 export default class TextRenderer extends DisplayElement implements ITextRenderer {
     public constructor() {
@@ -15,7 +15,7 @@ export default class TextRenderer extends DisplayElement implements ITextRendere
         this.name = 'TextRenderer';
         this.style.fontFamily = this.fontFamily;
         this.style.lineHeight = this.lineHeight.toString();
-        this.style.fontWeight = this.fontWeight.toString();
+        this.style.fontWeight = this.fontWeight;
     }
 
     protected connectedCallback(): void {
@@ -24,19 +24,12 @@ export default class TextRenderer extends DisplayElement implements ITextRendere
     }
 
     protected invalidateInternalSize(): void {
-        console.log(this.name, 'invalidateInternalSize');
         if (this.connected) {
             this.setActualSizeFromText();
         }
     }
 
-    protected updateDisplay(): void {
-        super.updateDisplay();
-        console.log(this.name, 'updateDisplay()', this.actualWidth, this.actualHeight);
-    }
-
     protected setActualSizeFromText(): void {
-        console.log(this.name, 'setActualSizeFromText', this.scrollWidth, this.scrollHeight);
         if (isNaN(this.width) && isNaN(this.height)) {
             this.setActualSize(this.scrollWidth, this.scrollHeight);
             this.dispatchEventWith(Events.INTERNAL_SIZE_CHANGED, this);
@@ -49,7 +42,7 @@ export default class TextRenderer extends DisplayElement implements ITextRendere
         }
     }
 
-    private _text = '';
+    private _text: string = Values.EMPTY;
 
     public set text(value: string) {
         if (this._text !== value) {
@@ -125,7 +118,7 @@ export default class TextRenderer extends DisplayElement implements ITextRendere
         return this._lineHeight;
     }
 
-    private _fontFamily = '"Roboto", sans-serif';
+    private _fontFamily = Theme.PRIMARY_FONT.fontFamily;
 
     public set fontFamily(value: string) {
         if (this._fontFamily !== value) {
@@ -139,7 +132,7 @@ export default class TextRenderer extends DisplayElement implements ITextRendere
         return this._fontFamily;
     }
 
-    private _fontDescription: IFontDescription = new FontDescription();
+    private _fontDescription: IFontDescription = Theme.PRIMARY_FONT;
 
     public set fontDescription(value) {
         if (this._fontDescription !== value) {

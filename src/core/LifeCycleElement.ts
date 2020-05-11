@@ -14,6 +14,7 @@ export default class LifeCycleElement extends EventDispatcherElement implements 
      */
     protected connectedCallback(): void {
         this.connected = true;
+        // console.log(this.name, 'connectedCallback()');
     }
 
     /**

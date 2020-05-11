@@ -15,26 +15,26 @@ document.body.appendChild(displayContainer as unknown as Node);
 
 describe('IDisplayContainer interface', () => {
     describe('default values', () => {
-        it('default children length should be 0', () => {
-            assert.strictEqual(displayContainer.children.length, 0);
+        it('default elements length should be 0', () => {
+            assert.strictEqual(displayContainer.elements.length, 0);
         });
     });
     describe('addElement()', () => {
-        it('given children.length is 0, when addElement(child), children.length should be 1', () => {
+        it('given elements.length is 0, when addElement(child), elements.length should be 1', () => {
             displayContainer.addElement(child1);
-            assert.strictEqual(displayContainer.children.length, 1);
+            assert.strictEqual(displayContainer.elements.length, 1);
         });
     });
     describe('removeElement()', () => {
-        it('given children.length is 1, when removeElement(child), children.length should be 0', () => {
+        it('given elements.length is 1, when removeElement(child), elements.length should be 0', () => {
             displayContainer.removeElement(child1);
-            assert.strictEqual(displayContainer.children.length, 0);
+            assert.strictEqual(displayContainer.elements.length, 0);
         });
     });
     describe('addElements()', () => {
-        it('given children.length is 0, when addElements([child1, child2]), children.length should be 2', () => {
+        it('given children.length is 0, when addElements([child1, child2]), elements.length should be 2', () => {
             displayContainer.addElements(elements);
-            assert.strictEqual(displayContainer.children.length, 2);
+            assert.strictEqual(displayContainer.elements.length, 2);
         });
     });
     describe('resizing from children', () => {
