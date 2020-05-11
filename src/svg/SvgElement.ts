@@ -19,7 +19,7 @@ export default class SvgElement extends DisplayElement implements ISvgElement {
     protected updateSvgAttributes(): void {
         this.svg.setAttribute('width', this.actualWidth.toString());
         this.svg.setAttribute('height', this.actualHeight.toString());
-        this.svg.setAttribute('viewBox', this.viewBox.left + ' ' + this.viewBox.top + ' ' + this.viewBox.width + ' ' + this.viewBox.height);
+        this.svg.setAttribute('viewBox', this.viewBox);
         this.path.setAttribute('fill', this.fillColor);
         this.path.setAttribute('fill-opacity', this.fillOpacity.toString());
         this.path.setAttribute('stroke-width', this.strokeWidth.toString());
@@ -53,16 +53,16 @@ export default class SvgElement extends DisplayElement implements ISvgElement {
         return this._pathData;
     }
 
-    private _viewBox: DOMRect = new DOMRect(0, 0, 24, 24);
+    private _viewBox = '0, 0, 24, 24';
 
-    public set viewBox(value: DOMRect) {
+    public set viewBox(value: string) {
         if (this._viewBox !== value) {
             this._viewBox = value;
             this.invalidateDisplay();
         }
     }
 
-    public get viewBox(): DOMRect {
+    public get viewBox(): string {
         return this._viewBox;
     }
 

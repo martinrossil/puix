@@ -1,7 +1,7 @@
 import IDisplayElement from './IDisplayElement';
 
 export default interface ISvgElement extends IDisplayElement {
-    viewBox: DOMRect;
+    viewBox: string;
     strokeColor: string;
     strokeWidth: number;
     strokeOpacity: number;
