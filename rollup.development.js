@@ -1,15 +1,15 @@
 /* eslint-disable */
 import {version} from './package.json';
 import typescript from 'rollup-plugin-typescript2';
-import clear from 'rollup-plugin-clear';
-import copy from 'rollup-plugin-copy';
+// import clear from 'rollup-plugin-clear';
+// import copy from 'rollup-plugin-copy';
 
 export default [
     {
         input: './src/PuixDev.ts',
         plugins: [
             typescript({tsconfig: "tsconfig.development.json"}),
-            clear({ targets: ['development'] }),
+            /* clear({ targets: ['development'] }),
             copy({
                 targets: [
                     { 
@@ -22,7 +22,7 @@ export default [
                         dest: 'development'
                     }
                 ]
-            })
+            }) */
         ],
         output: {
             file: './development/esnext.' + version + '.js',
