@@ -1,11 +1,11 @@
 import ApplicationElement from './containers/ApplicationElement';
-import AnchorLayout from './layouts/AnchorLayout';
 import Theme from './design/Theme';
 import Color from './design/Color';
-import IDisplayContainer from './interfaces/IDisplayContainer';
-import DisplayContainer from './containers/DisplayContainer';
 import IDisplayElement from './interfaces/IDisplayElement';
 import DisplayElement from './core/DisplayElement';
+import AnchorLayout from './layouts/AnchorLayout';
+import IDisplayContainer from './interfaces/IDisplayContainer';
+import DisplayContainer from './containers/DisplayContainer';
 import VerticalLayout from './layouts/VerticalLayout';
 import HorizontalAlign from './consts/HorizontalAlign';
 
@@ -24,9 +24,9 @@ export default class PuixDev extends ApplicationElement {
         vdc.layout = new VerticalLayout();
         vdc.layout.padding = 20;
         vdc.layout.verticalGap = 20;
-        vdc.layout.horizontalAlign = HorizontalAlign.FILL;
+        vdc.layout.horizontalAlign = HorizontalAlign.RIGHT;
         vdc.percentWidth = 100;
-        // vdc.horizontalCenter = vdc.verticalCenter = 0;
+        vdc.horizontalCenter = vdc.verticalCenter = 0;
         const d1: IDisplayElement = new DisplayElement();
         d1.backgroundColor = 'red';
         d1.setSize(300, 100);
@@ -40,7 +40,7 @@ export default class PuixDev extends ApplicationElement {
         const d4: IDisplayElement = new DisplayElement();
         d4.backgroundColor = 'yellow';
         d4.height = 100;
-        d4.percentWidth = 25;
+        d4.percentWidth = 75;
         vdc.addElements([d1, d2, d3, d4]);
         this.addElement(vdc);
     }

@@ -44,13 +44,13 @@ export default class TextElement extends DisplayElement implements ITextElement 
         const offsetY = -padding * 0.5;
         this.textRenderer.y = offsetY + capHeight * this.fontDescription.verticalOffset;
         if (isNaN(this.width) && isNaN(this.height)) {
-            this.setActualSize(this.textRenderer.scrollWidth, this.textRenderer.scrollHeight - padding);
+            this.setSize(this.textRenderer.scrollWidth, this.textRenderer.scrollHeight - padding);
             this.dispatchEventWith('internalSizeChanged', this);
         } else if (isNaN(this.width) && !isNaN(this.height)) {
-            this.actualWidth = this.textRenderer.scrollWidth;
+            this.width = this.textRenderer.scrollWidth;
             this.dispatchEventWith('internalSizeChanged', this);
         } else if (!isNaN(this.width) && isNaN(this.height)) {
-            this.actualHeight = this.textRenderer.scrollHeight - padding;
+            this.height = this.textRenderer.scrollHeight - padding;
             this.dispatchEventWith('internalSizeChanged', this);
         }
     }

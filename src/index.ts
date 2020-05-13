@@ -1,3 +1,8 @@
+// consts
+import Events from './consts/Events';
+import HorizontalAlign from './consts/HorizontalAlign';
+import VerticalAlign from './consts/VerticalAlign';
+
 // containers
 import ApplicationElement from './containers/ApplicationElement';
 import DisplayContainer from './containers/DisplayContainer';
@@ -24,6 +29,7 @@ import IDisplayContainer from './interfaces/IDisplayContainer';
 import IDisplayElement from './interfaces/IDisplayElement';
 import IEventDispatcher from './interfaces/IEventDispatcher';
 import IFontDescription from './interfaces/IFontDescription';
+import IIconElement from './interfaces/IIconElement';
 import ILayout from './interfaces/ILayout';
 import ILayoutElement from './interfaces/ILayoutElement';
 import ILifeCycleElement from './interfaces/ILifeCycleElement';
@@ -37,6 +43,7 @@ import ITextRenderer from './interfaces/ITextRenderer';
 import AnchorLayout from './layouts/AnchorLayout';
 import BaseLayout from './layouts/BaseLayout';
 import InternalSizeLayout from './layouts/InternalSizeLayout';
+import VerticalLayout from './layouts/VerticalLayout';
 
 // svg
 import SvgElement from './svg/SvgElement';
@@ -47,6 +54,10 @@ import TextElement from './text/TextElement';
 import TextRenderer from './text/TextRenderer';
 
 export {
+    // consts
+    Events,
+    HorizontalAlign,
+    VerticalAlign,
     // containers
     ApplicationElement,
     DisplayContainer,
@@ -73,6 +84,7 @@ export {
     IDisplayElement,
     IEventDispatcher,
     IFontDescription,
+    IIconElement,
     ILayout,
     ILayoutElement,
     ILifeCycleElement,
@@ -86,6 +98,7 @@ export {
     AnchorLayout,
     BaseLayout,
     InternalSizeLayout,
+    VerticalLayout,
 
     // svg
     SvgElement,

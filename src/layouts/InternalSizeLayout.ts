@@ -1,5 +1,6 @@
 import BaseLayout from './BaseLayout';
 import IDisplayContainer from '../interfaces/IDisplayContainer';
+import Events from '../consts/Events';
 
 export default class InternalSizeLayout extends BaseLayout {
     public constructor() {
@@ -9,110 +10,113 @@ export default class InternalSizeLayout extends BaseLayout {
 
     public updateLayout(container: IDisplayContainer): void {
         super.updateLayout(container);
-        this.invalidateActualContainerSize(container);
+        this.invalidateContainerSize(container);
+        this.layoutChildren(container);
     }
 
-    protected invalidateActualContainerSize(container: IDisplayContainer): void {
-        if (isNaN(container.width) && isNaN(container.height)) {
-            this.setActualSizeFromChildren(container);
-        } else if (isNaN(container.width) && !isNaN(container.height)) {
-            this.setActualWidthFromChildren(container);
-        } else if (!isNaN(container.width) && isNaN(container.height)) {
-            this.setActualHeightFromChildren(container);
-        } else {
-            this.offsetChildrenFromPadding(container);
-        }
-    }
-
-    protected offsetChildrenFromPadding(container: IDisplayContainer): void {
-        for (const element of container.elements) {
-            if (!isNaN(element.x)) {
-                element.actualX = this.paddingLeft + element.x;
-            } else {
-                element.actualX = this.paddingLeft;
+    protected invalidateContainerSize(container: IDisplayContainer): void {
+        if (isNaN(container.explicitWidth) && isNaN(container.explicitHeight)) {
+            if (isNaN(container.percentWidth) && isNaN(container.percentHeight)) {
+                this.setSizeFromChildren(container);
+            } else if (isNaN(container.percentWidth) && !isNaN(container.percentHeight)) {
+                this.setWidthFromChildren(container);
+            } else if (!isNaN(container.percentWidth) && isNaN(container.percentHeight)) {
+                this.setHeightFromChildren(container);
             }
-            if (!isNaN(element.y)) {
-                element.actualY = this.paddingTop + element.y;
-            } else {
-                element.actualY = this.paddingTop;
+        } else if (isNaN(container.explicitWidth) && !isNaN(container.explicitHeight)) {
+            if (isNaN(container.percentWidth)) {
+                this.setWidthFromChildren(container);
+            }
+        } else if (!isNaN(container.explicitWidth) && isNaN(container.explicitHeight)) {
+            if (isNaN(container.percentHeight)) {
+                this.setHeightFromChildren(container);
             }
         }
     }
 
-    protected setActualSizeFromChildren(container: IDisplayContainer): void {
+    protected setSizeFromChildren(container: IDisplayContainer): void {
         let maxWidth = 0;
         let maxHeight = 0;
         for (const element of container.elements) {
             if (!isNaN(element.x)) {
-                if (maxWidth < element.x + element.actualWidth) {
-                    maxWidth = element.x + element.actualWidth;
+                if (maxWidth < element.x + element.width) {
+                    maxWidth = element.x + element.width;
                 }
-                element.actualX = this.paddingLeft + element.x;
             } else {
-                if (maxWidth < element.actualWidth) {
-                    maxWidth = element.actualWidth;
+                if (maxWidth < element.width) {
+                    maxWidth = element.width;
                 }
-                element.actualX = this.paddingLeft;
             }
             if (!isNaN(element.y)) {
-                if (maxHeight < element.y + element.actualHeight) {
-                    maxHeight = element.y + element.actualHeight;
+                if (maxHeight < element.y + element.height) {
+                    maxHeight = element.y + element.height;
                 }
-                element.actualY = this.paddingTop + element.y;
             } else {
-                if (maxHeight < element.actualHeight) {
-                    maxHeight = element.actualHeight;
+                if (maxHeight < element.height) {
+                    maxHeight = element.height;
                 }
-                element.actualY = this.paddingTop;
             }
         }
         maxWidth = this.paddingLeft + maxWidth + this.paddingRight;
         maxHeight = this.paddingTop + maxHeight + this.paddingBottom;
-        if (container.actualWidth !== maxWidth || container.actualHeight !== maxHeight) {
-            container.setActualSize(maxWidth, maxHeight);
-            container.dispatchEventWith('internalSizeChanged', container);
+        if (container.width !== maxWidth || container.height !== maxHeight) {
+            container.setSize(maxWidth, maxHeight);
+            container.dispatchEventWith(Events.INTERNAL_SIZE_CHANGED, container);
         }
     }
 
-    protected setActualWidthFromChildren(container: IDisplayContainer): void {
+    protected setWidthFromChildren(container: IDisplayContainer): void {
         let maxWidth = 0;
         for (const element of container.elements) {
             if (!isNaN(element.x)) {
-                if (maxWidth < element.x + element.actualWidth) {
-                    maxWidth = element.x + element.actualWidth;
+                if (maxWidth < element.x + element.width) {
+                    maxWidth = element.x + element.width;
                 }
-                element.actualX = this.paddingLeft + element.x;
             } else {
-                if (maxWidth < element.actualWidth) {
-                    maxWidth = element.actualWidth;
+                if (maxWidth < element.width) {
+                    maxWidth = element.width;
                 }
-                element.actualX = this.paddingLeft;
             }
         }
-        if (container.actualWidth !== maxWidth) {
-            container.actualWidth = maxWidth;
-            container.dispatchEventWith('internalSizeChanged', container);
+        maxWidth = this.paddingLeft + maxWidth + this.paddingRight;
+        if (container.width !== maxWidth) {
+            container.width = maxWidth;
+            container.dispatchEventWith(Events.INTERNAL_SIZE_CHANGED, container);
         }
     }
 
-    protected setActualHeightFromChildren(container: IDisplayContainer): void {
+    protected setHeightFromChildren(container: IDisplayContainer): void {
         let maxHeight = 0;
         for (const element of container.elements) {
             if (!isNaN(element.y)) {
-                if (maxHeight < element.y + element.actualHeight) {
-                    maxHeight = element.y + element.actualHeight;
+                if (maxHeight < element.y + element.height) {
+                    maxHeight = element.y + element.height;
                 }
-                element.actualY = this.paddingTop + element.y;
             } else {
-                if (maxHeight < element.actualHeight) {
-                    maxHeight = element.actualHeight;
+                if (maxHeight < element.height) {
+                    maxHeight = element.height;
                 }
-                element.actualY = this.paddingTop;
             }
         }
-        if (container.actualHeight !== maxHeight) {
-            container.actualHeight = maxHeight;
-            container.dispatchEventWith('internalSizeChanged', container);
+        maxHeight = this.paddingTop + maxHeight + this.paddingBottom;
+        if (container.height !== maxHeight) {
+            container.height = maxHeight;
+            container.dispatchEventWith(Events.INTERNAL_SIZE_CHANGED, container);
+        }
+    }
+
+    protected layoutChildren(container: IDisplayContainer): void {
+        for (const element of container.elements) {
+            if (!isNaN(element.x)) {
+                element.actualX = this.paddingLeft + element.x;
+            } else {
+                element.actualX = this.paddingLeft;
+            }
+            if (!isNaN(element.y)) {
+                element.actualY = this.paddingTop + element.y;
+            } else {
+                element.actualY = this.paddingTop;
+            }
         }
     }
 }

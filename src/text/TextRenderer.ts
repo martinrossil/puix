@@ -25,13 +25,13 @@ export default class TextRenderer extends DisplayElement implements ITextRendere
 
     protected setActualSizeFromText(): void {
         if (isNaN(this.width) && isNaN(this.height)) {
-            this.setActualSize(this.scrollWidth, this.scrollHeight);
+            this.setSize(this.scrollWidth, this.scrollHeight);
             this.dispatchEventWith('internalSizeChanged', this);
         } else if (isNaN(this.width) && !isNaN(this.height)) {
-            this.actualWidth = this.scrollWidth;
+            this.width = this.scrollWidth;
             this.dispatchEventWith('internalSizeChanged', this);
         } else if (!isNaN(this.width) && isNaN(this.height)) {
-            this.actualHeight = this.scrollHeight;
+            this.height = this.scrollHeight;
             this.dispatchEventWith('internalSizeChanged', this);
         }
     }

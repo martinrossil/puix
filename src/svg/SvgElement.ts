@@ -17,8 +17,8 @@ export default class SvgElement extends DisplayElement implements ISvgElement {
     }
 
     protected updateSvgAttributes(): void {
-        this.svg.setAttribute('width', this.actualWidth.toString());
-        this.svg.setAttribute('height', this.actualHeight.toString());
+        this.svg.setAttribute('width', this.width.toString());
+        this.svg.setAttribute('height', this.height.toString());
         this.svg.setAttribute('viewBox', this.viewBox);
         this.path.setAttribute('fill', this.fillColor);
         this.path.setAttribute('fill-opacity', this.fillOpacity.toString());

@@ -31,16 +31,16 @@ describe('AnchorLayout class', () => {
             beforeEach(reset);
             it('when anchorLayout.padding = 10, displayContainer actualSize should be 20', () => {
                 anchorLayout.padding = 10;
-                assert.strictEqual(displayContainer.actualWidth, 20);
-                assert.strictEqual(displayContainer.actualHeight, 20);
+                assert.strictEqual(displayContainer.width, 20);
+                assert.strictEqual(displayContainer.height, 20);
             });
             describe('given 1 child with size 100', () => {
                 beforeEach(reset);
                 it('when anchorLayout.padding = 10, displayContainer actualSize should be 120', () => {
                     displayContainer.addElement(child100x100);
                     anchorLayout.padding = 10;
-                    assert.strictEqual(displayContainer.actualWidth, 120);
-                    assert.strictEqual(displayContainer.actualHeight, 120);
+                    assert.strictEqual(displayContainer.width, 120);
+                    assert.strictEqual(displayContainer.height, 120);
                     displayContainer.removeElement(child100x100);
                 });
             });
@@ -50,38 +50,11 @@ describe('AnchorLayout class', () => {
                     displayContainer.addElement(child100x100);
                     child100x100.width = NaN;
                     child100x100.percentWidth = 100;
-                    assert.strictEqual(displayContainer.actualWidth, 0);
-                    assert.strictEqual(displayContainer.actualHeight, 100);
+                    assert.strictEqual(displayContainer.width, 0);
+                    assert.strictEqual(displayContainer.height, 100);
                     displayContainer.removeElement(child100x100);
                     child100x100.width = 100;
                 });
-            });
-        });
-        describe('given displayContainer width is NaN and height is 100', () => {
-            beforeEach(reset);
-            it('when displayContainer.padding = 10, displayContainer actualWidth should be 20 and actualHeight should be 100', () => {
-                displayContainer.height = 100;
-                anchorLayout.padding = 10;
-                assert.strictEqual(displayContainer.actualWidth, 20);
-                assert.strictEqual(displayContainer.actualHeight, 100);
-            });
-            it('given 1 child with size 100, when anchorLayout.padding = 10, displayContainer actualWidth should be 120 and actualHeight should be 100', () => {
-                displayContainer.addElement(child100x100);
-                displayContainer.height = 100;
-                anchorLayout.padding = 10;
-                assert.strictEqual(displayContainer.actualWidth, 120);
-                assert.strictEqual(displayContainer.actualHeight, 100);
-                displayContainer.removeElement(child100x100);
-            });
-        });
-        describe('given layoutContainersize is 100', () => {
-            beforeEach(reset);
-            it('when anchorLayout.padding = 10, displayContainer actual size should be 100', () => {
-                displayContainer.width = 100;
-                displayContainer.height = 100;
-                anchorLayout.padding = 10;
-                assert.strictEqual(displayContainer.actualWidth, 100);
-                assert.strictEqual(displayContainer.actualHeight, 100);
             });
         });
         describe('given layoutContainersize is 400', () => {
@@ -95,28 +68,6 @@ describe('AnchorLayout class', () => {
                         child100x100.setPosition(20, 20);
                         assert.strictEqual(child100x100.actualX, 20);
                         assert.strictEqual(child100x100.actualY, 20);
-                        displayContainer.removeElement(child100x100);
-                        child100x100.setPosition(NaN, NaN)
-                    });
-                });
-                describe('given child.layoutData !== null', () => {
-                    beforeEach(reset);
-                    it('when horizontalCenter = 0, child.actualX should be 100', () => {
-                        displayContainer.addElement(child100x100);
-                        displayContainer.setSize(400, 400);
-                        child100x100.setSize(200, 200);
-                        child100x100.horizontalCenter = 0;
-                        assert.strictEqual(child100x100.actualX, 100);
-                        displayContainer.removeElement(child100x100);
-                        child100x100.setPosition(NaN, NaN)
-                    });
-                    beforeEach(reset);
-                    it('when verticalCenter = 0, child.actualY should be 100', () => {
-                        displayContainer.addElement(child100x100);
-                        displayContainer.setSize(400, 400);
-                        child100x100.setSize(200, 200);
-                        child100x100.verticalCenter = 0;
-                        assert.strictEqual(child100x100.actualY, 100);
                         displayContainer.removeElement(child100x100);
                         child100x100.setPosition(NaN, NaN)
                     });
