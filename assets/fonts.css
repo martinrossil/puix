@@ -12,10 +12,3 @@
   font-display: swap;
   src: url('montserrat-bold-danish.woff2') format('woff2'), url('montserrat-bold-danish.woff') format('woff');
 }
-@font-face {
-  font-family: 'Montserrat';
-  font-style: normal;
-  font-weight: 900;
-  font-display: swap;
-  src: url('montserrat-black-danish.woff2') format('woff2'), url('montserrat-black-danish.woff') format('woff');
-}

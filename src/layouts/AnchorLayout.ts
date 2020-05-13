@@ -10,6 +10,7 @@ export default class AnchorLayout extends BaseLayout {
 
     public updateLayout(container: IDisplayContainer): void {
         super.updateLayout(container);
+        console.log(this.name, 'updateLayout()');
         this.invalidateActualContainerSize(container);
         this.layoutChildren(container);
     }

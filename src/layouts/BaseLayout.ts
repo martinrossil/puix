@@ -1,5 +1,7 @@
 import ILayout from '../interfaces/ILayout';
 import IDisplayContainer from '../interfaces/IDisplayContainer';
+import HorizontalAlign from '../consts/HorizontalAlign';
+import VerticalAlign from '../consts/VerticalAlign';
 
 export default class BaseLayout implements ILayout {
     public constructor() {
@@ -206,6 +208,32 @@ export default class BaseLayout implements ILayout {
 
     public get verticalGap(): number {
         return this._verticalGap;
+    }
+
+    private _horizontalAlign: string = HorizontalAlign.LEFT;
+
+    public set horizontalAlign(value: string) {
+        if (this._horizontalAlign !== value) {
+            this._horizontalAlign = value;
+            this.invalidateLayout();
+        }
+    }
+
+    public get horizontalAlign(): string {
+        return this._horizontalAlign;
+    }
+
+    private _verticalAlign: string = VerticalAlign.TOP;
+
+    public set verticalAlign(value: string) {
+        if (this._verticalAlign !== value) {
+            this._verticalAlign = value;
+            this.invalidateLayout();
+        }
+    }
+
+    public get verticalAlign(): string {
+        return this._verticalAlign;
     }
 
     private _name = '';

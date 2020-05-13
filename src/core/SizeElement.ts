@@ -42,7 +42,6 @@ export default class SizeElement extends PositionElement implements ISizeElement
     }
 
     protected invalidateDisplay(): void {
-        // console.log(this.name, 'invalidateDisplay()');
         if (this.connected) {
             this.updateDisplay();
         }
@@ -50,7 +49,6 @@ export default class SizeElement extends PositionElement implements ISizeElement
 
     protected updateDisplay(): void {
         // override
-        // console.log(this.name, 'updateDisplay()');
     }
 
     private _minWidth = 0;
@@ -93,6 +91,23 @@ export default class SizeElement extends PositionElement implements ISizeElement
 
     public get width(): number {
         return this._width;
+    }
+
+    private _explicitWidth = NaN;
+
+    public set explicitWidth(value: number) {
+        /* if (this._explicitWidth !== value) {
+            if (!isNaN(value)) {
+                if (value < 0) {
+                    this._explicitWidth = 0;
+                }
+                this._width = value;
+            }
+        } */
+    }
+
+    public get explicitWidth(): number {
+        return this._explicitWidth;
     }
 
     protected getConstrainedWidth(value: number): number {
@@ -168,6 +183,16 @@ export default class SizeElement extends PositionElement implements ISizeElement
 
     public get height(): number {
         return this._height;
+    }
+
+    private _explicitHeight = NaN;
+
+    public set explicitHeight(value: number) {
+        //
+    }
+
+    public get explicitHeight(): number {
+        return this._explicitHeight;
     }
 
     protected getConstrainedHeight(value: number): number {

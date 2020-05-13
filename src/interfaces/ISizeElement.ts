@@ -11,4 +11,6 @@ export default interface ISizeElement extends IPositionElement {
     maxHeight: number;
     actualWidth: number;
     actualHeight: number;
+    explicitWidth: number;
+    explicitHeight: number;
 }
