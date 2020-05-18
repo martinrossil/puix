@@ -2,6 +2,7 @@ import DisplayElement from '../core/DisplayElement';
 import ITextRenderer from '../interfaces/ITextRenderer';
 import IFontDescription from '../interfaces/IFontDescription';
 import Theme from '../design/Theme';
+import Events from '../consts/Events';
 
 export default class TextRenderer extends DisplayElement implements ITextRenderer {
     public constructor() {
@@ -26,13 +27,13 @@ export default class TextRenderer extends DisplayElement implements ITextRendere
     protected setActualSizeFromText(): void {
         if (isNaN(this.width) && isNaN(this.height)) {
             this.setSize(this.scrollWidth, this.scrollHeight);
-            this.dispatchEventWith('internalSizeChanged', this);
+            this.dispatchEventWith(Events.INTERNAL_SIZE_CHANGED, this);
         } else if (isNaN(this.width) && !isNaN(this.height)) {
             this.width = this.scrollWidth;
-            this.dispatchEventWith('internalSizeChanged', this);
+            this.dispatchEventWith(Events.INTERNAL_SIZE_CHANGED, this);
         } else if (!isNaN(this.width) && isNaN(this.height)) {
             this.height = this.scrollHeight;
-            this.dispatchEventWith('internalSizeChanged', this);
+            this.dispatchEventWith(Events.INTERNAL_SIZE_CHANGED, this);
         }
     }
 

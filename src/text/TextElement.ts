@@ -3,6 +3,7 @@ import ITextElement from '../interfaces/ITextElement';
 import IFontDescription from '../interfaces/IFontDescription';
 import ITextRenderer from '../interfaces/ITextRenderer';
 import TextRenderer from './TextRenderer';
+import Events from '../consts/Events';
 
 export default class TextElement extends DisplayElement implements ITextElement {
     public constructor() {
@@ -10,7 +11,7 @@ export default class TextElement extends DisplayElement implements ITextElement 
         this.name = 'TextElement';
         this.appendChild(this.textRenderer as unknown as Node);
         this.interactive = false;
-        this.addEventListener('internalSizeChanged', this.textRendererInternalSizeChanged as EventListener);
+        this.addEventListener(Events.INTERNAL_SIZE_CHANGED, this.textRendererInternalSizeChanged as EventListener);
     }
 
     protected connectedCallback(): void {
@@ -45,13 +46,13 @@ export default class TextElement extends DisplayElement implements ITextElement 
         this.textRenderer.y = offsetY + capHeight * this.fontDescription.verticalOffset;
         if (isNaN(this.width) && isNaN(this.height)) {
             this.setSize(this.textRenderer.scrollWidth, this.textRenderer.scrollHeight - padding);
-            this.dispatchEventWith('internalSizeChanged', this);
+            this.dispatchEventWith(Events.INTERNAL_SIZE_CHANGED, this);
         } else if (isNaN(this.width) && !isNaN(this.height)) {
             this.width = this.textRenderer.scrollWidth;
-            this.dispatchEventWith('internalSizeChanged', this);
+            this.dispatchEventWith(Events.INTERNAL_SIZE_CHANGED, this);
         } else if (!isNaN(this.width) && isNaN(this.height)) {
             this.height = this.textRenderer.scrollHeight - padding;
-            this.dispatchEventWith('internalSizeChanged', this);
+            this.dispatchEventWith(Events.INTERNAL_SIZE_CHANGED, this);
         }
     }
 
