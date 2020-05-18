@@ -1,6 +1,6 @@
 export default class HorizontalAlign {
-    static LEFT = 'LEFT';
-    static CENTER = 'CENTER';
-    static RIGHT = 'RIGHT';
-    static FILL = 'FILL';
+    static LEFT = 'a';
+    static CENTER = 'b';
+    static RIGHT = 'c';
+    static FILL = 'd';
 }
