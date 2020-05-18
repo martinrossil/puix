@@ -22,11 +22,15 @@ export default class AnchorLayout extends InternalSizeLayout {
         if (isNaN(element.explicitWidth)) {
             if (!isNaN(element.percentWidth)) {
                 element.width = w * element.percentWidth / 100;
+            } else if (!isNaN(element.left) && !isNaN(element.right)) {
+                element.width = w - element.left - element.right;
             }
         }
         if (isNaN(element.explicitHeight)) {
             if (!isNaN(element.percentHeight)) {
                 element.height = h * element.percentHeight / 100;
+            } else if (!isNaN(element.top) && !isNaN(element.bottom)) {
+                element.height = h - element.top - element.bottom;
             }
         }
     }
