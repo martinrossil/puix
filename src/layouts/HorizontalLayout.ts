@@ -1,9 +1,46 @@
-import BaseLayout from './BaseLayout';
+import Layout from './Layout';
+import IHorizontalLayout from '../interfaces/IHorizontalLayout';
+import VerticalAlign from '../consts/VerticalAlign';
 
-export default class HorizontalLayout extends BaseLayout {
+export default class HorizontalLayout extends Layout implements IHorizontalLayout {
     public constructor() {
         super();
         this.name = 'HorizontalLayout';
+    }
+
+    private _horizontalGap = 0;
+
+    public set horizontalGap(value: number) {
+        if (isNaN(value)) {
+            if (this._horizontalGap !== 0) {
+                this._horizontalGap = 0;
+                this.invalidateLayout();
+            }
+        } else if (this._horizontalGap !== value) {
+            if (value < 0) {
+                this._horizontalGap = 0;
+            } else {
+                this._horizontalGap = value;
+            }
+            this.invalidateLayout();
+        }
+    }
+
+    public get horizontalGap(): number {
+        return this._horizontalGap;
+    }
+
+    private _verticalAlign: string = VerticalAlign.TOP;
+
+    public set verticalAlign(value: string) {
+        if (this._verticalAlign !== value) {
+            this._verticalAlign = value;
+            this.invalidateLayout();
+        }
+    }
+
+    public get verticalAlign(): string {
+        return this._verticalAlign;
     }
 
     /* public updateLayout(container: IDisplayContainer): void {

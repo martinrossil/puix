@@ -1,6 +1,6 @@
-import ILayoutData from './ILayoutData';
+import IEventDispatcher from './IEventDispatcher';
 
-export default interface IAnchorLayoutData extends ILayoutData {
+export default interface IAnchorLayoutData extends IEventDispatcher {
     left: number;
     top: number;
     right: number;

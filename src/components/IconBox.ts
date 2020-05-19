@@ -1,9 +1,9 @@
-import Icons from './Icons';
-import DisplayContainer from './containers/DisplayContainer';
-import Theme from './design/Theme';
-import IIconElement from './interfaces/IIconElement';
-import IconElement from './elements/IconElement';
-import Color from './design/Color';
+import Icons from '../Icons';
+import DisplayContainer from '../containers/DisplayContainer';
+import Theme from '../design/Theme';
+import IIconElement from '../interfaces/IIconElement';
+import IconElement from '../elements/IconElement';
+import Color from '../design/Color';
 
 export default class IconBox extends DisplayContainer {
     public constructor() {

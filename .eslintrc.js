@@ -30,6 +30,7 @@ module.exports = {
         "@typescript-eslint/no-useless-constructor": "off",
         "@typescript-eslint/interface-name-prefix": "off",
         "@typescript-eslint/no-empty-interface": "off",
+        // "@typescript-eslint/no-unused-vars": "off",
         "no-useless-constructor": "off",
         "no-restricted-syntax": "off", // so we can use for of loop instead if Array iterator
         "no-plusplus": "off"

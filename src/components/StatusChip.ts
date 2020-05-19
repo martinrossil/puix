@@ -1,7 +1,7 @@
-import DisplayContainer from './containers/DisplayContainer';
-import Theme from './design/Theme';
-import ITextElement from './interfaces/ITextElement';
-import TextElement from './text/TextElement';
+import DisplayContainer from '../containers/DisplayContainer';
+import Theme from '../design/Theme';
+import ITextElement from '../interfaces/ITextElement';
+import TextElement from '../text/TextElement';
 
 export default class StatusChip extends DisplayContainer {
     public constructor() {

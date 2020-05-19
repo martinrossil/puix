@@ -1,14 +1,6 @@
 import ISizeElement from './ISizeElement';
-import ILayoutData from './ILayoutData';
+import IEventDispatcher from './IEventDispatcher';
 
 export default interface ILayoutElement extends ISizeElement {
-    /* top: number;
-    right: number;
-    bottom: number;
-    left: number;
-    percentWidth: number;
-    percentHeight: number;
-    horizontalCenter: number;
-    verticalCenter: number; */
-    layoutData: ILayoutData | null;
+    layoutData: IEventDispatcher | null;
 }

@@ -1,15 +1,110 @@
 import ILayout from '../interfaces/ILayout';
 import IDisplayContainer from '../interfaces/IDisplayContainer';
-import HorizontalAlign from '../consts/HorizontalAlign';
-import VerticalAlign from '../consts/VerticalAlign';
+import Events from '../consts/Events';
 
-export default class BaseLayout implements ILayout {
+export default class Layout implements ILayout {
     public constructor() {
-        this.name = 'BaseLayout';
+        this.name = 'Layout';
     }
 
     public updateLayout(container: IDisplayContainer): void {
         this.container = container;
+        this.invalidateContainerSize(container);
+        this.resizeChildren(container);
+        this.layoutChildren(container);
+    }
+
+    protected resizeChildren(container: IDisplayContainer): void {
+        // override
+    }
+
+    protected layoutChildren(container: IDisplayContainer): void {
+        // override
+        for (const element of container.elements) {
+            element.setPosition(this.paddingLeft, this.paddingTop);
+        }
+    }
+
+    protected invalidateContainerSize(container: IDisplayContainer): void {
+        if (isNaN(container.width) && isNaN(container.height)) {
+            if (container.layoutData) {
+                if (isNaN(container.percentWidth) && isNaN(container.percentHeight)) {
+                    this.setSizeFromChildren(container);
+                } else if (isNaN(container.percentWidth) && !isNaN(container.percentHeight)) {
+                    this.setWidthFromChildren(container);
+                } else if (!isNaN(container.percentWidth) && isNaN(container.percentHeight)) {
+                    this.setHeightFromChildren(container);
+                }
+            } else {
+                this.setSizeFromChildren(container);
+            }
+        } else if (isNaN(container.width) && !isNaN(container.height)) {
+            if (container.layoutData) {
+                if (isNaN(container.percentWidth)) {
+                    this.setWidthFromChildren(container);
+                }
+            } else {
+                this.setWidthFromChildren(container);
+            }
+        } else if (!isNaN(container.width) && isNaN(container.height)) {
+            if (container.layoutData) {
+                if (isNaN(container.percentHeight)) {
+                    this.setHeightFromChildren(container);
+                }
+            } else {
+                this.setHeightFromChildren(container);
+            }
+        }
+    }
+
+    protected setSizeFromChildren(container: IDisplayContainer): void {
+        // override
+        let width = 0;
+        let height = 0;
+        for (const element of container.elements) {
+            if (width < element.actualWidth) {
+                width = element.actualWidth;
+            }
+            if (height < element.actualHeight) {
+                height = element.actualHeight;
+            }
+        }
+        width = this.paddingLeft + width + this.paddingRight;
+        height = this.paddingTop + height + this.paddingBottom;
+        if (container.actualWidth !== width || container.actualHeight !== height) {
+            container.setActualSize(width, height);
+            container.dispatchEventWith(Events.INTERNAL_SIZE_CHANGED, container);
+        }
+    }
+
+    protected setWidthFromChildren(container: IDisplayContainer): void {
+        // override
+        let width = 0;
+        for (const element of container.elements) {
+            if (width < element.actualWidth) {
+                width = element.actualWidth;
+            }
+        }
+        width = this.paddingLeft + width + this.paddingRight;
+        if (container.actualWidth !== width) {
+            container.actualWidth = width;
+            container.dispatchEventWith(Events.INTERNAL_SIZE_CHANGED, container);
+        }
+    }
+
+    protected setHeightFromChildren(container: IDisplayContainer): void {
+        // override
+        let height = 0;
+        for (const element of container.elements) {
+            if (height < element.actualHeight) {
+                height = element.actualHeight;
+            }
+        }
+        height = this.paddingTop + height + this.paddingBottom;
+        if (container.actualHeight !== height) {
+            container.actualHeight = height;
+            container.dispatchEventWith(Events.INTERNAL_SIZE_CHANGED, container);
+        }
     }
 
     protected container: IDisplayContainer | null = null;
@@ -138,102 +233,6 @@ export default class BaseLayout implements ILayout {
 
     public get paddingBottom(): number {
         return this._paddingBottom;
-    }
-
-    private _gap = 0;
-
-    public set gap(value: number) {
-        if (isNaN(value)) {
-            this._gap = 0;
-            this._horizontalGap = 0;
-            this._verticalGap = 0;
-            this.invalidateLayout();
-        } else if (this._gap !== value) {
-            if (value < 0) {
-                this._gap = 0;
-                this._horizontalGap = 0;
-                this._verticalGap = 0;
-            } else {
-                this._gap = value;
-                this._horizontalGap = value;
-                this._verticalGap = value;
-            }
-            this.invalidateLayout();
-        }
-    }
-
-    public get gap(): number {
-        return this._gap;
-    }
-
-    private _horizontalGap = 0;
-
-    public set horizontalGap(value: number) {
-        if (isNaN(value)) {
-            if (this._horizontalGap !== 0) {
-                this._horizontalGap = 0;
-                this.invalidateLayout();
-            }
-        } else if (this._horizontalGap !== value) {
-            if (value < 0) {
-                this._horizontalGap = 0;
-            } else {
-                this._horizontalGap = value;
-            }
-            this.invalidateLayout();
-        }
-    }
-
-    public get horizontalGap(): number {
-        return this._horizontalGap;
-    }
-
-    private _verticalGap = 0;
-
-    public set verticalGap(value: number) {
-        if (isNaN(value)) {
-            if (this._verticalGap !== 0) {
-                this._verticalGap = 0;
-                this.invalidateLayout();
-            }
-        } else if (this._verticalGap !== value) {
-            if (value < 0) {
-                this._verticalGap = 0;
-            } else {
-                this._verticalGap = value;
-            }
-            this.invalidateLayout();
-        }
-    }
-
-    public get verticalGap(): number {
-        return this._verticalGap;
-    }
-
-    private _horizontalAlign: string = HorizontalAlign.LEFT;
-
-    public set horizontalAlign(value: string) {
-        if (this._horizontalAlign !== value) {
-            this._horizontalAlign = value;
-            this.invalidateLayout();
-        }
-    }
-
-    public get horizontalAlign(): string {
-        return this._horizontalAlign;
-    }
-
-    private _verticalAlign: string = VerticalAlign.TOP;
-
-    public set verticalAlign(value: string) {
-        if (this._verticalAlign !== value) {
-            this._verticalAlign = value;
-            this.invalidateLayout();
-        }
-    }
-
-    public get verticalAlign(): string {
-        return this._verticalAlign;
     }
 
     private _name = '';

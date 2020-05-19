@@ -1,6 +1,6 @@
 import StatusChip from './StatusChip';
-import DisplayContainer from './containers/DisplayContainer';
-import Theme from './design/Theme';
+import DisplayContainer from '../containers/DisplayContainer';
+import Theme from '../design/Theme';
 
 export default class ActionBar extends DisplayContainer {
     public constructor() {

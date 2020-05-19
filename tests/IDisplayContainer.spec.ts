@@ -39,13 +39,13 @@ describe('IDisplayContainer interface', () => {
     });
     describe('resizing from children', () => {
         it('given displayContainer width and height is NaN, container should resize from children', () => {
-            assert.strictEqual(displayContainer.width, 300);
-            assert.strictEqual(displayContainer.height, 300);
+            assert.strictEqual(displayContainer.actualWidth, 300);
+            assert.strictEqual(displayContainer.actualHeight, 300);
         });
         it('when removeElement(), container should resize from children', () => {
             displayContainer.removeElement(child2)
-            assert.strictEqual(displayContainer.width, 300);
-            assert.strictEqual(displayContainer.height, 50);
+            assert.strictEqual(displayContainer.actualWidth, 300);
+            assert.strictEqual(displayContainer.actualHeight, 50);
         });
     });
 });

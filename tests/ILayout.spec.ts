@@ -1,12 +1,12 @@
 import { assert } from 'chai';
 import { describe, it, beforeEach } from 'mocha';
 import ILayout from '../src/interfaces/ILayout';
-import BaseLayout from '../src/layouts/BaseLayout';
 import IDisplayContainer from '../src/interfaces/IDisplayContainer';
 import DisplayContainer from '../src/containers/DisplayContainer';
+import { Layout } from '../src';
 
 const displayContainer: IDisplayContainer = new DisplayContainer();
-const baseLayout: ILayout = new BaseLayout();
+const baseLayout: ILayout = new Layout();
 displayContainer.layout = baseLayout;
 document.body.appendChild(displayContainer as unknown as Node);
 
@@ -27,15 +27,6 @@ describe('ILayout interface', () => {
         it('default paddingLeft should be 0', () => {
             assert.strictEqual(baseLayout.paddingLeft, 0);
         });
-        it('default gap should be 0', () => {
-            assert.strictEqual(baseLayout.gap, 0);
-        });
-        it('default horizontalGap should be 0', () => {
-            assert.strictEqual(baseLayout.horizontalGap, 0);
-        });
-        it('default verticalGap should be 0', () => {
-            assert.strictEqual(baseLayout.verticalGap, 0);
-        });
     });
     beforeEach(() => {
         baseLayout.padding = 0;
@@ -43,9 +34,6 @@ describe('ILayout interface', () => {
         baseLayout.paddingRight = 0;
         baseLayout.paddingBottom = 0;
         baseLayout.paddingLeft = 0;
-        baseLayout.gap = 0;
-        baseLayout.horizontalGap = 0;
-        baseLayout.verticalGap = 0;
     });
 
     describe('padding', () => {
@@ -152,29 +140,8 @@ describe('ILayout interface', () => {
             assert.strictEqual(baseLayout.paddingLeft, 0);
         });
     });
-    describe('gap', () => {
-        it('given gap is 0, when gap = 10, gap, horizontalGap and verticalGap should be 10', () => {
-            baseLayout.gap = 10;
-            assert.strictEqual(baseLayout.gap, 10);
-            assert.strictEqual(baseLayout.horizontalGap, 10);
-            assert.strictEqual(baseLayout.verticalGap, 10);
-        });
-        it('given gap is 10, when gap = -10, gap, horizontalGap and verticalGap should be 0', () => {
-            baseLayout.gap = 10;
-            baseLayout.gap = -10;
-            assert.strictEqual(baseLayout.gap, 0);
-            assert.strictEqual(baseLayout.horizontalGap, 0);
-            assert.strictEqual(baseLayout.verticalGap, 0);
-        });
-        it('given gap is 10, when gap = NaN, gap, horizontalGap and verticalGap should be 0', () => {
-            baseLayout.gap = 10;
-            baseLayout.gap = NaN;
-            assert.strictEqual(baseLayout.gap, 0);
-            assert.strictEqual(baseLayout.horizontalGap, 0);
-            assert.strictEqual(baseLayout.verticalGap, 0);
-        });
-    });
-    describe('horizontalGap', () => {
+
+    /* describe('horizontalGap', () => {
         it('given horizontalGap is 0, when horizontalGap = NaN, horizontalGap should be 0', () => {
             baseLayout.horizontalGap = NaN;
             assert.strictEqual(baseLayout.horizontalGap, 0);
@@ -211,5 +178,5 @@ describe('ILayout interface', () => {
             baseLayout.verticalGap = NaN;
             assert.strictEqual(baseLayout.verticalGap, 0);
         });
-    });
+    }); */
 });

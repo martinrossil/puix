@@ -1,9 +1,10 @@
 import IAnchorLayoutData from '../interfaces/IAnchorLayoutData';
-import LayoutData from './LayoutData';
+import EventDispatcher from '../core/EventDispatcher';
+import Events from '../consts/Events';
 
-export default class AnchorLayoutData extends LayoutData implements IAnchorLayoutData {
-    public constructor(left = NaN, top = NaN, right = NaN, bottom = NaN, hc = NaN, vc = NaN, pw = NaN, ph = NaN) {
-        super(pw, ph);
+export default class AnchorLayoutData extends EventDispatcher implements IAnchorLayoutData {
+    public constructor(left = NaN, top = NaN, right = NaN, bottom = NaN, hc = NaN, vc = NaN) {
+        super();
         this.name = 'AnchorLayoutData';
         this._left = left;
         this._top = top;
@@ -18,7 +19,7 @@ export default class AnchorLayoutData extends LayoutData implements IAnchorLayou
     public set left(value: number) {
         if (this._left !== value) {
             this._left = value;
-            this.dispatchLayoutDataChanged();
+            this.notifyChange();
         }
     }
 
@@ -31,7 +32,7 @@ export default class AnchorLayoutData extends LayoutData implements IAnchorLayou
     public set top(value: number) {
         if (this._top !== value) {
             this._top = value;
-            this.dispatchLayoutDataChanged();
+            this.notifyChange();
         }
     }
 
@@ -44,7 +45,7 @@ export default class AnchorLayoutData extends LayoutData implements IAnchorLayou
     public set right(value: number) {
         if (this._right !== value) {
             this._right = value;
-            this.dispatchLayoutDataChanged();
+            this.notifyChange();
         }
     }
 
@@ -57,7 +58,7 @@ export default class AnchorLayoutData extends LayoutData implements IAnchorLayou
     public set bottom(value: number) {
         if (this._bottom !== value) {
             this._bottom = value;
-            this.dispatchLayoutDataChanged();
+            this.notifyChange();
         }
     }
 
@@ -70,7 +71,7 @@ export default class AnchorLayoutData extends LayoutData implements IAnchorLayou
     public set horizontalCenter(value: number) {
         if (this._horizontalCenter !== value) {
             this._horizontalCenter = value;
-            this.dispatchLayoutDataChanged();
+            this.notifyChange();
         }
     }
 
@@ -83,11 +84,15 @@ export default class AnchorLayoutData extends LayoutData implements IAnchorLayou
     public set verticalCenter(value: number) {
         if (this._verticalCenter !== value) {
             this._verticalCenter = value;
-            this.dispatchLayoutDataChanged();
+            this.notifyChange();
         }
     }
 
     public get verticalCenter(): number {
         return this._verticalCenter;
+    }
+
+    protected notifyChange(): void {
+        this.dispatchEventWith(Events.LAYOUT_DATA_CHANGED);
     }
 }

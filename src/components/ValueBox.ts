@@ -1,7 +1,7 @@
-import DisplayContainer from './containers/DisplayContainer';
-import ITextElement from './interfaces/ITextElement';
-import TextElement from './text/TextElement';
-import Theme from './design/Theme';
+import DisplayContainer from '../containers/DisplayContainer';
+import ITextElement from '../interfaces/ITextElement';
+import TextElement from '../text/TextElement';
+import Theme from '../design/Theme';
 
 export default class ValueBox extends DisplayContainer {
     public constructor() {

@@ -21,8 +21,6 @@ const reset = (): void => {
     anchorLayout.padding = NaN;
     child100x100.percentWidth = NaN;
     child100x100.percentHeight = NaN;
-    child100x100.horizontalCenter = NaN;
-    child100x100.verticalCenter = NaN;
 }
 
 describe('AnchorLayout class', () => {
@@ -31,29 +29,17 @@ describe('AnchorLayout class', () => {
             beforeEach(reset);
             it('when anchorLayout.padding = 10, displayContainer actualSize should be 20', () => {
                 anchorLayout.padding = 10;
-                assert.strictEqual(displayContainer.width, 20);
-                assert.strictEqual(displayContainer.height, 20);
+                assert.strictEqual(displayContainer.actualWidth, 20);
+                assert.strictEqual(displayContainer.actualHeight, 20);
             });
             describe('given 1 child with size 100', () => {
                 beforeEach(reset);
                 it('when anchorLayout.padding = 10, displayContainer actualSize should be 120', () => {
                     displayContainer.addElement(child100x100);
                     anchorLayout.padding = 10;
-                    assert.strictEqual(displayContainer.width, 120);
-                    assert.strictEqual(displayContainer.height, 120);
+                    assert.strictEqual(displayContainer.actualWidth, 120);
+                    assert.strictEqual(displayContainer.actualHeight, 120);
                     displayContainer.removeElement(child100x100);
-                });
-            });
-            describe('given 1 child width is NaN and height is 100', () => {
-                beforeEach(reset);
-                it('when child.percentWidth = 100, displayContainer actualWidth should be 0 and actualHeight should be 100', () => {
-                    displayContainer.addElement(child100x100);
-                    child100x100.width = NaN;
-                    child100x100.percentWidth = 100;
-                    assert.strictEqual(displayContainer.width, 0);
-                    assert.strictEqual(displayContainer.height, 100);
-                    displayContainer.removeElement(child100x100);
-                    child100x100.width = 100;
                 });
             });
         });
@@ -66,8 +52,8 @@ describe('AnchorLayout class', () => {
                         displayContainer.setSize(400, 400);
                         child100x100.setSize(200, 200);
                         child100x100.setPosition(20, 20);
-                        assert.strictEqual(child100x100.actualX, 20);
-                        assert.strictEqual(child100x100.actualY, 20);
+                        assert.strictEqual(child100x100.x, 20);
+                        assert.strictEqual(child100x100.y, 20);
                         displayContainer.removeElement(child100x100);
                         child100x100.setPosition(NaN, NaN)
                     });

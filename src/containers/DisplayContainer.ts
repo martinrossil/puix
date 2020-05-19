@@ -3,8 +3,8 @@ import IDisplayContainer from '../interfaces/IDisplayContainer';
 import ILayoutElement from '../interfaces/ILayoutElement';
 import LayoutElement from '../core/LayoutElement';
 import ILayout from '../interfaces/ILayout';
-import InternalSizeLayout from '../layouts/InternalSizeLayout';
 import Events from '../consts/Events';
+import Layout from '../layouts/Layout';
 
 export default class DisplayContainer extends DisplayElement implements IDisplayContainer {
     public constructor() {
@@ -50,7 +50,7 @@ export default class DisplayContainer extends DisplayElement implements IDisplay
         this.invalidateDisplay();
     }
 
-    private _layout: ILayout = new InternalSizeLayout();
+    private _layout: ILayout = new Layout();
 
     public set layout(value: ILayout) {
         if (this._layout !== value) {

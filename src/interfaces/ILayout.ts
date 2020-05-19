@@ -7,10 +7,5 @@ export default interface ILayout {
     paddingTop: number;
     paddingRight: number;
     paddingBottom: number;
-    gap: number;
-    horizontalGap: number;
-    verticalGap: number;
-    horizontalAlign: string;
-    verticalAlign: string;
     name: string;
 }

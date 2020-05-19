@@ -23,6 +23,56 @@ export default class SizeElement extends PositionElement implements ISizeElement
         // override
     }
 
+    private _percentWidth = NaN;
+
+    public set percentWidth(value: number) {
+        if (this._percentWidth !== value) {
+            if (!isNaN(value)) {
+                if (value < 0) {
+                    if (this._percentWidth !== 0) {
+                        this._percentWidth = 0;
+                        this.invalidateDisplay();
+                    }
+                } else {
+                    this._percentWidth = value;
+                    this.invalidateDisplay();
+                }
+            } else {
+                this._percentWidth = value;
+                this.invalidateDisplay();
+            }
+        }
+    }
+
+    public get percentWidth(): number {
+        return this._percentWidth;
+    }
+
+    private _percentHeight = NaN;
+
+    public set percentHeight(value: number) {
+        if (this._percentHeight !== value) {
+            if (!isNaN(value)) {
+                if (value < 0) {
+                    if (this._percentHeight !== 0) {
+                        this._percentHeight = 0;
+                        this.invalidateDisplay();
+                    }
+                } else {
+                    this._percentHeight = value;
+                    this.invalidateDisplay();
+                }
+            } else {
+                this._percentHeight = value;
+                this.invalidateDisplay();
+            }
+        }
+    }
+
+    public get percentHeight(): number {
+        return this._percentHeight;
+    }
+
     public setSize(width: number, height: number): void {
         if (this._width === width && this._height === height) {
             return;

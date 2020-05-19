@@ -1,3 +1,11 @@
+// components
+import ActionBar from './components/ActionBar';
+import AppBar from './components/AppBar';
+import DataCard from './components/DataCard';
+import IconBox from './components/IconBox';
+import StatusChip from './components/StatusChip';
+import ValueBox from './components/ValueBox';
+
 // consts
 import Events from './consts/Events';
 import HorizontalAlign from './consts/HorizontalAlign';
@@ -24,6 +32,7 @@ import Theme from './design/Theme';
 import IconElement from './elements/IconElement';
 
 // interfaces
+import IAnchorLayoutData from './interfaces/IAnchorLayoutData';
 import IColor from './interfaces/IColor';
 import IDisplayContainer from './interfaces/IDisplayContainer';
 import IDisplayElement from './interfaces/IDisplayElement';
@@ -38,11 +47,13 @@ import ISizeElement from './interfaces/ISizeElement';
 import ISvgElement from './interfaces/ISvgElement';
 import ITextElement from './interfaces/ITextElement';
 import ITextRenderer from './interfaces/ITextRenderer';
+import IVerticalLayout from './interfaces/IVerticalLayout';
 
 // layouts
 import AnchorLayout from './layouts/AnchorLayout';
-import BaseLayout from './layouts/BaseLayout';
-import InternalSizeLayout from './layouts/InternalSizeLayout';
+import AnchorLayoutData from './layouts/AnchorLayoutData';
+import HorizontalLayout from './layouts/HorizontalLayout';
+import Layout from './layouts/Layout';
 import VerticalLayout from './layouts/VerticalLayout';
 
 // svg
@@ -54,6 +65,13 @@ import TextElement from './text/TextElement';
 import TextRenderer from './text/TextRenderer';
 
 export {
+    // components
+    ActionBar,
+    AppBar,
+    DataCard,
+    IconBox,
+    StatusChip,
+    ValueBox,
     // consts
     Events,
     HorizontalAlign,
@@ -79,6 +97,7 @@ export {
     IconElement,
 
     // interfaces
+    IAnchorLayoutData,
     IColor,
     IDisplayContainer,
     IDisplayElement,
@@ -93,11 +112,13 @@ export {
     ISvgElement,
     ITextElement,
     ITextRenderer,
+    IVerticalLayout,
 
     // layouts
     AnchorLayout,
-    BaseLayout,
-    InternalSizeLayout,
+    AnchorLayoutData,
+    HorizontalLayout,
+    Layout,
     VerticalLayout,
 
     // svg
