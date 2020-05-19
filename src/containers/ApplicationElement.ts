@@ -8,10 +8,9 @@ export default class ApplicationElement extends DisplayContainer {
         document.body.style.setProperty('-webkit-overflow-scrolling', 'touch');
         document.body.style.setProperty('margin', '0');
         window.addEventListener('resize', () => {
-            this.setExplicitSize(window.innerWidth, window.innerHeight);
+            this.setSize(window.innerWidth, window.innerHeight);
         });
-        this.setExplicitSize(window.innerWidth, window.innerHeight);
-        // this.overflow = 'hidden';
+        this.setSize(window.innerWidth, window.innerHeight);
     }
 
     protected connectedCallback(): void {

@@ -12,20 +12,18 @@ export default class PositionElement extends LifeCycleElement implements IPositi
         this.y = y;
     }
 
-    public setActualPosition(x: number, y: number): void {
-        this.actualX = x;
-        this.actualY = y;
-    }
-
-    private _x = NaN;
+    private _x = 0;
 
     public set x(value: number) {
-        if (isNaN(this._x) && isNaN(value)) {
-            return;
+        if (isNaN(value)) {
+            if (this._x !== 0) {
+                this._x = 0;
+                this.updateTransform();
+            }
         }
         if (this._x !== value) {
             this._x = value;
-            this.actualX = value;
+            this.updateTransform();
         }
     }
 
@@ -33,15 +31,18 @@ export default class PositionElement extends LifeCycleElement implements IPositi
         return this._x;
     }
 
-    private _y = NaN;
+    private _y = 0;
 
     public set y(value: number) {
-        if (isNaN(this._y) && isNaN(value)) {
-            return;
+        if (isNaN(value)) {
+            if (this._y !== 0) {
+                this._y = 0;
+                this.updateTransform();
+            }
         }
         if (this._y !== value) {
             this._y = value;
-            this.actualY = value;
+            this.updateTransform();
         }
     }
 
@@ -49,48 +50,8 @@ export default class PositionElement extends LifeCycleElement implements IPositi
         return this._y;
     }
 
-    private _actualX = 0;
-
-    public set actualX(value: number) {
-        if (isNaN(value)) {
-            if (this._actualX !== 0) {
-                this._actualX = 0;
-                this.updateTransform();
-            }
-        } else {
-            if (this._actualX !== value) {
-                this._actualX = value;
-                this.updateTransform();
-            }
-        }
-    }
-
-    public get actualX(): number {
-        return this._actualX;
-    }
-
-    private _actualY = 0;
-
-    public set actualY(value) {
-        if (isNaN(value)) {
-            if (this._actualY !== 0) {
-                this._actualY = 0;
-                this.updateTransform();
-            }
-        } else {
-            if (this._actualY !== value) {
-                this._actualY = value;
-                this.updateTransform();
-            }
-        }
-    }
-
-    public get actualY(): number {
-        return this._actualY;
-    }
-
     protected updateTransform(): void {
-        this.style.transform = 'translate(' + this.actualX + 'px, ' + this.actualY + 'px)';
+        this.style.transform = 'translate(' + this.x + 'px, ' + this.y + 'px)';
     }
 }
 customElements.define('position-element', PositionElement);

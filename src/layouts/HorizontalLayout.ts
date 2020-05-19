@@ -1,7 +1,4 @@
 import BaseLayout from './BaseLayout';
-import IDisplayContainer from '../interfaces/IDisplayContainer';
-import Events from '../consts/Events';
-import VerticalAlign from '../consts/VerticalAlign';
 
 export default class HorizontalLayout extends BaseLayout {
     public constructor() {
@@ -9,7 +6,7 @@ export default class HorizontalLayout extends BaseLayout {
         this.name = 'HorizontalLayout';
     }
 
-    public updateLayout(container: IDisplayContainer): void {
+    /* public updateLayout(container: IDisplayContainer): void {
         super.updateLayout(container);
         this.invalidateContainerSize(container);
         this.resizeChildren(container);
@@ -254,5 +251,5 @@ export default class HorizontalLayout extends BaseLayout {
             element.setPosition(x, container.height * 0.5 - element.height * 0.5);
             x += element.width + this.horizontalGap;
         }
-    }
+    } */
 }

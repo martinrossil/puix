@@ -20,66 +20,6 @@ export default class BaseLayout implements ILayout {
         }
     }
 
-    protected hasNoSize(container: IDisplayContainer): boolean {
-        return isNaN(container.explicitHeight) && isNaN(container.explicitWidth);
-    }
-
-    protected hasNoWidth(container: IDisplayContainer): boolean {
-        return isNaN(container.explicitWidth);
-    }
-
-    protected hasWidth(container: IDisplayContainer): boolean {
-        return !isNaN(container.explicitWidth);
-    }
-
-    protected hasNoHeight(container: IDisplayContainer): boolean {
-        return isNaN(container.explicitHeight);
-    }
-
-    protected hasHeight(container: IDisplayContainer): boolean {
-        return !isNaN(container.explicitHeight);
-    }
-
-    protected hasNoPercent(container: IDisplayContainer): boolean {
-        return isNaN(container.percentHeight) && isNaN(container.percentWidth);
-    }
-
-    protected hasNoPercentWidth(container: IDisplayContainer): boolean {
-        return isNaN(container.percentWidth);
-    }
-
-    protected hasPercentWidth(container: IDisplayContainer): boolean {
-        return !isNaN(container.percentWidth);
-    }
-
-    protected hasNoPercentHeight(container: IDisplayContainer): boolean {
-        return isNaN(container.percentHeight);
-    }
-
-    protected hasPercentHeight(container: IDisplayContainer): boolean {
-        return !isNaN(container.percentHeight);
-    }
-
-    protected hasNoAnchor(container: IDisplayContainer): boolean {
-        return isNaN(container.left) && isNaN(container.right) && isNaN(container.top) && isNaN(container.bottom);
-    }
-
-    protected hasAnchorWidth(container: IDisplayContainer): boolean {
-        return !isNaN(container.left) && !isNaN(container.right);
-    }
-
-    protected hasNoAnchorWidth(container: IDisplayContainer): boolean {
-        return isNaN(container.left) && isNaN(container.right);
-    }
-
-    protected hasAnchorHeight(container: IDisplayContainer): boolean {
-        return !isNaN(container.top) && !isNaN(container.bottom);
-    }
-
-    protected hasNoAnchorHeight(container: IDisplayContainer): boolean {
-        return isNaN(container.top) && isNaN(container.bottom);
-    }
-
     private _padding = 0;
 
     public set padding(value) {

@@ -1,7 +1,4 @@
 import BaseLayout from './BaseLayout';
-import HorizontalAlign from '../consts/HorizontalAlign';
-import IDisplayContainer from '../interfaces/IDisplayContainer';
-import Events from '../consts/Events';
 
 export default class VerticalLayout extends BaseLayout {
     public constructor() {
@@ -9,7 +6,7 @@ export default class VerticalLayout extends BaseLayout {
         this.name = 'VerticalLayout';
     }
 
-    public updateLayout(container: IDisplayContainer): void {
+    /* public updateLayout(container: IDisplayContainer): void {
         super.updateLayout(container);
         console.log(container.name, 'updateLayout()');
         this.invalidateContainerSize(container);
@@ -294,5 +291,5 @@ export default class VerticalLayout extends BaseLayout {
                 y += element.bottom;
             }
         }
-    }
+    } */
 }

@@ -1,6 +1,4 @@
 import BaseLayout from './BaseLayout';
-import IDisplayContainer from '../interfaces/IDisplayContainer';
-import Events from '../consts/Events';
 
 export default class InternalSizeLayout extends BaseLayout {
     public constructor() {
@@ -8,7 +6,7 @@ export default class InternalSizeLayout extends BaseLayout {
         this.name = 'InternalSizeLayout';
     }
 
-    public updateLayout(container: IDisplayContainer): void {
+    /* public updateLayout(container: IDisplayContainer): void {
         super.updateLayout(container);
         this.invalidateContainerSize(container);
         this.layoutChildren(container);
@@ -118,5 +116,5 @@ export default class InternalSizeLayout extends BaseLayout {
                 element.actualY = this.paddingTop;
             }
         }
-    }
+    } */
 }

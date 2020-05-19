@@ -11,19 +11,11 @@ export default class DisplayContainer extends DisplayElement implements IDisplay
         super();
         this.name = 'DisplayContainer';
         this.addEventListener(Events.INTERNAL_SIZE_CHANGED, this.childElementInternalSizeChanged as EventListener);
-        this.addEventListener(Events.LAYOUT_DATA_CHANGED, this.layoutDataChanged as EventListener);
     }
 
     public elements: ILayoutElement[] = [];
 
     protected childElementInternalSizeChanged(e: CustomEvent): void {
-        if (e.target !== this) {
-            e.stopImmediatePropagation();
-            this.invalidateDisplay();
-        }
-    }
-
-    protected layoutDataChanged(e: CustomEvent): void {
         if (e.target !== this) {
             e.stopImmediatePropagation();
             this.invalidateDisplay();

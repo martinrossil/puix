@@ -6,13 +6,14 @@ import IconElement from './elements/IconElement';
 import ITextElement from './interfaces/ITextElement';
 import TextElement from './text/TextElement';
 import Color from './design/Color';
+import LayoutData from './layouts/LayoutData';
 
 export default class Appbar extends DisplayContainer {
     public constructor() {
         super();
         this.name = 'AppBar';
-        this.percentWidth = 100;
-        this.explicitHeight = 64;
+        this.layoutData = new LayoutData(100);
+        this.height = 64;
         this.backgroundColor = Theme.NEUTRAL_COLOR.index[7];
         this.addElement(this.iconElement);
         this.addElement(this.textElement);
