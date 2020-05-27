@@ -5,7 +5,7 @@ import ColorCollection from './ColorCollection';
 import ColorNames from './ColorNames';
 import Events from '../../consts/Events';
 
-export default class Color extends EventDispatcher implements IColors {
+export default class Colors extends EventDispatcher implements IColors {
     private _primary: IColorCollection = new ColorCollection(ColorNames.CYAN);
 
     public set primary(value: IColorCollection) {
