@@ -3,7 +3,7 @@ import ITheme from '../interfaces/design/ITheme';
 import ITypography from '../interfaces/design/typography/ITypography';
 import Typography from './typography/Typography';
 import Events from '../consts/Events';
-import IColor from '../interfaces/design/color/IColors';
+import IColors from '../interfaces/design/color/IColors';
 import Colors from './color/Colors';
 
 export default class Theme extends EventDispatcher implements ITheme {
@@ -20,16 +20,16 @@ export default class Theme extends EventDispatcher implements ITheme {
         return this._typography;
     }
 
-    private _colors: IColor = new Colors();
+    private _colors: IColors = new Colors();
 
-    public set colors(value: IColor) {
+    public set colors(value: IColors) {
         if (this._colors !== value) {
             this._colors = value;
             this.dispatchEventWith(Events.COLOR_CHANGED);
         }
     }
 
-    public get colors(): IColor {
+    public get colors(): IColors {
         return this._colors;
     }
 }
