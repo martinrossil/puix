@@ -1,7 +1,7 @@
 import SizeElement from './SizeElement';
-import ILayoutElement from '../interfaces/ILayoutElement';
+import ILayoutElement from '../interfaces/core/ILayoutElement';
 import Events from '../consts/Events';
-import IEventDispatcher from '../interfaces/IEventDispatcher';
+import IEventDispatcher from '../interfaces/core/IEventDispatcher';
 
 export default class LayoutElement extends SizeElement implements ILayoutElement {
     public constructor() {

@@ -1,6 +1,6 @@
 import { assert } from 'chai';
 import { describe, it, beforeEach } from 'mocha';
-import ILayoutElement from '../src/interfaces/ILayoutElement';
+import ILayoutElement from '../src/interfaces/core/ILayoutElement';
 import LayoutElement from '../src/core/LayoutElement';
 
 const layoutElement: ILayoutElement = new LayoutElement();

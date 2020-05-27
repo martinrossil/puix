@@ -1,4 +1,4 @@
-import IEventDispatcher from '../interfaces/IEventDispatcher';
+import IEventDispatcher from '../interfaces/core/IEventDispatcher';
 
 export default class EventDispatcherElement extends HTMLElement implements IEventDispatcher {
     public constructor() {

@@ -1,4 +1,4 @@
-import ISvgElement from './ISvgElement';
+import ISvgElement from '../svg/ISvgElement';
 
 export default interface IIconElement extends ISvgElement {
     icon: string;

@@ -1,15 +1,14 @@
-import Icons from '../Icons';
+import Icons from '../design/icon/Icons';
 import DisplayContainer from '../containers/DisplayContainer';
-import Theme from '../design/Theme';
-import IIconElement from '../interfaces/IIconElement';
+import IIconElement from '../interfaces/elements/IIconElement';
 import IconElement from '../elements/IconElement';
-import Color from '../design/Color';
+import HSL from '../design/color/HSL';
 
 export default class IconBox extends DisplayContainer {
     public constructor() {
         super();
         this.name = 'IconBox';
-        this.backgroundColor = Theme.PRIMARY_COLOR.index[4];
+        this.backgroundColor = this.theme.colors.primary.c400;
         this.layout.padding = 8;
         this.cornerRadius = 8;
         this.addElement(this.iconElement);
@@ -19,7 +18,7 @@ export default class IconBox extends DisplayContainer {
         const iconElement: IIconElement = new IconElement();
         iconElement.setSize(38, 38);
         iconElement.icon = Icons.PUIX;
-        iconElement.color = Color.WHITE;
+        iconElement.color = HSL.WHITE;
         return iconElement;
     }
 }

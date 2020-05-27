@@ -1,15 +1,17 @@
 import StatusChip from './StatusChip';
 import DisplayContainer from '../containers/DisplayContainer';
-import Theme from '../design/Theme';
+import AnchorLayoutData from '../layouts/AnchorLayoutData';
+import AnchorLayout from '../layouts/AnchorLayout';
 
 export default class ActionBar extends DisplayContainer {
     public constructor() {
         super();
         this.name = 'ActionBar';
-        this.setSize(400, 50);
-        this.x = -28;
-        this.y = 175 - 28 - 50;
-        this.backgroundColor = Theme.NEUTRAL_COLOR.index[1];
+        this.height = 50;
+        this.percentWidth = 100;
+        this.layoutData = new AnchorLayoutData(NaN, NaN, NaN, 0);
+        this.backgroundColor = this.theme.colors.neutral.c50;
+        this.layout = new AnchorLayout();
         this.addElement(new StatusChip());
     }
 }

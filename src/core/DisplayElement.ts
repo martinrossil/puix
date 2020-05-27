@@ -1,5 +1,7 @@
-import IDisplayElement from '../interfaces/IDisplayElement';
+import IDisplayElement from '../interfaces/core/IDisplayElement';
 import LayoutElement from './LayoutElement';
+import ITheme from '../interfaces/design/ITheme';
+import Design from '../design/Design';
 
 export default class DisplayElement extends LayoutElement implements IDisplayElement {
     public constructor() {
@@ -148,6 +150,10 @@ export default class DisplayElement extends LayoutElement implements IDisplayEle
 
     public get cornerRadius(): number {
         return this._cornerRadius;
+    }
+
+    public get theme(): ITheme {
+        return Design.theme;
     }
 }
 customElements.define('display-element', DisplayElement);

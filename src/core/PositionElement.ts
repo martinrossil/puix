@@ -1,5 +1,5 @@
 import LifeCycleElement from './LifeCycleElement';
-import IPositionElement from '../interfaces/IPositionElement';
+import IPositionElement from '../interfaces/core/IPositionElement';
 
 export default class PositionElement extends LifeCycleElement implements IPositionElement {
     public constructor() {

@@ -1,4 +1,4 @@
-import IEventDispatcher from './IEventDispatcher';
+import IEventDispatcher from '../core/IEventDispatcher';
 
 export default interface IAnchorLayoutData extends IEventDispatcher {
     left: number;

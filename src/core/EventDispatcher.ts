@@ -1,4 +1,4 @@
-import IEventDispatcher from '../interfaces/IEventDispatcher';
+import IEventDispatcher from '../interfaces/core/IEventDispatcher';
 
 export default class EventDispatcher implements IEventDispatcher {
     protected listeners: Map<string, Function[] | undefined> = new Map();

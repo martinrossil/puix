@@ -1,4 +1,5 @@
 import DisplayContainer from './DisplayContainer';
+import Events from '../consts/Events';
 
 export default class ApplicationElement extends DisplayContainer {
     public constructor() {
@@ -15,7 +16,7 @@ export default class ApplicationElement extends DisplayContainer {
 
     protected connectedCallback(): void {
         super.connectedCallback();
-        this.dispatchEventWith('applicationComplete');
+        this.dispatchEventWith(Events.APPLICATION_COMPLETE);
     }
 
     public set backgroundColor(value: string) {

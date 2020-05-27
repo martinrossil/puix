@@ -1,6 +1,6 @@
-import IDisplayElement from '../interfaces/IDisplayElement';
-import ILayoutElement from './ILayoutElement';
-import { ILayout } from '../index';
+import IDisplayElement from '../core/IDisplayElement';
+import ILayoutElement from '../core/ILayoutElement';
+import ILayout from '../layouts/ILayout';
 
 export default interface IDisplayContainer extends IDisplayElement {
     addElement(element: ILayoutElement): void;

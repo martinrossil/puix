@@ -1,5 +1,5 @@
 import PositionElement from './PositionElement';
-import ISizeElement from '../interfaces/ISizeElement';
+import ISizeElement from '../interfaces/core/ISizeElement';
 
 export default class SizeElement extends PositionElement implements ISizeElement {
     public constructor() {
@@ -143,7 +143,7 @@ export default class SizeElement extends PositionElement implements ISizeElement
                 this._actualWidth = this.maxWidth;
                 this.style.width = this._actualWidth + 'px';
             }
-        } else {
+        } else if (this._actualWidth !== width) {
             widthChanged = true;
             this._actualWidth = width;
             this.style.width = this._actualWidth + 'px';
@@ -167,7 +167,7 @@ export default class SizeElement extends PositionElement implements ISizeElement
                 this._actualHeight = this.maxHeight;
                 this.style.height = this._actualHeight + 'px';
             }
-        } else {
+        } else if (this._actualHeight !== height) {
             heightChanged = true;
             this._actualHeight = height;
             this.style.height = this._actualHeight + 'px';
@@ -238,7 +238,7 @@ export default class SizeElement extends PositionElement implements ISizeElement
                 this._actualWidth = this.maxWidth;
                 this.style.width = this._actualWidth + 'px';
             }
-        } else {
+        } else if (this._actualWidth !== value) {
             changed = true;
             this._actualWidth = value;
             this.style.width = this._actualWidth + 'px';
@@ -381,7 +381,7 @@ export default class SizeElement extends PositionElement implements ISizeElement
                 this._actualHeight = this.maxHeight;
                 this.style.height = this._actualHeight + 'px';
             }
-        } else {
+        } else if (this._actualHeight !== value) {
             changed = true;
             this._actualHeight = value;
             this.style.height = this._actualHeight + 'px';

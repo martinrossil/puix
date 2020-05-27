@@ -1,6 +1,6 @@
 import { assert } from 'chai';
 import { describe, it, beforeEach } from 'mocha';
-import ISizeElement from '../src/interfaces/ISizeElement';
+import ISizeElement from '../src/interfaces/core/ISizeElement';
 import SizeElement from '../src/core/SizeElement';
 
 const sizeElement: ISizeElement = new SizeElement();

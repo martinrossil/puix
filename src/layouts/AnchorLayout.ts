@@ -1,8 +1,8 @@
 import Layout from './Layout';
-import IDisplayContainer from '../interfaces/IDisplayContainer';
+import IDisplayContainer from '../interfaces/containers/IDisplayContainer';
 import AnchorLayoutData from './AnchorLayoutData';
-import IAnchorLayoutData from '../interfaces/IAnchorLayoutData';
-import ILayoutElement from '../interfaces/ILayoutElement';
+import IAnchorLayoutData from '../interfaces/layouts/IAnchorLayoutData';
+import ILayoutElement from '../interfaces/core/ILayoutElement';
 
 export default class AnchorLayout extends Layout {
     public constructor() {

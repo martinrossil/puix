@@ -1,4 +1,4 @@
-import IDisplayContainer from './IDisplayContainer';
+import IDisplayContainer from '../containers/IDisplayContainer';
 
 export default interface ILayout {
     updateLayout(container: IDisplayContainer): void;

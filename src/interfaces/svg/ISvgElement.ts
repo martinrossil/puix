@@ -1,4 +1,4 @@
-import IDisplayElement from './IDisplayElement';
+import IDisplayElement from '../core/IDisplayElement';
 
 export default interface ISvgElement extends IDisplayElement {
     viewBox: string;

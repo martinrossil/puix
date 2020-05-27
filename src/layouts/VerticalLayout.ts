@@ -1,11 +1,11 @@
 import Layout from './Layout';
-import IVerticalLayout from '../interfaces/IVerticalLayout';
+import IVerticalLayout from '../interfaces/layouts/IVerticalLayout';
 import HorizontalAlign from '../consts/HorizontalAlign';
-import IDisplayContainer from '../interfaces/IDisplayContainer';
+import IDisplayContainer from '../interfaces/containers/IDisplayContainer';
 import Events from '../consts/Events';
 
 export default class VerticalLayout extends Layout implements IVerticalLayout {
-    public constructor(verticalGap = 0, horizontalAlign: string = HorizontalAlign.LEFT) {
+    public constructor(verticalGap = 0, horizontalAlign = HorizontalAlign.LEFT) {
         super();
         this.name = 'VerticalLayout';
         this.verticalGap = verticalGap;

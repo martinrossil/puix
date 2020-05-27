@@ -1,14 +1,35 @@
-import IFontDescription from '../interfaces/IFontDescription';
-import FontDescription from '../text/FontDescription';
-import IColor from '../interfaces/IColor';
-import Color from '../design/Color';
-export default class Theme {
-    static PRIMARY_COLOR: IColor = new Color(205);
-    static SECONDARY_COLOR: IColor = new Color(50);
-    static NEUTRAL_COLOR: IColor = new Color(200, 10);
-    static ERROR_COLOR: IColor = new Color(0);
-    static WARNING_COLOR: IColor = new Color(45);
-    static SUCCESS_COLOR: IColor = new Color(120);
-    static PRIMARY_FONT: IFontDescription = new FontDescription('"Montserrat", sans-serif', 0.7013, -0.0117);
-    static SECONDARY_FONT: IFontDescription = new FontDescription('"Montserrat", sans-serif', 0.7013, -0.0117);
+import EventDispatcher from '../core/EventDispatcher';
+import ITheme from '../interfaces/design/ITheme';
+import ITypography from '../interfaces/design/typography/ITypography';
+import Typography from './typography/Typography';
+import Events from '../consts/Events';
+import IColor from '../interfaces/design/color/IColors';
+import Colors from './color/Colors';
+
+export default class Theme extends EventDispatcher implements ITheme {
+    private _typography: ITypography = new Typography();
+
+    public set typography(value: ITypography) {
+        if (this._typography !== value) {
+            this._typography = value;
+            this.dispatchEventWith(Events.TYPOGRAPHY_CHANGED);
+        }
+    }
+
+    public get typography(): ITypography {
+        return this._typography;
+    }
+
+    private _colors: IColor = new Colors();
+
+    public set colors(value: IColor) {
+        if (this._colors !== value) {
+            this._colors = value;
+            this.dispatchEventWith(Events.COLOR_CHANGED);
+        }
+    }
+
+    public get colors(): IColor {
+        return this._colors;
+    }
 }

@@ -1,5 +1,5 @@
-import ILayout from '../interfaces/ILayout';
-import IDisplayContainer from '../interfaces/IDisplayContainer';
+import ILayout from '../interfaces/layouts/ILayout';
+import IDisplayContainer from '../interfaces/containers/IDisplayContainer';
 import Events from '../consts/Events';
 
 export default class Layout implements ILayout {
@@ -27,31 +27,19 @@ export default class Layout implements ILayout {
 
     protected invalidateContainerSize(container: IDisplayContainer): void {
         if (isNaN(container.width) && isNaN(container.height)) {
-            if (container.layoutData) {
-                if (isNaN(container.percentWidth) && isNaN(container.percentHeight)) {
-                    this.setSizeFromChildren(container);
-                } else if (isNaN(container.percentWidth) && !isNaN(container.percentHeight)) {
-                    this.setWidthFromChildren(container);
-                } else if (!isNaN(container.percentWidth) && isNaN(container.percentHeight)) {
-                    this.setHeightFromChildren(container);
-                }
-            } else {
+            if (isNaN(container.percentWidth) && isNaN(container.percentHeight)) {
                 this.setSizeFromChildren(container);
+            } else if (isNaN(container.percentWidth) && !isNaN(container.percentHeight)) {
+                this.setWidthFromChildren(container);
+            } else if (!isNaN(container.percentWidth) && isNaN(container.percentHeight)) {
+                this.setHeightFromChildren(container);
             }
         } else if (isNaN(container.width) && !isNaN(container.height)) {
-            if (container.layoutData) {
-                if (isNaN(container.percentWidth)) {
-                    this.setWidthFromChildren(container);
-                }
-            } else {
+            if (isNaN(container.percentWidth)) {
                 this.setWidthFromChildren(container);
             }
         } else if (!isNaN(container.width) && isNaN(container.height)) {
-            if (container.layoutData) {
-                if (isNaN(container.percentHeight)) {
-                    this.setHeightFromChildren(container);
-                }
-            } else {
+            if (isNaN(container.percentHeight)) {
                 this.setHeightFromChildren(container);
             }
         }

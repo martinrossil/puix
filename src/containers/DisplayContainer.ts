@@ -1,8 +1,8 @@
 import DisplayElement from '../core/DisplayElement';
-import IDisplayContainer from '../interfaces/IDisplayContainer';
-import ILayoutElement from '../interfaces/ILayoutElement';
+import IDisplayContainer from '../interfaces/containers/IDisplayContainer';
+import ILayoutElement from '../interfaces/core/ILayoutElement';
 import LayoutElement from '../core/LayoutElement';
-import ILayout from '../interfaces/ILayout';
+import ILayout from '../interfaces/layouts/ILayout';
 import Events from '../consts/Events';
 import Layout from '../layouts/Layout';
 

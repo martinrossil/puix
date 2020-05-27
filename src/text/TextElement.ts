@@ -1,159 +1,165 @@
 import DisplayElement from '../core/DisplayElement';
-import ITextElement from '../interfaces/ITextElement';
-import IFontDescription from '../interfaces/IFontDescription';
-import ITextRenderer from '../interfaces/ITextRenderer';
+import ITextElement from '../interfaces/text/ITextElement';
+import ITypeData from '../interfaces/text/ITypeData';
+import ITextRenderer from '../interfaces/text/ITextRenderer';
 import TextRenderer from './TextRenderer';
+import Design from '../design/Design';
 import Events from '../consts/Events';
 
 export default class TextElement extends DisplayElement implements ITextElement {
     public constructor() {
         super();
         this.name = 'TextElement';
-        this.appendChild(this.textRenderer as unknown as Node);
         this.interactive = false;
-        this.addEventListener(Events.INTERNAL_SIZE_CHANGED, this.textRendererInternalSizeChanged as EventListener);
-    }
-
-    protected connectedCallback(): void {
-        super.connectedCallback();
-        this.invalidateTextSize();
-    }
-
-    protected textRendererInternalSizeChanged(e: CustomEvent): void {
-        if (e.target !== this) {
-            e.stopImmediatePropagation();
-            this.invalidateTextSize();
-        }
+        this.textRenderer.fontFamily = this.typeData.fontFamily;
+        this.textRenderer.fontWeight = this.fontWeight;
+        this.textRenderer.fontSize = this.letterHeight / this.typeData.capHeight;
+        this.textRenderer.lineHeight = this.lineHeight;
+        this.appendChild(this.textRenderer as unknown as Node);
     }
 
     protected updateDisplay(): void {
         super.updateDisplay();
-        this.textRenderer.setSize(this.width, this.height);
-    }
-
-    protected invalidateTextSize(): void {
-        if (this.connected) {
-            this.validateTextSize();
-        }
-    }
-
-    protected validateTextSize(): void {
-        console.log(this.name, 'validateTextSize()');
-        const lineHeight = this.fontSize * this.lineHeight;
-        const capHeight = lineHeight * this.fontDescription.capHeight / this.lineHeight;
-        const padding = lineHeight - capHeight;
-        const offsetY = -padding * 0.5;
-        this.textRenderer.y = offsetY + capHeight * this.fontDescription.verticalOffset;
+        const lineHeightMinusLetterHeight = this.lineHeight - this.letterHeight;
+        const offsetY = lineHeightMinusLetterHeight * 0.5;
+        this.textRenderer.y = -offsetY + (this.typeData.verticalOffset * this.letterHeight);
         if (isNaN(this.width) && isNaN(this.height)) {
-            this.setSize(this.textRenderer.scrollWidth, this.textRenderer.scrollHeight - padding);
-            this.dispatchEventWith(Events.INTERNAL_SIZE_CHANGED, this);
+            if (isNaN(this.percentWidth) && isNaN(this.percentHeight)) {
+                this.setActualSize(this.textRenderer.clientWidth, this.textRenderer.clientHeight - lineHeightMinusLetterHeight);
+                this.dispatchEventWith(Events.INTERNAL_SIZE_CHANGED, this);
+            } else if (isNaN(this.percentWidth) && !isNaN(this.percentHeight)) {
+                this.textRenderer.actualHeight = this.actualHeight;
+                this.actualWidth = this.textRenderer.clientWidth;
+                this.dispatchEventWith(Events.INTERNAL_SIZE_CHANGED, this);
+            } else if (!isNaN(this.percentWidth) && isNaN(this.percentHeight)) {
+                this.textRenderer.actualWidth = this.actualWidth;
+                this.actualHeight = this.textRenderer.clientHeight - lineHeightMinusLetterHeight;
+                this.dispatchEventWith(Events.INTERNAL_SIZE_CHANGED, this);
+            } else {
+                this.textRenderer.setActualSize(this.actualWidth, this.actualHeight);
+            }
         } else if (isNaN(this.width) && !isNaN(this.height)) {
-            this.width = this.textRenderer.scrollWidth;
+            this.textRenderer.actualHeight = this.actualHeight;
+            this.actualWidth = this.textRenderer.clientWidth;
             this.dispatchEventWith(Events.INTERNAL_SIZE_CHANGED, this);
         } else if (!isNaN(this.width) && isNaN(this.height)) {
-            this.height = this.textRenderer.scrollHeight - padding;
+            this.textRenderer.actualWidth = this.actualWidth;
+            this.actualHeight = this.textRenderer.clientHeight - lineHeightMinusLetterHeight;
             this.dispatchEventWith(Events.INTERNAL_SIZE_CHANGED, this);
+        } else {
+            this.textRenderer.setActualSize(this.actualWidth, this.actualHeight);
         }
+    }
+
+    private _text = '';
+
+    public set text(value: string) {
+        if (this._text !== value) {
+            this._text = value;
+            this.textRenderer.text = value;
+            this.invalidateDisplay();
+        }
+    }
+
+    public get text(): string {
+        return this._text;
+    }
+
+    private _typeData: ITypeData = Design.theme.typography.primary;
+
+    public set typeData(value) {
+        if (this._typeData !== value) {
+            this._typeData = value;
+            this.textRenderer.fontFamily = value.fontFamily;
+            this.invalidateDisplay();
+        }
+    }
+
+    public get typeData(): ITypeData {
+        return this._typeData;
+    }
+
+    private _letterHeight = 11.2;
+
+    public set letterHeight(value: number) {
+        if (this._letterHeight !== value) {
+            this._letterHeight = value;
+            this.textRenderer.fontSize = value / this.typeData.capHeight;
+            this.invalidateDisplay();
+        }
+    }
+
+    public get letterHeight(): number {
+        return this._letterHeight;
+    }
+
+    private _lineHeight = 19.2;
+
+    public set lineHeight(value: number) {
+        if (this._lineHeight !== value) {
+            this._lineHeight = value;
+            this.textRenderer.lineHeight = value;
+            this.invalidateDisplay();
+        }
+    }
+
+    public get lineHeight(): number {
+        return this._lineHeight;
+    }
+
+    private _wordwrap = true;
+
+    public set wordwrap(value: boolean) {
+        if (this._wordwrap !== value) {
+            this._wordwrap = value;
+            if (value) {
+                this.textRenderer.whiteSpace = 'normal';
+                this.textRenderer.overflow = 'visible';
+                this.textRenderer.textOverflow = 'clip';
+            } else {
+                this.textRenderer.whiteSpace = 'nowrap';
+                this.textRenderer.overflow = 'hidden';
+                this.textRenderer.textOverflow = 'ellipsis';
+            }
+            this.invalidateDisplay();
+        }
+    }
+
+    public get wordwrap(): boolean {
+        return this._wordwrap;
+    }
+
+    private _color = '';
+
+    public set color(value: string) {
+        if (this._color !== value) {
+            this._color = value;
+            this.textRenderer.color = value;
+        }
+    }
+
+    public get color(): string {
+        return this._color;
+    }
+
+    private _fontWeight = 400;
+
+    public set fontWeight(value: number) {
+        if (this._fontWeight !== value) {
+            this._fontWeight = value;
+            this.textRenderer.fontWeight = value;
+            this.invalidateDisplay();
+        }
+    }
+
+    public get fontWeight(): number {
+        return this._fontWeight;
     }
 
     private _textRenderer: ITextRenderer = new TextRenderer();
 
     protected get textRenderer(): ITextRenderer {
         return this._textRenderer;
-    }
-
-    public set text(value: string) {
-        this.textRenderer.text = value;
-    }
-
-    public get text(): string {
-        return this.textRenderer.text;
-    }
-
-    /**
-     * The font-size CSS property sets the size of the font.
-     * This property is also used to compute the size of em, ex, and other relative <length> units.
-     */
-    public set fontSize(value: number) {
-        this.textRenderer.fontSize = value;
-    }
-
-    public get fontSize(): number {
-        return this.textRenderer.fontSize;
-    }
-
-    /**
-     * The font-weight CSS property sets the weight (or boldness) of the font.
-     * The weights available depend on the font-family you are using.
-     */
-    public set fontWeight(value: number) {
-        this.textRenderer.fontWeight = value;
-    }
-
-    public get fontWeight(): number {
-        return this.textRenderer.fontWeight;
-    }
-
-    /**
-     * The line-height CSS property sets the height of a line box.
-     * It's commonly used to set the distance between lines of text.
-     * On block-level elements, it specifies the minimum height of line boxes within the element.
-     * On non-replaced inline elements, it specifies the height that is used to calculate line box height.
-     */
-    public set lineHeight(value) {
-        this.textRenderer.lineHeight = value;
-    }
-
-    public get lineHeight(): number {
-        return this.textRenderer.lineHeight;
-    }
-
-    public set fontDescription(value: IFontDescription) {
-        this.textRenderer.fontDescription = value;
-    }
-
-    public get fontDescription(): IFontDescription {
-        return this.textRenderer.fontDescription;
-    }
-
-    public set whiteSpace(value: string) {
-        this.textRenderer.whiteSpace = value;
-    }
-
-    public get whiteSpace(): string {
-        return this.textRenderer.whiteSpace;
-    }
-
-    public set color(value: string) {
-        this.textRenderer.color = value;
-    }
-
-    public get color(): string {
-        return this.textRenderer.color;
-    }
-
-    public set letterSpacing(value) {
-        this.textRenderer.letterSpacing = value;
-    }
-
-    public get letterSpacing(): number {
-        return this.textRenderer.letterSpacing;
-    }
-
-    public set textOverflow(value: string) {
-        this.textRenderer.textOverflow = value;
-    }
-
-    public get textOverflow(): string {
-        return this.textRenderer.textOverflow;
-    }
-
-    public set truncate(value: boolean) {
-        this.textRenderer.truncate = value;
-    }
-
-    public get truncate(): boolean {
-        return this.textRenderer.truncate;
     }
 }
 customElements.define('text-element', TextElement);

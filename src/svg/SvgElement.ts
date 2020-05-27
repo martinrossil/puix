@@ -1,5 +1,5 @@
 import DisplayElement from '../core/DisplayElement';
-import ISvgElement from '../interfaces/ISvgElement';
+import ISvgElement from '../interfaces/svg/ISvgElement';
 
 export default class SvgElement extends DisplayElement implements ISvgElement {
     public constructor() {

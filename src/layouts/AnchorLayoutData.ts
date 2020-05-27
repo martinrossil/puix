@@ -1,4 +1,4 @@
-import IAnchorLayoutData from '../interfaces/IAnchorLayoutData';
+import IAnchorLayoutData from '../interfaces/layouts/IAnchorLayoutData';
 import EventDispatcher from '../core/EventDispatcher';
 import Events from '../consts/Events';
 
