@@ -5,7 +5,7 @@ import TypeData from '../../text/TypeData';
 import Events from '../../consts/Events';
 
 export default class Typography extends EventDispatcher implements ITypography {
-    private _primary: ITypeData = new TypeData('"Inter", sans-serif', 0.728, 0.003);
+    private _primary: ITypeData = new TypeData('"Inter", sans-serif', 0.728, 0.018);
 
     public set primary(value: ITypeData) {
         if (this._primary !== value) {

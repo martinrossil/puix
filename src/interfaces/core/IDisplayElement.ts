@@ -8,7 +8,8 @@ export default interface IDisplayElement extends ILayoutElement {
     overflowHorizontal: string;
     overflowVertical: string;
     interactive: boolean;
-    cornerRadius: number;
+    borderRadius: number;
     z: number;
     theme: ITheme;
+    tabIndex: number;
 }

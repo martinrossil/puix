@@ -1,12 +1,12 @@
-import Icons from '../design/icon/Icons';
-import DisplayContainer from '../containers/DisplayContainer';
-import IIconElement from '../interfaces/elements/IIconElement';
-import IconElement from '../elements/IconElement';
-import ITextElement from '../interfaces/text/ITextElement';
-import TextElement from '../text/TextElement';
-import HSL from '../design/color/HSL';
-import HorizontalLayout from '../layouts/HorizontalLayout';
-import VerticalAlign from '../consts/VerticalAlign';
+import Icons from '../../design/icon/Icons';
+import DisplayContainer from '../../containers/DisplayContainer';
+import IIconElement from '../../interfaces/elements/IIconElement';
+import IconElement from '../../elements/IconElement';
+import ITextElement from '../../interfaces/text/ITextElement';
+import TextElement from '../../text/TextElement';
+import HSL from '../../design/color/HSL';
+import HorizontalLayout from '../../layouts/HorizontalLayout';
+import VerticalAlign from '../../consts/VerticalAlign';
 
 export default class Appbar extends DisplayContainer {
     public constructor() {

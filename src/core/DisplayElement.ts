@@ -7,6 +7,8 @@ export default class DisplayElement extends LayoutElement implements IDisplayEle
     public constructor() {
         super();
         this.name = 'DisplayElement';
+        this.style.border = 'none';
+        this.style.outline = 'none';
     }
 
     private _backgroundColor = '';
@@ -134,22 +136,22 @@ export default class DisplayElement extends LayoutElement implements IDisplayEle
         return this._z;
     }
 
-    private _cornerRadius = 0;
+    private _borderRadius = 0;
 
-    public set cornerRadius(value: number) {
+    public set borderRadius(value: number) {
         if (isNaN(value) || value < 0) {
-            if (this._cornerRadius !== 0) {
-                this._cornerRadius = 0;
+            if (this._borderRadius !== 0) {
+                this._borderRadius = 0;
                 this.style.borderRadius = '0';
             }
-        } else if (this._cornerRadius !== value) {
-            this._cornerRadius = value;
+        } else if (this._borderRadius !== value) {
+            this._borderRadius = value;
             this.style.borderRadius = value + 'px';
         }
     }
 
-    public get cornerRadius(): number {
-        return this._cornerRadius;
+    public get borderRadius(): number {
+        return this._borderRadius;
     }
 
     public get theme(): ITheme {

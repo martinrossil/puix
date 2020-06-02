@@ -1,11 +1,12 @@
 import IIconElement from '../interfaces/elements/IIconElement';
-import SvgElement from '../svg/SvgElement';
+import PathElement from '../svg/PathElement';
 
-export default class IconElement extends SvgElement implements IIconElement {
+export default class IconElement extends PathElement implements IIconElement {
     public constructor() {
         super();
         this.name = 'IconElement';
         this.setSize(24, 24);
+        this.svg.setAttribute('viewBox', '0 0 24 24');
     }
 
     private _icon = '';

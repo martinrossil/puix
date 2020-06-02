@@ -9,4 +9,5 @@ export default interface ITextElement extends IDisplayElement {
     color: string;
     fontWeight: number;
     lineHeight: number;
+    letterSpacing: number;
 }

@@ -1,13 +1,17 @@
+// components/custom
+import ActionBar from './components/custom/ActionBar';
+import AppBar from './components/custom/AppBar';
+import DataCard from './components/custom/DataCard';
+import IconBox from './components/custom/IconBox';
+import IconTextContainer from './components/custom/IconTextContainer';
+import StatusChip from './components/custom/StatusChip';
+import ValueBox from './components/custom/ValueBox';
+
 // components
-import ActionBar from './components/ActionBar';
-import AppBar from './components/AppBar';
-import DataCard from './components/DataCard';
-import IconBox from './components/IconBox';
-import IconTextContainer from './components/IconTextContainer';
-import StatusChip from './components/StatusChip';
-import ValueBox from './components/ValueBox';
+import ButtonElement from './components/ButtonElement';
 
 // consts
+import CornerType from './consts/CornerType';
 import Events from './consts/Events';
 import HorizontalAlign from './consts/HorizontalAlign';
 import VerticalAlign from './consts/VerticalAlign';
@@ -44,6 +48,9 @@ import Theme from './design/Theme';
 // elements
 import IconElement from './elements/IconElement';
 
+// interfaces/components
+import IButtonElement from './interfaces/components/IButtonElement';
+
 // interfaces/containers
 import IDisplayContainer from './interfaces/containers/IDisplayContainer';
 
@@ -74,7 +81,13 @@ import IHorizontalLayout from './interfaces/layouts/IHorizontalLayout';
 import ILayout from './interfaces/layouts/ILayout';
 import IVerticalLayout from './interfaces/layouts/IVerticalLayout';
 
+// interfaces/svg/filters
+import IFilter from './interfaces/svg/filters/IFilter';
+import IShadowFilter from './interfaces/svg/filters/IShadowFilter';
+
 // interfaces/svg
+import IPathElement from './interfaces/svg/IPathElement';
+import IShapeElement from './interfaces/svg/IShapeElement';
 import ISvgElement from './interfaces/svg/ISvgElement';
 
 // interfaces/text
@@ -89,7 +102,12 @@ import HorizontalLayout from './layouts/HorizontalLayout';
 import Layout from './layouts/Layout';
 import VerticalLayout from './layouts/VerticalLayout';
 
+// svg/filters
+import ShadowFilter from './svg/filters/ShadowFilter';
+
 // svg
+import PathElement from './svg/PathElement';
+import ShapeElement from './svg/ShapeElement';
 import SvgElement from './svg/SvgElement';
 
 // text
@@ -98,7 +116,7 @@ import TextRenderer from './text/TextRenderer';
 import TypeData from './text/TypeData';
 
 export {
-    // components
+    // components/custom
     ActionBar,
     AppBar,
     DataCard,
@@ -106,10 +124,16 @@ export {
     IconTextContainer,
     StatusChip,
     ValueBox,
+
+    // components
+    ButtonElement,
+
     // consts
+    CornerType,
     Events,
     HorizontalAlign,
     VerticalAlign,
+
     // containers
     ApplicationElement,
     DisplayContainer,
@@ -142,6 +166,9 @@ export {
     // elements
     IconElement,
 
+    // interfaces/components
+    IButtonElement,
+
     // interfaces/containers
     IDisplayContainer,
 
@@ -172,7 +199,13 @@ export {
     ILayout,
     IVerticalLayout,
 
+    // interfaces/svg/filters
+    IFilter,
+    IShadowFilter,
+
     // interfaces/svg
+    IPathElement,
+    IShapeElement,
     ISvgElement,
 
     // interfaces/text
@@ -187,7 +220,12 @@ export {
     Layout,
     VerticalLayout,
 
+    // svg/filters
+    ShadowFilter,
+
     // svg
+    PathElement,
+    ShapeElement,
     SvgElement,
 
     // text

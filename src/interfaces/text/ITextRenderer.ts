@@ -11,4 +11,5 @@ export default interface ITextRenderer extends IDisplayElement {
     lineHeight: number;
     whiteSpace: string;
     textOverflow: string;
+    letterSpacing: number;
 }

@@ -1,8 +1,8 @@
-import DisplayContainer from '../containers/DisplayContainer';
+import DisplayContainer from '../../containers/DisplayContainer';
 import IconBox from './IconBox';
-import HorizontalLayout from '../layouts/HorizontalLayout';
+import HorizontalLayout from '../../layouts/HorizontalLayout';
 import ValueBox from './ValueBox';
-import VerticalAlign from '../consts/VerticalAlign';
+import VerticalAlign from '../../consts/VerticalAlign';
 
 export default class IconTextContainer extends DisplayContainer {
     public constructor() {

@@ -1,8 +1,8 @@
-import Icons from '../design/icon/Icons';
-import DisplayContainer from '../containers/DisplayContainer';
-import IIconElement from '../interfaces/elements/IIconElement';
-import IconElement from '../elements/IconElement';
-import HSL from '../design/color/HSL';
+import Icons from '../../design/icon/Icons';
+import DisplayContainer from '../../containers/DisplayContainer';
+import IIconElement from '../../interfaces/elements/IIconElement';
+import IconElement from '../../elements/IconElement';
+import HSL from '../../design/color/HSL';
 
 export default class IconBox extends DisplayContainer {
     public constructor() {
@@ -10,7 +10,7 @@ export default class IconBox extends DisplayContainer {
         this.name = 'IconBox';
         this.backgroundColor = this.theme.colors.primary.c400;
         this.layout.padding = 8;
-        this.cornerRadius = 8;
+        this.borderRadius = 8;
         this.addElement(this.iconElement);
     }
 

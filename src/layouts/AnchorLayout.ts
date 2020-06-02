@@ -56,10 +56,11 @@ export default class AnchorLayout extends Layout {
     }
 
     protected setElementSize(w: number, h: number, element: ILayoutElement): void {
-        if (!isNaN(element.percentWidth)) {
+        if (!isNaN(element.percentWidth) && !isNaN(element.percentHeight)) {
+            element.setActualSize(w * element.percentWidth / 100, h * element.percentHeight / 100);
+        } else if (!isNaN(element.percentWidth)) {
             element.actualWidth = w * element.percentWidth / 100;
-        }
-        if (!isNaN(element.percentHeight)) {
+        } else if (!isNaN(element.percentHeight)) {
             element.actualHeight = h * element.percentHeight / 100;
         }
     }

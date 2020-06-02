@@ -13,6 +13,13 @@
   src: url('inter-normal-danish.woff2') format('woff2'), url('inter-normal-danish.woff') format('woff');
 }
 @font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('inter-medium-danish.woff2') format('woff2'), url('inter-medium-danish.woff') format('woff');
+}
+@font-face {
   font-family: 'Montserrat';
   font-style: normal;
   font-weight: 700;

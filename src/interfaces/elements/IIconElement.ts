@@ -1,6 +1,6 @@
-import ISvgElement from '../svg/ISvgElement';
+import IPathElement from '../svg/IPathElement';
 
-export default interface IIconElement extends ISvgElement {
+export default interface IIconElement extends IPathElement {
     icon: string;
     color: string;
 }

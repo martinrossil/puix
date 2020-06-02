@@ -15,6 +15,7 @@ export default class TextElement extends DisplayElement implements ITextElement 
         this.textRenderer.fontWeight = this.fontWeight;
         this.textRenderer.fontSize = this.letterHeight / this.typeData.capHeight;
         this.textRenderer.lineHeight = this.lineHeight;
+        this.textRenderer.letterSpacing = this.letterSpacing;
         this.appendChild(this.textRenderer as unknown as Node);
     }
 
@@ -154,6 +155,20 @@ export default class TextElement extends DisplayElement implements ITextElement 
 
     public get fontWeight(): number {
         return this._fontWeight;
+    }
+
+    private _letterSpacing = 1;
+
+    public set letterSpacing(value: number) {
+        if (this._letterSpacing !== value) {
+            this._letterSpacing = value;
+            this.textRenderer.letterSpacing = value;
+            this.invalidateDisplay();
+        }
+    }
+
+    public get letterSpacing(): number {
+        return this._letterSpacing;
     }
 
     private _textRenderer: ITextRenderer = new TextRenderer();

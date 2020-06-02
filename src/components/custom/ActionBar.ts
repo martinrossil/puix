@@ -1,7 +1,7 @@
 import StatusChip from './StatusChip';
-import DisplayContainer from '../containers/DisplayContainer';
-import AnchorLayoutData from '../layouts/AnchorLayoutData';
-import AnchorLayout from '../layouts/AnchorLayout';
+import DisplayContainer from '../../containers/DisplayContainer';
+import AnchorLayoutData from '../../layouts/AnchorLayoutData';
+import AnchorLayout from '../../layouts/AnchorLayout';
 
 export default class ActionBar extends DisplayContainer {
     public constructor() {
