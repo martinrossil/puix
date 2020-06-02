@@ -65,12 +65,12 @@ export default class ShadowFilter implements IShadowFilter {
     }
 
     public attach(svg: ISvgElement): void {
-        svg.group.prepend(this.filter);
+        svg.group.appendChild(this.filter);
         svg.group.setAttribute('filter', 'url(#' + this.filterId + ')');
     }
 
     public detach(svg: ISvgElement): void {
-        svg.removeChild(this.filter);
+        svg.group.removeChild(this.filter);
         svg.group.setAttribute('filter', '');
     }
 
