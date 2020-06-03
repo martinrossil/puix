@@ -33,6 +33,25 @@ export default class DisplayContainer extends DisplayElement implements IDisplay
         this.invalidateDisplay();
     }
 
+    public addElementAt(element: ILayoutElement, index: number): void {
+        if (this.elements[index]) {
+            const beforeElement: Node = this.elements[index] as unknown as Node;
+            this.elements.splice(index, 0, element);
+            this.insertBefore(element as unknown as Node, beforeElement);
+        } else {
+            this.elements.push(element);
+            this.appendChild(element as unknown as Node);
+        }
+        this.invalidateDisplay();
+    }
+
+    public getElementAt(index: number): ILayoutElement | null {
+        if (this.elements[index]) {
+            return this.elements[index];
+        }
+        return null;
+    }
+
     public removeElement(element: ILayoutElement): void {
         const start: number = this.elements.indexOf(element);
         this.elements.splice(start, 1);

@@ -1,6 +1,7 @@
 export default class HSL {
     static BLACK = 'hsl(0, 0%, 0%)';
     static WHITE = 'hsl(0, 0%, 100%)';
+    static TRANSPARENT = 'hsla(0, 0%, 100%, 0.0)';
 
     static GREY_50 = 'hsl(0, 0%, 97%)';
     static GREY_100 = 'hsl(0, 0%, 88%)';

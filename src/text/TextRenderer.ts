@@ -36,7 +36,7 @@ export default class TextRenderer extends DisplayElement implements ITextRendere
     }
 
     public set lineHeight(value: number) {
-        this.style.lineHeight = value + 'px';
+        this.style.lineHeight = value.toString();
     }
 
     public set letterSpacing(value: number) {

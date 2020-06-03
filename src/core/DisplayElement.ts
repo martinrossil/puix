@@ -11,17 +11,6 @@ export default class DisplayElement extends LayoutElement implements IDisplayEle
         this.style.outline = 'none';
     }
 
-    private _backgroundColor = '';
-
-    public set backgroundColor(value: string) {
-        this._backgroundColor = value;
-        this.style.backgroundColor = value;
-    }
-
-    public get backgroundColor(): string {
-        return this._backgroundColor;
-    }
-
     private _opacity = 1;
 
     public set opacity(value: number) {

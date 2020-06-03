@@ -1,10 +1,13 @@
 import DisplayContainer from './DisplayContainer';
 import Events from '../consts/Events';
+import AnchorLayout from '../layouts/AnchorLayout';
 
 export default class ApplicationElement extends DisplayContainer {
     public constructor() {
         super();
         this.name = 'ApplicationElement';
+        this.backgroundColor = this.theme.colors.background;
+        this.layout = new AnchorLayout();
         document.body.style.setProperty('position', 'absolute');
         document.body.style.setProperty('-webkit-overflow-scrolling', 'touch');
         document.body.style.setProperty('margin', '0');

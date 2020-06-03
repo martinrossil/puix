@@ -10,7 +10,6 @@ export default class ShapeElement extends PathElement implements IShapeElement {
 
     protected updateDisplay(): void {
         super.updateDisplay();
-        console.log(this.name, 'updateDisplay()', this.actualWidth, this.actualHeight);
         this.updatePathData();
     }
 

@@ -13,7 +13,7 @@ export default class TextElement extends DisplayElement implements ITextElement 
         this.interactive = false;
         this.textRenderer.fontFamily = this.typeData.fontFamily;
         this.textRenderer.fontWeight = this.fontWeight;
-        this.textRenderer.fontSize = this.letterHeight / this.typeData.capHeight;
+        this.textRenderer.fontSize = this.fontSize;
         this.textRenderer.lineHeight = this.lineHeight;
         this.textRenderer.letterSpacing = this.letterSpacing;
         this.appendChild(this.textRenderer as unknown as Node);
@@ -21,12 +21,14 @@ export default class TextElement extends DisplayElement implements ITextElement 
 
     protected updateDisplay(): void {
         super.updateDisplay();
-        const lineHeightMinusLetterHeight = this.lineHeight - this.letterHeight;
-        const offsetY = lineHeightMinusLetterHeight * 0.5;
-        this.textRenderer.y = -offsetY + (this.typeData.verticalOffset * this.letterHeight);
+        const lineHeight = this.fontSize * this.lineHeight;
+        const capHeight = lineHeight * this.typeData.capHeight / this.lineHeight;
+        const padding = lineHeight - capHeight;
+        const offsetY = -padding * 0.5;
+        this.textRenderer.y = offsetY + capHeight * this.typeData.verticalOffset;
         if (isNaN(this.width) && isNaN(this.height)) {
             if (isNaN(this.percentWidth) && isNaN(this.percentHeight)) {
-                this.setActualSize(this.textRenderer.clientWidth, this.textRenderer.clientHeight - lineHeightMinusLetterHeight);
+                this.setActualSize(this.textRenderer.clientWidth, this.textRenderer.clientHeight - padding);
                 this.dispatchEventWith(Events.INTERNAL_SIZE_CHANGED, this);
             } else if (isNaN(this.percentWidth) && !isNaN(this.percentHeight)) {
                 this.textRenderer.actualHeight = this.actualHeight;
@@ -34,7 +36,7 @@ export default class TextElement extends DisplayElement implements ITextElement 
                 this.dispatchEventWith(Events.INTERNAL_SIZE_CHANGED, this);
             } else if (!isNaN(this.percentWidth) && isNaN(this.percentHeight)) {
                 this.textRenderer.actualWidth = this.actualWidth;
-                this.actualHeight = this.textRenderer.clientHeight - lineHeightMinusLetterHeight;
+                this.actualHeight = this.textRenderer.clientHeight - padding;
                 this.dispatchEventWith(Events.INTERNAL_SIZE_CHANGED, this);
             } else {
                 this.textRenderer.setActualSize(this.actualWidth, this.actualHeight);
@@ -45,7 +47,7 @@ export default class TextElement extends DisplayElement implements ITextElement 
             this.dispatchEventWith(Events.INTERNAL_SIZE_CHANGED, this);
         } else if (!isNaN(this.width) && isNaN(this.height)) {
             this.textRenderer.actualWidth = this.actualWidth;
-            this.actualHeight = this.textRenderer.clientHeight - lineHeightMinusLetterHeight;
+            this.actualHeight = this.textRenderer.clientHeight - padding;
             this.dispatchEventWith(Events.INTERNAL_SIZE_CHANGED, this);
         } else {
             this.textRenderer.setActualSize(this.actualWidth, this.actualHeight);
@@ -80,21 +82,21 @@ export default class TextElement extends DisplayElement implements ITextElement 
         return this._typeData;
     }
 
-    private _letterHeight = 11.2;
+    private _fontSize = 16;
 
-    public set letterHeight(value: number) {
-        if (this._letterHeight !== value) {
-            this._letterHeight = value;
-            this.textRenderer.fontSize = value / this.typeData.capHeight;
+    public set fontSize(value: number) {
+        if (this._fontSize !== value) {
+            this._fontSize = value;
+            this.textRenderer.fontSize = value;
             this.invalidateDisplay();
         }
     }
 
-    public get letterHeight(): number {
-        return this._letterHeight;
+    public get fontSize(): number {
+        return this._fontSize;
     }
 
-    private _lineHeight = 19.2;
+    private _lineHeight = 1.2;
 
     public set lineHeight(value: number) {
         if (this._lineHeight !== value) {
@@ -157,7 +159,7 @@ export default class TextElement extends DisplayElement implements ITextElement 
         return this._fontWeight;
     }
 
-    private _letterSpacing = 1;
+    private _letterSpacing = 0.0;
 
     public set letterSpacing(value: number) {
         if (this._letterSpacing !== value) {

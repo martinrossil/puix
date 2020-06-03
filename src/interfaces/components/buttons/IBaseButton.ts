@@ -1,6 +1,6 @@
-import IDisplayContainer from '../containers/IDisplayContainer';
+import IDisplayContainer from '../../containers/IDisplayContainer';
 
-export default interface IButtonElement extends IDisplayContainer {
+export default interface IBaseButton extends IDisplayContainer {
     icon: string;
     label: string;
     color: string;

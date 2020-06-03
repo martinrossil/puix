@@ -4,7 +4,7 @@ import IDisplayElement from '../core/IDisplayElement';
 export default interface ITextElement extends IDisplayElement {
     text: string;
     typeData: ITypeData;
-    letterHeight: number;
+    fontSize: number;
     wordwrap: boolean;
     color: string;
     fontWeight: number;

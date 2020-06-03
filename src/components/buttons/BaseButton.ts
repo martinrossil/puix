@@ -1,90 +1,48 @@
-import DisplayContainer from '../containers/DisplayContainer';
-import IButtonElement from '../interfaces/components/IButtonElement';
-import ITextElement from '../interfaces/text/ITextElement';
-import TextElement from '../text/TextElement';
-import IIconElement from '../interfaces/elements/IIconElement';
-import IconElement from '../elements/IconElement';
-import IShapeElement from '../interfaces/svg/IShapeElement';
-import ShapeElement from '../svg/ShapeElement';
-import AnchorLayout from '../layouts/AnchorLayout';
-import IDisplayContainer from '../interfaces/containers/IDisplayContainer';
-import AnchorLayoutData from '../layouts/AnchorLayoutData';
-import HorizontalLayout from '../layouts/HorizontalLayout';
-import VerticalAlign from '../consts/VerticalAlign';
+import DisplayContainer from '../../containers/DisplayContainer';
+import AnchorLayout from '../../layouts/AnchorLayout';
+import IShapeElement from '../../interfaces/svg/IShapeElement';
+import IDisplayContainer from '../../interfaces/containers/IDisplayContainer';
+import IIconElement from '../../interfaces/elements/IIconElement';
+import ITextElement from '../../interfaces/text/ITextElement';
+import ShapeElement from '../../svg/ShapeElement';
+import IconElement from '../../elements/IconElement';
+import TextElement from '../../text/TextElement';
+import AnchorLayoutData from '../../layouts/AnchorLayoutData';
+import HorizontalLayout from '../../layouts/HorizontalLayout';
+import VerticalAlign from '../../consts/VerticalAlign';
+import IBaseButton from '../../interfaces/components/buttons/IBaseButton';
+import CornerType from '../../consts/CornerType';
 
-export default class ButtonElement extends DisplayContainer implements IButtonElement {
+export default class BaseButton extends DisplayContainer implements IBaseButton {
     public constructor() {
         super();
-        this.name = 'ButtonElement';
-        this.setButton();
-        this.setShape();
-        this.setIcon();
-        this.setLabel();
-        this.setContainer();
-        this.addChildren();
-    }
-
-    protected setButton(): void {
+        this.name = 'BaseButton';
         this.minWidth = 36;
         this.minHeight = 36;
+        this.cornerType = CornerType.ROUNDED;
+        this.cornerSize = 4;
         this.layout = new AnchorLayout();
-        this.color = this.theme.colors.onSecondary;
-    }
-
-    protected setShape(): void {
         this.shapeElement.percentWidth = 100;
         this.shapeElement.percentHeight = 100;
-        this.backgroundColor = this.theme.colors.secondary.c500;
-    }
-
-    protected setIcon(): void {
         this.iconElement.setSize(18, 18);
-    }
-
-    protected setLabel(): void {
-        this.labelElement.text = this.label;
-        this.labelElement.letterHeight = 10;
+        this.labelElement.fontSize = 14;
         this.labelElement.fontWeight = 500;
         this.labelElement.wordwrap = false;
-    }
-
-    protected setContainer(): void {
         this.iconLabelContainer.layoutData = new AnchorLayoutData(NaN, NaN, NaN, NaN, 0, 0);
         this.iconLabelContainer.layout = new HorizontalLayout(8, VerticalAlign.MIDDLE);
         this.iconLabelContainer.layout.paddingLeft = 16;
         this.iconLabelContainer.layout.paddingRight = 16;
-    }
-
-    protected addChildren(): void {
         this.iconLabelContainer.addElement(this.labelElement);
         this.addElements([this.shapeElement, this.iconLabelContainer]);
     }
 
-    protected updateDisplay(): void {
-        super.updateDisplay();
-        console.log(this.name, 'updateDisplay()', this.actualWidth, this.actualHeight);
-    }
-
-    private shapeElement: IShapeElement = new ShapeElement();
+    protected shapeElement: IShapeElement = new ShapeElement();
 
     private iconLabelContainer: IDisplayContainer = new DisplayContainer();
 
     private iconElement: IIconElement = new IconElement();
 
     private labelElement: ITextElement = new TextElement();
-
-    private _label = 'BUTTON';
-
-    public set label(value: string) {
-        if (this._label !== value) {
-            this._label = value;
-            this.labelElement.text = value;
-        }
-    }
-
-    public get label(): string {
-        return this._label;
-    }
 
     private _icon = '';
 
@@ -104,6 +62,19 @@ export default class ButtonElement extends DisplayContainer implements IButtonEl
 
     public get icon(): string {
         return this._icon;
+    }
+
+    private _label = '';
+
+    public set label(value: string) {
+        if (this._label !== value) {
+            this._label = value;
+            this.labelElement.text = value;
+        }
+    }
+
+    public get label(): string {
+        return this._label;
     }
 
     private _color = '';
@@ -139,12 +110,14 @@ export default class ButtonElement extends DisplayContainer implements IButtonEl
     private _backgroundColor = '';
 
     public set backgroundColor(value: string) {
-        this._backgroundColor = value;
-        this.shapeElement.fillColor = value;
+        if (this._backgroundColor !== value) {
+            this._backgroundColor = value;
+            this.shapeElement.fillColor = value;
+        }
     }
 
     public get backgroundColor(): string {
         return this._backgroundColor;
     }
 }
-customElements.define('button-element', ButtonElement);
+customElements.define('base-button', BaseButton);

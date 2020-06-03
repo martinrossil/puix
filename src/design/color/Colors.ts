@@ -4,6 +4,7 @@ import IColorCollection from '../../interfaces/design/color/IColorCollection';
 import ColorCollection from './ColorCollection';
 import ColorNames from './ColorNames';
 import Events from '../../consts/Events';
+import HSL from './HSL';
 
 export default class Colors extends EventDispatcher implements IColors {
     private _primary: IColorCollection = new ColorCollection(ColorNames.CYAN);
@@ -95,5 +96,96 @@ export default class Colors extends EventDispatcher implements IColors {
 
     public get error(): IColorCollection {
         return this._error;
+    }
+
+    private _background = HSL.BLUE_GREY_50;
+
+    public set background(value: string) {
+        if (this._background !== value) {
+            this._background = value;
+            this.dispatchEventWith(Events.BACKGROUND_CHANGED);
+        }
+    }
+
+    public get background(): string {
+        return this._background;
+    }
+
+    private _onPrimary = HSL.WHITE;
+
+    public set onPrimary(value: string) {
+        if (this._onPrimary !== value) {
+            this._onPrimary = value;
+            this.dispatchEventWith(Events.ON_PRIMARY_CHANGED);
+        }
+    }
+
+    public get onPrimary(): string {
+        return this._onPrimary;
+    }
+
+    private _onSecondary = HSL.WHITE;
+
+    public set onSecondary(value: string) {
+        if (this._onSecondary !== value) {
+            this._onSecondary = value;
+            this.dispatchEventWith(Events.ON_SECONDARY_CHANGED);
+        }
+    }
+
+    public get onSecondary(): string {
+        return this._onSecondary;
+    }
+
+    private _onTertiary = HSL.WHITE;
+
+    public set onTertiary(value: string) {
+        if (this._onTertiary !== value) {
+            this._onTertiary = value;
+            this.dispatchEventWith(Events.ON_TERTIARY_CHANGED);
+        }
+    }
+
+    public get onTertiary(): string {
+        return this._onTertiary;
+    }
+
+    private _onBackground = HSL.BLUE_GREY_900;
+
+    public set onBackground(value: string) {
+        if (this._onBackground !== value) {
+            this._onBackground = value;
+            this.dispatchEventWith(Events.ON_BACKGROUND_CHANGED);
+        }
+    }
+
+    public get onBackground(): string {
+        return this._onBackground;
+    }
+
+    private _surface = HSL.WHITE;
+
+    public set surface(value: string) {
+        if (this._surface !== value) {
+            this._surface = value;
+            this.dispatchEventWith(Events.SURFACE_CHANGED);
+        }
+    }
+
+    public get surface(): string {
+        return this._surface;
+    }
+
+    private _onSurface = HSL.BLUE_GREY_900;
+
+    public set onSurface(value: string) {
+        if (this._onSurface !== value) {
+            this._onSurface = value;
+            this.dispatchEventWith(Events.ON_SURFACE_CHANGED);
+        }
+    }
+
+    public get onSurface(): string {
+        return this._onSurface;
     }
 }

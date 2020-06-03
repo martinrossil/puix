@@ -50,11 +50,15 @@ export default class Layout implements ILayout {
         let width = 0;
         let height = 0;
         for (const element of container.elements) {
-            if (width < element.actualWidth) {
-                width = element.actualWidth;
+            if (isNaN(element.percentWidth)) {
+                if (width < element.actualWidth) {
+                    width = element.actualWidth;
+                }
             }
-            if (height < element.actualHeight) {
-                height = element.actualHeight;
+            if (isNaN(element.percentHeight)) {
+                if (height < element.actualHeight) {
+                    height = element.actualHeight;
+                }
             }
         }
         width = this.paddingLeft + width + this.paddingRight;
@@ -69,8 +73,10 @@ export default class Layout implements ILayout {
         // override
         let width = 0;
         for (const element of container.elements) {
-            if (width < element.actualWidth) {
-                width = element.actualWidth;
+            if (isNaN(element.percentWidth)) {
+                if (width < element.actualWidth) {
+                    width = element.actualWidth;
+                }
             }
         }
         width = this.paddingLeft + width + this.paddingRight;
@@ -84,8 +90,10 @@ export default class Layout implements ILayout {
         // override
         let height = 0;
         for (const element of container.elements) {
-            if (height < element.actualHeight) {
-                height = element.actualHeight;
+            if (isNaN(element.percentHeight)) {
+                if (height < element.actualHeight) {
+                    height = element.actualHeight;
+                }
             }
         }
         height = this.paddingTop + height + this.paddingBottom;

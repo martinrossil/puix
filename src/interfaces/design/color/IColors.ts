@@ -9,4 +9,11 @@ export default interface IColors extends IEventDispatcher {
     success: IColorCollection;
     warning: IColorCollection;
     error: IColorCollection;
+    background: string;
+    surface: string;
+    onPrimary: string;
+    onSecondary: string;
+    onTertiary: string;
+    onBackground: string;
+    onSurface: string;
 }
