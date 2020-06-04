@@ -12,6 +12,8 @@ import HorizontalLayout from '../../layouts/HorizontalLayout';
 import VerticalAlign from '../../consts/VerticalAlign';
 import IBaseButton from '../../interfaces/components/buttons/IBaseButton';
 import CornerType from '../../consts/CornerType';
+import IDisplayElement from '../../interfaces/core/IDisplayElement';
+import HitLayer from '../../elements/HitLayer';
 
 export default class BaseButton extends DisplayContainer implements IBaseButton {
     public constructor() {
@@ -28,12 +30,14 @@ export default class BaseButton extends DisplayContainer implements IBaseButton 
         this.labelElement.fontSize = 14;
         this.labelElement.fontWeight = 500;
         this.labelElement.wordwrap = false;
+        this.hitLayer.percentWidth = 100;
+        this.hitLayer.percentHeight = 100;
         this.iconLabelContainer.layoutData = new AnchorLayoutData(NaN, NaN, NaN, NaN, 0, 0);
         this.iconLabelContainer.layout = new HorizontalLayout(8, VerticalAlign.MIDDLE);
         this.iconLabelContainer.layout.paddingLeft = 16;
         this.iconLabelContainer.layout.paddingRight = 16;
         this.iconLabelContainer.addElement(this.labelElement);
-        this.addElements([this.shapeElement, this.iconLabelContainer]);
+        this.addElements([this.shapeElement, this.iconLabelContainer, this.hitLayer]);
     }
 
     protected shapeElement: IShapeElement = new ShapeElement();
@@ -43,6 +47,8 @@ export default class BaseButton extends DisplayContainer implements IBaseButton 
     private iconElement: IIconElement = new IconElement();
 
     private labelElement: ITextElement = new TextElement();
+
+    private hitLayer: IDisplayElement = new HitLayer();
 
     private _icon = '';
 
@@ -64,31 +70,28 @@ export default class BaseButton extends DisplayContainer implements IBaseButton 
         return this._icon;
     }
 
-    private _label = '';
-
     public set label(value: string) {
-        if (this._label !== value) {
-            this._label = value;
-            this.labelElement.text = value;
-        }
+        this.labelElement.text = value;
     }
 
     public get label(): string {
-        return this._label;
+        return this.labelElement.text;
     }
 
-    private _color = '';
-
-    public set color(value: string) {
-        if (this._color !== value) {
-            this._color = value;
-            this.iconElement.color = value;
-            this.labelElement.color = value;
-        }
+    public set labelColor(value: string) {
+        this.labelElement.color = value;
     }
 
-    public get color(): string {
-        return this._color;
+    public get labelColor(): string {
+        return this.labelElement.color;
+    }
+
+    public set iconColor(value: string) {
+        this.iconElement.color = value;
+    }
+
+    public get iconColor(): string {
+        return this.iconElement.color;
     }
 
     public set cornerType(value: number) {
@@ -107,17 +110,44 @@ export default class BaseButton extends DisplayContainer implements IBaseButton 
         return this.shapeElement.cornerSize;
     }
 
-    private _backgroundColor = '';
-
     public set backgroundColor(value: string) {
-        if (this._backgroundColor !== value) {
-            this._backgroundColor = value;
-            this.shapeElement.fillColor = value;
-        }
+        this.shapeElement.fillColor = value;
     }
 
     public get backgroundColor(): string {
-        return this._backgroundColor;
+        return this.shapeElement.fillColor;
+    }
+
+    public set backgroundColorOpacity(value: number) {
+        this.shapeElement.fillOpacity = value;
+    }
+
+    public get backgroundColorOpacity(): number {
+        return this.shapeElement.fillOpacity;
+    }
+
+    public set strokeColor(value: string) {
+        this.shapeElement.strokeColor = value;
+    }
+
+    public get strokeColor(): string {
+        return this.shapeElement.strokeColor;
+    }
+
+    public set strokeOpacity(value: number) {
+        this.shapeElement.strokeOpacity = value;
+    }
+
+    public get strokeOpacity(): number {
+        return this.shapeElement.strokeOpacity;
+    }
+
+    public set strokeWidth(value: number) {
+        this.shapeElement.strokeWidth = value;
+    }
+
+    public get strokeWidth(): number {
+        return this.shapeElement.strokeWidth;
     }
 }
 customElements.define('base-button', BaseButton);

@@ -5,11 +5,12 @@ export default class OutlinedButton extends BaseButton implements IOutlinedButto
     public constructor() {
         super();
         this.name = 'OutlinedButton';
-        this.color = this.theme.colors.secondary.c500;
-        this.shapeElement.fillColor = this.theme.colors.secondary.c500;
-        this.shapeElement.fillOpacity = 0.0;
-        this.shapeElement.strokeColor = this.theme.colors.secondary.c500;
-        this.shapeElement.strokeWidth = 1.0;
+        this.backgroundColor = this.theme.colors.secondary.c500;
+        this.backgroundColorOpacity = 0.0;
+        this.strokeColor = this.theme.colors.secondary.c500;
+        this.strokeWidth = 1.5;
+        this.iconColor = this.theme.colors.secondary.c500;
+        this.labelColor = this.theme.colors.secondary.c500;
     }
 }
 customElements.define('outlined-button', OutlinedButton);

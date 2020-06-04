@@ -146,5 +146,18 @@ export default class DisplayElement extends LayoutElement implements IDisplayEle
     public get theme(): ITheme {
         return Design.theme;
     }
+
+    private _cursor = '';
+
+    public set cursor(value: string) {
+        if (this._cursor !== value) {
+            this._cursor = value;
+            this.style.cursor = value;
+        }
+    }
+
+    public get cursor(): string {
+        return this._cursor;
+    }
 }
 customElements.define('display-element', DisplayElement);
