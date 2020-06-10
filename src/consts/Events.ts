@@ -24,4 +24,6 @@ export default class Events {
     static POINTER_DOWN = 'w';
     static POINTER_TRIGGERED = 'x';
     static POINTER_LEAVE = 'y';
+    static RIPPLE_CHANGED = 'z';
+    static WINDOW_UP = 'aa';
 }

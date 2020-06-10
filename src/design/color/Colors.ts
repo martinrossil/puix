@@ -188,4 +188,17 @@ export default class Colors extends EventDispatcher implements IColors {
     public get onSurface(): string {
         return this._onSurface;
     }
+
+    private _ripple = HSL.WHITE;
+
+    public set ripple(value: string) {
+        if (this._ripple !== value) {
+            this._ripple = value;
+            this.dispatchEventWith(Events.RIPPLE_CHANGED);
+        }
+    }
+
+    public get ripple(): string {
+        return this._ripple;
+    }
 }

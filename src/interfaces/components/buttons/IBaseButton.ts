@@ -7,6 +7,7 @@ export default interface IBaseButton extends IDisplayContainer {
     cornerType: number;
     labelColor: string;
     iconColor: string;
+    rippleColor: string;
     strokeColor: string;
     strokeOpacity: number;
     strokeWidth: number;

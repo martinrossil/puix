@@ -12,8 +12,8 @@ import HorizontalLayout from '../../layouts/HorizontalLayout';
 import VerticalAlign from '../../consts/VerticalAlign';
 import IBaseButton from '../../interfaces/components/buttons/IBaseButton';
 import CornerType from '../../consts/CornerType';
-import IDisplayElement from '../../interfaces/core/IDisplayElement';
-import HitLayer from '../../elements/HitLayer';
+import IRippleElement from '../../interfaces/elements/IRippleElement';
+import RippleElement from '../../elements/RippleElement';
 
 export default class BaseButton extends DisplayContainer implements IBaseButton {
     public constructor() {
@@ -23,6 +23,7 @@ export default class BaseButton extends DisplayContainer implements IBaseButton 
         this.minHeight = 36;
         this.cornerType = CornerType.ROUNDED;
         this.cornerSize = 4;
+        this.rippleColor = this.theme.colors.ripple;
         this.layout = new AnchorLayout();
         this.shapeElement.percentWidth = 100;
         this.shapeElement.percentHeight = 100;
@@ -30,14 +31,14 @@ export default class BaseButton extends DisplayContainer implements IBaseButton 
         this.labelElement.fontSize = 14;
         this.labelElement.fontWeight = 500;
         this.labelElement.wordwrap = false;
-        this.hitLayer.percentWidth = 100;
-        this.hitLayer.percentHeight = 100;
+        this.rippleElement.percentWidth = 100;
+        this.rippleElement.percentHeight = 100;
         this.iconLabelContainer.layoutData = new AnchorLayoutData(NaN, NaN, NaN, NaN, 0, 0);
         this.iconLabelContainer.layout = new HorizontalLayout(8, VerticalAlign.MIDDLE);
         this.iconLabelContainer.layout.paddingLeft = 16;
         this.iconLabelContainer.layout.paddingRight = 16;
         this.iconLabelContainer.addElement(this.labelElement);
-        this.addElements([this.shapeElement, this.iconLabelContainer, this.hitLayer]);
+        this.addElements([this.shapeElement, this.iconLabelContainer, this.rippleElement]);
     }
 
     protected shapeElement: IShapeElement = new ShapeElement();
@@ -48,7 +49,7 @@ export default class BaseButton extends DisplayContainer implements IBaseButton 
 
     private labelElement: ITextElement = new TextElement();
 
-    private hitLayer: IDisplayElement = new HitLayer();
+    private rippleElement: IRippleElement = new RippleElement();
 
     private _icon = '';
 
@@ -148,6 +149,14 @@ export default class BaseButton extends DisplayContainer implements IBaseButton 
 
     public get strokeWidth(): number {
         return this.shapeElement.strokeWidth;
+    }
+
+    public set rippleColor(value: string) {
+        this.rippleElement.rippleColor = value;
+    }
+
+    public get rippleColor(): string {
+        return this.rippleElement.rippleColor;
     }
 }
 customElements.define('base-button', BaseButton);

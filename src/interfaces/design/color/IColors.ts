@@ -16,4 +16,5 @@ export default interface IColors extends IEventDispatcher {
     onTertiary: string;
     onBackground: string;
     onSurface: string;
+    ripple: string;
 }
