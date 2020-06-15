@@ -6,10 +6,17 @@ export default class PuixDev extends ApplicationElement {
     public constructor() {
         super();
         this.name = 'PuixDev';
-        const rc: RippleComponent = new RippleComponent();
-        rc.layoutData = new AnchorLayoutData(NaN, NaN, NaN, NaN, 0, 0);
-        rc.setSize(200, 200);
-        this.addElement(rc);
+        this.addElement(this.rc);
+    }
+
+    private _rc: RippleComponent | null = null;
+
+    protected get rc(): RippleComponent {
+        if (!this._rc) {
+            this._rc = new RippleComponent();
+            this._rc.layoutData = new AnchorLayoutData(NaN, NaN, NaN, NaN, 0, 0);
+        }
+        return this._rc;
     }
 }
 customElements.define('puix-dev', PuixDev);
