@@ -17,7 +17,6 @@ export default class Appbar extends DisplayContainer {
         this.z = 2;
         this.percentWidth = 100;
         this.height = 64;
-        this.backgroundColor = this.theme.colors.neutral.c700;
         this.addElement(this.iconElement);
         this.addElement(this.textElement);
     }
@@ -35,7 +34,7 @@ export default class Appbar extends DisplayContainer {
         textElement.text = 'Pui/x';
         textElement.color = HSL.WHITE;
         textElement.fontWeight = 700;
-        textElement.letterHeight = 24;
+        textElement.fontSize = 24;
         return textElement;
     }
 }

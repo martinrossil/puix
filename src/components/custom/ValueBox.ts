@@ -17,7 +17,7 @@ export default class ValueBox extends DisplayContainer {
         titleTextElement.text = 'Total Subscribers';
         titleTextElement.wordwrap = false;
         titleTextElement.fontWeight = 700;
-        titleTextElement.letterHeight = 12;
+        titleTextElement.fontSize = 12;
         titleTextElement.lineHeight = 20;
         titleTextElement.color = this.theme.colors.neutral.c400;
         return titleTextElement;
@@ -28,7 +28,7 @@ export default class ValueBox extends DisplayContainer {
         valueTextElement.text = '71,897';
         valueTextElement.wordwrap = false;
         valueTextElement.fontWeight = 700;
-        valueTextElement.letterHeight = 24;
+        valueTextElement.fontSize = 24;
         valueTextElement.lineHeight = 32;
         valueTextElement.color = this.theme.colors.neutral.c900;
         return valueTextElement;

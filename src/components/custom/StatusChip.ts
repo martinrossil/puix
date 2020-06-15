@@ -7,7 +7,6 @@ export default class StatusChip extends DisplayContainer {
     public constructor() {
         super();
         this.name = 'StatusChip';
-        this.backgroundColor = this.theme.colors.success.c100;
         this.layout.paddingTop = this.layout.paddingBottom = 7;
         this.layout.paddingLeft = this.layout.paddingRight = 10;
         this.borderRadius = 12;
@@ -19,7 +18,7 @@ export default class StatusChip extends DisplayContainer {
         const textElement: ITextElement = new TextElement();
         textElement.text = 'Inactive';
         textElement.color = this.theme.colors.success.c600;
-        textElement.letterHeight = 9;
+        textElement.fontSize = 9;
         textElement.fontWeight = 700;
         return textElement;
     }

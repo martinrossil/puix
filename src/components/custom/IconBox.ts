@@ -8,7 +8,6 @@ export default class IconBox extends DisplayContainer {
     public constructor() {
         super();
         this.name = 'IconBox';
-        this.backgroundColor = this.theme.colors.primary.c400;
         this.layout.padding = 8;
         this.borderRadius = 8;
         this.addElement(this.iconElement);

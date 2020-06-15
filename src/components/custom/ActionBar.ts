@@ -10,7 +10,6 @@ export default class ActionBar extends DisplayContainer {
         this.height = 50;
         this.percentWidth = 100;
         this.layoutData = new AnchorLayoutData(NaN, NaN, NaN, 0);
-        this.backgroundColor = this.theme.colors.neutral.c50;
         this.layout = new AnchorLayout();
         this.addElement(new StatusChip());
     }
