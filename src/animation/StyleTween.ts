@@ -1,23 +1,23 @@
-import ITween from '../interfaces/animation/ITween';
 import EventDispatcher from '../core/EventDispatcher';
+import ITween from '../interfaces/animation/ITween';
 
-export default class AttributeTween extends EventDispatcher implements ITween {
-    protected target: Element;
-    protected attribute: string;
+export default class StyleTween extends EventDispatcher implements ITween {
+    protected target: ElementCSSInlineStyle;
+    protected style: string;
     protected duration: number;
     protected value = 0;
     protected startValue = 0;
     protected currentValue = 0;
     protected difference = 0;
     protected start = 0;
-    protected requestId = NaN;
+    protected requestId = 0;
     protected progress = 0;
 
-    public constructor(target: Element, attribute: string, duration: number) {
+    public constructor(target: ElementCSSInlineStyle, style: string, duration: number) {
         super();
-        this.name = 'AttributeTween';
+        this.name = 'StyleTween';
         this.target = target;
-        this.attribute = attribute;
+        this.style = style;
         this.duration = duration;
         this.animationFrame = this.animationFrame.bind(this);
     }
@@ -29,9 +29,9 @@ export default class AttributeTween extends EventDispatcher implements ITween {
         if (!isNaN(duration)) {
             this.duration = duration;
         }
-        const attributeValue: string | null = this.target.getAttribute(this.attribute);
-        if (attributeValue) {
-            this.currentValue = this.startValue = parseFloat(attributeValue);
+        const styleValue: string = this.target.style.getPropertyValue(this.style);
+        if (styleValue) {
+            this.currentValue = this.startValue = parseFloat(styleValue);
         } else {
             this.currentValue = this.startValue = 0;
         }
@@ -53,6 +53,6 @@ export default class AttributeTween extends EventDispatcher implements ITween {
         } else {
             this.currentValue = this.startValue = this.value;
         }
-        this.target.setAttribute(this.attribute, this.currentValue.toString());
+        this.target.style.setProperty(this.style, this.currentValue.toString());
     }
 }

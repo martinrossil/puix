@@ -1,5 +1,6 @@
 // animation
 import AttributeTween from './animation/AttributeTween';
+import StyleTween from './animation/StyleTween';
 
 // components/buttons
 import BaseButton from './components/buttons/BaseButton';
@@ -147,6 +148,7 @@ import Point from './vo/Point';
 export {
     // animation
     AttributeTween,
+    StyleTween,
 
     // components/buttons
     BaseButton,

@@ -5,6 +5,7 @@ import ShapeUtil from '../svg/utils/ShapeUtil';
 import ITween from '../interfaces/animation/ITween';
 import AttributeTween from '../animation/AttributeTween';
 import IPoint from '../interfaces/vo/IPoint';
+import StyleTween from '../animation/StyleTween';
 
 export default class RippleElement extends DisplayElement implements IRippleElement {
     public constructor() {
@@ -21,13 +22,16 @@ export default class RippleElement extends DisplayElement implements IRippleElem
     }
 
     public show(point: IPoint): void {
-        this.radiusTween.to(100);
+        this.circle.setAttribute('r', '0');
+        this.circle.style.opacity = '0.1';
+        this.radiusTween.to(this.circleRadius, 500);
+        this.opacityTween.to(0.4, 500);
         this.circle.setAttribute('cx', point.x.toString());
         this.circle.setAttribute('cy', point.y.toString());
     }
 
     public hide(): void {
-        this.radiusTween.to(0);
+        this.opacityTween.to(0, 300);
     }
 
     protected updateDisplay(): void {
@@ -70,7 +74,9 @@ export default class RippleElement extends DisplayElement implements IRippleElem
 
     private circle: SVGCircleElement = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
 
-    protected radiusTween: ITween = new AttributeTween(this.circle, 'r', 1000);
+    protected radiusTween: ITween = new AttributeTween(this.circle, 'r', 500);
+
+    protected opacityTween: ITween = new StyleTween(this.circle, 'opacity', 500);
 
     private _rippleColor = '';
 
