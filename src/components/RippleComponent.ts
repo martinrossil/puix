@@ -33,6 +33,7 @@ export default class RippleComponent extends DisplayContainer {
         this.hitLayer.cornerSize = 75;
         this.addEventListener(Events.POINTER_DOWN, this.pointerDown as EventListener);
         this.addEventListener(Events.POINTER_TRIGGERED, this.pointerTriggered as EventListener);
+        this.addEventListener(Events.POINTER_LEAVE, this.pointerLeave as EventListener);
         this.addElement(this.shapeElement);
         this.addElement(this.rippleElement);
         this.addElement(this.hitLayer);
@@ -45,6 +46,11 @@ export default class RippleComponent extends DisplayContainer {
     }
 
     protected pointerTriggered(e: CustomEvent): void {
+        e.stopPropagation();
+        this.rippleElement.hide();
+    }
+
+    protected pointerLeave(e: CustomEvent): void {
         e.stopPropagation();
         this.rippleElement.hide();
     }

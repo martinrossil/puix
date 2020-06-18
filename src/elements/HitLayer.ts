@@ -14,6 +14,7 @@ export default class HitLayer extends DisplayElement implements IHitLayer {
         this.hitPath.style.fill = '#CC000000';
         this.hitPath.style.cursor = Cursor.POINTER;
         this.svg.appendChild(this.hitPath);
+        this.svg.setAttribute('fill', 'transparent');
         this.appendChild(this.svg);
         this.mouseOver = this.mouseOver.bind(this);
         this.mouseLeave = this.mouseLeave.bind(this);
