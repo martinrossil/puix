@@ -9,7 +9,8 @@ import HSL from '../design/color/HSL';
 import ShadowFilter from '../svg/filters/ShadowFilter';
 import IHitLayer from '../interfaces/elements/IHitlayer';
 import HitLayer from '../elements/HitLayer';
-import Events from '../consts/Events';
+import HitLayerEvent from '../events/HitLayerEvent';
+import IHitLayerEvent from '../interfaces/events/IHitLayerEvent';
 
 export default class RippleComponent extends DisplayContainer {
     public constructor() {
@@ -31,22 +32,20 @@ export default class RippleComponent extends DisplayContainer {
         this.hitLayer.percentHeight = 100;
         this.hitLayer.cornerType = CornerType.CUT;
         this.hitLayer.cornerSize = 75;
-        this.addEventListener(Events.POINTER_DOWN, this.pointerDown as EventListener);
-        this.addEventListener(Events.POINTER_TRIGGERED, this.pointerTriggered as EventListener);
-        this.addEventListener(Events.POINTER_LEAVE, this.pointerLeave as EventListener);
+        this.addEventListener(HitLayerEvent.POINTER_DOWN, this.pointerDown as EventListener);
+        this.addEventListener(HitLayerEvent.POINTER_TRIGGERED, this.pointerTriggered as EventListener);
+        this.addEventListener(HitLayerEvent.POINTER_LEAVE, this.pointerLeave as EventListener);
         this.addElement(this.shapeElement);
         this.addElement(this.rippleElement);
         this.addElement(this.hitLayer);
     }
 
-    protected pointerDown(e: CustomEvent): void {
+    protected pointerDown(e: IHitLayerEvent): void {
         e.stopPropagation();
-        this.rippleElement.show(e.detail);
-        console.log(this.name, e.type, e.detail);
+        this.rippleElement.show(e.point);
     }
 
-    protected pointerTriggered(e: CustomEvent): void {
-        e.stopPropagation();
+    protected pointerTriggered(): void {
         this.rippleElement.hide();
     }
 

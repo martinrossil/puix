@@ -1,7 +1,7 @@
-import EventDispatcherElement from './EventDispatcherElement';
 import ILifeCycleElement from '../interfaces/core/ILifeCycleElement';
+import StateElement from './StateElement';
 
-export default class LifeCycleElement extends EventDispatcherElement implements ILifeCycleElement {
+export default class LifeCycleElement extends StateElement implements ILifeCycleElement {
     public constructor() {
         super();
         this.name = 'LifeCycleElement';

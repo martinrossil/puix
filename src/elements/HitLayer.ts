@@ -3,11 +3,13 @@ import IHitLayer from '../interfaces/elements/IHitlayer';
 import CornerType from '../consts/CornerType';
 import ShapeUtil from '../svg/utils/ShapeUtil';
 import Cursor from '../consts/Cursor';
-import Events from '../consts/Events';
 import IPoint from '../interfaces/vo/IPoint';
 import Point from '../vo/Point';
+import HitLayerEvent from '../events/HitLayerEvent';
 
 export default class HitLayer extends DisplayElement implements IHitLayer {
+    protected didTouchStart = false;
+
     public constructor() {
         super();
         this.name = 'HitLayer';
@@ -16,93 +18,70 @@ export default class HitLayer extends DisplayElement implements IHitLayer {
         this.svg.appendChild(this.hitPath);
         this.svg.setAttribute('fill', 'transparent');
         this.appendChild(this.svg);
-        this.mouseOver = this.mouseOver.bind(this);
-        this.mouseLeave = this.mouseLeave.bind(this);
-        this.mouseDown = this.mouseDown.bind(this);
-        this.mouseUp = this.mouseUp.bind(this);
-        this.windowUp = this.windowUp.bind(this);
-        this.touchStart = this.touchStart.bind(this);
-        this.touchEnd = this.touchEnd.bind(this);
-        this.hitPath.addEventListener('mouseover', this.mouseOver);
-        this.hitPath.addEventListener('touchstart', this.touchStart);
-    }
-
-    protected mouseOver(): void {
-        console.log(this.name, 'mouseOver()');
-        this.hitPath.removeEventListener('mouseover', this.mouseOver);
-        this.hitPath.addEventListener('mouseleave', this.mouseLeave);
-        this.hitPath.addEventListener('mousedown', this.mouseDown);
-        this.dispatchEventWith(Events.POINTER_OVER);
-    }
-
-    protected mouseDown(e: MouseEvent): void {
-        this.hitPath.removeEventListener('mousedown', this.mouseDown);
-        this.hitPath.addEventListener('mouseup', this.mouseUp);
-        window.addEventListener('mouseup', this.windowUp);
-        const point: IPoint = new Point(e.offsetX, e.offsetY);
-        console.log(this.name, 'mouseDown()', point);
-        this.dispatchEventWith(Events.POINTER_DOWN, point);
-    }
-
-    protected mouseUp(): void {
-        console.log(this.name, 'mouseUp()');
-        window.removeEventListener('mouseup', this.windowUp);
-        this.hitPath.removeEventListener('mouseup', this.mouseUp);
-        this.hitPath.addEventListener('mousedown', this.mouseDown);
-        this.dispatchEventWith(Events.POINTER_TRIGGERED);
-    }
-
-    protected windowUp(): void {
-        console.log(this.name, 'windowUp()');
-        window.removeEventListener('mouseup', this.windowUp);
-        this.dispatchEventWith(Events.WINDOW_UP);
-    }
-
-    protected mouseLeave(): void {
-        console.log(this.name, 'mouseLeave()');
-        this.hitPath.removeEventListener('mouseleave', this.mouseLeave);
-        this.hitPath.removeEventListener('mousedown', this.mouseDown);
-        this.hitPath.removeEventListener('mouseup', this.mouseUp);
-        this.hitPath.addEventListener('mouseover', this.mouseOver);
-        this.dispatchEventWith(Events.POINTER_LEAVE);
+        this.hitPath.addEventListener('mouseover', this.mouseOver.bind(this));
+        this.hitPath.addEventListener('mouseleave', this.mouseLeave.bind(this));
+        this.hitPath.addEventListener('mousedown', this.mouseDown.bind(this));
+        this.hitPath.addEventListener('mouseup', this.mouseUp.bind(this));
+        this.hitPath.addEventListener('touchstart', this.touchStart.bind(this), { passive: true });
+        this.hitPath.addEventListener('touchend', this.touchEnd.bind(this), { passive: true });
     }
 
     protected touchStart(e: TouchEvent): void {
-        e.preventDefault();
-        this.hitPath.removeEventListener('touchstart', this.touchStart);
-        this.hitPath.addEventListener('touchend', this.touchEnd);
+        this.didTouchStart = true;
         if (e.changedTouches && e.changedTouches.length > 0) {
             const touch: Touch = e.changedTouches[0];
             const px: number = touch.pageX;
             const py: number = touch.pageY;
             const cr: ClientRect = this.hitPath.getBoundingClientRect();
             const point: IPoint = new Point(px - cr.left, py - cr.top);
-            console.log(this.name, 'touchStart()', point);
-            this.dispatchEventWith(Events.POINTER_DOWN, point);
+            this.dispatchEvent(new HitLayerEvent(HitLayerEvent.POINTER_DOWN, point));
         }
     }
 
     protected touchEnd(e: TouchEvent): void {
-        e.preventDefault();
-        console.log(this.name, 'touchEnd()');
-        this.hitPath.removeEventListener('touchend', this.touchEnd);
-        this.hitPath.addEventListener('touchstart', this.touchStart);
         if (e.changedTouches && e.changedTouches.length > 0) {
             const touch: Touch = e.changedTouches[0];
             const px: number = touch.pageX;
             const py: number = touch.pageY;
             const cr = this.hitPath.getBoundingClientRect();
+            const point: IPoint = new Point(px - cr.left, py - cr.top);
             const cl: number = cr.left;
             const ct: number = cr.top;
             const cw: number = cr.width;
             const ch: number = cr.height;
             if (px > cl && px < cl + cw && py > ct && py < ct + ch) {
-                this.dispatchEventWith(Events.POINTER_TRIGGERED);
+                this.dispatchEvent(new HitLayerEvent(HitLayerEvent.POINTER_TRIGGERED, point));
             } else {
-                this.dispatchEventWith(Events.POINTER_LEAVE);
+                this.dispatchEvent(new HitLayerEvent(HitLayerEvent.POINTER_LEAVE, point));
             }
         } else {
-            this.dispatchEventWith(Events.POINTER_LEAVE);
+            this.dispatchEvent(new HitLayerEvent(HitLayerEvent.POINTER_LEAVE, new Point()));
+        }
+    }
+
+    protected mouseOver(e: MouseEvent): void {
+        if (!this.didTouchStart) {
+            this.dispatchEvent(new HitLayerEvent(HitLayerEvent.POINTER_OVER, new Point(e.offsetX, e.offsetY)));
+        }
+    }
+
+    protected mouseDown(e: MouseEvent): void {
+        if (!this.didTouchStart) {
+            this.dispatchEvent(new HitLayerEvent(HitLayerEvent.POINTER_DOWN, new Point(e.offsetX, e.offsetY)));
+        }
+    }
+
+    protected mouseUp(e: MouseEvent): void {
+        if (!this.didTouchStart) {
+            this.dispatchEvent(new HitLayerEvent(HitLayerEvent.POINTER_TRIGGERED, new Point(e.offsetX, e.offsetY)));
+        }
+    }
+
+    protected mouseLeave(e: MouseEvent): void {
+        if (!this.didTouchStart) {
+            this.dispatchEvent(new HitLayerEvent(HitLayerEvent.POINTER_LEAVE, new Point(e.offsetX, e.offsetY)));
+        } else {
+            this.didTouchStart = false;
         }
     }
 
