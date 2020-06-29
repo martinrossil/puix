@@ -5,7 +5,8 @@
         "sourceMap": true,
         "strict": true,
         "strictNullChecks": true,
-        "noImplicitAny": true
+        "noImplicitAny": true,
+        "moduleResolution": "Node"
     },
     "include": [
         "src/**/*"
