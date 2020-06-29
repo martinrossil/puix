@@ -20,10 +20,5 @@ export default class Events {
     static SURFACE_CHANGED = 's';
     static ON_BACKGROUND_CHANGED = 't';
     static ON_SURFACE_CHANGED = 'u';
-    static POINTER_OVER = 'v';
-    static POINTER_DOWN = 'w';
-    static POINTER_TRIGGERED = 'x';
-    static POINTER_LEAVE = 'y';
-    static RIPPLE_CHANGED = 'z';
-    static WINDOW_UP = 'aa';
+    static RIPPLE_CHANGED = 'v';
 }
