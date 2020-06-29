@@ -39,6 +39,7 @@ import LayoutElement from './core/LayoutElement';
 import LifeCycleElement from './core/LifeCycleElement';
 import PositionElement from './core/PositionElement';
 import SizeElement from './core/SizeElement';
+import StateElement from './core/StateElement';
 
 // design/color
 import ColorCollection from './design/color/ColorCollection';
@@ -60,6 +61,14 @@ import Theme from './design/Theme';
 import HitLayer from './elements/HitLayer';
 import IconElement from './elements/IconElement';
 import RippleElement from './elements/RippleElement';
+
+// events
+import HitLayerEvent from './events/HitLayerEvent';
+import HitLayerEventInit from './events/HitLayerEventInit';
+
+// fsm
+import State from './fsm/State';
+import StateMachine from './fsm/StateMachine';
 
 // interfaces/animation
 import ITween from './interfaces/animation/ITween';
@@ -99,6 +108,14 @@ import IHitlayer from './interfaces/elements/IHitlayer';
 import IIconElement from './interfaces/elements/IIconElement';
 import IRippleElement from './interfaces/elements/IRippleElement';
 
+// events
+import IHitLayerEvent from './interfaces/events/IHitLayerEvent';
+import IHitLayerEventInit from './interfaces/events/IHitLayerEventInit';
+
+// fsm
+import IState from './interfaces/fsm/IState';
+import IStateMachine from './interfaces/fsm/IStateMachine';
+
 // interfaces/layouts
 import IAnchorLayoutData from './interfaces/layouts/IAnchorLayoutData';
 import IHorizontalLayout from './interfaces/layouts/IHorizontalLayout';
@@ -131,6 +148,9 @@ import VerticalLayout from './layouts/VerticalLayout';
 
 // svg/filters
 import ShadowFilter from './svg/filters/ShadowFilter';
+
+// svg/utils
+import ShapeUtils from './svg/utils/ShapeUtil';
 
 // svg
 import PathElement from './svg/PathElement';
@@ -187,6 +207,7 @@ export {
     LifeCycleElement,
     PositionElement,
     SizeElement,
+    StateElement,
 
     // design/color
     ColorCollection,
@@ -208,6 +229,14 @@ export {
     HitLayer,
     IconElement,
     RippleElement,
+
+    // events
+    HitLayerEvent,
+    HitLayerEventInit,
+
+    // fsm
+    State,
+    StateMachine,
 
     // interfaces/animation
     ITween,
@@ -247,6 +276,14 @@ export {
     IIconElement,
     IRippleElement,
 
+    // interfaces/events
+    IHitLayerEvent,
+    IHitLayerEventInit,
+
+    // interfaces/fsm
+    IState,
+    IStateMachine,
+
     // interfaces/layouts
     IAnchorLayoutData,
     IHorizontalLayout,
@@ -279,6 +316,9 @@ export {
 
     // svg/filters
     ShadowFilter,
+
+    // svg/utils
+    ShapeUtils,
 
     // svg
     PathElement,
