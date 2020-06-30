@@ -1,23 +1,23 @@
 import ApplicationElement from './containers/ApplicationElement';
 import AnchorLayoutData from './layouts/AnchorLayoutData';
 import RippleComponent from './components/RippleComponent';
-import HitLayerEvent from './events/HitLayerEvent';
 import Point from './vo/Point';
-import IHitLayerEvent from './interfaces/events/IHitLayerEvent';
+import { IPoint } from '.';
+import Events from './consts/Events';
 
 export default class PuixDev extends ApplicationElement {
     public constructor() {
         super();
         this.name = 'PuixDev';
         this.addElement(this.rc);
-        this.addEventListener(HitLayerEvent.POINTER_TRIGGERED, this.test as EventListener);
+        this.addEventListener(Events.POINTER_TRIGGERED, this.test as EventListener);
     }
 
-    protected test(e: IHitLayerEvent): void {
-        console.log('puix', e.type, e.point, e instanceof HitLayerEvent, e.point instanceof Point);
+    protected test(e: CustomEvent<IPoint>): void {
+        console.log('puix', e.type, e.detail, e.detail instanceof Point);
     }
 
-    private _rc: RippleComponent | null = null;
+    private _rc!: RippleComponent;
 
     protected get rc(): RippleComponent {
         if (!this._rc) {

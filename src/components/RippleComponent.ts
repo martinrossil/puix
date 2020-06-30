@@ -9,40 +9,26 @@ import HSL from '../design/color/HSL';
 import ShadowFilter from '../svg/filters/ShadowFilter';
 import IHitLayer from '../interfaces/elements/IHitlayer';
 import HitLayer from '../elements/HitLayer';
-import HitLayerEvent from '../events/HitLayerEvent';
-import IHitLayerEvent from '../interfaces/events/IHitLayerEvent';
+import Events from '../consts/Events';
+import IPoint from '../interfaces/vo/IPoint';
+import { IHitlayer } from '..';
 
 export default class RippleComponent extends DisplayContainer {
     public constructor() {
         super();
         this.name = 'RippleComponent';
         this.layout = new AnchorLayout();
-        this.shapeElement.fillColor = this.theme.colors.secondary.c500;
-        this.shapeElement.percentWidth = 100;
-        this.shapeElement.percentHeight = 100;
-        this.shapeElement.cornerType = CornerType.CUT;
-        this.shapeElement.cornerSize = 75;
-        this.shapeElement.filter = new ShadowFilter(0, 4, 8, '#000', 0.5);
-        this.rippleElement.percentWidth = 100;
-        this.rippleElement.percentHeight = 100;
-        this.rippleElement.cornerType = CornerType.CUT;
-        this.rippleElement.cornerSize = 75;
-        this.rippleElement.rippleColor = HSL.WHITE;
-        this.hitLayer.percentWidth = 100;
-        this.hitLayer.percentHeight = 100;
-        this.hitLayer.cornerType = CornerType.CUT;
-        this.hitLayer.cornerSize = 75;
-        this.addEventListener(HitLayerEvent.POINTER_DOWN, this.pointerDown as EventListener);
-        this.addEventListener(HitLayerEvent.POINTER_TRIGGERED, this.pointerTriggered as EventListener);
-        this.addEventListener(HitLayerEvent.POINTER_LEAVE, this.pointerLeave as EventListener);
+        this.addEventListener(Events.POINTER_DOWN, this.pointerDown as EventListener);
+        this.addEventListener(Events.POINTER_TRIGGERED, this.pointerTriggered as EventListener);
+        this.addEventListener(Events.POINTER_LEAVE, this.pointerLeave as EventListener);
         this.addElement(this.shapeElement);
         this.addElement(this.rippleElement);
         this.addElement(this.hitLayer);
     }
 
-    protected pointerDown(e: IHitLayerEvent): void {
+    protected pointerDown(e: CustomEvent<IPoint>): void {
         e.stopPropagation();
-        this.rippleElement.show(e.point);
+        this.rippleElement.show(e.detail);
     }
 
     protected pointerTriggered(): void {
@@ -54,10 +40,46 @@ export default class RippleComponent extends DisplayContainer {
         this.rippleElement.hide();
     }
 
-    private shapeElement: IShapeElement = new ShapeElement();
+    private _shapeElement!: IShapeElement;
 
-    private rippleElement: IRippleElement = new RippleElement();
+    protected get shapeElement(): IShapeElement {
+        if (!this._shapeElement) {
+            this._shapeElement = new ShapeElement();
+            this._shapeElement.fillColor = this.theme.colors.secondary.c500;
+            this._shapeElement.percentWidth = 100;
+            this._shapeElement.percentHeight = 100;
+            this._shapeElement.cornerType = CornerType.CUT;
+            this._shapeElement.cornerSize = 75;
+            this._shapeElement.filter = new ShadowFilter(0, 4, 8, '#000', 0.5);
+        }
+        return this._shapeElement;
+    }
 
-    private hitLayer: IHitLayer = new HitLayer();
+    private _rippleElement!: IRippleElement
+
+    protected get rippleElement(): IRippleElement {
+        if (!this._rippleElement) {
+            this._rippleElement = new RippleElement();
+            this._rippleElement.percentWidth = 100;
+            this._rippleElement.percentHeight = 100;
+            this._rippleElement.cornerType = CornerType.CUT;
+            this._rippleElement.cornerSize = 75;
+            this._rippleElement.rippleColor = HSL.WHITE;
+        }
+        return this._rippleElement;
+    }
+
+    private _hitLayer!: IHitLayer;
+
+    protected get hitLayer(): IHitlayer {
+        if (!this._hitLayer) {
+            this._hitLayer = new HitLayer();
+            this._hitLayer.percentWidth = 100;
+            this._hitLayer.percentHeight = 100;
+            this._hitLayer.cornerType = CornerType.CUT;
+            this._hitLayer.cornerSize = 75;
+        }
+        return this._hitLayer;
+    }
 }
 customElements.define('ripple-component', RippleComponent);

@@ -5,7 +5,7 @@ import ShapeUtil from '../svg/utils/ShapeUtil';
 import Cursor from '../consts/Cursor';
 import IPoint from '../interfaces/vo/IPoint';
 import Point from '../vo/Point';
-import HitLayerEvent from '../events/HitLayerEvent';
+import Events from '../consts/Events';
 
 export default class HitLayer extends DisplayElement implements IHitLayer {
     protected didTouchStart = false;
@@ -13,17 +13,7 @@ export default class HitLayer extends DisplayElement implements IHitLayer {
     public constructor() {
         super();
         this.name = 'HitLayer';
-        this.hitPath.style.fill = '#CC000000';
-        this.hitPath.style.cursor = Cursor.POINTER;
-        this.svg.appendChild(this.hitPath);
-        this.svg.setAttribute('fill', 'transparent');
         this.appendChild(this.svg);
-        this.hitPath.addEventListener('mouseover', this.mouseOver.bind(this));
-        this.hitPath.addEventListener('mouseleave', this.mouseLeave.bind(this));
-        this.hitPath.addEventListener('mousedown', this.mouseDown.bind(this));
-        this.hitPath.addEventListener('mouseup', this.mouseUp.bind(this));
-        this.hitPath.addEventListener('touchstart', this.touchStart.bind(this), { passive: true });
-        this.hitPath.addEventListener('touchend', this.touchEnd.bind(this), { passive: true });
     }
 
     protected touchStart(e: TouchEvent): void {
@@ -34,7 +24,7 @@ export default class HitLayer extends DisplayElement implements IHitLayer {
             const py: number = touch.pageY;
             const cr: ClientRect = this.hitPath.getBoundingClientRect();
             const point: IPoint = new Point(px - cr.left, py - cr.top);
-            this.dispatchEvent(new HitLayerEvent(HitLayerEvent.POINTER_DOWN, point));
+            this.dispatchEventWith(Events.POINTER_DOWN, point);
         }
     }
 
@@ -44,42 +34,41 @@ export default class HitLayer extends DisplayElement implements IHitLayer {
             const px: number = touch.pageX;
             const py: number = touch.pageY;
             const cr = this.hitPath.getBoundingClientRect();
-            const point: IPoint = new Point(px - cr.left, py - cr.top);
             const cl: number = cr.left;
             const ct: number = cr.top;
             const cw: number = cr.width;
             const ch: number = cr.height;
             if (px > cl && px < cl + cw && py > ct && py < ct + ch) {
-                this.dispatchEvent(new HitLayerEvent(HitLayerEvent.POINTER_TRIGGERED, point));
+                this.dispatchEventWith(Events.POINTER_TRIGGERED);
             } else {
-                this.dispatchEvent(new HitLayerEvent(HitLayerEvent.POINTER_LEAVE, point));
+                this.dispatchEventWith(Events.POINTER_LEAVE);
             }
         } else {
-            this.dispatchEvent(new HitLayerEvent(HitLayerEvent.POINTER_LEAVE, new Point()));
+            this.dispatchEventWith(Events.POINTER_LEAVE);
         }
     }
 
-    protected mouseOver(e: MouseEvent): void {
+    protected mouseOver(): void {
         if (!this.didTouchStart) {
-            this.dispatchEvent(new HitLayerEvent(HitLayerEvent.POINTER_OVER, new Point(e.offsetX, e.offsetY)));
+            this.dispatchEventWith(Events.POINTER_OVER);
         }
     }
 
     protected mouseDown(e: MouseEvent): void {
         if (!this.didTouchStart) {
-            this.dispatchEvent(new HitLayerEvent(HitLayerEvent.POINTER_DOWN, new Point(e.offsetX, e.offsetY)));
+            this.dispatchEventWith(Events.POINTER_DOWN, new Point(e.offsetX, e.offsetY));
         }
     }
 
-    protected mouseUp(e: MouseEvent): void {
+    protected mouseUp(): void {
         if (!this.didTouchStart) {
-            this.dispatchEvent(new HitLayerEvent(HitLayerEvent.POINTER_TRIGGERED, new Point(e.offsetX, e.offsetY)));
+            this.dispatchEventWith(Events.POINTER_TRIGGERED);
         }
     }
 
-    protected mouseLeave(e: MouseEvent): void {
+    protected mouseLeave(): void {
         if (!this.didTouchStart) {
-            this.dispatchEvent(new HitLayerEvent(HitLayerEvent.POINTER_LEAVE, new Point(e.offsetX, e.offsetY)));
+            this.dispatchEventWith(Events.POINTER_OVER);
         } else {
             this.didTouchStart = false;
         }
@@ -108,9 +97,33 @@ export default class HitLayer extends DisplayElement implements IHitLayer {
         this.hitPath.setAttribute('d', d);
     }
 
-    private svg: SVGSVGElement = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    private _svg!: SVGSVGElement;
 
-    protected hitPath: SVGPathElement = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    protected get svg(): SVGSVGElement {
+        if (!this._svg) {
+            this._svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+            this._svg.appendChild(this.hitPath);
+            this._svg.setAttribute('fill', 'transparent');
+        }
+        return this._svg;
+    }
+
+    private _hitPath!: SVGPathElement;
+
+    protected get hitPath(): SVGPathElement {
+        if (!this._hitPath) {
+            this._hitPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+            this._hitPath.style.fill = '#CC000000';
+            this._hitPath.style.cursor = Cursor.POINTER;
+            this._hitPath.addEventListener('mouseover', this.mouseOver.bind(this));
+            this._hitPath.addEventListener('mouseleave', this.mouseLeave.bind(this));
+            this._hitPath.addEventListener('mousedown', this.mouseDown.bind(this));
+            this._hitPath.addEventListener('mouseup', this.mouseUp.bind(this));
+            this._hitPath.addEventListener('touchstart', this.touchStart.bind(this), { passive: true });
+            this._hitPath.addEventListener('touchend', this.touchEnd.bind(this), { passive: true });
+        }
+        return this._hitPath;
+    }
 
     private _cornerType = CornerType.NONE;
 

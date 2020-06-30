@@ -62,10 +62,6 @@ import HitLayer from './elements/HitLayer';
 import IconElement from './elements/IconElement';
 import RippleElement from './elements/RippleElement';
 
-// events
-import HitLayerEvent from './events/HitLayerEvent';
-import HitLayerEventInit from './events/HitLayerEventInit';
-
 // fsm
 import State from './fsm/State';
 import StateMachine from './fsm/StateMachine';
@@ -107,10 +103,6 @@ import ITheme from './interfaces/design/ITheme';
 import IHitlayer from './interfaces/elements/IHitlayer';
 import IIconElement from './interfaces/elements/IIconElement';
 import IRippleElement from './interfaces/elements/IRippleElement';
-
-// events
-import IHitLayerEvent from './interfaces/events/IHitLayerEvent';
-import IHitLayerEventInit from './interfaces/events/IHitLayerEventInit';
 
 // fsm
 import IState from './interfaces/fsm/IState';
@@ -230,10 +222,6 @@ export {
     IconElement,
     RippleElement,
 
-    // events
-    HitLayerEvent,
-    HitLayerEventInit,
-
     // fsm
     State,
     StateMachine,
@@ -275,10 +263,6 @@ export {
     IHitlayer,
     IIconElement,
     IRippleElement,
-
-    // interfaces/events
-    IHitLayerEvent,
-    IHitLayerEventInit,
 
     // interfaces/fsm
     IState,
