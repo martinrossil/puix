@@ -1,6 +1,5 @@
 import ActionBar from './ActionBar';
 import DisplayContainer from '../../containers/DisplayContainer';
-import AnchorLayoutData from '../../layouts/AnchorLayoutData';
 import AnchorLayout from '../../layouts/AnchorLayout';
 import IconTextContainer from './IconTextContainer';
 
@@ -10,7 +9,8 @@ export default class DataCard extends DisplayContainer {
         this.name = 'DataCard';
         this.setSize(400, 175);
         this.layout = new AnchorLayout();
-        this.layoutData = new AnchorLayoutData(NaN, NaN, NaN, NaN, 0, 0);
+        this.horizontalCenter = 0;
+        this.verticalCenter = 0;
         this.borderRadius = 8;
         this.z = 3;
         this.overflow = 'hidden';

@@ -1,7 +1,6 @@
 import DisplayContainer from '../../containers/DisplayContainer';
 import ITextElement from '../../interfaces/text/ITextElement';
 import TextElement from '../../text/TextElement';
-import AnchorLayoutData from '../../layouts/AnchorLayoutData';
 
 export default class StatusChip extends DisplayContainer {
     public constructor() {
@@ -10,7 +9,8 @@ export default class StatusChip extends DisplayContainer {
         this.layout.paddingTop = this.layout.paddingBottom = 7;
         this.layout.paddingLeft = this.layout.paddingRight = 10;
         this.borderRadius = 12;
-        this.layoutData = new AnchorLayoutData(NaN, NaN, 13.5, NaN, NaN, 0);
+        this.bottom = 13.5;
+        this.verticalCenter = 0;
         this.addElement(this.textElement);
     }
 

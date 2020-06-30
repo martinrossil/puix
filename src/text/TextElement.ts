@@ -70,7 +70,7 @@ export default class TextElement extends DisplayElement implements ITextElement 
 
     private _typeData: ITypeData = Design.theme.typography.primary;
 
-    public set typeData(value) {
+    public set typeData(value: ITypeData) {
         if (this._typeData !== value) {
             this._typeData = value;
             this.textRenderer.fontFamily = value.fontFamily;

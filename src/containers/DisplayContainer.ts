@@ -10,12 +10,13 @@ export default class DisplayContainer extends DisplayElement implements IDisplay
     public constructor() {
         super();
         this.name = 'DisplayContainer';
-        this.addEventListener(Events.INTERNAL_SIZE_CHANGED, this.childElementInternalSizeChanged as EventListener);
+        this.addEventListener(Events.INTERNAL_SIZE_CHANGED, this.childChanged as EventListener);
+        this.addEventListener(Events.LAYOUT_DATA_CHANGED, this.childChanged as EventListener);
     }
 
     public elements: ILayoutElement[] = [];
 
-    protected childElementInternalSizeChanged(e: CustomEvent): void {
+    protected childChanged(e: CustomEvent): void {
         if (e.target !== this) {
             e.stopImmediatePropagation();
             this.invalidateDisplay();

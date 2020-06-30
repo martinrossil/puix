@@ -1,5 +1,4 @@
 import ApplicationElement from './containers/ApplicationElement';
-import AnchorLayoutData from './layouts/AnchorLayoutData';
 import RippleComponent from './components/RippleComponent';
 import Point from './vo/Point';
 import { IPoint } from '.';
@@ -15,6 +14,7 @@ export default class PuixDev extends ApplicationElement {
 
     protected test(e: CustomEvent<IPoint>): void {
         console.log('puix', e.type, e.detail, e.detail instanceof Point);
+        this.rc.horizontalCenter = NaN;
     }
 
     private _rc!: RippleComponent;
@@ -22,8 +22,11 @@ export default class PuixDev extends ApplicationElement {
     protected get rc(): RippleComponent {
         if (!this._rc) {
             this._rc = new RippleComponent();
-            this._rc.setSize(200, 200);
-            this._rc.layoutData = new AnchorLayoutData(NaN, NaN, NaN, NaN, 0, 0);
+            this._rc.percentWidth = 50;
+            this._rc.percentHeight = 50;
+            // this._rc.setSize(200, 200);
+            this._rc.horizontalCenter = 0;
+            this._rc.verticalCenter = 0;
         }
         return this._rc;
     }

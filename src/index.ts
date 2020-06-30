@@ -109,7 +109,6 @@ import IState from './interfaces/fsm/IState';
 import IStateMachine from './interfaces/fsm/IStateMachine';
 
 // interfaces/layouts
-import IAnchorLayoutData from './interfaces/layouts/IAnchorLayoutData';
 import IHorizontalLayout from './interfaces/layouts/IHorizontalLayout';
 import ILayout from './interfaces/layouts/ILayout';
 import IVerticalLayout from './interfaces/layouts/IVerticalLayout';
@@ -133,7 +132,6 @@ import IPoint from './interfaces/vo/IPoint';
 
 // layouts
 import AnchorLayout from './layouts/AnchorLayout';
-import AnchorLayoutData from './layouts/AnchorLayoutData';
 import HorizontalLayout from './layouts/HorizontalLayout';
 import Layout from './layouts/Layout';
 import VerticalLayout from './layouts/VerticalLayout';
@@ -269,7 +267,6 @@ export {
     IStateMachine,
 
     // interfaces/layouts
-    IAnchorLayoutData,
     IHorizontalLayout,
     ILayout,
     IVerticalLayout,
@@ -293,7 +290,6 @@ export {
 
     // layouts
     AnchorLayout,
-    AnchorLayoutData,
     HorizontalLayout,
     Layout,
     VerticalLayout,

@@ -1,7 +1,6 @@
 import SizeElement from './SizeElement';
 import ILayoutElement from '../interfaces/core/ILayoutElement';
 import Events from '../consts/Events';
-import IEventDispatcher from '../interfaces/core/IEventDispatcher';
 
 export default class LayoutElement extends SizeElement implements ILayoutElement {
     public constructor() {
@@ -9,22 +8,88 @@ export default class LayoutElement extends SizeElement implements ILayoutElement
         this.name = 'LayoutElement';
     }
 
-    private _layoutData: IEventDispatcher | null = null;
+    private _top = NaN;
 
-    public set layoutData(value: IEventDispatcher | null) {
-        if (this._layoutData !== value) {
-            if (this._layoutData) {
-                this._layoutData.removeEventListener(Events.LAYOUT_DATA_CHANGED, this.invalidateDisplay);
-            }
-            this._layoutData = value;
-            if (this._layoutData) {
-                this._layoutData.addEventListener(Events.LAYOUT_DATA_CHANGED, this.invalidateDisplay);
-            }
+    public set top(value: number) {
+        if (this._top !== value) {
+            this._top = value;
+            this.notifyLayoutDataChanged();
         }
     }
 
-    public get layoutData(): IEventDispatcher | null {
-        return this._layoutData;
+    public get top(): number {
+        return this._top;
+    }
+
+    private _right = NaN;
+
+    public set right(value: number) {
+        if (this._right !== value) {
+            this._right = value;
+            this.notifyLayoutDataChanged();
+        }
+    }
+
+    public get right(): number {
+        return this._right;
+    }
+
+    private _bottom = NaN;
+
+    public set bottom(value: number) {
+        if (this._bottom !== value) {
+            this._bottom = value;
+            this.notifyLayoutDataChanged();
+        }
+    }
+
+    public get bottom(): number {
+        return this._bottom;
+    }
+
+    private _left = NaN;
+
+    public set left(value: number) {
+        if (this._left !== value) {
+            this._left = value;
+            this.notifyLayoutDataChanged();
+        }
+    }
+
+    public get left(): number {
+        return this._left;
+    }
+
+    private _horizontalCenter = NaN;
+
+    public set horizontalCenter(value: number) {
+        if (this._horizontalCenter !== value) {
+            this._horizontalCenter = value;
+            this.notifyLayoutDataChanged();
+        }
+    }
+
+    public get horizontalCenter(): number {
+        return this._horizontalCenter;
+    }
+
+    private _verticalCenter = NaN;
+
+    public set verticalCenter(value: number) {
+        if (this._verticalCenter !== value) {
+            this._verticalCenter = value;
+            this.notifyLayoutDataChanged();
+        }
+    }
+
+    public get verticalCenter(): number {
+        return this._verticalCenter;
+    }
+
+    protected notifyLayoutDataChanged(): void {
+        if (this.connected) {
+            this.dispatchEventWith(Events.LAYOUT_DATA_CHANGED);
+        }
     }
 }
 customElements.define('layout-element', LayoutElement);

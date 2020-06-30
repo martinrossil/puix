@@ -7,7 +7,6 @@ import ITextElement from '../../interfaces/text/ITextElement';
 import ShapeElement from '../../svg/ShapeElement';
 import IconElement from '../../elements/IconElement';
 import TextElement from '../../text/TextElement';
-import AnchorLayoutData from '../../layouts/AnchorLayoutData';
 import HorizontalLayout from '../../layouts/HorizontalLayout';
 import VerticalAlign from '../../consts/VerticalAlign';
 import IBaseButton from '../../interfaces/components/buttons/IBaseButton';
@@ -33,7 +32,8 @@ export default class BaseButton extends DisplayContainer implements IBaseButton 
         this.labelElement.wordwrap = false;
         this.rippleElement.percentWidth = 100;
         this.rippleElement.percentHeight = 100;
-        this.iconLabelContainer.layoutData = new AnchorLayoutData(NaN, NaN, NaN, NaN, 0, 0);
+        this.iconLabelContainer.horizontalCenter = 0;
+        this.iconLabelContainer.verticalCenter = 0;
         this.iconLabelContainer.layout = new HorizontalLayout(8, VerticalAlign.MIDDLE);
         this.iconLabelContainer.layout.paddingLeft = 16;
         this.iconLabelContainer.layout.paddingRight = 16;
