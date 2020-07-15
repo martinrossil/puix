@@ -12,12 +12,10 @@ export default [
             clear({ targets: ['development'] }),
             copy({
                 targets: [
-                    {
-                        src: ['assets/*.*'],
-                        dest: 'development'
-                    },
+                    { src: 'assets/fonts/**.*', dest: 'development' },
+                    { src: 'assets/icons/**.*', dest: 'development' },
                     { 
-                        src: 'assets/index.html',
+                        src: 'assets/development/index.html',
                         dest: 'development',
                         transform: (contents) => contents.toString().replace('{{version}}', version)
                     }

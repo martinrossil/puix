@@ -1,0 +1,18 @@
+{
+    "compilerOptions": {
+        "target": "ESNext",
+        "module": "ESNext",
+        "moduleResolution": "Node",
+        "sourceMap":  false,
+        "strict": true,
+        "strictNullChecks": true,
+        "noImplicitAny": true,
+        "outDir": "./esnext",
+        "removeComments": true,
+        "allowSyntheticDefaultImports": true
+    },
+    "exclude": [
+        "node_modules/**",
+        "**/*.spec.ts"
+    ]
+}
