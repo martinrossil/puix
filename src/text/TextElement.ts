@@ -1,6 +1,6 @@
 import DisplayElement from '../core/DisplayElement';
 import ITextElement from '../interfaces/text/ITextElement';
-import ITypeData from '../interfaces/text/ITypeData';
+import ITypeData from '../interfaces/design/typography/ITypeData';
 import ITextRenderer from '../interfaces/text/ITextRenderer';
 import TextRenderer from './TextRenderer';
 import Design from '../design/Design';

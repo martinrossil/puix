@@ -8,13 +8,13 @@ export default class ContainedButton extends BaseButton implements IContainedBut
     public constructor() {
         super();
         this.name = 'ContainedButton';
-        this.backgroundColor = this.theme.colors.secondary.c500;
-        this.iconColor = this.theme.colors.onSecondary;
-        this.labelColor = this.theme.colors.onSecondary;
+        this.backgroundColor = this.theme.colors.secondary.medium;
+        this.iconColor = this.theme.colors.neutral.darkest;
+        this.labelColor = this.theme.colors.neutral.darkest;
         this.filter = this.shadowFilter;
     }
 
-    private shadowFilter: IShadowFilter = new ShadowFilter(0, 5, 5, this.theme.colors.secondary.c900, 0.5);
+    private shadowFilter: IShadowFilter = new ShadowFilter(0, 5, 5, this.theme.colors.secondary.darkest, 0.5);
 
     public set filter(value: IFilter | null) {
         this.shapeElement.filter = value;

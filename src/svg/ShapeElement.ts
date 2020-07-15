@@ -26,14 +26,14 @@ export default class ShapeElement extends PathElement implements IShapeElement {
 
     private _cornerType = CornerType.NONE;
 
-    public set cornerType(value: number) {
+    public set cornerType(value: string) {
         if (this._cornerType !== value) {
             this._cornerType = value;
             this.invalidateDisplay();
         }
     }
 
-    public get cornerType(): number {
+    public get cornerType(): string {
         return this._cornerType;
     }
 

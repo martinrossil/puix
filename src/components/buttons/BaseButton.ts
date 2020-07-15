@@ -13,6 +13,7 @@ import IBaseButton from '../../interfaces/components/buttons/IBaseButton';
 import CornerType from '../../consts/CornerType';
 import IRippleElement from '../../interfaces/elements/IRippleElement';
 import RippleElement from '../../elements/RippleElement';
+import HSL from '../../design/color/HSL';
 
 export default class BaseButton extends DisplayContainer implements IBaseButton {
     public constructor() {
@@ -22,7 +23,7 @@ export default class BaseButton extends DisplayContainer implements IBaseButton 
         this.minHeight = 36;
         this.cornerType = CornerType.ROUNDED;
         this.cornerSize = 4;
-        this.rippleColor = this.theme.colors.ripple;
+        this.rippleColor = HSL.WHITE;
         this.layout = new AnchorLayout();
         this.shapeElement.percentWidth = 100;
         this.shapeElement.percentHeight = 100;
@@ -95,11 +96,11 @@ export default class BaseButton extends DisplayContainer implements IBaseButton 
         return this.iconElement.color;
     }
 
-    public set cornerType(value: number) {
+    public set cornerType(value: string) {
         this.shapeElement.cornerType = value;
     }
 
-    public get cornerType(): number {
+    public get cornerType(): string {
         return this.shapeElement.cornerType;
     }
 

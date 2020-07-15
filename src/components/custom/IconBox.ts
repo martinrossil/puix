@@ -10,13 +10,14 @@ export default class IconBox extends DisplayContainer {
         this.name = 'IconBox';
         this.layout.padding = 8;
         this.borderRadius = 8;
+        this.backgroundColor = this.theme.colors.primary.medium;
         this.addElement(this.iconElement);
     }
 
     protected get iconElement(): IIconElement {
         const iconElement: IIconElement = new IconElement();
         iconElement.setSize(38, 38);
-        iconElement.icon = Icons.PUIX;
+        iconElement.icon = Icons.EMAIL;
         iconElement.color = HSL.WHITE;
         return iconElement;
     }

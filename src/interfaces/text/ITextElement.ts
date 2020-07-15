@@ -1,4 +1,4 @@
-import ITypeData from './ITypeData';
+import ITypeData from '../design/typography/ITypeData';
 import IDisplayElement from '../core/IDisplayElement';
 
 export default interface ITextElement extends IDisplayElement {

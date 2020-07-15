@@ -1,4 +1,4 @@
-import ITypeData from '../interfaces/text/ITypeData.js';
+import ITypeData from '../../interfaces/design/typography/ITypeData.js';
 
 export default class TypeData implements ITypeData {
     public fontFamily: string;

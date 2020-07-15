@@ -8,6 +8,7 @@ export default class SvgElement extends DisplayElement implements ISvgElement {
         this.name = 'SvgElement';
         this.svg.style.position = 'absolute';
         this.svg.style.overflow = 'visible';
+        this.svg.appendChild(this.defs);
         this.svg.appendChild(this.group);
         this.appendChild(this.svg);
     }
@@ -23,6 +24,8 @@ export default class SvgElement extends DisplayElement implements ISvgElement {
     }
 
     public svg: SVGSVGElement = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+
+    public defs: SVGDefsElement = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
 
     public group: SVGElement = document.createElementNS('http://www.w3.org/2000/svg', 'g');
 

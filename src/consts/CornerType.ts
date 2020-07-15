@@ -1,5 +1,5 @@
 export default class CornerType {
-    static NONE = 0;
-    static CUT = 1;
-    static ROUNDED = 2;
+    static NONE = 'NONE';
+    static CUT = 'CUT';
+    static ROUNDED = 'ROUNDED';
 }

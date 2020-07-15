@@ -1,10 +1,8 @@
-import Icons from '../../design/icon/Icons';
 import DisplayContainer from '../../containers/DisplayContainer';
 import IIconElement from '../../interfaces/elements/IIconElement';
 import IconElement from '../../elements/IconElement';
 import ITextElement from '../../interfaces/text/ITextElement';
 import TextElement from '../../text/TextElement';
-import HSL from '../../design/color/HSL';
 import HorizontalLayout from '../../layouts/HorizontalLayout';
 import VerticalAlign from '../../consts/VerticalAlign';
 import IShapeElement from '../../interfaces/svg/IShapeElement';
@@ -12,6 +10,8 @@ import ShapeElement from '../../svg/ShapeElement';
 import ShadowFilter from '../../svg/filters/ShadowFilter';
 import IDisplayContainer from '../../interfaces/containers/IDisplayContainer';
 import AnchorLayout from '../../layouts/AnchorLayout';
+import HSL from '../../design/color/HSL';
+import Icons from '../../design/icon/Icons';
 
 export default class Appbar extends DisplayContainer {
     public constructor() {
@@ -43,7 +43,7 @@ export default class Appbar extends DisplayContainer {
     protected get shapeElement(): IShapeElement {
         if (!this._shapeElement) {
             this._shapeElement = new ShapeElement();
-            this._shapeElement.fillColor = this.theme.colors.secondary.c500;
+            this._shapeElement.fillColor = this.theme.colors.secondary.medium;
             this._shapeElement.percentWidth = 100;
             this._shapeElement.percentHeight = 100;
             this._shapeElement.filter = new ShadowFilter(0, 4, 8, '#000', 0.5);
@@ -58,7 +58,7 @@ export default class Appbar extends DisplayContainer {
             this._iconElement = new IconElement();
             this._iconElement.setSize(32, 32);
             this._iconElement.icon = Icons.PUIX;
-            this._iconElement.color = this.theme.colors.primary.c500;
+            this._iconElement.color = this.theme.colors.primary.medium;
         }
         return this._iconElement;
     }

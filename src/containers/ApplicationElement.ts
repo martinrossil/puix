@@ -7,13 +7,14 @@ export default class ApplicationElement extends DisplayContainer {
     public constructor() {
         super();
         this.name = 'ApplicationElement';
-        this.backgroundColor = this.theme.colors.background;
+        this.backgroundColor = this.theme.colors.neutral.lightest;
         this.layout = new AnchorLayout();
         document.body.style.setProperty('position', 'absolute');
         document.body.style.setProperty('-webkit-overflow-scrolling', 'touch');
         document.body.style.setProperty('-webkit-tap-highlight-color', HSL.TRANSPARENT);
         document.body.style.setProperty('-moz-tap-highlight-color', HSL.TRANSPARENT);
         document.body.style.setProperty('margin', '0');
+        this.style.overflow = 'hidden';
         window.addEventListener('resize', () => {
             this.setSize(window.innerWidth, window.innerHeight);
         });

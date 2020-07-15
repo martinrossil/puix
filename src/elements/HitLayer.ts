@@ -4,8 +4,8 @@ import CornerType from '../consts/CornerType';
 import ShapeUtil from '../svg/utils/ShapeUtil';
 import Cursor from '../consts/Cursor';
 import IPoint from '../interfaces/vo/IPoint';
-import Point from '../vo/Point';
 import Events from '../consts/Events';
+import Point from '../vo/Point';
 
 export default class HitLayer extends DisplayElement implements IHitLayer {
     protected didTouchStart = false;
@@ -127,14 +127,14 @@ export default class HitLayer extends DisplayElement implements IHitLayer {
 
     private _cornerType = CornerType.NONE;
 
-    public set cornerType(value: number) {
+    public set cornerType(value: string) {
         if (this._cornerType !== value) {
             this._cornerType = value;
             this.invalidateDisplay();
         }
     }
 
-    public get cornerType(): number {
+    public get cornerType(): string {
         return this._cornerType;
     }
 

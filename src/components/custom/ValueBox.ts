@@ -19,7 +19,7 @@ export default class ValueBox extends DisplayContainer {
         titleTextElement.fontWeight = 700;
         titleTextElement.fontSize = 12;
         titleTextElement.lineHeight = 20;
-        titleTextElement.color = this.theme.colors.neutral.c400;
+        titleTextElement.color = this.theme.colors.neutral.light;
         return titleTextElement;
     }
 
@@ -30,7 +30,7 @@ export default class ValueBox extends DisplayContainer {
         valueTextElement.fontWeight = 700;
         valueTextElement.fontSize = 24;
         valueTextElement.lineHeight = 32;
-        valueTextElement.color = this.theme.colors.neutral.c900;
+        valueTextElement.color = this.theme.colors.neutral.darkest;
         return valueTextElement;
     }
 }

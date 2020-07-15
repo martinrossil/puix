@@ -159,5 +159,18 @@ export default class DisplayElement extends LayoutElement implements IDisplayEle
     public get cursor(): string {
         return this._cursor;
     }
+
+    private _backgoundColor = '';
+
+    public set backgroundColor(value: string) {
+        if (this._backgoundColor !== value) {
+            this._backgoundColor = value;
+            this.style.backgroundColor = value;
+        }
+    }
+
+    public get backgroundColor(): string {
+        return this._backgoundColor;
+    }
 }
 customElements.define('display-element', DisplayElement);

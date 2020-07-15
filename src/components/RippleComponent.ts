@@ -45,11 +45,11 @@ export default class RippleComponent extends DisplayContainer {
     protected get shapeElement(): IShapeElement {
         if (!this._shapeElement) {
             this._shapeElement = new ShapeElement();
-            this._shapeElement.fillColor = this.theme.colors.secondary.c500;
+            this._shapeElement.fillColor = this.theme.colors.secondary.medium;
             this._shapeElement.percentWidth = 100;
             this._shapeElement.percentHeight = 100;
-            this._shapeElement.cornerType = CornerType.CUT;
-            this._shapeElement.cornerSize = 75;
+            this._shapeElement.cornerType = CornerType.ROUNDED;
+            this._shapeElement.cornerSize = 32;
             this._shapeElement.filter = new ShadowFilter(0, 4, 8, '#000', 0.5);
         }
         return this._shapeElement;

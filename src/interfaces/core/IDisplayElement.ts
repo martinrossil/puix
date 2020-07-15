@@ -12,4 +12,5 @@ export default interface IDisplayElement extends ILayoutElement {
     theme: ITheme;
     tabIndex: number;
     cursor: string;
+    backgroundColor: string;
 }

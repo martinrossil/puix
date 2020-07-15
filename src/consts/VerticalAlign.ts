@@ -1,6 +1,6 @@
 export default class VerticalAlign {
-    static TOP = 'a';
-    static MIDDLE = 'b';
-    static BOTTOM = 'c';
-    static FILL = 'd';
+    static TOP = 'top';
+    static MIDDLE = 'middle';
+    static BOTTOM = 'bottom';
+    static FILL = 'fill';
 }
