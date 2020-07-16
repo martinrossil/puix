@@ -1,13 +1,17 @@
 import DisplayElement from '../core/DisplayElement';
-import IHitLayer from '../interfaces/elements/IHitlayer';
+import IPointerElement from '../interfaces/elements/IPointerElement';
 import CornerType from '../consts/CornerType';
 import ShapeUtil from '../svg/utils/ShapeUtil';
 import Cursor from '../consts/Cursor';
 import IPoint from '../interfaces/vo/IPoint';
-import Events from '../consts/Events';
 import Point from '../vo/Point';
 
-export default class HitLayer extends DisplayElement implements IHitLayer {
+export default class PointerElement extends DisplayElement implements IPointerElement {
+    static OVER = 'PointerElement.OVER';
+    static DOWN = 'PointerElement.DOWN';
+    static TRIGGERED = 'PointerElement.TRIGGERED';
+    static LEAVE = 'PointerElement.LEAVE';
+
     protected didTouchStart = false;
 
     public constructor() {
@@ -24,7 +28,7 @@ export default class HitLayer extends DisplayElement implements IHitLayer {
             const py: number = touch.pageY;
             const cr: ClientRect = this.hitPath.getBoundingClientRect();
             const point: IPoint = new Point(px - cr.left, py - cr.top);
-            this.dispatchEventWith(Events.POINTER_DOWN, point);
+            this.dispatchEventWith(PointerElement.DOWN, point);
         }
     }
 
@@ -39,36 +43,36 @@ export default class HitLayer extends DisplayElement implements IHitLayer {
             const cw: number = cr.width;
             const ch: number = cr.height;
             if (px > cl && px < cl + cw && py > ct && py < ct + ch) {
-                this.dispatchEventWith(Events.POINTER_TRIGGERED);
+                this.dispatchEventWith(PointerElement.TRIGGERED);
             } else {
-                this.dispatchEventWith(Events.POINTER_LEAVE);
+                this.dispatchEventWith(PointerElement.LEAVE);
             }
         } else {
-            this.dispatchEventWith(Events.POINTER_LEAVE);
+            this.dispatchEventWith(PointerElement.LEAVE);
         }
     }
 
     protected mouseOver(): void {
         if (!this.didTouchStart) {
-            this.dispatchEventWith(Events.POINTER_OVER);
+            this.dispatchEventWith(PointerElement.OVER);
         }
     }
 
     protected mouseDown(e: MouseEvent): void {
         if (!this.didTouchStart) {
-            this.dispatchEventWith(Events.POINTER_DOWN, new Point(e.offsetX, e.offsetY));
+            this.dispatchEventWith(PointerElement.DOWN, new Point(e.offsetX, e.offsetY));
         }
     }
 
     protected mouseUp(): void {
         if (!this.didTouchStart) {
-            this.dispatchEventWith(Events.POINTER_TRIGGERED);
+            this.dispatchEventWith(PointerElement.TRIGGERED);
         }
     }
 
     protected mouseLeave(): void {
         if (!this.didTouchStart) {
-            this.dispatchEventWith(Events.POINTER_OVER);
+            this.dispatchEventWith(PointerElement.OVER);
         } else {
             this.didTouchStart = false;
         }
@@ -156,4 +160,4 @@ export default class HitLayer extends DisplayElement implements IHitLayer {
         return this._cornerSize;
     }
 }
-customElements.define('hit-layer', HitLayer);
+customElements.define('pointer-element', PointerElement);

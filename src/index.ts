@@ -48,7 +48,7 @@ export { default as Typography } from './design/typography/Typography';
 export { default as Design } from './design/Design';
 export { default as Theme } from './design/Theme';
 
-export { default as HitLayer } from './elements/HitLayer';
+export { default as PointerElement } from './elements/PointerElement';
 export { default as IconElement } from './elements/IconElement';
 export { default as RippleElement } from './elements/RippleElement';
 
@@ -83,7 +83,7 @@ export { default as ITypography } from './interfaces/design/typography/ITypograp
 
 export { default as ITheme } from './interfaces/design/ITheme';
 
-export { default as IHitlayer } from './interfaces/elements/IHitlayer';
+export { default as IPointerElement } from './interfaces/elements/IPointerElement';
 export { default as IIconElement } from './interfaces/elements/IIconElement';
 export { default as IRippleElement } from './interfaces/elements/IRippleElement';
 
