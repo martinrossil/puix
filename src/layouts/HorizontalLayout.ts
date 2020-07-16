@@ -2,7 +2,7 @@ import Layout from './Layout';
 import IHorizontalLayout from '../interfaces/layouts/IHorizontalLayout';
 import VerticalAlign from '../consts/VerticalAlign';
 import IDisplayContainer from '../interfaces/containers/IDisplayContainer';
-import Events from '../consts/Events';
+import SizeElement from '../core/SizeElement';
 
 export default class HorizontalLayout extends Layout implements IHorizontalLayout {
     public constructor(horizontalGap = 0, verticalAlign = VerticalAlign.TOP) {
@@ -25,7 +25,7 @@ export default class HorizontalLayout extends Layout implements IHorizontalLayou
         height = this.paddingTop + height + this.paddingBottom;
         if (container.actualWidth !== width || container.actualHeight !== height) {
             container.setActualSize(width, height);
-            container.dispatchEventWith(Events.INTERNAL_SIZE_CHANGED, container);
+            container.dispatchEventWith(SizeElement.INTERNAL_SIZE_CHANGED, container);
         }
     }
 
@@ -37,7 +37,7 @@ export default class HorizontalLayout extends Layout implements IHorizontalLayou
         width = this.paddingLeft + width - this.horizontalGap + this.paddingRight;
         if (container.actualWidth !== width) {
             container.actualWidth = width;
-            container.dispatchEventWith(Events.INTERNAL_SIZE_CHANGED, container);
+            container.dispatchEventWith(SizeElement.INTERNAL_SIZE_CHANGED, container);
         }
     }
 

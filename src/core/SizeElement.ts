@@ -2,6 +2,8 @@ import PositionElement from './PositionElement';
 import ISizeElement from '../interfaces/core/ISizeElement';
 
 export default class SizeElement extends PositionElement implements ISizeElement {
+    static INTERNAL_SIZE_CHANGED = 'SizeElement.internalSizeChanged';
+
     public constructor() {
         super();
         this.name = 'SizeElement';

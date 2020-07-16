@@ -1,6 +1,6 @@
 import ILayout from '../interfaces/layouts/ILayout';
 import IDisplayContainer from '../interfaces/containers/IDisplayContainer';
-import Events from '../consts/Events';
+import SizeElement from '../core/SizeElement';
 
 export default class Layout implements ILayout {
     public constructor() {
@@ -65,7 +65,7 @@ export default class Layout implements ILayout {
         height = this.paddingTop + height + this.paddingBottom;
         if (container.actualWidth !== width || container.actualHeight !== height) {
             container.setActualSize(width, height);
-            container.dispatchEventWith(Events.INTERNAL_SIZE_CHANGED, container);
+            container.dispatchEventWith(SizeElement.INTERNAL_SIZE_CHANGED, container);
         }
     }
 
@@ -82,7 +82,7 @@ export default class Layout implements ILayout {
         width = this.paddingLeft + width + this.paddingRight;
         if (container.actualWidth !== width) {
             container.actualWidth = width;
-            container.dispatchEventWith(Events.INTERNAL_SIZE_CHANGED, container);
+            container.dispatchEventWith(SizeElement.INTERNAL_SIZE_CHANGED, container);
         }
     }
 
@@ -99,7 +99,7 @@ export default class Layout implements ILayout {
         height = this.paddingTop + height + this.paddingBottom;
         if (container.actualHeight !== height) {
             container.actualHeight = height;
-            container.dispatchEventWith(Events.INTERNAL_SIZE_CHANGED, container);
+            container.dispatchEventWith(SizeElement.INTERNAL_SIZE_CHANGED, container);
         }
     }
 

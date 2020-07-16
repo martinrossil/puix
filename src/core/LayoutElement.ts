@@ -1,8 +1,9 @@
 import SizeElement from './SizeElement';
 import ILayoutElement from '../interfaces/core/ILayoutElement';
-import Events from '../consts/Events';
 
 export default class LayoutElement extends SizeElement implements ILayoutElement {
+    static LAYOUT_DATA_CHANGED = 'LayoutElement.layoutDataChanged';
+
     public constructor() {
         super();
         this.name = 'LayoutElement';
@@ -88,7 +89,7 @@ export default class LayoutElement extends SizeElement implements ILayoutElement
 
     protected notifyLayoutDataChanged(): void {
         if (this.connected) {
-            this.dispatchEventWith(Events.LAYOUT_DATA_CHANGED);
+            this.dispatchEventWith(LayoutElement.LAYOUT_DATA_CHANGED);
         }
     }
 }
