@@ -25,7 +25,7 @@ export default class HorizontalLayout extends Layout implements IHorizontalLayou
         height = this.paddingTop + height + this.paddingBottom;
         if (container.actualWidth !== width || container.actualHeight !== height) {
             container.setActualSize(width, height);
-            container.dispatchEventWith(SizeElement.INTERNAL_SIZE_CHANGED, container);
+            container.dispatchEventWith(SizeElement.INTERNAL_SIZE_CHANGED, container, true);
         }
     }
 
@@ -37,7 +37,7 @@ export default class HorizontalLayout extends Layout implements IHorizontalLayou
         width = this.paddingLeft + width - this.horizontalGap + this.paddingRight;
         if (container.actualWidth !== width) {
             container.actualWidth = width;
-            container.dispatchEventWith(SizeElement.INTERNAL_SIZE_CHANGED, container);
+            container.dispatchEventWith(SizeElement.INTERNAL_SIZE_CHANGED, container, true);
         }
     }
 

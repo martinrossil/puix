@@ -25,7 +25,7 @@ export default class VerticalLayout extends Layout implements IVerticalLayout {
         height = this.paddingTop + height - this.verticalGap + this.paddingBottom;
         if (container.actualWidth !== width || container.actualHeight !== height) {
             container.setActualSize(width, height);
-            container.dispatchEventWith(SizeElement.INTERNAL_SIZE_CHANGED, container);
+            container.dispatchEventWith(SizeElement.INTERNAL_SIZE_CHANGED, container, true);
         }
     }
 
@@ -37,7 +37,7 @@ export default class VerticalLayout extends Layout implements IVerticalLayout {
         height = this.paddingTop + height - this.verticalGap + this.paddingBottom;
         if (container.actualHeight !== height) {
             container.actualHeight = height;
-            container.dispatchEventWith(SizeElement.INTERNAL_SIZE_CHANGED, container);
+            container.dispatchEventWith(SizeElement.INTERNAL_SIZE_CHANGED, container, true);
         }
     }
 

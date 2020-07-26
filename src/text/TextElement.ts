@@ -29,26 +29,26 @@ export default class TextElement extends DisplayElement implements ITextElement 
         if (isNaN(this.width) && isNaN(this.height)) {
             if (isNaN(this.percentWidth) && isNaN(this.percentHeight)) {
                 this.setActualSize(this.textRenderer.clientWidth, this.textRenderer.clientHeight - padding);
-                this.dispatchEventWith(SizeElement.INTERNAL_SIZE_CHANGED, this);
+                this.dispatchEventWith(SizeElement.INTERNAL_SIZE_CHANGED, this, true);
             } else if (isNaN(this.percentWidth) && !isNaN(this.percentHeight)) {
                 this.textRenderer.actualHeight = this.actualHeight;
                 this.actualWidth = this.textRenderer.clientWidth;
-                this.dispatchEventWith(SizeElement.INTERNAL_SIZE_CHANGED, this);
+                this.dispatchEventWith(SizeElement.INTERNAL_SIZE_CHANGED, this, true);
             } else if (!isNaN(this.percentWidth) && isNaN(this.percentHeight)) {
                 this.textRenderer.actualWidth = this.actualWidth;
                 this.actualHeight = this.textRenderer.clientHeight - padding;
-                this.dispatchEventWith(SizeElement.INTERNAL_SIZE_CHANGED, this);
+                this.dispatchEventWith(SizeElement.INTERNAL_SIZE_CHANGED, this, true);
             } else {
                 this.textRenderer.setActualSize(this.actualWidth, this.actualHeight);
             }
         } else if (isNaN(this.width) && !isNaN(this.height)) {
             this.textRenderer.actualHeight = this.actualHeight;
             this.actualWidth = this.textRenderer.clientWidth;
-            this.dispatchEventWith(SizeElement.INTERNAL_SIZE_CHANGED, this);
+            this.dispatchEventWith(SizeElement.INTERNAL_SIZE_CHANGED, this, true);
         } else if (!isNaN(this.width) && isNaN(this.height)) {
             this.textRenderer.actualWidth = this.actualWidth;
             this.actualHeight = this.textRenderer.clientHeight - padding;
-            this.dispatchEventWith(SizeElement.INTERNAL_SIZE_CHANGED, this);
+            this.dispatchEventWith(SizeElement.INTERNAL_SIZE_CHANGED, this, true);
         } else {
             this.textRenderer.setActualSize(this.actualWidth, this.actualHeight);
         }

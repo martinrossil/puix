@@ -6,8 +6,8 @@ export default class EventDispatcherElement extends HTMLElement implements IEven
         this.style.position = 'absolute';
     }
 
-    public dispatchEventWith(typeArg: string, payload: unknown = null): void {
-        const customEvent: CustomEvent = new CustomEvent(typeArg, { bubbles: true, detail: payload });
+    public dispatchEventWith(typeArg: string, payload: unknown = null, bubbles = false): void {
+        const customEvent: CustomEvent = new CustomEvent(typeArg, { bubbles: bubbles, detail: payload });
         this.dispatchEvent(customEvent);
     }
 

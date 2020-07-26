@@ -89,7 +89,7 @@ export default class LayoutElement extends SizeElement implements ILayoutElement
 
     protected notifyLayoutDataChanged(): void {
         if (this.connected) {
-            this.dispatchEventWith(LayoutElement.LAYOUT_DATA_CHANGED);
+            this.dispatchEventWith(LayoutElement.LAYOUT_DATA_CHANGED, true);
         }
     }
 }

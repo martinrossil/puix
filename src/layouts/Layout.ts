@@ -65,7 +65,7 @@ export default class Layout implements ILayout {
         height = this.paddingTop + height + this.paddingBottom;
         if (container.actualWidth !== width || container.actualHeight !== height) {
             container.setActualSize(width, height);
-            container.dispatchEventWith(SizeElement.INTERNAL_SIZE_CHANGED, container);
+            container.dispatchEventWith(SizeElement.INTERNAL_SIZE_CHANGED, container, true);
         }
     }
 
@@ -82,7 +82,7 @@ export default class Layout implements ILayout {
         width = this.paddingLeft + width + this.paddingRight;
         if (container.actualWidth !== width) {
             container.actualWidth = width;
-            container.dispatchEventWith(SizeElement.INTERNAL_SIZE_CHANGED, container);
+            container.dispatchEventWith(SizeElement.INTERNAL_SIZE_CHANGED, container, true);
         }
     }
 
@@ -99,7 +99,7 @@ export default class Layout implements ILayout {
         height = this.paddingTop + height + this.paddingBottom;
         if (container.actualHeight !== height) {
             container.actualHeight = height;
-            container.dispatchEventWith(SizeElement.INTERNAL_SIZE_CHANGED, container);
+            container.dispatchEventWith(SizeElement.INTERNAL_SIZE_CHANGED, container, true);
         }
     }
 
