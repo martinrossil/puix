@@ -14,8 +14,8 @@ export default class DataCard extends DisplayContainer {
         this.verticalCenter = 0;
         this.borderRadius = 8;
         this.backgroundColor = HSL.WHITE;
-        this.z = 3;
         this.overflow = 'hidden';
+        this.shadow = this.theme.shadows.medium;
         this.addElement(new IconTextContainer());
         this.addElement(new ActionBar());
     }

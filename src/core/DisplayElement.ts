@@ -96,33 +96,17 @@ export default class DisplayElement extends LayoutElement implements IDisplayEle
         return this._overflowVertical;
     }
 
-    private _z = 0;
+    private _shadow: string = this.theme.shadows.none;
 
-    public set z(value: number) {
-        if (isNaN(value)) {
-            if (this._z !== 0) {
-                this._z = 0;
-                this.style.boxShadow = 'none';
-            }
-        } else if (this._z !== value) {
-            let shadow = '';
-            if (value < 0) {
-                shadow = 'inset ';
-            }
-            shadow += '0 ' + Math.floor(Math.pow(Math.abs(value), 2)) + 'px ';
-            shadow += Math.floor(Math.pow(Math.abs(value), 2.5)) + 'px ';
-            shadow += Math.floor(Math.pow(Math.abs(value), 1.1)) + 'px ';
-            shadow += 'rgba(0, 0, 0, 0.' + Math.round(Math.pow(Math.abs(value), 0.5) * 10) + '),';
-            shadow += ' 0 ' + Math.round(Math.pow(Math.abs(1.8), Math.abs(value))) + 'px ';
-            shadow += Math.round(Math.pow(Math.abs(1.9), Math.abs(value))) + 'px ';
-            shadow += -Math.abs(value) + 'px ';
-            shadow += 'rgba(0, 0, 0, 0.05)';
-            this.style.boxShadow = shadow;
+    public set shadow(value: string) {
+        if (this._shadow !== value) {
+            this._shadow = value;
+            this.style.boxShadow = value;
         }
     }
 
-    public get z(): number {
-        return this._z;
+    public get shadow(): string {
+        return this._shadow;
     }
 
     private _borderRadius = 0;
