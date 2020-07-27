@@ -36,18 +36,10 @@ export default class DisplayElement extends LayoutElement implements IDisplayEle
         this._interactive = value;
         if (value) {
             this.style.pointerEvents = '';
-            this.style.setProperty('-webkit-user-select', 'auto');
-            this.style.setProperty('-khtml-user-select', 'auto');
-            this.style.setProperty('-moz-user-select', 'auto');
-            this.style.setProperty('-ms-user-select', 'auto');
-            this.style.setProperty('user-select', 'auto');
+            this.style.userSelect = 'auto';
         } else {
             this.style.pointerEvents = 'none';
-            this.style.setProperty('-webkit-user-select', 'none');
-            this.style.setProperty('-khtml-user-select', 'none');
-            this.style.setProperty('-moz-user-select', 'none');
-            this.style.setProperty('-ms-user-select', 'none');
-            this.style.setProperty('user-select', 'none');
+            this.style.userSelect = 'none';
         }
     }
 
