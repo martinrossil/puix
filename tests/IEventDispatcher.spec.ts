@@ -35,8 +35,8 @@ describe('IEventDispatcher interface', () => {
     });
     describe('addEventListener()', () => {
         it('given addEventListener(), when dispatchEventWith("type"), handler should have been called', () => {
-            eventDispatcherElement.dispatchEventWith('test', this);
-            eventDispatcher.dispatchEventWith('test', this);
+            eventDispatcherElement.dispatchEventWith('test', this, false);
+            eventDispatcher.dispatchEventWith('test', this, false);
             assert.isTrue(handlerHasBeenCalled);
             assert.isTrue(handlerHasBeenCalled2);
         });
@@ -47,8 +47,8 @@ describe('IEventDispatcher interface', () => {
             handlerHasBeenCalled2 = false;
             eventDispatcher.removeEventListener('test', handler2);
             eventDispatcherElement.removeEventListener('test', handler);
-            eventDispatcherElement.dispatchEventWith('test', this);
-            eventDispatcher.dispatchEventWith('test', this);
+            eventDispatcherElement.dispatchEventWith('test', this, false);
+            eventDispatcher.dispatchEventWith('test', this, false);
             assert.isFalse(handlerHasBeenCalled);
             assert.isFalse(handlerHasBeenCalled2);
         });
