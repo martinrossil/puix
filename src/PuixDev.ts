@@ -1,22 +1,45 @@
 import ApplicationElement from './containers/ApplicationElement';
-import Appbar from './components/custom/AppBar';
 import RippleComponent from './components/RippleComponent';
 import IShapeElement from './interfaces/svg/IShapeElement';
 import ShapeElement from './svg/ShapeElement';
 import IDisplayElement from './interfaces/core/IDisplayElement';
 import DisplayElement from './core/DisplayElement';
 import HSL from './design/color/HSL';
-import DataCard from './components/custom/DataCard';
+import IScrollContainer from './interfaces/containers/IScrollContainer';
+import ScrollContainer from './containers/ScrollContainer';
+import ScrollPolicy from './consts/ScrollPolicy';
+import HorizontalLayout from './layouts/HorizontalLayout';
+import VerticalAlign from './consts/VerticalAlign';
 
 export default class PuixDev extends ApplicationElement {
     public constructor() {
         super();
         this.name = 'PuixDev';
-        // this.addElement(this.shapeElement);
-        this.addElement(new Appbar());
-        // this.addElement(this.rippleComponent);
-        this.addElement(new DataCard());
-        // this.addElement(this.innerBox);
+        this.addElement(this.scrollContainer);
+    }
+
+    private _scrollContainer!: IScrollContainer;
+
+    protected get scrollContainer(): IScrollContainer {
+        if (!this._scrollContainer) {
+            this._scrollContainer = new ScrollContainer();
+            this._scrollContainer.horizontalCenter = 0;
+            this._scrollContainer.verticalCenter = 0;
+            this._scrollContainer.height = 400;
+            this._scrollContainer.percentWidth = 75;
+            this._scrollContainer.backgroundColor = HSL.WHITE;
+            this._scrollContainer.shadow = this.theme.shadows.large;
+            this._scrollContainer.horizontalScrollPolicy = ScrollPolicy.ON;
+            for (let i = 0; i < 2; i++) {
+                const d: IDisplayElement = new DisplayElement();
+                d.width = 200;
+                d.backgroundColor = HSL.BLUE_GREY_100;
+                this.scrollContainer.addElement(d);
+            }
+            this._scrollContainer.layout = new HorizontalLayout(16, VerticalAlign.FILL);
+            this._scrollContainer.layout.padding = 16;
+        }
+        return this._scrollContainer;
     }
 
     private _innerBox!: IDisplayElement;

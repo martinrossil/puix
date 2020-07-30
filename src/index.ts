@@ -20,10 +20,13 @@ export { default as CornerType } from './consts/CornerType';
 export { default as Cursor } from './consts/Cursor';
 export { default as Events } from './consts/Events';
 export { default as HorizontalAlign } from './consts/HorizontalAlign';
+export { default as Overflow } from './consts/Overflow';
+export { default as ScrollPolicy } from './consts/ScrollPolicy';
 export { default as VerticalAlign } from './consts/VerticalAlign';
 
 export { default as ApplicationElement } from './containers/ApplicationElement';
 export { default as DisplayContainer } from './containers/DisplayContainer';
+export { default as ScrollContainer } from './containers/ScrollContainer';
 
 export { default as DisplayElement } from './core/DisplayElement';
 export { default as EventDispatcher } from './core/EventDispatcher';
@@ -39,8 +42,11 @@ export { default as HSL } from './design/color/HSL';
 
 export { default as Icons } from './design/icon/Icons';
 
+export { default as Shadows } from './design/shadow/Shadows';
+
 export { default as Spacing } from './design/spacing/Spacing';
 
+export { default as FontSizes } from './design/typography/FontSizes';
 export { default as FontWeight } from './design/typography/FontWeight';
 export { default as TypeData } from './design/typography/TypeData';
 export { default as Typography } from './design/typography/Typography';
@@ -48,8 +54,8 @@ export { default as Typography } from './design/typography/Typography';
 export { default as Design } from './design/Design';
 export { default as Theme } from './design/Theme';
 
-export { default as PointerElement } from './elements/PointerElement';
 export { default as IconElement } from './elements/IconElement';
+export { default as PointerElement } from './elements/PointerElement';
 export { default as RippleElement } from './elements/RippleElement';
 
 export { default as State } from './fsm/State';
@@ -65,6 +71,7 @@ export { default as ITextButton } from './interfaces/components/buttons/ITextBut
 export { default as IButtonElement } from './interfaces/components/IButtonElement';
 
 export { default as IDisplayContainer } from './interfaces/containers/IDisplayContainer';
+export { default as IScrollContainer } from './interfaces/containers/IScrollContainer';
 
 export { default as IDisplayElement } from './interfaces/core/IDisplayElement';
 export { default as IEventDispatcher } from './interfaces/core/IEventDispatcher';
@@ -76,15 +83,18 @@ export { default as ISizeElement } from './interfaces/core/ISizeElement';
 export { default as IColorRange } from './interfaces/design/color/IColorRange';
 export { default as IColors } from './interfaces/design/color/IColors';
 
+export { default as IShadows } from './interfaces/design/shadow/IShadows';
+
 export { default as ISpacing } from './interfaces/design/spacing/ISpacing';
 
+export { default as IFontSizes } from './interfaces/design/typography/IFontSizes';
 export { default as ITypeData } from './interfaces/design/typography/ITypeData';
 export { default as ITypography } from './interfaces/design/typography/ITypography';
 
 export { default as ITheme } from './interfaces/design/ITheme';
 
-export { default as IPointerElement } from './interfaces/elements/IPointerElement';
 export { default as IIconElement } from './interfaces/elements/IIconElement';
+export { default as IPointerElement } from './interfaces/elements/IPointerElement';
 export { default as IRippleElement } from './interfaces/elements/IRippleElement';
 
 export { default as IState } from './interfaces/fsm/IState';

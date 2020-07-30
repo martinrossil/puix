@@ -2,6 +2,7 @@ import IDisplayElement from '../interfaces/core/IDisplayElement';
 import LayoutElement from './LayoutElement';
 import ITheme from '../interfaces/design/ITheme';
 import Design from '../design/Design';
+import Overflow from '../consts/Overflow';
 
 export default class DisplayElement extends LayoutElement implements IDisplayElement {
     public constructor() {
@@ -47,7 +48,7 @@ export default class DisplayElement extends LayoutElement implements IDisplayEle
         return this._interactive;
     }
 
-    private _overflow = 'visible';
+    private _overflow = Overflow.VISIBLE;
 
     public set overflow(value: string) {
         if (this._overflow !== value) {
@@ -62,7 +63,7 @@ export default class DisplayElement extends LayoutElement implements IDisplayEle
         return this._overflow;
     }
 
-    private _overflowHorizontal = 'visible';
+    private _overflowHorizontal = Overflow.VISIBLE;
 
     public set overflowHorizontal(value: string) {
         if (this._overflowHorizontal !== value) {
@@ -75,7 +76,7 @@ export default class DisplayElement extends LayoutElement implements IDisplayEle
         return this._overflowHorizontal;
     }
 
-    private _overflowVertical = 'visible';
+    private _overflowVertical = Overflow.VISIBLE;
 
     public set overflowVertical(value: string) {
         if (this._overflowVertical !== value) {

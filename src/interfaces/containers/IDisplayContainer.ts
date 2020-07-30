@@ -8,6 +8,6 @@ export default interface IDisplayContainer extends IDisplayElement {
     addElements(elements: ILayoutElement[]): void;
     removeElement(element: ILayoutElement): void;
     getElementAt(index: number): ILayoutElement | null;
-    elements: ILayoutElement[];
+    readonly elements: ILayoutElement[];
     layout: ILayout;
 }
