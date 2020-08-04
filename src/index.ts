@@ -109,6 +109,7 @@ export { default as IShadowFilter } from './interfaces/svg/filters/IShadowFilter
 
 export { default as IPathElement } from './interfaces/svg/IPathElement';
 export { default as IShapeElement } from './interfaces/svg/IShapeElement';
+export { default as IStrokeElement } from './interfaces/svg/IStrokeElement';
 export { default as ISvgElement } from './interfaces/svg/ISvgElement';
 
 export { default as ITextElement } from './interfaces/text/ITextElement';
@@ -127,6 +128,7 @@ export { default as ShapeUtils } from './svg/utils/ShapeUtil';
 
 export { default as PathElement } from './svg/PathElement';
 export { default as ShapeElement } from './svg/ShapeElement';
+export { default as StrokeElement } from './svg/StrokeElement';
 export { default as SvgElement } from './svg/SvgElement';
 
 export { default as TextElement } from './text/TextElement';

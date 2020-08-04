@@ -10,12 +10,48 @@ import ScrollContainer from './containers/ScrollContainer';
 import ScrollPolicy from './consts/ScrollPolicy';
 import HorizontalLayout from './layouts/HorizontalLayout';
 import VerticalAlign from './consts/VerticalAlign';
+import IDisplayContainer from './interfaces/containers/IDisplayContainer';
+import DisplayContainer from './containers/DisplayContainer';
+import IStrokeElement from './interfaces/svg/IStrokeElement';
+import StrokeElement from './svg/StrokeElement';
+import AnchorLayout from './layouts/AnchorLayout';
 
 export default class PuixDev extends ApplicationElement {
     public constructor() {
         super();
         this.name = 'PuixDev';
-        this.addElement(this.scrollContainer);
+        this.addElement(this.shapeContainer);
+    }
+
+    private _shapeContainer!: IDisplayContainer;
+
+    protected get shapeContainer(): IDisplayContainer {
+        if (!this._shapeContainer) {
+            this._shapeContainer = new DisplayContainer();
+            this._shapeContainer.borderRadius = 100;
+            this._shapeContainer.horizontalCenter = 0;
+            this._shapeContainer.verticalCenter = 0;
+            this._shapeContainer.setSize(200, 200);
+            this._shapeContainer.backgroundColor = HSL.PINK_100;
+            this._shapeContainer.layout = new AnchorLayout();
+            this._shapeContainer.addElement(this.strokeElement);
+        }
+        return this._shapeContainer;
+    }
+
+    private _strokeElement!: IStrokeElement;
+
+    protected get strokeElement(): IStrokeElement {
+        if (!this._strokeElement) {
+            this._strokeElement = new StrokeElement();
+            this._strokeElement.setSize(200, 200);
+            this._strokeElement.strokeColor = HSL.PINK_500;
+            this._strokeElement.strokeWidth = 20;
+            this._strokeElement.strokeOpacity = 0.5;
+            this._strokeElement.borderRadius = 100;
+            this._strokeElement.fillColor = HSL.NONE;
+        }
+        return this._strokeElement;
     }
 
     private _scrollContainer!: IScrollContainer;
@@ -33,7 +69,7 @@ export default class PuixDev extends ApplicationElement {
             for (let i = 0; i < 2; i++) {
                 const d: IDisplayElement = new DisplayElement();
                 d.width = 200;
-                d.backgroundColor = HSL.BLUE_GREY_100;
+                d.backgroundColor = HSL.CYAN_100;
                 this.scrollContainer.addElement(d);
             }
             this._scrollContainer.layout = new HorizontalLayout(16, VerticalAlign.FILL);
