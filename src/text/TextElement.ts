@@ -10,7 +10,7 @@ export default class TextElement extends DisplayElement implements ITextElement 
     public constructor() {
         super();
         this.name = 'TextElement';
-        this.interactive = false;
+        this.enabled = false;
         this.textRenderer.fontFamily = this.typeData.fontFamily;
         this.textRenderer.fontWeight = this.fontWeight;
         this.textRenderer.fontSize = this.fontSize;
