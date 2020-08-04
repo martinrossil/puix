@@ -31,10 +31,10 @@ export default class DisplayElement extends LayoutElement implements IDisplayEle
         return this._opacity;
     }
 
-    private _interactive = true;
+    private _enabled = true;
 
-    public set interactive(value: boolean) {
-        this._interactive = value;
+    public set enabled(value: boolean) {
+        this._enabled = value;
         if (value) {
             this.style.pointerEvents = '';
             this.style.userSelect = 'auto';
@@ -44,8 +44,8 @@ export default class DisplayElement extends LayoutElement implements IDisplayEle
         }
     }
 
-    public get interactive(): boolean {
-        return this._interactive;
+    public get enabled(): boolean {
+        return this._enabled;
     }
 
     private _overflow = Overflow.VISIBLE;
@@ -53,8 +53,8 @@ export default class DisplayElement extends LayoutElement implements IDisplayEle
     public set overflow(value: string) {
         if (this._overflow !== value) {
             this._overflow = value;
-            this._overflowHorizontal = value;
-            this._overflowVertical = value;
+            this._overflowX = value;
+            this._overflowY = value;
             this.style.overflow = value;
         }
     }
@@ -63,30 +63,30 @@ export default class DisplayElement extends LayoutElement implements IDisplayEle
         return this._overflow;
     }
 
-    private _overflowHorizontal = Overflow.VISIBLE;
+    private _overflowX = Overflow.VISIBLE;
 
-    public set overflowHorizontal(value: string) {
-        if (this._overflowHorizontal !== value) {
-            this._overflowHorizontal = value;
+    public set overflowX(value: string) {
+        if (this._overflowX !== value) {
+            this._overflowX = value;
             this.style.overflowX = value;
         }
     }
 
-    public get overflowHorizontal(): string {
-        return this._overflowHorizontal;
+    public get overflowX(): string {
+        return this._overflowX;
     }
 
-    private _overflowVertical = Overflow.VISIBLE;
+    private _overflowY = Overflow.VISIBLE;
 
-    public set overflowVertical(value: string) {
-        if (this._overflowVertical !== value) {
-            this._overflowVertical = value;
+    public set overflowY(value: string) {
+        if (this._overflowY !== value) {
+            this._overflowY = value;
             this.style.overflowY = value;
         }
     }
 
-    public get overflowVertical(): string {
-        return this._overflowVertical;
+    public get overflowY(): string {
+        return this._overflowY;
     }
 
     private _shadow: string = this.theme.shadows.none;
