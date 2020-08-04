@@ -50,12 +50,21 @@ export default class AnchorLayout extends Layout {
     }
 
     protected setElementSize(w: number, h: number, element: ILayoutElement): void {
-        if (!isNaN(element.percentWidth) && !isNaN(element.percentHeight)) {
+        if (!isNaN(element.left) && !isNaN(element.right) && !isNaN(element.top) && !isNaN(element.bottom)) {
+            element.setActualSize(w - element.left - element.right, h - element.top - element.bottom);
+        } else if (!isNaN(element.percentWidth) && !isNaN(element.percentHeight)) {
             element.setActualSize(w * element.percentWidth / 100, h * element.percentHeight / 100);
-        } else if (!isNaN(element.percentWidth)) {
-            element.actualWidth = w * element.percentWidth / 100;
-        } else if (!isNaN(element.percentHeight)) {
-            element.actualHeight = h * element.percentHeight / 100;
+        } else {
+            if (!isNaN(element.left) && !isNaN(element.right)) {
+                element.actualWidth = w - element.left - element.right;
+            } else if (!isNaN(element.percentWidth)) {
+                element.actualWidth = w * element.percentWidth / 100;
+            }
+            if (!isNaN(element.top) && !isNaN(element.bottom)) {
+                element.actualHeight = h - element.top - element.bottom;
+            } else if (!isNaN(element.percentHeight)) {
+                element.actualHeight = h * element.percentHeight / 100;
+            }
         }
     }
 }
