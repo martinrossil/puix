@@ -1,109 +1,28 @@
 import ApplicationElement from './containers/ApplicationElement';
 import RippleComponent from './components/RippleComponent';
-import IShapeElement from './interfaces/svg/IShapeElement';
-import ShapeElement from './svg/ShapeElement';
-import IDisplayElement from './interfaces/core/IDisplayElement';
-import DisplayElement from './core/DisplayElement';
-import HSL from './design/color/HSL';
-import IScrollContainer from './interfaces/containers/IScrollContainer';
-import ScrollContainer from './containers/ScrollContainer';
-import ScrollPolicy from './consts/ScrollPolicy';
-import HorizontalLayout from './layouts/HorizontalLayout';
-import VerticalAlign from './consts/VerticalAlign';
-import IDisplayContainer from './interfaces/containers/IDisplayContainer';
-import DisplayContainer from './containers/DisplayContainer';
-import IStrokeElement from './interfaces/svg/IStrokeElement';
-import StrokeElement from './svg/StrokeElement';
-import AnchorLayout from './layouts/AnchorLayout';
+import IButtonComponent from './interfaces/components/IButtonComponent';
+import ButtonComponent from './components/ButtonComponent';
+import Icons from './design/icon/Icons';
 
 export default class PuixDev extends ApplicationElement {
     public constructor() {
         super();
         this.name = 'PuixDev';
-        this.addElement(this.shapeContainer);
+        // this.addElement(this.rippleComponent);
+        this.addElement(this.button);
     }
 
-    private _shapeContainer!: IDisplayContainer;
+    protected _button!: IButtonComponent;
 
-    protected get shapeContainer(): IDisplayContainer {
-        if (!this._shapeContainer) {
-            this._shapeContainer = new DisplayContainer();
-            this._shapeContainer.borderRadius = 100;
-            this._shapeContainer.horizontalCenter = 0;
-            this._shapeContainer.verticalCenter = 0;
-            this._shapeContainer.setSize(200, 200);
-            this._shapeContainer.backgroundColor = HSL.PINK_100;
-            this._shapeContainer.layout = new AnchorLayout();
-            this._shapeContainer.addElement(this.strokeElement);
+    protected get button(): IButtonComponent {
+        if (!this._button) {
+            this._button = new ButtonComponent();
+            this._button.icon = Icons.EMAIL;
+            this._button.label = 'Click me';
+            this._button.horizontalCenter = 0;
+            this._button.verticalCenter = 0;
         }
-        return this._shapeContainer;
-    }
-
-    private _strokeElement!: IStrokeElement;
-
-    protected get strokeElement(): IStrokeElement {
-        if (!this._strokeElement) {
-            this._strokeElement = new StrokeElement();
-            this._strokeElement.setSize(200, 200);
-            this._strokeElement.strokeColor = HSL.PINK_500;
-            this._strokeElement.strokeWidth = 20;
-            this._strokeElement.strokeOpacity = 0.5;
-            this._strokeElement.borderRadius = 100;
-            this._strokeElement.fillColor = HSL.NONE;
-        }
-        return this._strokeElement;
-    }
-
-    private _scrollContainer!: IScrollContainer;
-
-    protected get scrollContainer(): IScrollContainer {
-        if (!this._scrollContainer) {
-            this._scrollContainer = new ScrollContainer();
-            this._scrollContainer.horizontalCenter = 0;
-            this._scrollContainer.verticalCenter = 0;
-            this._scrollContainer.height = 400;
-            this._scrollContainer.percentWidth = 75;
-            this._scrollContainer.backgroundColor = HSL.WHITE;
-            this._scrollContainer.shadow = this.theme.shadows.large;
-            this._scrollContainer.horizontalScrollPolicy = ScrollPolicy.ON;
-            for (let i = 0; i < 2; i++) {
-                const d: IDisplayElement = new DisplayElement();
-                d.width = 200;
-                d.backgroundColor = HSL.CYAN_100;
-                this.scrollContainer.addElement(d);
-            }
-            this._scrollContainer.layout = new HorizontalLayout(16, VerticalAlign.FILL);
-            this._scrollContainer.layout.padding = 16;
-        }
-        return this._scrollContainer;
-    }
-
-    private _innerBox!: IDisplayElement;
-
-    protected get innerBox(): IDisplayElement {
-        if (!this._innerBox) {
-            this._innerBox = new DisplayElement();
-            this._innerBox.backgroundColor = HSL.WHITE;
-            this._innerBox.setSize(200, 200);
-            this._innerBox.horizontalCenter = 0;
-            this._innerBox.verticalCenter = 0;
-            this._innerBox.shadow = this.theme.shadows.inner;
-            this._innerBox.borderRadius = 16;
-        }
-        return this._innerBox;
-    }
-
-    protected _shapeElement!: IShapeElement;
-
-    protected get shapeElement(): IShapeElement {
-        if (!this._shapeElement) {
-            this._shapeElement = new ShapeElement();
-            this._shapeElement.setSize(300, 300);
-            this._shapeElement.horizontalCenter = 0;
-            this._shapeElement.verticalCenter = 0;
-            this._shapeElement.fillColor = this.theme.colors.accent.medium;
-        }
-        return this._shapeElement;
+        return this._button;
     }
 
     protected _rippleComponent!: RippleComponent;

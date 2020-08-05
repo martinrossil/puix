@@ -1,6 +1,8 @@
 export { default as AttributeTween } from './animation/AttributeTween';
 export { default as StyleTween } from './animation/StyleTween';
 
+export { default as ButtonComponent } from './components/ButtonComponent';
+
 export { default as BaseButton } from './components/buttons/BaseButton';
 export { default as ContainedButton } from './components/buttons/ContainedButton';
 export { default as OutlinedButton } from './components/buttons/OutlinedButton';
@@ -16,7 +18,6 @@ export { default as ValueBox } from './components/custom/ValueBox';
 
 export { default as RippleComponent } from './components/RippleComponent';
 
-export { default as CornerType } from './consts/CornerType';
 export { default as Cursor } from './consts/Cursor';
 export { default as Events } from './consts/Events';
 export { default as HorizontalAlign } from './consts/HorizontalAlign';
@@ -68,6 +69,7 @@ export { default as IContainedButton } from './interfaces/components/buttons/ICo
 export { default as IOutlinedButton } from './interfaces/components/buttons/IOutlinedButton';
 export { default as ITextButton } from './interfaces/components/buttons/ITextButton';
 
+export { default as IButtonComponent } from './interfaces/components/IButtonComponent';
 export { default as IButtonElement } from './interfaces/components/IButtonElement';
 
 export { default as IDisplayContainer } from './interfaces/containers/IDisplayContainer';
@@ -94,7 +96,6 @@ export { default as ITypography } from './interfaces/design/typography/ITypograp
 export { default as ITheme } from './interfaces/design/ITheme';
 
 export { default as IIconElement } from './interfaces/elements/IIconElement';
-export { default as IPointerElement } from './interfaces/elements/IPointerElement';
 export { default as IRippleElement } from './interfaces/elements/IRippleElement';
 
 export { default as IState } from './interfaces/fsm/IState';
@@ -104,12 +105,8 @@ export { default as IHorizontalLayout } from './interfaces/layouts/IHorizontalLa
 export { default as ILayout } from './interfaces/layouts/ILayout';
 export { default as IVerticalLayout } from './interfaces/layouts/IVerticalLayout';
 
-export { default as IFilter } from './interfaces/svg/filters/IFilter';
-export { default as IShadowFilter } from './interfaces/svg/filters/IShadowFilter';
-
 export { default as IPathElement } from './interfaces/svg/IPathElement';
 export { default as IShapeElement } from './interfaces/svg/IShapeElement';
-export { default as IStrokeElement } from './interfaces/svg/IStrokeElement';
 export { default as ISvgElement } from './interfaces/svg/ISvgElement';
 
 export { default as ITextElement } from './interfaces/text/ITextElement';
@@ -122,13 +119,8 @@ export { default as HorizontalLayout } from './layouts/HorizontalLayout';
 export { default as Layout } from './layouts/Layout';
 export { default as VerticalLayout } from './layouts/VerticalLayout';
 
-export { default as ShadowFilter } from './svg/filters/ShadowFilter';
-
-export { default as ShapeUtils } from './svg/utils/ShapeUtil';
-
 export { default as PathElement } from './svg/PathElement';
 export { default as ShapeElement } from './svg/ShapeElement';
-export { default as StrokeElement } from './svg/StrokeElement';
 export { default as SvgElement } from './svg/SvgElement';
 
 export { default as TextElement } from './text/TextElement';
