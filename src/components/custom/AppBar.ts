@@ -7,7 +7,6 @@ import HorizontalLayout from '../../layouts/HorizontalLayout';
 import VerticalAlign from '../../consts/VerticalAlign';
 import IShapeElement from '../../interfaces/svg/IShapeElement';
 import ShapeElement from '../../svg/ShapeElement';
-import ShadowFilter from '../../svg/filters/ShadowFilter';
 import IDisplayContainer from '../../interfaces/containers/IDisplayContainer';
 import AnchorLayout from '../../layouts/AnchorLayout';
 import HSL from '../../design/color/HSL';
@@ -46,7 +45,6 @@ export default class Appbar extends DisplayContainer {
             this._shapeElement.fillColor = this.theme.colors.secondary.medium;
             this._shapeElement.percentWidth = 100;
             this._shapeElement.percentHeight = 100;
-            this._shapeElement.filter = new ShadowFilter(0, 4, 8, '#000', 0.5);
         }
         return this._shapeElement;
     }

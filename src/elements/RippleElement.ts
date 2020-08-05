@@ -1,13 +1,11 @@
-import DisplayElement from '../core/DisplayElement';
 import IRippleElement from '../interfaces/elements/IRippleElement';
-import CornerType from '../consts/CornerType';
-import ShapeUtil from '../svg/utils/ShapeUtil';
 import ITween from '../interfaces/animation/ITween';
 import AttributeTween from '../animation/AttributeTween';
 import IPoint from '../interfaces/vo/IPoint';
 import StyleTween from '../animation/StyleTween';
+import ShapeElement from '../svg/ShapeElement';
 
-export default class RippleElement extends DisplayElement implements IRippleElement {
+export default class RippleElement extends ShapeElement implements IRippleElement {
     public constructor() {
         super();
         this.name = 'RippleElement';
@@ -36,26 +34,7 @@ export default class RippleElement extends DisplayElement implements IRippleElem
 
     protected updateDisplay(): void {
         super.updateDisplay();
-        this.updateSvgAttributes();
-        this.updatePathData();
         this.updateCircleRadius();
-    }
-
-    protected updateSvgAttributes(): void {
-        this.svg.setAttribute('width', this.actualWidth.toString());
-        this.svg.setAttribute('height', this.actualHeight.toString());
-    }
-
-    protected updatePathData(): void {
-        let d;
-        if (this.cornerType === CornerType.NONE) {
-            d = ShapeUtil.getNonePath(this.actualWidth, this.actualHeight);
-        } else if (this.cornerType === CornerType.ROUNDED) {
-            d = ShapeUtil.getRoundedPath(this.actualWidth, this.actualHeight, this.cornerSize);
-        } else {
-            d = ShapeUtil.getCutPath(this.actualWidth, this.actualHeight, this.cornerSize);
-        }
-        this.path.setAttribute('d', d);
     }
 
     protected updateCircleRadius(): void {
@@ -66,11 +45,7 @@ export default class RippleElement extends DisplayElement implements IRippleElem
 
     protected maskId = Math.random().toString();
 
-    private svg: SVGSVGElement = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-
     private mask: SVGMaskElement = document.createElementNS('http://www.w3.org/2000/svg', 'mask');
-
-    protected path: SVGPathElement = document.createElementNS('http://www.w3.org/2000/svg', 'path');
 
     private circle: SVGCircleElement = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
 
@@ -89,37 +64,6 @@ export default class RippleElement extends DisplayElement implements IRippleElem
 
     public get rippleColor(): string {
         return this._rippleColor;
-    }
-
-    private _cornerType = CornerType.NONE;
-
-    public set cornerType(value: string) {
-        if (this._cornerType !== value) {
-            this._cornerType = value;
-            this.invalidateDisplay();
-        }
-    }
-
-    public get cornerType(): string {
-        return this._cornerType;
-    }
-
-    private _cornerSize = 0;
-
-    public set cornerSize(value: number) {
-        if (isNaN(value) || value < 0) {
-            if (this._cornerSize !== 0) {
-                this._cornerSize = 0;
-                this.invalidateDisplay();
-            }
-        } else if (this._cornerSize !== value) {
-            this._cornerSize = value;
-            this.invalidateDisplay();
-        }
-    }
-
-    public get cornerSize(): number {
-        return this._cornerSize;
     }
 }
 customElements.define('ripple-element', RippleElement);

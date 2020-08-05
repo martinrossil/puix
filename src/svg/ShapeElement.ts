@@ -1,7 +1,5 @@
 import IShapeElement from '../interfaces/svg/IShapeElement';
-import CornerType from '../consts/CornerType';
 import PathElement from './PathElement';
-import ShapeUtil from './utils/ShapeUtil';
 
 export default class ShapeElement extends PathElement implements IShapeElement {
     public constructor() {
@@ -15,44 +13,51 @@ export default class ShapeElement extends PathElement implements IShapeElement {
     }
 
     protected updatePathData(): void {
-        if (this.cornerType === CornerType.NONE) {
-            this.pathData = ShapeUtil.getNonePath(this.actualWidth, this.actualHeight);
-        } else if (this.cornerType === CornerType.ROUNDED) {
-            this.pathData = ShapeUtil.getRoundedPath(this.actualWidth, this.actualHeight, this.cornerSize);
-        } else if (this.cornerType === CornerType.CUT) {
-            this.pathData = ShapeUtil.getCutPath(this.actualWidth, this.actualHeight, this.cornerSize);
-        }
+        const tlc = this.cornerRadius;
+        const trc = tlc;
+        const brc = tlc;
+        const blc = tlc;
+        const w = this.actualWidth;
+        const h = this.actualHeight;
+
+        let d = '';
+        // mov top left arc start
+        d += 'M 0 ' + tlc + ' ';
+        // tlc arc
+        d += 'A ' + tlc + ' ' + tlc + ' 0 0 1 ' + tlc + ' 0 ';
+        // line to topRightCorner
+        d += 'L ' + (w - trc) + ' 0 ';
+        // trc arc
+        d += 'A ' + trc + ' ' + trc + ' 1 0 1 ' + w + ' ' + trc + ' ';
+        // line to bottomRightCorner
+        d += 'L ' + w + ' ' + (h - brc) + ' ';
+        // brc arc
+        d += 'A ' + brc + ' ' + brc + ' 1 0 1 ' + (w - brc) + ' ' + h + ' ';
+        // line to bottomLeftCorner
+        d += 'L ' + blc + ' ' + h + ' ';
+        // blc arc
+        d += 'A ' + blc + ' ' + blc + ' 0 0 1 ' + '0 ' + (h - blc) + ' ';
+        // close path
+        d += 'Z';
+        this.path.setAttribute('d', d);
     }
 
-    private _cornerType = CornerType.NONE;
+    private _cornerRadius = 0;
 
-    public set cornerType(value: string) {
-        if (this._cornerType !== value) {
-            this._cornerType = value;
-            this.invalidateDisplay();
-        }
-    }
-
-    public get cornerType(): string {
-        return this._cornerType;
-    }
-
-    private _cornerSize = 0;
-
-    public set cornerSize(value: number) {
+    public set cornerRadius(value: number) {
         if (isNaN(value) || value < 0) {
-            if (this._cornerSize !== 0) {
-                this._cornerSize = 0;
+            if (this._cornerRadius !== 0) {
+                this._cornerRadius = 0;
                 this.invalidateDisplay();
             }
-        } else if (this._cornerSize !== value) {
-            this._cornerSize = value;
+        } else if (this._cornerRadius !== value) {
+            this._cornerRadius = value;
             this.invalidateDisplay();
         }
     }
 
-    public get cornerSize(): number {
-        return this._cornerSize;
+    public get cornerRadius(): number {
+        return this._cornerRadius;
     }
 }
 customElements.define('shape-element', ShapeElement);
