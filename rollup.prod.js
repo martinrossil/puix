@@ -5,6 +5,7 @@ import strip from '@rollup/plugin-strip';
 import clear from 'rollup-plugin-clear';
 import copy from 'rollup-plugin-copy';
 import {version} from './package.json';
+import serve from 'rollup-plugin-serve';
 
 export default {
     input: './src/PuixDev.ts',
@@ -24,6 +25,10 @@ export default {
         }),
         typescript({ tsconfig: "tsconfig.esnext.json" }),
         strip(),
+        serve({
+            contentBase: 'public',
+            open: true
+        })
     ],
     output: [
         {

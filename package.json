@@ -10,8 +10,7 @@
   "scripts": {
     "test:watch": "karma start --auto-watch=true --single-run=false",
     "dev": "rollup -c rollup.development.js --watch",
-    "prod:watch": "rollup -c rollup.prod.js --watch",
-    "prod:serve": "live-server --open=./public",
+    "prod": "rollup -c rollup.prod.js",
     "lint": "eslint src/**/*",
     "test": "karma start",
     "build": "rollup -c"

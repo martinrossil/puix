@@ -4,18 +4,18 @@ import typescript from 'rollup-plugin-typescript2';
 import clear from 'rollup-plugin-clear';
 import copy from 'rollup-plugin-copy';
 import serve from 'rollup-plugin-serve';
-import livereload from 'rollup-plugin-livereload'
+import livereload from 'rollup-plugin-livereload';
 
 export default [
     {
         input: './src/PuixDev.ts',
         plugins: [
             typescript({tsconfig: "tsconfig.development.json"}),
-            // clear({ targets: ['development'] }),
+            clear({ targets: ['development'] }),
             copy({
                 targets: [
-                    // { src: 'assets/fonts/**.*', dest: 'development' },
-                    // { src: 'assets/icons/**.*', dest: 'development' },
+                    { src: 'assets/fonts/**.*', dest: 'development' },
+                    { src: 'assets/icons/**.*', dest: 'development' },
                     { 
                         src: 'assets/development/index.html',
                         dest: 'development',
