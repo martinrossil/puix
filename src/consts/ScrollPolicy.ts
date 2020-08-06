@@ -1,5 +1,5 @@
 export default class ScrollPolicy {
-    static ON = 'ON';
-    static OFF = 'OFF';
-    static AUTO = 'AUTO';
+    static ON = 'on';
+    static OFF = 'off';
+    static AUTO = 'auto';
 }

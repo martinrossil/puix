@@ -18,9 +18,14 @@ export default class PuixDev extends ApplicationElement {
         if (!this._button) {
             this._button = new ButtonComponent();
             this._button.icon = Icons.EMAIL;
-            this._button.label = 'Click me';
+            this._button.label = 'Click Me';
             this._button.horizontalCenter = 0;
             this._button.verticalCenter = 0;
+            // this._button.setSize(56, 56);
+            // this._button.borderRadius = 13;
+            // this._button.iconSize = 24;
+            // this._button.shadow = this.theme.shadows.xSmall;
+            this._button.buttonType = ButtonComponent.OUTLINE;
         }
         return this._button;
     }

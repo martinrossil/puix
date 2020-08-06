@@ -13,7 +13,7 @@ export default class RippleElement extends ShapeElement implements IRippleElemen
         this.mask.setAttribute('id', this.maskId);
         this.mask.appendChild(this.path);
         this.circle.setAttribute('mask', 'url(#' + this.maskId + ')');
-        this.circle.setAttribute('r', '10');
+        this.circle.setAttribute('r', '0');
         this.svg.appendChild(this.mask);
         this.svg.appendChild(this.circle);
         this.appendChild(this.svg);
@@ -22,8 +22,8 @@ export default class RippleElement extends ShapeElement implements IRippleElemen
     public show(point: IPoint): void {
         this.circle.setAttribute('r', '0');
         this.circle.style.opacity = '0.1';
-        this.radiusTween.to(this.circleRadius, 500);
-        this.opacityTween.to(0.4, 500);
+        this.radiusTween.to(this.circleRadius, 300);
+        this.opacityTween.to(0.4, 300);
         this.circle.setAttribute('cx', point.x.toString());
         this.circle.setAttribute('cy', point.y.toString());
     }
