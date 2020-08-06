@@ -87,6 +87,19 @@ export default class LayoutElement extends SizeElement implements ILayoutElement
         return this._verticalCenter;
     }
 
+    private _includeInLayout = true;
+
+    public set includeInLayout(value: boolean) {
+        if (this._includeInLayout !== value) {
+            this._includeInLayout = value;
+            this.notifyLayoutDataChanged();
+        }
+    }
+
+    public get includeInLayout(): boolean {
+        return this._includeInLayout;
+    }
+
     protected notifyLayoutDataChanged(): void {
         if (this.connected) {
             this.dispatchEventWith(LayoutElement.LAYOUT_DATA_CHANGED, true);

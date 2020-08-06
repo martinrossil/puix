@@ -12,7 +12,9 @@ export default class AnchorLayout extends Layout {
         const w = container.actualWidth - this.paddingLeft - this.paddingRight;
         const h = container.actualHeight - this.paddingTop - this.paddingBottom;
         for (const element of container.elements) {
-            this.setElementSize(w, h, element);
+            if (element.includeInLayout) {
+                this.setElementSize(w, h, element);
+            }
         }
     }
 
@@ -20,7 +22,9 @@ export default class AnchorLayout extends Layout {
         const w = container.actualWidth - this.paddingLeft - this.paddingRight;
         const h = container.actualHeight - this.paddingTop - this.paddingBottom;
         for (const element of container.elements) {
-            this.setElementPosition(w, h, element);
+            if (element.includeInLayout) {
+                this.setElementPosition(w, h, element);
+            }
         }
     }
 

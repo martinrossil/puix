@@ -149,5 +149,22 @@ export default class DisplayElement extends LayoutElement implements IDisplayEle
     public get backgroundColor(): string {
         return this._backgoundColor;
     }
+
+    private _visible = true;
+
+    public set visible(value: boolean) {
+        if (this._visible !== value) {
+            this._visible = value;
+            if (value) {
+                this.style.visibility = 'visible';
+            } else {
+                this.style.visibility = 'hidden';
+            }
+        }
+    }
+
+    public get visible(): boolean {
+        return this._visible;
+    }
 }
 customElements.define('display-element', DisplayElement);

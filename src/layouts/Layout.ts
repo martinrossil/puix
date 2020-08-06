@@ -15,13 +15,14 @@ export default class Layout implements ILayout {
     }
 
     protected resizeChildren(container: IDisplayContainer): void {
-        // override
+        //
     }
 
     protected layoutChildren(container: IDisplayContainer): void {
-        // override
         for (const element of container.elements) {
-            element.setPosition(this.paddingLeft, this.paddingTop);
+            if (element.includeInLayout) {
+                element.setPosition(this.paddingLeft, this.paddingTop);
+            }
         }
     }
 
@@ -46,18 +47,19 @@ export default class Layout implements ILayout {
     }
 
     protected setSizeFromChildren(container: IDisplayContainer): void {
-        // override
         let width = 0;
         let height = 0;
         for (const element of container.elements) {
-            if (isNaN(element.percentWidth)) {
-                if (width < element.actualWidth) {
-                    width = element.actualWidth;
+            if (element.includeInLayout) {
+                if (isNaN(element.percentWidth)) {
+                    if (width < element.actualWidth) {
+                        width = element.actualWidth;
+                    }
                 }
-            }
-            if (isNaN(element.percentHeight)) {
-                if (height < element.actualHeight) {
-                    height = element.actualHeight;
+                if (isNaN(element.percentHeight)) {
+                    if (height < element.actualHeight) {
+                        height = element.actualHeight;
+                    }
                 }
             }
         }
@@ -70,12 +72,13 @@ export default class Layout implements ILayout {
     }
 
     protected setWidthFromChildren(container: IDisplayContainer): void {
-        // override
         let width = 0;
         for (const element of container.elements) {
-            if (isNaN(element.percentWidth)) {
-                if (width < element.actualWidth) {
-                    width = element.actualWidth;
+            if (element.includeInLayout) {
+                if (isNaN(element.percentWidth)) {
+                    if (width < element.actualWidth) {
+                        width = element.actualWidth;
+                    }
                 }
             }
         }
@@ -87,12 +90,13 @@ export default class Layout implements ILayout {
     }
 
     protected setHeightFromChildren(container: IDisplayContainer): void {
-        // override
         let height = 0;
         for (const element of container.elements) {
-            if (isNaN(element.percentHeight)) {
-                if (height < element.actualHeight) {
-                    height = element.actualHeight;
+            if (element.includeInLayout) {
+                if (isNaN(element.percentHeight)) {
+                    if (height < element.actualHeight) {
+                        height = element.actualHeight;
+                    }
                 }
             }
         }

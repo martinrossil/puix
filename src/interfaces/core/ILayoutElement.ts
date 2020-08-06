@@ -7,4 +7,5 @@ export default interface ILayoutElement extends ISizeElement {
     left: number;
     horizontalCenter: number;
     verticalCenter: number;
+    includeInLayout: boolean;
 }

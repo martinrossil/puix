@@ -16,10 +16,12 @@ export default class VerticalLayout extends Layout implements IVerticalLayout {
         let width = 0;
         let height = 0;
         for (const element of container.elements) {
-            if (width < element.actualWidth) {
-                width = element.actualWidth;
+            if (element.includeInLayout) {
+                if (width < element.actualWidth) {
+                    width = element.actualWidth;
+                }
+                height += element.actualHeight + this.verticalGap;
             }
-            height += element.actualHeight + this.verticalGap;
         }
         width = this.paddingLeft + width + this.paddingRight;
         height = this.paddingTop + height - this.verticalGap + this.paddingBottom;
@@ -32,7 +34,9 @@ export default class VerticalLayout extends Layout implements IVerticalLayout {
     protected setHeightFromChildren(container: IDisplayContainer): void {
         let height = 0;
         for (const element of container.elements) {
-            height += element.actualHeight + this.verticalGap;
+            if (element.includeInLayout) {
+                height += element.actualHeight + this.verticalGap;
+            }
         }
         height = this.paddingTop + height - this.verticalGap + this.paddingBottom;
         if (container.actualHeight !== height) {
@@ -53,10 +57,12 @@ export default class VerticalLayout extends Layout implements IVerticalLayout {
         let heightSum = 0;
         let percentHeightSum = 0;
         for (const element of container.elements) {
-            if (isNaN(element.percentHeight)) {
-                heightSum += element.actualHeight;
-            } else {
-                percentHeightSum += element.percentHeight;
+            if (element.includeInLayout) {
+                if (isNaN(element.percentHeight)) {
+                    heightSum += element.actualHeight;
+                } else {
+                    percentHeightSum += element.percentHeight;
+                }
             }
         }
         const actualWidth = container.actualWidth - this.paddingLeft - this.paddingRight;
@@ -65,13 +71,15 @@ export default class VerticalLayout extends Layout implements IVerticalLayout {
         const actualHeightLeftForPercentHeight = actualHeight - heightSum - verticalGapSumHeight;
         const pixelPercentRatio = actualHeightLeftForPercentHeight / percentHeightSum;
         for (const element of container.elements) {
-            if (!isNaN(element.percentWidth)) {
-                element.actualWidth = actualWidth * element.percentWidth / 100;
-            } else if (this.horizontalAlign === HorizontalAlign.FILL) {
-                element.actualWidth = actualWidth;
-            }
-            if (!isNaN(element.percentHeight)) {
-                element.actualHeight = pixelPercentRatio * element.percentHeight;
+            if (element.includeInLayout) {
+                if (!isNaN(element.percentWidth)) {
+                    element.actualWidth = actualWidth * element.percentWidth / 100;
+                } else if (this.horizontalAlign === HorizontalAlign.FILL) {
+                    element.actualWidth = actualWidth;
+                }
+                if (!isNaN(element.percentHeight)) {
+                    element.actualHeight = pixelPercentRatio * element.percentHeight;
+                }
             }
         }
     }
@@ -79,10 +87,12 @@ export default class VerticalLayout extends Layout implements IVerticalLayout {
     protected setElementsWidth(container: IDisplayContainer): void {
         const w = container.actualWidth - this.paddingLeft - this.paddingRight;
         for (const element of container.elements) {
-            if (!isNaN(element.percentWidth)) {
-                element.actualWidth = w * element.percentWidth / 100;
-            } else if (this.horizontalAlign === HorizontalAlign.FILL) {
-                element.actualWidth = w;
+            if (element.includeInLayout) {
+                if (!isNaN(element.percentWidth)) {
+                    element.actualWidth = w * element.percentWidth / 100;
+                } else if (this.horizontalAlign === HorizontalAlign.FILL) {
+                    element.actualWidth = w;
+                }
             }
         }
     }
@@ -103,9 +113,11 @@ export default class VerticalLayout extends Layout implements IVerticalLayout {
         let x = 0;
         let y = this.paddingTop;
         for (const element of container.elements) {
-            x = container.actualWidth - this.paddingRight - element.actualWidth;
-            element.setPosition(x, y);
-            y += element.actualHeight + this.verticalGap;
+            if (element.includeInLayout) {
+                x = container.actualWidth - this.paddingRight - element.actualWidth;
+                element.setPosition(x, y);
+                y += element.actualHeight + this.verticalGap;
+            }
         }
     }
 
@@ -113,17 +125,21 @@ export default class VerticalLayout extends Layout implements IVerticalLayout {
         let x = 0;
         let y = this.paddingTop;
         for (const element of container.elements) {
-            x = container.actualWidth * 0.5 - element.actualWidth * 0.5;
-            element.setPosition(x, y);
-            y += element.actualHeight + this.verticalGap;
+            if (element.includeInLayout) {
+                x = container.actualWidth * 0.5 - element.actualWidth * 0.5;
+                element.setPosition(x, y);
+                y += element.actualHeight + this.verticalGap;
+            }
         }
     }
 
     protected layoutLeft(container: IDisplayContainer): void {
         let y = this.paddingTop;
         for (const element of container.elements) {
-            element.setPosition(this.paddingLeft, y);
-            y += element.actualHeight + this.verticalGap;
+            if (element.includeInLayout) {
+                element.setPosition(this.paddingLeft, y);
+                y += element.actualHeight + this.verticalGap;
+            }
         }
     }
 

@@ -16,10 +16,12 @@ export default class HorizontalLayout extends Layout implements IHorizontalLayou
         let width = 0;
         let height = 0;
         for (const element of container.elements) {
-            if (height < element.actualHeight) {
-                height = element.actualHeight;
+            if (element.includeInLayout) {
+                if (height < element.actualHeight) {
+                    height = element.actualHeight;
+                }
+                width += element.actualWidth + this.horizontalGap;
             }
-            width += element.actualWidth + this.horizontalGap;
         }
         width = this.paddingLeft + width - this.horizontalGap + this.paddingRight;
         height = this.paddingTop + height + this.paddingBottom;
@@ -32,7 +34,9 @@ export default class HorizontalLayout extends Layout implements IHorizontalLayou
     protected setWidthFromChildren(container: IDisplayContainer): void {
         let width = 0;
         for (const element of container.elements) {
-            width += element.actualWidth + this.horizontalGap;
+            if (element.includeInLayout) {
+                width += element.actualWidth + this.horizontalGap;
+            }
         }
         width = this.paddingLeft + width - this.horizontalGap + this.paddingRight;
         if (container.actualWidth !== width) {
@@ -53,10 +57,12 @@ export default class HorizontalLayout extends Layout implements IHorizontalLayou
         let widthSum = 0;
         let percentWidthSum = 0;
         for (const element of container.elements) {
-            if (isNaN(element.percentWidth)) {
-                widthSum += element.actualWidth;
-            } else {
-                percentWidthSum += element.percentWidth;
+            if (element.includeInLayout) {
+                if (isNaN(element.percentWidth)) {
+                    widthSum += element.actualWidth;
+                } else {
+                    percentWidthSum += element.percentWidth;
+                }
             }
         }
         const actualWidth = container.actualWidth - this.paddingLeft - this.paddingRight;
@@ -65,13 +71,15 @@ export default class HorizontalLayout extends Layout implements IHorizontalLayou
         const actualWidthLeftForPercentWidth = actualWidth - widthSum - horizontalGapSumWidth;
         const pixelPercentRatio = actualWidthLeftForPercentWidth / percentWidthSum;
         for (const element of container.elements) {
-            if (!isNaN(element.percentHeight)) {
-                element.actualHeight = actualHeight * element.percentHeight / 100;
-            } else if (this.verticalAlign === VerticalAlign.FILL) {
-                element.actualHeight = actualHeight;
-            }
-            if (!isNaN(element.percentWidth)) {
-                element.actualWidth = pixelPercentRatio * element.percentWidth;
+            if (element.includeInLayout) {
+                if (!isNaN(element.percentHeight)) {
+                    element.actualHeight = actualHeight * element.percentHeight / 100;
+                } else if (this.verticalAlign === VerticalAlign.FILL) {
+                    element.actualHeight = actualHeight;
+                }
+                if (!isNaN(element.percentWidth)) {
+                    element.actualWidth = pixelPercentRatio * element.percentWidth;
+                }
             }
         }
     }
@@ -79,10 +87,12 @@ export default class HorizontalLayout extends Layout implements IHorizontalLayou
     protected setElementsHeight(container: IDisplayContainer): void {
         const h = container.actualHeight - this.paddingTop - this.paddingBottom;
         for (const element of container.elements) {
-            if (!isNaN(element.percentHeight)) {
-                element.actualHeight = h * element.percentHeight / 100;
-            } else if (this.verticalAlign === VerticalAlign.FILL) {
-                element.actualHeight = h;
+            if (element.includeInLayout) {
+                if (!isNaN(element.percentHeight)) {
+                    element.actualHeight = h * element.percentHeight / 100;
+                } else if (this.verticalAlign === VerticalAlign.FILL) {
+                    element.actualHeight = h;
+                }
             }
         }
     }
@@ -102,16 +112,20 @@ export default class HorizontalLayout extends Layout implements IHorizontalLayou
     protected layoutTop(container: IDisplayContainer): void {
         let x = this.paddingLeft;
         for (const element of container.elements) {
-            element.setPosition(x, this.paddingTop);
-            x += element.actualWidth + this.horizontalGap;
+            if (element.includeInLayout) {
+                element.setPosition(x, this.paddingTop);
+                x += element.actualWidth + this.horizontalGap;
+            }
         }
     }
 
     protected layoutMiddle(container: IDisplayContainer): void {
         let x = this.paddingLeft;
         for (const element of container.elements) {
-            element.setPosition(x, container.actualHeight * 0.5 - element.actualHeight * 0.5);
-            x += element.actualWidth + this.horizontalGap;
+            if (element.includeInLayout) {
+                element.setPosition(x, container.actualHeight * 0.5 - element.actualHeight * 0.5);
+                x += element.actualWidth + this.horizontalGap;
+            }
         }
     }
 
@@ -119,9 +133,11 @@ export default class HorizontalLayout extends Layout implements IHorizontalLayou
         let x = this.paddingLeft;
         let y = 0;
         for (const element of container.elements) {
-            y = container.actualHeight - this.paddingBottom - element.actualHeight;
-            element.setPosition(x, y);
-            x += element.actualWidth + this.horizontalGap;
+            if (element.includeInLayout) {
+                y = container.actualHeight - this.paddingBottom - element.actualHeight;
+                element.setPosition(x, y);
+                x += element.actualWidth + this.horizontalGap;
+            }
         }
     }
 
