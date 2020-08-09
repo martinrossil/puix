@@ -1,7 +1,7 @@
 import LifeCycleElement from './LifeCycleElement';
-import IPositionElement from '../interfaces/core/IPositionElement';
+import PositionElementInterface from './PositionElementInterface';
 
-export default class PositionElement extends LifeCycleElement implements IPositionElement {
+export default class PositionElement extends LifeCycleElement implements PositionElementInterface {
     public constructor() {
         super();
         this.name = 'PositionElement';

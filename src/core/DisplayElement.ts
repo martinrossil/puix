@@ -1,10 +1,10 @@
-import IDisplayElement from '../interfaces/core/IDisplayElement';
+import DisplayElementInterface from './DisplayElementInterface';
 import LayoutElement from './LayoutElement';
 import ITheme from '../interfaces/design/ITheme';
 import Design from '../design/Design';
 import Overflow from '../consts/Overflow';
 
-export default class DisplayElement extends LayoutElement implements IDisplayElement {
+export default class DisplayElement extends LayoutElement implements DisplayElementInterface {
     public constructor() {
         super();
         this.name = 'DisplayElement';

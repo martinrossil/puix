@@ -1,24 +1,24 @@
 import DisplayContainer from '../containers/DisplayContainer';
-import IButtonComponent from '../interfaces/components/IButtonComponent';
-import ITextElement from '../interfaces/text/ITextElement';
+import ButtonComponentInterface from './ButtonComponentInterface';
+import TextElementInterface from '../text/TextElementInterface';
 import TextElement from '../text/TextElement';
 import FontWeight from '../design/typography/FontWeight';
-import IDisplayContainer from '../interfaces/containers/IDisplayContainer';
-import IIconElement from '../interfaces/elements/IIconElement';
+import DisplayContainerInterface from '../containers/DisplayContainerInterface';
+import IconElementInterface from '../elements/IconElementInterface';
 import IconElement from '../elements/IconElement';
 import HorizontalLayout from '../layouts/HorizontalLayout';
 import VerticalAlign from '../consts/VerticalAlign';
 import AnchorLayout from '../layouts/AnchorLayout';
 import IColorRange from '../interfaces/design/color/IColorRange';
 import HSL from '../design/color/HSL';
-import IRippleElement from '../interfaces/elements/IRippleElement';
+import RippleElementInterface from '../elements/RippleElementInterface';
 import RippleElement from '../elements/RippleElement';
-import IShapeElement from '../interfaces/svg/IShapeElement';
+import ShapeElementInterface from '../svg/ShapeElementInterface';
 import ShapeElement from '../svg/ShapeElement';
 import PointerElement from '../elements/PointerElement';
-import IPoint from '../interfaces/vo/IPoint';
+import PointInterface from '../vo/PointInterface';
 
-export default class ButtonComponent extends DisplayContainer implements IButtonComponent {
+export default class ButtonComponent extends DisplayContainer implements ButtonComponentInterface {
     static FILL = 'fill';
     static OUTLINE = 'outline';
     static TEXT = 'text';
@@ -38,7 +38,7 @@ export default class ButtonComponent extends DisplayContainer implements IButton
         this.addElement(this.pointerElement)
     }
 
-    protected pointerDown(e: CustomEvent<IPoint>): void {
+    protected pointerDown(e: CustomEvent<PointInterface>): void {
         e.stopPropagation();
         this.rippleElement.show(e.detail);
     }
@@ -109,9 +109,9 @@ export default class ButtonComponent extends DisplayContainer implements IButton
         return this.labelElement.text;
     }
 
-    private _iconLabelContainer!: IDisplayContainer;
+    private _iconLabelContainer!: DisplayContainerInterface;
 
-    protected get iconLabelContainer(): IDisplayContainer {
+    protected get iconLabelContainer(): DisplayContainerInterface {
         if (!this._iconLabelContainer) {
             this._iconLabelContainer = new DisplayContainer();
             this._iconLabelContainer.layout = new HorizontalLayout(8, VerticalAlign.MIDDLE);
@@ -124,9 +124,9 @@ export default class ButtonComponent extends DisplayContainer implements IButton
         return this._iconLabelContainer;
     }
 
-    private _iconElement!: IIconElement;
+    private _iconElement!: IconElementInterface;
 
-    protected get iconElement(): IIconElement {
+    protected get iconElement(): IconElementInterface {
         if (!this._iconElement) {
             this._iconElement = new IconElement();
             this._iconElement.setSize(this.iconSize, this.iconSize);
@@ -136,9 +136,9 @@ export default class ButtonComponent extends DisplayContainer implements IButton
         return this._iconElement;
     }
 
-    private _labelElement!: ITextElement;
+    private _labelElement!: TextElementInterface;
 
-    protected get labelElement(): ITextElement {
+    protected get labelElement(): TextElementInterface {
         if (!this._labelElement) {
             this._labelElement = new TextElement();
             this._labelElement.wordwrap = false;
@@ -151,9 +151,9 @@ export default class ButtonComponent extends DisplayContainer implements IButton
         return this._labelElement;
     }
 
-    private _shapeElement!: IShapeElement;
+    private _shapeElement!: ShapeElementInterface;
 
-    protected get shapeElement(): IShapeElement {
+    protected get shapeElement(): ShapeElementInterface {
         if (!this._shapeElement) {
             this._shapeElement = new ShapeElement();
             this._shapeElement.strokeWidth = 1.3;
@@ -166,9 +166,9 @@ export default class ButtonComponent extends DisplayContainer implements IButton
         return this._shapeElement;
     }
 
-    private _rippleElement!: IRippleElement;
+    private _rippleElement!: RippleElementInterface;
 
-    protected get rippleElement(): IRippleElement {
+    protected get rippleElement(): RippleElementInterface {
         if (!this._rippleElement) {
             this._rippleElement = new RippleElement();
             this._rippleElement.percentWidth = 100;
@@ -177,9 +177,9 @@ export default class ButtonComponent extends DisplayContainer implements IButton
         return this._rippleElement;
     }
 
-    private _pointerElement!: IShapeElement;
+    private _pointerElement!: ShapeElementInterface;
 
-    protected get pointerElement(): IShapeElement {
+    protected get pointerElement(): ShapeElementInterface {
         if (!this._pointerElement) {
             this._pointerElement = new PointerElement();
             this._pointerElement.percentWidth = 100;

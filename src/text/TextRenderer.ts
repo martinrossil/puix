@@ -1,7 +1,7 @@
 import DisplayElement from '../core/DisplayElement';
-import ITextRenderer from '../interfaces/text/ITextRenderer';
+import TextRendererInterface from './TextRendererInterface';
 
-export default class TextRenderer extends DisplayElement implements ITextRenderer {
+export default class TextRenderer extends DisplayElement implements TextRendererInterface {
     public constructor() {
         super();
         this.name = 'TextRenderer';

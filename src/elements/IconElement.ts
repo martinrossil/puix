@@ -1,7 +1,7 @@
-import IIconElement from '../interfaces/elements/IIconElement';
+import IconElementInterface from './IconElementInterface';
 import PathElement from '../svg/PathElement';
 
-export default class IconElement extends PathElement implements IIconElement {
+export default class IconElement extends PathElement implements IconElementInterface {
     public constructor() {
         super();
         this.name = 'IconElement';

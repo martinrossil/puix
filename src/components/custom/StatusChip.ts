@@ -1,5 +1,5 @@
 import DisplayContainer from '../../containers/DisplayContainer';
-import ITextElement from '../../interfaces/text/ITextElement';
+import TextElementInterface from '../../text/TextElementInterface';
 import TextElement from '../../text/TextElement';
 import FontWeight from '../../design/typography/FontWeight';
 import AnchorLayout from '../../layouts/AnchorLayout';
@@ -18,8 +18,8 @@ export default class StatusChip extends DisplayContainer {
         this.addElement(this.textElement);
     }
 
-    protected get textElement(): ITextElement {
-        const textElement: ITextElement = new TextElement();
+    protected get textElement(): TextElementInterface {
+        const textElement: TextElementInterface = new TextElement();
         textElement.text = 'Inactive';
         textElement.color = this.theme.colors.success.darkest;
         textElement.fontSize = this.theme.typography.fontSizes.xSmall;

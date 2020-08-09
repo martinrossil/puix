@@ -1,19 +1,19 @@
 import { assert } from 'chai';
 import { describe, it } from 'mocha';
-import IDisplayContainer from '../src/interfaces/containers/IDisplayContainer';
+import DisplayContainerInterface from '../src/interfaces/containers/DisplayContainerInterface';
 import DisplayContainer from '../src/containers/DisplayContainer';
-import IDisplayElement from '../src/interfaces/core/IDisplayElement';
+import DisplayElementInterface from '../src/interfaces/core/DisplayElementInterface';
 import DisplayElement from '../src/core/DisplayElement';
 
-const displayContainer: IDisplayContainer = new DisplayContainer();
-const child1: IDisplayElement = new DisplayElement();
+const displayContainer: DisplayContainerInterface = new DisplayContainer();
+const child1: DisplayElementInterface = new DisplayElement();
 child1.setSize(300, 50);
-const child2: IDisplayElement = new DisplayElement();
+const child2: DisplayElementInterface = new DisplayElement();
 child2.setSize(50, 300);
-const elements: IDisplayElement[] = [child1, child2];
+const elements: DisplayElementInterface[] = [child1, child2];
 document.body.appendChild(displayContainer as unknown as Node);
 
-describe('IDisplayContainer interface', () => {
+describe('DisplayContainerInterface interface', () => {
     describe('default values', () => {
         it('default elements length should be 0', () => {
             assert.strictEqual(displayContainer.elements.length, 0);

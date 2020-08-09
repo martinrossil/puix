@@ -1,12 +1,12 @@
 import DisplayElement from '../core/DisplayElement';
-import ITextElement from '../interfaces/text/ITextElement';
+import TextElementInterface from './TextElementInterface';
 import ITypeData from '../interfaces/design/typography/ITypeData';
-import ITextRenderer from '../interfaces/text/ITextRenderer';
+import TextRendererInterface from './TextRendererInterface';
 import TextRenderer from './TextRenderer';
 import Design from '../design/Design';
 import SizeElement from '../core/SizeElement';
 
-export default class TextElement extends DisplayElement implements ITextElement {
+export default class TextElement extends DisplayElement implements TextElementInterface {
     public constructor() {
         super();
         this.name = 'TextElement';
@@ -173,9 +173,9 @@ export default class TextElement extends DisplayElement implements ITextElement 
         return this._letterSpacing;
     }
 
-    private _textRenderer: ITextRenderer = new TextRenderer();
+    private _textRenderer: TextRendererInterface = new TextRenderer();
 
-    protected get textRenderer(): ITextRenderer {
+    protected get textRenderer(): TextRendererInterface {
         return this._textRenderer;
     }
 }

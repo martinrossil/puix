@@ -1,13 +1,13 @@
 import EventDispatcher from '../core/EventDispatcher';
-import IStateMachine from '../interfaces/fsm/IStateMachine';
-import IState from '../interfaces/fsm/IState';
+import StateMachineInterface from './StateMachineInterface';
+import StateInterface from './StateInterface';
 
-export default class StateMachine extends EventDispatcher implements IStateMachine {
+export default class StateMachine extends EventDispatcher implements StateMachineInterface {
     private host: HTMLElement;
-    public initial: IState;
-    public current: IState;
-    public states: Set<IState> = new Set();
-    public constructor(initial: IState, host: HTMLElement) {
+    public initial: StateInterface;
+    public current: StateInterface;
+    public states: Set<StateInterface> = new Set();
+    public constructor(initial: StateInterface, host: HTMLElement) {
         super();
         this.host = host;
         this.initial = initial;
@@ -15,7 +15,7 @@ export default class StateMachine extends EventDispatcher implements IStateMachi
         this.states.add(initial);
     }
 
-    public addState(state: IState): IStateMachine {
+    public addState(state: StateInterface): StateMachineInterface {
         this.states.add(state);
         return this;
     }
@@ -30,7 +30,7 @@ export default class StateMachine extends EventDispatcher implements IStateMachi
 
     public send(e: Event): void {
         console.log('send()', e.type);
-        const state: IState = this.current.getState(e.type);
+        const state: StateInterface = this.current.getState(e.type);
         if (this.current !== state) {
             if (this.current.exit) {
                 this.current.exit.call(this.host, e);

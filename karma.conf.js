@@ -11,12 +11,12 @@ module.exports = function karma(config) {
         files: [
             { pattern: 'src/**/*.ts', include: true },
             { pattern: 'tests/**/*.ts', include: true }
-            // { pattern: 'tests/IEventDispatcher.spec.ts', include: true }
+            // { pattern: 'tests/EventDispatcherInterface.spec.ts', include: true }
             // { pattern: 'tests/AnchorLayout.spec.ts' },
-            // { pattern: 'tests/IDisplayContainer.spec.ts' },
-            // { pattern: 'tests/IDisplayElement.spec.ts' },
-            // { pattern: 'tests/IEventDispatcher.spec.ts' },
-            // { pattern: 'tests/ILayout.spec.ts' }
+            // { pattern: 'tests/DisplayContainerInterface.spec.ts' },
+            // { pattern: 'tests/DisplayElementInterface.spec.ts' },
+            // { pattern: 'tests/EventDispatcherInterface.spec.ts' },
+            // { pattern: 'tests/LayoutInterface.spec.ts' }
         ],
         preprocessors: {
             '**/*.ts': 'karma-typescript',

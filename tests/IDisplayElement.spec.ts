@@ -1,15 +1,15 @@
 import { assert } from 'chai';
 import { describe, it, beforeEach } from 'mocha';
-import IDisplayElement from '../src/interfaces/core/IDisplayElement';
+import DisplayElementInterface from '../src/interfaces/core/DisplayElementInterface';
 import DisplayElement from '../src/core/DisplayElement';
 
-const displayElement: IDisplayElement = new DisplayElement();
+const displayElement: DisplayElementInterface = new DisplayElement();
 
 beforeEach(() => {
     displayElement.opacity = 1;
 });
 
-describe('IDisplayElement interface', () => {
+describe('DisplayElementInterface interface', () => {
     describe('opacity', () => {
         it('given opacity is 1, when opacity = -1, opacity should be 0', () => {
             displayElement.opacity = -1;

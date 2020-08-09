@@ -1,7 +1,7 @@
 import BaseButton from './BaseButton';
-import IContainedButton from '../../interfaces/components/buttons/IContainedButton';
+import ContainedButtonInterface from './ContainedButtonInterface';
 
-export default class ContainedButton extends BaseButton implements IContainedButton {
+export default class ContainedButton extends BaseButton implements ContainedButtonInterface {
     public constructor() {
         super();
         this.name = 'ContainedButton';

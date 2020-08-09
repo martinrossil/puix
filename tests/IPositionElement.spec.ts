@@ -1,16 +1,16 @@
 import { assert } from 'chai';
 import { describe, it, beforeEach } from 'mocha';
-import IPositionElement from '../src/interfaces/core/IPositionElement';
+import PositionElementInterface from '../src/interfaces/core/PositionElementInterface';
 import PositionElement from '../src/core/PositionElement';
 
-const positionElement: IPositionElement = new PositionElement();
+const positionElement: PositionElementInterface = new PositionElement();
 document.body.appendChild(positionElement as unknown as Node);
 
 beforeEach(() => {
     positionElement.setPosition(NaN, NaN);
 });
 
-describe('IPositionElement interface', () => {
+describe('PositionElementInterface interface', () => {
     describe('default values', () => {
         it('default x should be NaN', () => {
             assert.isNaN(positionElement.x);

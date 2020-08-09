@@ -1,24 +1,24 @@
-import ILayout from '../interfaces/layouts/ILayout';
-import IDisplayContainer from '../interfaces/containers/IDisplayContainer';
+import LayoutInterface from './LayoutInterface';
+import DisplayContainerInterface from '../containers/DisplayContainerInterface';
 import SizeElement from '../core/SizeElement';
 
-export default class Layout implements ILayout {
+export default class Layout implements LayoutInterface {
     public constructor() {
         this.name = 'Layout';
     }
 
-    public updateLayout(container: IDisplayContainer): void {
+    public updateLayout(container: DisplayContainerInterface): void {
         this.container = container;
         this.invalidateContainerSize(container);
         this.resizeChildren(container);
         this.layoutChildren(container);
     }
 
-    protected resizeChildren(container: IDisplayContainer): void {
+    protected resizeChildren(container: DisplayContainerInterface): void {
         //
     }
 
-    protected layoutChildren(container: IDisplayContainer): void {
+    protected layoutChildren(container: DisplayContainerInterface): void {
         for (const element of container.elements) {
             if (element.includeInLayout) {
                 element.setPosition(this.paddingLeft, this.paddingTop);
@@ -26,7 +26,7 @@ export default class Layout implements ILayout {
         }
     }
 
-    protected invalidateContainerSize(container: IDisplayContainer): void {
+    protected invalidateContainerSize(container: DisplayContainerInterface): void {
         if (isNaN(container.width) && isNaN(container.height)) {
             if (isNaN(container.percentWidth) && isNaN(container.percentHeight)) {
                 this.setSizeFromChildren(container);
@@ -46,7 +46,7 @@ export default class Layout implements ILayout {
         }
     }
 
-    protected setSizeFromChildren(container: IDisplayContainer): void {
+    protected setSizeFromChildren(container: DisplayContainerInterface): void {
         let width = 0;
         let height = 0;
         for (const element of container.elements) {
@@ -71,7 +71,7 @@ export default class Layout implements ILayout {
         }
     }
 
-    protected setWidthFromChildren(container: IDisplayContainer): void {
+    protected setWidthFromChildren(container: DisplayContainerInterface): void {
         let width = 0;
         for (const element of container.elements) {
             if (element.includeInLayout) {
@@ -89,7 +89,7 @@ export default class Layout implements ILayout {
         }
     }
 
-    protected setHeightFromChildren(container: IDisplayContainer): void {
+    protected setHeightFromChildren(container: DisplayContainerInterface): void {
         let height = 0;
         for (const element of container.elements) {
             if (element.includeInLayout) {
@@ -107,7 +107,7 @@ export default class Layout implements ILayout {
         }
     }
 
-    protected container: IDisplayContainer | null = null;
+    protected container: DisplayContainerInterface | null = null;
 
     protected invalidateLayout(): void {
         if (this.container && this.container.connected) {

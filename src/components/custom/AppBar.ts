@@ -1,13 +1,13 @@
 import DisplayContainer from '../../containers/DisplayContainer';
-import IIconElement from '../../interfaces/elements/IIconElement';
+import IconElementInterface from '../../elements/IconElementInterface';
 import IconElement from '../../elements/IconElement';
-import ITextElement from '../../interfaces/text/ITextElement';
+import TextElementInterface from '../../text/TextElementInterface';
 import TextElement from '../../text/TextElement';
 import HorizontalLayout from '../../layouts/HorizontalLayout';
 import VerticalAlign from '../../consts/VerticalAlign';
-import IShapeElement from '../../interfaces/svg/IShapeElement';
+import ShapeElementInterface from '../../svg/ShapeElementInterface';
 import ShapeElement from '../../svg/ShapeElement';
-import IDisplayContainer from '../../interfaces/containers/IDisplayContainer';
+import DisplayContainerInterface from '../../containers/DisplayContainerInterface';
 import AnchorLayout from '../../layouts/AnchorLayout';
 import HSL from '../../design/color/HSL';
 import Icons from '../../design/icon/Icons';
@@ -23,9 +23,9 @@ export default class Appbar extends DisplayContainer {
         this.addElement(this.horizontalContainer);
     }
 
-    private _horizontalContainer!: IDisplayContainer;
+    private _horizontalContainer!: DisplayContainerInterface;
 
-    protected get horizontalContainer(): IDisplayContainer {
+    protected get horizontalContainer(): DisplayContainerInterface {
         if (!this._horizontalContainer) {
             this._horizontalContainer = new DisplayContainer();
             this._horizontalContainer.percentWidth = 100;
@@ -37,9 +37,9 @@ export default class Appbar extends DisplayContainer {
         return this._horizontalContainer;
     }
 
-    private _shapeElement!: IShapeElement;
+    private _shapeElement!: ShapeElementInterface;
 
-    protected get shapeElement(): IShapeElement {
+    protected get shapeElement(): ShapeElementInterface {
         if (!this._shapeElement) {
             this._shapeElement = new ShapeElement();
             this._shapeElement.fillColor = this.theme.colors.secondary.medium;
@@ -49,9 +49,9 @@ export default class Appbar extends DisplayContainer {
         return this._shapeElement;
     }
 
-    private _iconElement!: IIconElement;
+    private _iconElement!: IconElementInterface;
 
-    protected get iconElement(): IIconElement {
+    protected get iconElement(): IconElementInterface {
         if (!this._iconElement) {
             this._iconElement = new IconElement();
             this._iconElement.setSize(32, 32);
@@ -61,9 +61,9 @@ export default class Appbar extends DisplayContainer {
         return this._iconElement;
     }
 
-    private _textElement!: ITextElement;
+    private _textElement!: TextElementInterface;
 
-    protected get textElement(): ITextElement {
+    protected get textElement(): TextElementInterface {
         if (!this._textElement) {
             this._textElement = new TextElement();
             this._textElement.text = 'Pui/x';

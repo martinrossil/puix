@@ -1,6 +1,6 @@
 import ApplicationElement from './containers/ApplicationElement';
 import RippleComponent from './components/RippleComponent';
-import IButtonComponent from './interfaces/components/IButtonComponent';
+import ButtonComponentInterface from './components/ButtonComponentInterface';
 import ButtonComponent from './components/ButtonComponent';
 import Icons from './design/icon/Icons';
 
@@ -12,9 +12,9 @@ export default class PuixDev extends ApplicationElement {
         this.addElement(this.button);
     }
 
-    protected _button!: IButtonComponent;
+    protected _button!: ButtonComponentInterface;
 
-    protected get button(): IButtonComponent {
+    protected get button(): ButtonComponentInterface {
         if (!this._button) {
             this._button = new ButtonComponent();
             this._button.icon = Icons.EMAIL;

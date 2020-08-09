@@ -1,16 +1,16 @@
 import { assert } from 'chai';
 import { describe, it, beforeEach } from 'mocha';
-import ILayout from '../src/interfaces/layouts/ILayout';
-import IDisplayContainer from '../src/interfaces/containers/IDisplayContainer';
+import LayoutInterface from '../src/interfaces/layouts/LayoutInterface';
+import DisplayContainerInterface from '../src/interfaces/containers/DisplayContainerInterface';
 import DisplayContainer from '../src/containers/DisplayContainer';
 import { Layout } from '../src';
 
-const displayContainer: IDisplayContainer = new DisplayContainer();
-const baseLayout: ILayout = new Layout();
+const displayContainer: DisplayContainerInterface = new DisplayContainer();
+const baseLayout: LayoutInterface = new Layout();
 displayContainer.layout = baseLayout;
 document.body.appendChild(displayContainer as unknown as Node);
 
-describe('ILayout interface', () => {
+describe('LayoutInterface interface', () => {
     describe('default values', () => {
         it('default padding should be 0', () => {
             assert.strictEqual(baseLayout.padding, 0);

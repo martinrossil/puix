@@ -1,7 +1,7 @@
-import IShapeElement from '../interfaces/svg/IShapeElement';
+import ShapeElementInterface from './ShapeElementInterface';
 import PathElement from './PathElement';
 
-export default class ShapeElement extends PathElement implements IShapeElement {
+export default class ShapeElement extends PathElement implements ShapeElementInterface {
     public constructor() {
         super();
         this.name = 'ShapeElement';

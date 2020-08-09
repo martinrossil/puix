@@ -1,11 +1,11 @@
 import { assert } from 'chai';
 import { describe, it, beforeEach } from 'mocha';
-import ILayoutElement from '../src/interfaces/core/ILayoutElement';
+import LayoutElementInterface from '../src/interfaces/core/LayoutElementInterface';
 import LayoutElement from '../src/core/LayoutElement';
 
-const layoutElement: ILayoutElement = new LayoutElement();
+const layoutElement: LayoutElementInterface = new LayoutElement();
 
-describe('ILayoutElement interface', () => {
+describe('LayoutElementInterface interface', () => {
     describe('default values', () => {
         it('default percentWidth should be NaN', () => {
             assert.isNaN(layoutElement.percentWidth);

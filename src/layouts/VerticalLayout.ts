@@ -1,10 +1,10 @@
 import Layout from './Layout';
-import IVerticalLayout from '../interfaces/layouts/IVerticalLayout';
+import VerticalLayoutInterface from './VerticalLayoutInterface';
 import HorizontalAlign from '../consts/HorizontalAlign';
-import IDisplayContainer from '../interfaces/containers/IDisplayContainer';
+import DisplayContainerInterface from '../containers/DisplayContainerInterface';
 import SizeElement from '../core/SizeElement';
 
-export default class VerticalLayout extends Layout implements IVerticalLayout {
+export default class VerticalLayout extends Layout implements VerticalLayoutInterface {
     public constructor(verticalGap = 0, horizontalAlign = HorizontalAlign.LEFT) {
         super();
         this.name = 'VerticalLayout';
@@ -12,7 +12,7 @@ export default class VerticalLayout extends Layout implements IVerticalLayout {
         this.horizontalAlign = horizontalAlign;
     }
 
-    protected setSizeFromChildren(container: IDisplayContainer): void {
+    protected setSizeFromChildren(container: DisplayContainerInterface): void {
         let width = 0;
         let height = 0;
         for (const element of container.elements) {
@@ -31,7 +31,7 @@ export default class VerticalLayout extends Layout implements IVerticalLayout {
         }
     }
 
-    protected setHeightFromChildren(container: IDisplayContainer): void {
+    protected setHeightFromChildren(container: DisplayContainerInterface): void {
         let height = 0;
         for (const element of container.elements) {
             if (element.includeInLayout) {
@@ -45,7 +45,7 @@ export default class VerticalLayout extends Layout implements IVerticalLayout {
         }
     }
 
-    protected resizeChildren(container: IDisplayContainer): void {
+    protected resizeChildren(container: DisplayContainerInterface): void {
         if (!isNaN(container.height) || !isNaN(container.percentHeight)) {
             this.setElementsSize(container);
         } else {
@@ -53,7 +53,7 @@ export default class VerticalLayout extends Layout implements IVerticalLayout {
         }
     }
 
-    protected setElementsSize(container: IDisplayContainer): void {
+    protected setElementsSize(container: DisplayContainerInterface): void {
         let heightSum = 0;
         let percentHeightSum = 0;
         for (const element of container.elements) {
@@ -84,7 +84,7 @@ export default class VerticalLayout extends Layout implements IVerticalLayout {
         }
     }
 
-    protected setElementsWidth(container: IDisplayContainer): void {
+    protected setElementsWidth(container: DisplayContainerInterface): void {
         const w = container.actualWidth - this.paddingLeft - this.paddingRight;
         for (const element of container.elements) {
             if (element.includeInLayout) {
@@ -97,7 +97,7 @@ export default class VerticalLayout extends Layout implements IVerticalLayout {
         }
     }
 
-    protected layoutChildren(container: IDisplayContainer): void {
+    protected layoutChildren(container: DisplayContainerInterface): void {
         if (this.horizontalAlign === HorizontalAlign.LEFT) {
             this.layoutLeft(container);
         } else if (this.horizontalAlign === HorizontalAlign.CENTER) {
@@ -109,7 +109,7 @@ export default class VerticalLayout extends Layout implements IVerticalLayout {
         }
     }
 
-    protected layoutRight(container: IDisplayContainer): void {
+    protected layoutRight(container: DisplayContainerInterface): void {
         let x = 0;
         let y = this.paddingTop;
         for (const element of container.elements) {
@@ -121,7 +121,7 @@ export default class VerticalLayout extends Layout implements IVerticalLayout {
         }
     }
 
-    protected layoutCenter(container: IDisplayContainer): void {
+    protected layoutCenter(container: DisplayContainerInterface): void {
         let x = 0;
         let y = this.paddingTop;
         for (const element of container.elements) {
@@ -133,7 +133,7 @@ export default class VerticalLayout extends Layout implements IVerticalLayout {
         }
     }
 
-    protected layoutLeft(container: IDisplayContainer): void {
+    protected layoutLeft(container: DisplayContainerInterface): void {
         let y = this.paddingTop;
         for (const element of container.elements) {
             if (element.includeInLayout) {

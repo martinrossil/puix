@@ -1,12 +1,18 @@
 export { default as AttributeTween } from './animation/AttributeTween';
 export { default as StyleTween } from './animation/StyleTween';
+export { default as TweenInterface } from './animation/TweenInterface';
 
 export { default as ButtonComponent } from './components/ButtonComponent';
+export { default as ButtonComponentInterface } from './components/ButtonComponentInterface';
 
 export { default as BaseButton } from './components/buttons/BaseButton';
+export { default as BaseButtonInterface } from './components/buttons/BaseButtonInterface';
 export { default as ContainedButton } from './components/buttons/ContainedButton';
+export { default as ContainedButtonInterface } from './components/buttons/ContainedButtonInterface';
 export { default as OutlinedButton } from './components/buttons/OutlinedButton';
+export { default as OutlinedButtonInterface } from './components/buttons/OutlinedButtonInterface';
 export { default as TextButton } from './components/buttons/TextButton';
+export { default as TextButtonInterface } from './components/buttons/TextButtonInterface';
 
 export { default as ActionBar } from './components/custom/ActionBar';
 export { default as AppBar } from './components/custom/AppBar';
@@ -27,15 +33,23 @@ export { default as VerticalAlign } from './consts/VerticalAlign';
 
 export { default as ApplicationElement } from './containers/ApplicationElement';
 export { default as DisplayContainer } from './containers/DisplayContainer';
+export { default as DisplayContainerInterface } from './containers/DisplayContainerInterface';
 export { default as ScrollContainer } from './containers/ScrollContainer';
+export { default as ScrollContainerInterface } from './containers/ScrollContainerInterface';
 
 export { default as DisplayElement } from './core/DisplayElement';
+export { default as DisplayElementInterface } from './core/DisplayElementInterface';
 export { default as EventDispatcher } from './core/EventDispatcher';
+export { default as EventDispatcherInterface } from './core/EventDispatcherInterface';
 export { default as EventDispatcherElement } from './core/EventDispatcherElement';
 export { default as LayoutElement } from './core/LayoutElement';
+export { default as LayoutElementInterface } from './core/LayoutElementInterface';
 export { default as LifeCycleElement } from './core/LifeCycleElement';
+export { default as LifeCycleElementInterface } from './core/LifeCycleElementInterface';
 export { default as PositionElement } from './core/PositionElement';
+export { default as PositionElementInterface } from './core/PositionElementInterface';
 export { default as SizeElement } from './core/SizeElement';
+export { default as SizeElementInterface } from './core/SizeElementInterface';
 
 export { default as ColorRange } from './design/color/ColorRange';
 export { default as Colors } from './design/color/Colors';
@@ -56,31 +70,15 @@ export { default as Design } from './design/Design';
 export { default as Theme } from './design/Theme';
 
 export { default as IconElement } from './elements/IconElement';
+export { default as IconElementInterface } from './elements/IconElementInterface';
 export { default as PointerElement } from './elements/PointerElement';
 export { default as RippleElement } from './elements/RippleElement';
+export { default as RippleElementInterface } from './elements/RippleElementInterface';
 
 export { default as State } from './fsm/State';
+export { default as StateInterface } from './fsm/StateInterface';
 export { default as StateMachine } from './fsm/StateMachine';
-
-export { default as ITween } from './interfaces/animation/ITween';
-
-export { default as IBaseButton } from './interfaces/components/buttons/IBaseButton';
-export { default as IContainedButton } from './interfaces/components/buttons/IContainedButton';
-export { default as IOutlinedButton } from './interfaces/components/buttons/IOutlinedButton';
-export { default as ITextButton } from './interfaces/components/buttons/ITextButton';
-
-export { default as IButtonComponent } from './interfaces/components/IButtonComponent';
-export { default as IButtonElement } from './interfaces/components/IButtonElement';
-
-export { default as IDisplayContainer } from './interfaces/containers/IDisplayContainer';
-export { default as IScrollContainer } from './interfaces/containers/IScrollContainer';
-
-export { default as IDisplayElement } from './interfaces/core/IDisplayElement';
-export { default as IEventDispatcher } from './interfaces/core/IEventDispatcher';
-export { default as ILayoutElement } from './interfaces/core/ILayoutElement';
-export { default as ILifeCycleElement } from './interfaces/core/ILifeCycleElement';
-export { default as IPositionElement } from './interfaces/core/IPositionElement';
-export { default as ISizeElement } from './interfaces/core/ISizeElement';
+export { default as StateMachineInterface } from './fsm/StateMachineInterface';
 
 export { default as IColorRange } from './interfaces/design/color/IColorRange';
 export { default as IColors } from './interfaces/design/color/IColors';
@@ -95,35 +93,25 @@ export { default as ITypography } from './interfaces/design/typography/ITypograp
 
 export { default as ITheme } from './interfaces/design/ITheme';
 
-export { default as IIconElement } from './interfaces/elements/IIconElement';
-export { default as IRippleElement } from './interfaces/elements/IRippleElement';
-
-export { default as IState } from './interfaces/fsm/IState';
-export { default as IStateMachine } from './interfaces/fsm/IStateMachine';
-
-export { default as IHorizontalLayout } from './interfaces/layouts/IHorizontalLayout';
-export { default as ILayout } from './interfaces/layouts/ILayout';
-export { default as IVerticalLayout } from './interfaces/layouts/IVerticalLayout';
-
-export { default as IPathElement } from './interfaces/svg/IPathElement';
-export { default as IShapeElement } from './interfaces/svg/IShapeElement';
-export { default as ISvgElement } from './interfaces/svg/ISvgElement';
-
-export { default as ITextElement } from './interfaces/text/ITextElement';
-export { default as ITextRenderer } from './interfaces/text/ITextRenderer';
-
-export { default as IPoint } from './interfaces/vo/IPoint';
-
 export { default as AnchorLayout } from './layouts/AnchorLayout';
 export { default as HorizontalLayout } from './layouts/HorizontalLayout';
+export { default as HorizontalLayoutInterface } from './layouts/HorizontalLayoutInterface';
 export { default as Layout } from './layouts/Layout';
+export { default as LayoutInterface } from './layouts/LayoutInterface';
 export { default as VerticalLayout } from './layouts/VerticalLayout';
+export { default as VerticalLayoutInterface } from './layouts/VerticalLayoutInterface';
 
 export { default as PathElement } from './svg/PathElement';
+export { default as PathElementInterface } from './svg/PathElementInterface';
 export { default as ShapeElement } from './svg/ShapeElement';
+export { default as ShapeElementInterface } from './svg/ShapeElementInterface';
 export { default as SvgElement } from './svg/SvgElement';
+export { default as SvgElementInterface } from './svg/SvgElementInterface';
 
 export { default as TextElement } from './text/TextElement';
+export { default as TextElementInterface } from './text/TextElementInterface';
 export { default as TextRenderer } from './text/TextRenderer';
+export { default as TextRendererInterface } from './text/TextRendererInterface';
 
 export { default as Point } from './vo/Point';
+export { default as PointInterface } from './vo/PointInterface';

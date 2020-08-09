@@ -1,7 +1,7 @@
 import SvgElement from './SvgElement';
-import IPathElement from '../interfaces/svg/IPathElement';
+import PathElementInterface from './PathElementInterface';
 
-export default class PathElement extends SvgElement implements IPathElement {
+export default class PathElement extends SvgElement implements PathElementInterface {
     public constructor() {
         super();
         this.name = 'PathElement';

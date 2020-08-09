@@ -1,7 +1,7 @@
 import BaseButton from './BaseButton';
-import IOutlinedButton from '../../interfaces/components/buttons/IOutlinedButton';
+import OutlinedButtonInterface from './OutlinedButtonInterface';
 
-export default class OutlinedButton extends BaseButton implements IOutlinedButton {
+export default class OutlinedButton extends BaseButton implements OutlinedButtonInterface {
     public constructor() {
         super();
         this.name = 'OutlinedButton';

@@ -1,7 +1,7 @@
 import SizeElement from './SizeElement';
-import ILayoutElement from '../interfaces/core/ILayoutElement';
+import LayoutElementInterface from './LayoutElementInterface';
 
-export default class LayoutElement extends SizeElement implements ILayoutElement {
+export default class LayoutElement extends SizeElement implements LayoutElementInterface {
     static LAYOUT_DATA_CHANGED = 'LayoutElement.layoutDataChanged';
 
     public constructor() {

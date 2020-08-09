@@ -1,12 +1,12 @@
 import DisplayElement from '../core/DisplayElement';
-import IDisplayContainer from '../interfaces/containers/IDisplayContainer';
-import ILayoutElement from '../interfaces/core/ILayoutElement';
+import DisplayContainerInterface from './DisplayContainerInterface';
+import LayoutElementInterface from '../core/LayoutElementInterface';
 import LayoutElement from '../core/LayoutElement';
-import ILayout from '../interfaces/layouts/ILayout';
+import LayoutInterface from '../layouts/LayoutInterface';
 import Layout from '../layouts/Layout';
 import SizeElement from '../core/SizeElement';
 
-export default class DisplayContainer extends DisplayElement implements IDisplayContainer {
+export default class DisplayContainer extends DisplayElement implements DisplayContainerInterface {
     public constructor() {
         super();
         this.name = 'DisplayContainer';
@@ -14,7 +14,7 @@ export default class DisplayContainer extends DisplayElement implements IDisplay
         this.addEventListener(LayoutElement.LAYOUT_DATA_CHANGED, this.childChanged as EventListener);
     }
 
-    public elements: ILayoutElement[] = [];
+    public elements: LayoutElementInterface[] = [];
 
     protected childChanged(e: CustomEvent): void {
         if (e.target !== this) {
@@ -28,13 +28,13 @@ export default class DisplayContainer extends DisplayElement implements IDisplay
         this.layout.updateLayout(this);
     }
 
-    public addElement(element: ILayoutElement): void {
+    public addElement(element: LayoutElementInterface): void {
         this.elements.push(element);
         this.appendChild(element as unknown as Node);
         this.invalidateDisplay();
     }
 
-    public addElementAt(element: ILayoutElement, index: number): void {
+    public addElementAt(element: LayoutElementInterface, index: number): void {
         if (this.elements[index]) {
             const beforeElement: Node = this.elements[index] as unknown as Node;
             this.elements.splice(index, 0, element);
@@ -46,21 +46,21 @@ export default class DisplayContainer extends DisplayElement implements IDisplay
         this.invalidateDisplay();
     }
 
-    public getElementAt(index: number): ILayoutElement | null {
+    public getElementAt(index: number): LayoutElementInterface | null {
         if (this.elements[index]) {
             return this.elements[index];
         }
         return null;
     }
 
-    public removeElement(element: ILayoutElement): void {
+    public removeElement(element: LayoutElementInterface): void {
         const start: number = this.elements.indexOf(element);
         this.elements.splice(start, 1);
         this.removeChild(element as LayoutElement);
         this.invalidateDisplay();
     }
 
-    public addElements(elements: ILayoutElement[]): void {
+    public addElements(elements: LayoutElementInterface[]): void {
         const frag: DocumentFragment = document.createDocumentFragment();
         for (const element of elements) {
             this.elements.push(element);
@@ -70,16 +70,16 @@ export default class DisplayContainer extends DisplayElement implements IDisplay
         this.invalidateDisplay();
     }
 
-    private _layout: ILayout = new Layout();
+    private _layout: LayoutInterface = new Layout();
 
-    public set layout(value: ILayout) {
+    public set layout(value: LayoutInterface) {
         if (this._layout !== value) {
             this._layout = value;
             this.invalidateDisplay();
         }
     }
 
-    public get layout(): ILayout {
+    public get layout(): LayoutInterface {
         return this._layout;
     }
 }

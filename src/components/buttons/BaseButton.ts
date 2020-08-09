@@ -1,20 +1,20 @@
 import DisplayContainer from '../../containers/DisplayContainer';
 import AnchorLayout from '../../layouts/AnchorLayout';
-import IShapeElement from '../../interfaces/svg/IShapeElement';
-import IDisplayContainer from '../../interfaces/containers/IDisplayContainer';
-import IIconElement from '../../interfaces/elements/IIconElement';
-import ITextElement from '../../interfaces/text/ITextElement';
+import ShapeElementInterface from '../../svg/ShapeElementInterface';
+import DisplayContainerInterface from '../../containers/DisplayContainerInterface';
+import IconElementInterface from '../../elements/IconElementInterface';
+import TextElementInterface from '../../text/TextElementInterface';
 import ShapeElement from '../../svg/ShapeElement';
 import IconElement from '../../elements/IconElement';
 import TextElement from '../../text/TextElement';
 import HorizontalLayout from '../../layouts/HorizontalLayout';
 import VerticalAlign from '../../consts/VerticalAlign';
-import IBaseButton from '../../interfaces/components/buttons/IBaseButton';
-import IRippleElement from '../../interfaces/elements/IRippleElement';
+import BaseButtonInterface from './BaseButtonInterface';
+import RippleElementInterface from '../../elements/RippleElementInterface';
 import RippleElement from '../../elements/RippleElement';
 import HSL from '../../design/color/HSL';
 
-export default class BaseButton extends DisplayContainer implements IBaseButton {
+export default class BaseButton extends DisplayContainer implements BaseButtonInterface {
     public constructor() {
         super();
         this.name = 'BaseButton';
@@ -40,15 +40,15 @@ export default class BaseButton extends DisplayContainer implements IBaseButton 
         this.addElements([this.shapeElement, this.iconLabelContainer, this.rippleElement]);
     }
 
-    protected shapeElement: IShapeElement = new ShapeElement();
+    protected shapeElement: ShapeElementInterface = new ShapeElement();
 
-    private iconLabelContainer: IDisplayContainer = new DisplayContainer();
+    private iconLabelContainer: DisplayContainerInterface = new DisplayContainer();
 
-    private iconElement: IIconElement = new IconElement();
+    private iconElement: IconElementInterface = new IconElement();
 
-    private labelElement: ITextElement = new TextElement();
+    private labelElement: TextElementInterface = new TextElement();
 
-    private rippleElement: IRippleElement = new RippleElement();
+    private rippleElement: RippleElementInterface = new RippleElement();
 
     private _icon = '';
 

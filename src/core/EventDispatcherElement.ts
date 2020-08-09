@@ -1,6 +1,6 @@
-import IEventDispatcher from '../interfaces/core/IEventDispatcher';
+import EventDispatcherInterface from './EventDispatcherInterface';
 
-export default class EventDispatcherElement extends HTMLElement implements IEventDispatcher {
+export default class EventDispatcherElement extends HTMLElement implements EventDispatcherInterface {
     public constructor() {
         super();
         this.style.position = 'absolute';

@@ -1,7 +1,7 @@
 import BaseButton from './BaseButton';
-import ITextButton from '../../interfaces/components/buttons/ITextButton';
+import TextButtonInterface from './TextButtonInterface';
 
-export default class TextButton extends BaseButton implements ITextButton {
+export default class TextButton extends BaseButton implements TextButtonInterface {
     public constructor() {
         super();
         this.name = 'TextButton';

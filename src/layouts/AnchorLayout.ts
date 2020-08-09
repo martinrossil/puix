@@ -1,6 +1,6 @@
 import Layout from './Layout';
-import IDisplayContainer from '../interfaces/containers/IDisplayContainer';
-import ILayoutElement from '../interfaces/core/ILayoutElement';
+import DisplayContainerInterface from '../containers/DisplayContainerInterface';
+import LayoutElementInterface from '../core/LayoutElementInterface';
 
 export default class AnchorLayout extends Layout {
     public constructor() {
@@ -8,7 +8,7 @@ export default class AnchorLayout extends Layout {
         this.name = 'AnchorLayout';
     }
 
-    protected resizeChildren(container: IDisplayContainer): void {
+    protected resizeChildren(container: DisplayContainerInterface): void {
         const w = container.actualWidth - this.paddingLeft - this.paddingRight;
         const h = container.actualHeight - this.paddingTop - this.paddingBottom;
         for (const element of container.elements) {
@@ -18,7 +18,7 @@ export default class AnchorLayout extends Layout {
         }
     }
 
-    protected layoutChildren(container: IDisplayContainer): void {
+    protected layoutChildren(container: DisplayContainerInterface): void {
         const w = container.actualWidth - this.paddingLeft - this.paddingRight;
         const h = container.actualHeight - this.paddingTop - this.paddingBottom;
         for (const element of container.elements) {
@@ -28,7 +28,7 @@ export default class AnchorLayout extends Layout {
         }
     }
 
-    protected setElementPosition(w: number, h: number, element: ILayoutElement): void {
+    protected setElementPosition(w: number, h: number, element: LayoutElementInterface): void {
         if (!isNaN(element.horizontalCenter)) {
             element.x = this.paddingLeft + w * 0.5 - element.actualWidth * 0.5 + element.horizontalCenter;
         } else if (!isNaN(element.left) && !isNaN(element.right)) {
@@ -53,7 +53,7 @@ export default class AnchorLayout extends Layout {
         }
     }
 
-    protected setElementSize(w: number, h: number, element: ILayoutElement): void {
+    protected setElementSize(w: number, h: number, element: LayoutElementInterface): void {
         if (!isNaN(element.left) && !isNaN(element.right) && !isNaN(element.top) && !isNaN(element.bottom)) {
             element.setActualSize(w - element.left - element.right, h - element.top - element.bottom);
         } else if (!isNaN(element.percentWidth) && !isNaN(element.percentHeight)) {

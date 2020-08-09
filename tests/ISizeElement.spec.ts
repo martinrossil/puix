@@ -1,9 +1,9 @@
 import { assert } from 'chai';
 import { describe, it, beforeEach } from 'mocha';
-import ISizeElement from '../src/interfaces/core/ISizeElement';
+import SizeElementInterface from '../src/interfaces/core/SizeElementInterface';
 import SizeElement from '../src/core/SizeElement';
 
-const sizeElement: ISizeElement = new SizeElement();
+const sizeElement: SizeElementInterface = new SizeElement();
 document.body.appendChild(sizeElement as unknown as Node);
 
 beforeEach(() => {
@@ -17,7 +17,7 @@ beforeEach(() => {
     sizeElement.height = NaN;
 });
 
-describe('ISizeElement interface', () => {
+describe('SizeElementInterface interface', () => {
     describe('default values', () => {
         it('default minWidth should be 0', () => {
             assert.strictEqual(sizeElement.minWidth, 0);

@@ -1,7 +1,7 @@
-import IEventDispatcher from '../../core/IEventDispatcher';
+import EventDispatcherInterface from '../../../core/EventDispatcherInterface';
 import IColorRange from './IColorRange';
 
-export default interface IColors extends IEventDispatcher {
+export default interface IColors extends EventDispatcherInterface {
     primary: IColorRange;
     secondary: IColorRange;
     accent: IColorRange;

@@ -1,15 +1,15 @@
 import DisplayElement from '../core/DisplayElement';
-import IScrollContainer from '../interfaces/containers/IScrollContainer';
-import IDisplayContainer from '../interfaces/containers/IDisplayContainer';
+import ScrollContainerInterface from './ScrollContainerInterface';
+import DisplayContainerInterface from './DisplayContainerInterface';
 import DisplayContainer from './DisplayContainer';
-import ILayoutElement from '../interfaces/core/ILayoutElement';
-import ILayout from '../interfaces/layouts/ILayout';
+import LayoutElementInterface from '../core/LayoutElementInterface';
+import LayoutInterface from '../layouts/LayoutInterface';
 import ScrollPolicy from '../consts/ScrollPolicy';
 import SizeElement from '../core/SizeElement';
 import LayoutElement from '../core/LayoutElement';
 import Overflow from '../consts/Overflow';
 
-export default class ScrollContainer extends DisplayElement implements IScrollContainer {
+export default class ScrollContainer extends DisplayElement implements ScrollContainerInterface {
     public constructor() {
         super();
         this.name = 'ScrollContainer';
@@ -56,23 +56,23 @@ export default class ScrollContainer extends DisplayElement implements IScrollCo
         }
     }
 
-    public addElement(element: ILayoutElement): void {
+    public addElement(element: LayoutElementInterface): void {
         this.container.addElement(element);
     }
 
-    public addElementAt(element: ILayoutElement, index: number): void {
+    public addElementAt(element: LayoutElementInterface, index: number): void {
         this.container.addElementAt(element, index);
     }
 
-    public addElements(elements: ILayoutElement[]): void {
+    public addElements(elements: LayoutElementInterface[]): void {
         this.container.addElements(elements);
     }
 
-    public getElementAt(index: number): ILayoutElement | null {
+    public getElementAt(index: number): LayoutElementInterface | null {
         return this.container.getElementAt(index);
     }
 
-    public removeElement(element: ILayoutElement): void {
+    public removeElement(element: LayoutElementInterface): void {
         this.container.removeElement(element);
     }
 
@@ -114,21 +114,21 @@ export default class ScrollContainer extends DisplayElement implements IScrollCo
         return this._verticalScrollPolicy;
     }
 
-    public get elements(): ILayoutElement[] {
+    public get elements(): LayoutElementInterface[] {
         return this.container.elements;
     }
 
-    public set layout(value: ILayout) {
+    public set layout(value: LayoutInterface) {
         this.container.layout = value;
     }
 
-    public get layout(): ILayout {
+    public get layout(): LayoutInterface {
         return this.container.layout;
     }
 
-    private _container: IDisplayContainer = new DisplayContainer();
+    private _container: DisplayContainerInterface = new DisplayContainer();
 
-    protected get container(): IDisplayContainer {
+    protected get container(): DisplayContainerInterface {
         return this._container;
     }
 }

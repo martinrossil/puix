@@ -1,5 +1,5 @@
 import Cursor from '../consts/Cursor';
-import IPoint from '../interfaces/vo/IPoint';
+import PointInterface from '../vo/PointInterface';
 import Point from '../vo/Point';
 import ShapeElement from '../svg/ShapeElement';
 
@@ -32,7 +32,7 @@ export default class PointerElement extends ShapeElement {
             const px: number = touch.pageX;
             const py: number = touch.pageY;
             const cr: ClientRect = this.path.getBoundingClientRect();
-            const point: IPoint = new Point(px - cr.left, py - cr.top);
+            const point: PointInterface = new Point(px - cr.left, py - cr.top);
             this.dispatchEventWith(PointerElement.DOWN, point);
         }
     }

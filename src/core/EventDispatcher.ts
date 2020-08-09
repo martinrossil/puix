@@ -1,6 +1,6 @@
-import IEventDispatcher from '../interfaces/core/IEventDispatcher';
+import EventDispatcherInterface from './EventDispatcherInterface';
 
-export default class EventDispatcher implements IEventDispatcher {
+export default class EventDispatcher implements EventDispatcherInterface {
     protected listeners: Map<string, Function[] | undefined> = new Map();
 
     public dispatchEventWith(type: string, payload: unknown = null): void {

@@ -1,10 +1,10 @@
 import Layout from './Layout';
-import IHorizontalLayout from '../interfaces/layouts/IHorizontalLayout';
+import HorizontalLayoutInterface from './HorizontalLayoutInterface';
 import VerticalAlign from '../consts/VerticalAlign';
-import IDisplayContainer from '../interfaces/containers/IDisplayContainer';
+import DisplayContainerInterface from '../containers/DisplayContainerInterface';
 import SizeElement from '../core/SizeElement';
 
-export default class HorizontalLayout extends Layout implements IHorizontalLayout {
+export default class HorizontalLayout extends Layout implements HorizontalLayoutInterface {
     public constructor(horizontalGap = 0, verticalAlign = VerticalAlign.TOP) {
         super();
         this.name = 'HorizontalLayout';
@@ -12,7 +12,7 @@ export default class HorizontalLayout extends Layout implements IHorizontalLayou
         this.verticalAlign = verticalAlign;
     }
 
-    protected setSizeFromChildren(container: IDisplayContainer): void {
+    protected setSizeFromChildren(container: DisplayContainerInterface): void {
         let width = 0;
         let height = 0;
         for (const element of container.elements) {
@@ -31,7 +31,7 @@ export default class HorizontalLayout extends Layout implements IHorizontalLayou
         }
     }
 
-    protected setWidthFromChildren(container: IDisplayContainer): void {
+    protected setWidthFromChildren(container: DisplayContainerInterface): void {
         let width = 0;
         for (const element of container.elements) {
             if (element.includeInLayout) {
@@ -45,7 +45,7 @@ export default class HorizontalLayout extends Layout implements IHorizontalLayou
         }
     }
 
-    protected resizeChildren(container: IDisplayContainer): void {
+    protected resizeChildren(container: DisplayContainerInterface): void {
         if (!isNaN(container.width) || !isNaN(container.percentWidth)) {
             this.setElementsSize(container);
         } else {
@@ -53,7 +53,7 @@ export default class HorizontalLayout extends Layout implements IHorizontalLayou
         }
     }
 
-    protected setElementsSize(container: IDisplayContainer): void {
+    protected setElementsSize(container: DisplayContainerInterface): void {
         let widthSum = 0;
         let percentWidthSum = 0;
         for (const element of container.elements) {
@@ -84,7 +84,7 @@ export default class HorizontalLayout extends Layout implements IHorizontalLayou
         }
     }
 
-    protected setElementsHeight(container: IDisplayContainer): void {
+    protected setElementsHeight(container: DisplayContainerInterface): void {
         const h = container.actualHeight - this.paddingTop - this.paddingBottom;
         for (const element of container.elements) {
             if (element.includeInLayout) {
@@ -97,7 +97,7 @@ export default class HorizontalLayout extends Layout implements IHorizontalLayou
         }
     }
 
-    protected layoutChildren(container: IDisplayContainer): void {
+    protected layoutChildren(container: DisplayContainerInterface): void {
         if (this.verticalAlign === VerticalAlign.TOP) {
             this.layoutTop(container);
         } else if (this.verticalAlign === VerticalAlign.MIDDLE) {
@@ -109,7 +109,7 @@ export default class HorizontalLayout extends Layout implements IHorizontalLayou
         }
     }
 
-    protected layoutTop(container: IDisplayContainer): void {
+    protected layoutTop(container: DisplayContainerInterface): void {
         let x = this.paddingLeft;
         for (const element of container.elements) {
             if (element.includeInLayout) {
@@ -119,7 +119,7 @@ export default class HorizontalLayout extends Layout implements IHorizontalLayou
         }
     }
 
-    protected layoutMiddle(container: IDisplayContainer): void {
+    protected layoutMiddle(container: DisplayContainerInterface): void {
         let x = this.paddingLeft;
         for (const element of container.elements) {
             if (element.includeInLayout) {
@@ -129,7 +129,7 @@ export default class HorizontalLayout extends Layout implements IHorizontalLayou
         }
     }
 
-    protected layoutBottom(container: IDisplayContainer): void {
+    protected layoutBottom(container: DisplayContainerInterface): void {
         let x = this.paddingLeft;
         let y = 0;
         for (const element of container.elements) {

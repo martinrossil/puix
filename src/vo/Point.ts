@@ -1,6 +1,6 @@
-import IPoint from '../interfaces/vo/IPoint';
+import PointInterface from './PointInterface';
 
-export default class Point implements IPoint {
+export default class Point implements PointInterface {
     public x = 0;
     public y = 0;
 

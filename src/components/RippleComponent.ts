@@ -1,12 +1,12 @@
 import DisplayContainer from '../containers/DisplayContainer';
-import IShapeElement from '../interfaces/svg/IShapeElement';
+import ShapeElementInterface from '../svg/ShapeElementInterface';
 import ShapeElement from '../svg/ShapeElement';
 import AnchorLayout from '../layouts/AnchorLayout';
-import IRippleElement from '../interfaces/elements/IRippleElement';
+import RippleElementInterface from '../elements/RippleElementInterface';
 import RippleElement from '../elements/RippleElement';
 import HSL from '../design/color/HSL';
 import PointerElement from '../elements/PointerElement';
-import IPoint from '../interfaces/vo/IPoint';
+import PointInterface from '../vo/PointInterface';
 
 export default class RippleComponent extends DisplayContainer {
     public constructor() {
@@ -21,7 +21,7 @@ export default class RippleComponent extends DisplayContainer {
         this.addElement(this.pointerElement);
     }
 
-    protected pointerDown(e: CustomEvent<IPoint>): void {
+    protected pointerDown(e: CustomEvent<PointInterface>): void {
         e.stopPropagation();
         this.rippleElement.show(e.detail);
     }
@@ -35,9 +35,9 @@ export default class RippleComponent extends DisplayContainer {
         this.rippleElement.hide();
     }
 
-    private _shapeElement!: IShapeElement;
+    private _shapeElement!: ShapeElementInterface;
 
-    protected get shapeElement(): IShapeElement {
+    protected get shapeElement(): ShapeElementInterface {
         if (!this._shapeElement) {
             this._shapeElement = new ShapeElement();
             this._shapeElement.fillColor = this.theme.colors.secondary.medium;
@@ -48,9 +48,9 @@ export default class RippleComponent extends DisplayContainer {
         return this._shapeElement;
     }
 
-    private _rippleElement!: IRippleElement
+    private _rippleElement!: RippleElementInterface
 
-    protected get rippleElement(): IRippleElement {
+    protected get rippleElement(): RippleElementInterface {
         if (!this._rippleElement) {
             this._rippleElement = new RippleElement();
             this._rippleElement.percentWidth = 100;
@@ -61,9 +61,9 @@ export default class RippleComponent extends DisplayContainer {
         return this._rippleElement;
     }
 
-    private _pointerElement!: IShapeElement;
+    private _pointerElement!: ShapeElementInterface;
 
-    protected get pointerElement(): IShapeElement {
+    protected get pointerElement(): ShapeElementInterface {
         if (!this._pointerElement) {
             this._pointerElement = new PointerElement();
             this._pointerElement.percentWidth = 100;

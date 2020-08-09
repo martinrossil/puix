@@ -1,7 +1,7 @@
 import PositionElement from './PositionElement';
-import ISizeElement from '../interfaces/core/ISizeElement';
+import SizeElementInterface from './SizeElementInterface';
 
-export default class SizeElement extends PositionElement implements ISizeElement {
+export default class SizeElement extends PositionElement implements SizeElementInterface {
     static INTERNAL_SIZE_CHANGED = 'SizeElement.internalSizeChanged';
 
     public constructor() {

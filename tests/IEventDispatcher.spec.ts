@@ -1,6 +1,6 @@
 import { assert } from 'chai';
 import { describe, it } from 'mocha';
-import IEventDispatcher from '../src/interfaces/core/IEventDispatcher';
+import EventDispatcherInterface from '../src/interfaces/core/EventDispatcherInterface';
 import EventDispatcherElement from '../src/core/EventDispatcherElement';
 import EventDispatcher from '../src/core/EventDispatcher';
 
@@ -12,13 +12,13 @@ const handler: Function = () => {
 const handler2: Function = () => {
     handlerHasBeenCalled2 = true;
 };
-const eventDispatcherElement: IEventDispatcher = new EventDispatcherElement();
+const eventDispatcherElement: EventDispatcherInterface = new EventDispatcherElement();
 eventDispatcherElement.addEventListener('test', handler);
 
-const eventDispatcher: IEventDispatcher = new EventDispatcher();
+const eventDispatcher: EventDispatcherInterface = new EventDispatcher();
 eventDispatcher.addEventListener('test', handler2);
 
-describe('IEventDispatcher interface', () => {
+describe('EventDispatcherInterface interface', () => {
     describe('default values', () => {
         it('default name should be ""', () => {
             assert.strictEqual(eventDispatcherElement.name, '');
