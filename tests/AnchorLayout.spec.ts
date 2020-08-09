@@ -1,12 +1,12 @@
 import { assert } from 'chai';
 import { describe, it, beforeEach } from 'mocha';
 
-import DisplayContainerInterface from '../src/interfaces/containers/DisplayContainerInterface';
-import DisplayElementInterface from '../src/interfaces/core/DisplayElementInterface';
+import DisplayContainerInterface from '../src/containers/DisplayContainerInterface';
+import DisplayElementInterface from '../src/core/DisplayElementInterface';
 import DisplayContainer from '../src/containers/DisplayContainer';
 import DisplayElement from '../src/core/DisplayElement';
 import AnchorLayout from '../src/layouts/AnchorLayout';
-import LayoutInterface from '../src/interfaces/layouts/LayoutInterface';
+import LayoutInterface from '../src/layouts/LayoutInterface';
 
 const displayContainer: DisplayContainerInterface = new DisplayContainer();
 const anchorLayout: LayoutInterface = new AnchorLayout();

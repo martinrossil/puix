@@ -1,6 +1,6 @@
 import { assert } from 'chai';
 import { describe, it, beforeEach } from 'mocha';
-import DisplayElementInterface from '../src/interfaces/core/DisplayElementInterface';
+import DisplayElementInterface from '../src/core/DisplayElementInterface';
 import DisplayElement from '../src/core/DisplayElement';
 
 const displayElement: DisplayElementInterface = new DisplayElement();

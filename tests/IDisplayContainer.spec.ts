@@ -1,8 +1,8 @@
 import { assert } from 'chai';
 import { describe, it } from 'mocha';
-import DisplayContainerInterface from '../src/interfaces/containers/DisplayContainerInterface';
+import DisplayContainerInterface from '../src/containers/DisplayContainerInterface';
 import DisplayContainer from '../src/containers/DisplayContainer';
-import DisplayElementInterface from '../src/interfaces/core/DisplayElementInterface';
+import DisplayElementInterface from '../src/core/DisplayElementInterface';
 import DisplayElement from '../src/core/DisplayElement';
 
 const displayContainer: DisplayContainerInterface = new DisplayContainer();

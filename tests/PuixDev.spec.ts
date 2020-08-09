@@ -1,6 +1,6 @@
 import { assert } from 'chai';
 import { describe, it } from 'mocha';
-import DisplayContainerInterface from '../src/interfaces/containers/DisplayContainerInterface';
+import DisplayContainerInterface from '../src/containers/DisplayContainerInterface';
 import PuixDev from '../src/PuixDev';
 
 const puixDev: DisplayContainerInterface = new PuixDev();

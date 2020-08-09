@@ -1,6 +1,6 @@
 import { assert } from 'chai';
 import { describe, it, beforeEach } from 'mocha';
-import PositionElementInterface from '../src/interfaces/core/PositionElementInterface';
+import PositionElementInterface from '../src/core/PositionElementInterface';
 import PositionElement from '../src/core/PositionElement';
 
 const positionElement: PositionElementInterface = new PositionElement();

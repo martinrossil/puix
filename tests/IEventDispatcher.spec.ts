@@ -1,6 +1,6 @@
 import { assert } from 'chai';
 import { describe, it } from 'mocha';
-import EventDispatcherInterface from '../src/interfaces/core/EventDispatcherInterface';
+import EventDispatcherInterface from '../src/core/EventDispatcherInterface';
 import EventDispatcherElement from '../src/core/EventDispatcherElement';
 import EventDispatcher from '../src/core/EventDispatcher';
 

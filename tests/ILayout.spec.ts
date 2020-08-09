@@ -1,7 +1,7 @@
 import { assert } from 'chai';
 import { describe, it, beforeEach } from 'mocha';
-import LayoutInterface from '../src/interfaces/layouts/LayoutInterface';
-import DisplayContainerInterface from '../src/interfaces/containers/DisplayContainerInterface';
+import LayoutInterface from '../src/layouts/LayoutInterface';
+import DisplayContainerInterface from '../src/containers/DisplayContainerInterface';
 import DisplayContainer from '../src/containers/DisplayContainer';
 import { Layout } from '../src';
 

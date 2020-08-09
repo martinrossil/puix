@@ -1,6 +1,6 @@
 import { assert } from 'chai';
 import { describe, it, beforeEach } from 'mocha';
-import LayoutElementInterface from '../src/interfaces/core/LayoutElementInterface';
+import LayoutElementInterface from '../src/core/LayoutElementInterface';
 import LayoutElement from '../src/core/LayoutElement';
 
 const layoutElement: LayoutElementInterface = new LayoutElement();
