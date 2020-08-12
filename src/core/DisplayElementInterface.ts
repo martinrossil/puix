@@ -1,5 +1,4 @@
 import LayoutElementInterface from './LayoutElementInterface';
-import ITheme from '../interfaces/design/ITheme';
 
 export default interface DisplayElementInterface extends LayoutElementInterface {
     opacity: number;
@@ -9,7 +8,6 @@ export default interface DisplayElementInterface extends LayoutElementInterface 
     enabled: boolean;
     borderRadius: number;
     shadow: string;
-    theme: ITheme;
     tabIndex: number;
     cursor: string;
     backgroundColor: string;

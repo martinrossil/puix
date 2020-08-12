@@ -1,7 +1,7 @@
 import DisplayContainer from '../../containers/DisplayContainer';
 import TextElementInterface from '../../text/TextElementInterface';
 import TextElement from '../../text/TextElement';
-import FontWeight from '../../design/typography/FontWeight';
+import FontWeight from '../../consts/FontWeight';
 import AnchorLayout from '../../layouts/AnchorLayout';
 
 export default class StatusChip extends DisplayContainer {
@@ -14,15 +14,12 @@ export default class StatusChip extends DisplayContainer {
         this.borderRadius = 9;
         this.right = 12;
         this.verticalCenter = 0;
-        this.backgroundColor = this.theme.colors.success.lightest;
         this.addElement(this.textElement);
     }
 
     protected get textElement(): TextElementInterface {
         const textElement: TextElementInterface = new TextElement();
         textElement.text = 'Inactive';
-        textElement.color = this.theme.colors.success.darkest;
-        textElement.fontSize = this.theme.typography.fontSizes.xSmall;
         textElement.fontWeight = FontWeight.BOLD;
         textElement.verticalCenter = 0;
         return textElement;

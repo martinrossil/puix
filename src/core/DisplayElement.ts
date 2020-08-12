@@ -1,7 +1,5 @@
 import DisplayElementInterface from './DisplayElementInterface';
 import LayoutElement from './LayoutElement';
-import ITheme from '../interfaces/design/ITheme';
-import Design from '../design/Design';
 import Overflow from '../consts/Overflow';
 
 export default class DisplayElement extends LayoutElement implements DisplayElementInterface {
@@ -89,7 +87,7 @@ export default class DisplayElement extends LayoutElement implements DisplayElem
         return this._overflowY;
     }
 
-    private _shadow: string = this.theme.shadows.none;
+    private _shadow = '';
 
     public set shadow(value: string) {
         if (this._shadow !== value) {
@@ -118,10 +116,6 @@ export default class DisplayElement extends LayoutElement implements DisplayElem
 
     public get borderRadius(): number {
         return this._borderRadius;
-    }
-
-    public get theme(): ITheme {
-        return Design.theme;
     }
 
     private _cursor = '';

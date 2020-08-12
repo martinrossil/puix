@@ -12,7 +12,6 @@ import VerticalAlign from '../../consts/VerticalAlign';
 import BaseButtonInterface from './BaseButtonInterface';
 import RippleElementInterface from '../../elements/RippleElementInterface';
 import RippleElement from '../../elements/RippleElement';
-import HSL from '../../design/color/HSL';
 
 export default class BaseButton extends DisplayContainer implements BaseButtonInterface {
     public constructor() {
@@ -21,7 +20,7 @@ export default class BaseButton extends DisplayContainer implements BaseButtonIn
         this.minWidth = 36;
         this.minHeight = 36;
         this.cornerSize = 4;
-        this.rippleColor = HSL.WHITE;
+        this.rippleColor = 'white';
         this.layout = new AnchorLayout();
         this.shapeElement.percentWidth = 100;
         this.shapeElement.percentHeight = 100;

@@ -2,15 +2,13 @@ import DisplayContainer from '../containers/DisplayContainer';
 import ButtonComponentInterface from './ButtonComponentInterface';
 import TextElementInterface from '../text/TextElementInterface';
 import TextElement from '../text/TextElement';
-import FontWeight from '../design/typography/FontWeight';
+import FontWeight from '../consts/FontWeight';
 import DisplayContainerInterface from '../containers/DisplayContainerInterface';
 import IconElementInterface from '../elements/IconElementInterface';
 import IconElement from '../elements/IconElement';
 import HorizontalLayout from '../layouts/HorizontalLayout';
 import VerticalAlign from '../consts/VerticalAlign';
 import AnchorLayout from '../layouts/AnchorLayout';
-import IColorRange from '../interfaces/design/color/IColorRange';
-import HSL from '../design/color/HSL';
 import RippleElementInterface from '../elements/RippleElementInterface';
 import RippleElement from '../elements/RippleElement';
 import ShapeElementInterface from '../svg/ShapeElementInterface';
@@ -29,9 +27,8 @@ export default class ButtonComponent extends DisplayContainer implements ButtonC
         this.minWidth = 36;
         this.minHeight = 36;
         this.borderRadius = 4;
-        this.backgroundColor = this.colorRange.medium;
         this.layout = new AnchorLayout();
-        this.labelColor = HSL.WHITE;
+        this.labelColor = 'white';
         this.addElement(this.iconLabelContainer);
         this.addElement(this.shapeElement);
         this.addElement(this.rippleElement);
@@ -157,8 +154,7 @@ export default class ButtonComponent extends DisplayContainer implements ButtonC
         if (!this._shapeElement) {
             this._shapeElement = new ShapeElement();
             this._shapeElement.strokeWidth = 1.3;
-            this._shapeElement.strokeColor = this.colorRange.medium;
-            this._shapeElement.fillColor = HSL.NONE;
+            this._shapeElement.fillColor = 'none';
             this._shapeElement.percentWidth = 100;
             this._shapeElement.percentHeight = 100;
             this._shapeElement.visible = false;
@@ -206,19 +202,6 @@ export default class ButtonComponent extends DisplayContainer implements ButtonC
         return this._labelColor;
     }
 
-    private _colorRange: IColorRange = this.theme.colors.secondary;
-
-    public set colorRange(value: IColorRange) {
-        if (this._colorRange !== value) {
-            this._colorRange = value;
-            this.backgroundColor = value.medium;
-        }
-    }
-
-    public get colorRange(): IColorRange {
-        return this._colorRange;
-    }
-
     private _buttonType = ButtonComponent.FILL;
 
     public set buttonType(value: string) {
@@ -227,9 +210,6 @@ export default class ButtonComponent extends DisplayContainer implements ButtonC
             if (value === ButtonComponent.OUTLINE) {
                 this.backgroundColor = '';
                 this.shapeElement.visible = true;
-                this.iconElement.color = this.colorRange.medium;
-                this.labelElement.color = this.colorRange.medium;
-                this.rippleElement.rippleColor = this.colorRange.medium;
             }
         }
     }

@@ -9,8 +9,6 @@ import ShapeElementInterface from '../../svg/ShapeElementInterface';
 import ShapeElement from '../../svg/ShapeElement';
 import DisplayContainerInterface from '../../containers/DisplayContainerInterface';
 import AnchorLayout from '../../layouts/AnchorLayout';
-import HSL from '../../design/color/HSL';
-import Icons from '../../design/icon/Icons';
 
 export default class Appbar extends DisplayContainer {
     public constructor() {
@@ -42,7 +40,6 @@ export default class Appbar extends DisplayContainer {
     protected get shapeElement(): ShapeElementInterface {
         if (!this._shapeElement) {
             this._shapeElement = new ShapeElement();
-            this._shapeElement.fillColor = this.theme.colors.secondary.medium;
             this._shapeElement.percentWidth = 100;
             this._shapeElement.percentHeight = 100;
         }
@@ -55,8 +52,6 @@ export default class Appbar extends DisplayContainer {
         if (!this._iconElement) {
             this._iconElement = new IconElement();
             this._iconElement.setSize(32, 32);
-            this._iconElement.icon = Icons.PUIX;
-            this._iconElement.color = this.theme.colors.primary.medium;
         }
         return this._iconElement;
     }
@@ -67,7 +62,7 @@ export default class Appbar extends DisplayContainer {
         if (!this._textElement) {
             this._textElement = new TextElement();
             this._textElement.text = 'Pui/x';
-            this._textElement.color = HSL.WHITE;
+            this._textElement.color = 'white';
             this._textElement.fontWeight = 700;
             this._textElement.fontSize = 24;
         }

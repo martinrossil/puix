@@ -2,7 +2,6 @@ import ActionBar from './ActionBar';
 import DisplayContainer from '../../containers/DisplayContainer';
 import AnchorLayout from '../../layouts/AnchorLayout';
 import IconTextContainer from './IconTextContainer';
-import HSL from '../../design/color/HSL';
 
 export default class DataCard extends DisplayContainer {
     public constructor() {
@@ -13,9 +12,8 @@ export default class DataCard extends DisplayContainer {
         this.horizontalCenter = 0;
         this.verticalCenter = 0;
         this.borderRadius = 8;
-        this.backgroundColor = HSL.WHITE;
+        this.backgroundColor = 'white';
         this.overflow = 'hidden';
-        this.shadow = this.theme.shadows.medium;
         this.addElement(new IconTextContainer());
         this.addElement(new ActionBar());
     }
