@@ -1,45 +1,36 @@
 import ApplicationElement from './containers/ApplicationElement';
-import RippleComponent from './components/RippleComponent';
-import ButtonComponentInterface from './components/ButtonComponentInterface';
-import ButtonComponent from './components/ButtonComponent';
-import Icons from './design/icon/Icons';
+import TextElementInterface from './text/TextElementInterface';
+import TextElement from './text/TextElement';
 
 export default class PuixDev extends ApplicationElement {
     public constructor() {
         super();
         this.name = 'PuixDev';
-        // this.addElement(this.rippleComponent);
-        this.addElement(this.button);
+        this.addElement(this.textElement);
     }
 
-    protected _button!: ButtonComponentInterface;
+    private _textElement!: TextElementInterface;
 
-    protected get button(): ButtonComponentInterface {
-        if (!this._button) {
-            this._button = new ButtonComponent();
-            this._button.icon = Icons.EMAIL;
-            this._button.label = 'Click Me';
-            this._button.horizontalCenter = 0;
-            this._button.verticalCenter = 0;
-            // this._button.setSize(56, 56);
-            // this._button.borderRadius = 13;
-            // this._button.iconSize = 24;
-            // this._button.shadow = this.theme.shadows.xSmall;
-            this._button.buttonType = ButtonComponent.OUTLINE;
+    protected get textElement(): TextElementInterface {
+        if (!this._textElement) {
+            this._textElement = new TextElement();
+            // this._textElement.backgroundColor = 'hsla(0, 100%, 50%, 0.2)';
+            this._textElement.text = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
+            // this._textElement.fontSize = 100;
+            // this._textElement.lineHeight = 100;
+            // this._textElement.top = 100;
+            // this._textElement.horizontalCenter = 0;
+            // this._textElement.verticalCenter = 0;
+            this._textElement.percentWidth = 80;
+            // this._textElement.letterSpacing = 2;
+            // this._textElement.capHeight = 0.73;
+            // his._textElement.verticalTextOffset = 0.044;
+            // this._textElement.lineHeight = 19.2;
+            // this._textElement.letterSpacing = 10
+            // this.textElement.percentHeight = 100;
+            // this.textElement.percentWidth = 100;
         }
-        return this._button;
-    }
-
-    protected _rippleComponent!: RippleComponent;
-
-    protected get rippleComponent(): RippleComponent {
-        if (!this._rippleComponent) {
-            this._rippleComponent = new RippleComponent();
-            this._rippleComponent.setSize(200, 200);
-            this._rippleComponent.horizontalCenter = 0;
-            this._rippleComponent.verticalCenter = 0;
-        }
-        return this._rippleComponent;
+        return this._textElement;
     }
 }
 customElements.define('puix-dev', PuixDev);
