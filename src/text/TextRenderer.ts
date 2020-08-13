@@ -5,6 +5,7 @@ import FontWeight from '../consts/FontWeight';
 export default class TextRenderer extends DisplayElement implements TextRendererInterface {
     public constructor() {
         super();
+        // this.backgroundColor = 'hsla(0, 50%, 0%, 0.2)';
         this.name = 'TextRenderer';
         this.fontFamily = 'Verdana';
         this.fontSize = 11.68;

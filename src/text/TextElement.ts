@@ -5,15 +5,22 @@ import TextRenderer from './TextRenderer';
 import SizeElement from '../core/SizeElement';
 import FontWeight from '../consts/FontWeight';
 
+/**
+ * Verdana 400 capHeight = 0.73, verticalOffset = 0.044, horizontalOffset = 0.13;
+ * Inter 400 capHeight = 0.727, verticalOffset = 0.002, horizontalOffset = 0.121;
+ * Inter 500 capHeight = 0.727, verticalOffset = 0.000, horizontalOffset = 0.11;
+ * Inter 700 capHeight = 0.727, verticalOffset = 0.002, horizontalOffset = 0.086;
+ */
+
 export default class TextElement extends DisplayElement implements TextElementInterface {
     public constructor() {
         super();
         this.name = 'TextElement';
         this.enabled = false;
-        this.fontFamily = 'Verdana';
-        this.capHeight = 0.73;
-        this.verticalOffset = 0.044;
-        this.horizontalOffset = 0.13;
+        this.fontFamily = 'Inter';
+        this.capHeight = 0.7;
+        this.verticalOffset = 0.0;
+        this.horizontalOffset = 0.0;
         this.fontSize = 11.68;
         this.lineHeight = 19.2;
         this.fontWeight = FontWeight.REGULAR;
@@ -27,7 +34,7 @@ export default class TextElement extends DisplayElement implements TextElementIn
         this.textRenderer.fontSize = this.fontSize / this.capHeight;
         const topPadding = this.lineHeight - this.fontSize;
         const offsetY = -topPadding * 0.5;
-        this.textRenderer.y = offsetY - this.fontSize * this.verticalOffset;
+        this.textRenderer.y = offsetY - this.fontSize * -this.verticalOffset;
         const offsetX = this.fontSize * this.horizontalOffset;
         this.textRenderer.x = -offsetX;
         if (isNaN(this.width) && isNaN(this.height)) {
