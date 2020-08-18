@@ -1,74 +1,74 @@
 import ApplicationElement from './containers/ApplicationElement';
+import ButtonPrimaryInterface from './components/fluent/buttons/ButtonPrimaryInterface';
+import ButtonPrimary from './components/fluent/buttons/ButtonPrimary';
+import TouchLayerInterface from './elements/TouchLayerInterface';
+import TouchLayer from './elements/TouchLayer';
 import TextElementInterface from './text/TextElementInterface';
 import TextElement from './text/TextElement';
-import FontWeight from './consts/FontWeight';
+import { TextAlign } from './enums/TextAlign';
+import FluentTheme from './FluentTheme';
 
 export default class PuixDev extends ApplicationElement {
     public constructor() {
         super();
         this.name = 'PuixDev';
-        // this.addElement(this.textElement);
-        this.addElement(this.textElementMedium);
-        // this.addElement(this.textElementBold);
+        // this.addElement(this.buttonPrimary);
+        // this.addElement(this.buttonPrimary2);
+        // this.addElement(this.touchLayer);
+        // genialt const test: EventDispatcherInterface & LifeCycleElementInterface = new LifeCycleElement();
+        const te: TextElementInterface = new TextElement();
+        te.fontSize = 16;
+        te.lineHeight = 28;
+        te.fontFamily = FluentTheme.FONT_FAMILY;
+        te.capHeight = FluentTheme.FONT_CAP_HEIGHT;
+        te.verticalOffset = FluentTheme.FONT_VERICAL_OFFSET;
+        te.horizontalOffset = FluentTheme.FONT_400_HORIZONTAL_OFFSET;
+        te.percentWidth = 90;
+        te.textAlign = TextAlign.JUSTIFY;
+        te.textColor = 'hsla(0, 0%, 10%, 1.0)';
+        te.text = 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.';
+        te.verticalCenter = 0;
+        te.horizontalCenter = 0;
+        this.addElement(te);
     }
 
-    private _textElement!: TextElementInterface;
+    private _touchLayer!: TouchLayerInterface;
 
-    protected get textElement(): TextElementInterface {
-        if (!this._textElement) {
-            this._textElement = new TextElement();
-            this._textElement.backgroundColor = 'hsla(0, 100%, 50%, 0.4)';
-            this._textElement.text = 'Katrine'; // 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
-            this._textElement.fontSize = 100;
-            this._textElement.lineHeight = 100;
-            this._textElement.horizontalCenter = 0;
-            this._textElement.verticalCenter = -125;
-            this._textElement.capHeight = 0.727;
-            this._textElement.verticalOffset = 0.002;
-            this.textElement.horizontalOffset = 0.121;
-            this._textElement.color = 'hsla(180, 100%, 50%, 0.4)';
+    public get touchLayer(): TouchLayerInterface {
+        if (!this._touchLayer) {
+            this._touchLayer = new TouchLayer();
+            this._touchLayer.setSize(200, 200);
+            this._touchLayer.backgroundColor = 'hsla(0, 100%, 50%)';
+            this._touchLayer.horizontalCenter = 0;
+            this._touchLayer.verticalCenter = 0;
         }
-        return this._textElement;
+        return this._touchLayer;
     }
 
-    private _textElementMedium!: TextElementInterface;
+    private _buttonPrimary!: ButtonPrimaryInterface;
 
-    protected get textElementMedium(): TextElementInterface {
-        if (!this._textElementMedium) {
-            this._textElementMedium = new TextElement();
-            this._textElementMedium.backgroundColor = 'hsla(0, 100%, 50%, 0.4)';
-            this._textElementMedium.text = 'HH'; // 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
-            this._textElementMedium.fontSize = 300;
-            this._textElementMedium.lineHeight = 300;
-            this._textElementMedium.fontWeight = FontWeight.MEDIUM;
-            this._textElementMedium.horizontalCenter = 0;
-            this._textElementMedium.verticalCenter = 0;
-            this._textElementMedium.capHeight = 0.727;
-            this._textElementMedium.verticalOffset = 0.000;
-            this._textElementMedium.horizontalOffset = 0.11;
-            this._textElementMedium.color = 'hsla(180, 100%, 50%, 0.4)';
+    protected get buttonPrimary(): ButtonPrimaryInterface {
+        if (!this._buttonPrimary) {
+            this._buttonPrimary = new ButtonPrimary();
+            this._buttonPrimary.horizontalCenter = 0;
+            this._buttonPrimary.verticalCenter = -30;
+            this._buttonPrimary.text = 'Primary Button';
+            this._buttonPrimary.tabIndex = 0;
         }
-        return this._textElementMedium;
+        return this._buttonPrimary;
     }
 
-    private _textElementBold!: TextElementInterface;
+    private _buttonPrimary2!: ButtonPrimaryInterface;
 
-    protected get textElementBold(): TextElementInterface {
-        if (!this._textElementBold) {
-            this._textElementBold = new TextElement();
-            this._textElementBold.backgroundColor = 'hsla(0, 100%, 50%, 0.4)';
-            this._textElementBold.text = 'Katrine'; // 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
-            this._textElementBold.fontSize = 100;
-            this._textElementBold.lineHeight = 100;
-            this._textElementBold.fontWeight = FontWeight.BOLD;
-            this._textElementBold.horizontalCenter = 0;
-            this._textElementBold.verticalCenter = 125;
-            this._textElementBold.capHeight = 0.727;
-            this._textElementBold.verticalOffset = 0.002;
-            this._textElementBold.horizontalOffset = 0.086;
-            this._textElementBold.color = 'hsla(180, 100%, 50%, 0.4)';
+    protected get buttonPrimary2(): ButtonPrimaryInterface {
+        if (!this._buttonPrimary2) {
+            this._buttonPrimary2 = new ButtonPrimary();
+            this._buttonPrimary2.horizontalCenter = 0;
+            this._buttonPrimary2.verticalCenter = 30;
+            this._buttonPrimary2.text = 'Primary Button ';
+            this._buttonPrimary2.tabIndex = 0;
         }
-        return this._textElementBold;
+        return this._buttonPrimary2;
     }
 }
 customElements.define('puix-dev', PuixDev);
