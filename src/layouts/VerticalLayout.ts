@@ -1,6 +1,6 @@
 import Layout from './Layout';
 import VerticalLayoutInterface from './VerticalLayoutInterface';
-import HorizontalAlign from '../consts/HorizontalAlign';
+import { HorizontalAlign } from '../enums/HorizontalAlign';
 import DisplayContainerInterface from '../containers/DisplayContainerInterface';
 import SizeElement from '../core/SizeElement';
 

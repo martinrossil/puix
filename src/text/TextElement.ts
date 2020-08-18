@@ -3,13 +3,20 @@ import TextElementInterface from './TextElementInterface';
 import TextRendererInterface from './TextRendererInterface';
 import TextRenderer from './TextRenderer';
 import SizeElement from '../core/SizeElement';
-import FontWeight from '../consts/FontWeight';
+import { FontWeight } from '../enums/FontWeight';
+import { TextAlign } from '../enums/TextAlign';
+import { WhiteSpace } from '../enums/WhiteSpace';
+import { Overflow } from '../enums/Overflow';
+import { TextOverflow } from '../enums/TextOverflow';
 
 /**
  * Verdana 400 capHeight = 0.73, verticalOffset = 0.044, horizontalOffset = 0.13;
  * Inter 400 capHeight = 0.727, verticalOffset = 0.002, horizontalOffset = 0.121;
  * Inter 500 capHeight = 0.727, verticalOffset = 0.000, horizontalOffset = 0.11;
  * Inter 700 capHeight = 0.727, verticalOffset = 0.002, horizontalOffset = 0.086;
+ * Montserrat 400 capHeight = 0.7, verticalOffset = -0.013, horizontalOffset = 0.163;
+ * SegoeUI 400 capHeight = 0.7, verticalOffset = -0.091, horizontalOffset = 0.13;
+ * SegoeUI 600 capHeight = 0.7, verticalOffset = -0.091, horizontalOffset = 0.123;
  */
 
 export default class TextElement extends DisplayElement implements TextElementInterface {
@@ -23,9 +30,8 @@ export default class TextElement extends DisplayElement implements TextElementIn
         this.horizontalOffset = 0.0;
         this.fontSize = 11.68;
         this.lineHeight = 19.2;
-        this.fontWeight = FontWeight.REGULAR;
+        this.fontWeight = FontWeight.REGULAR_400;
         this.letterSpacing = 0.0;
-        this.color = 'black';
         this.appendChild(this.textRenderer as unknown as Node);
     }
 
@@ -165,13 +171,13 @@ export default class TextElement extends DisplayElement implements TextElementIn
         if (this._wordwrap !== value) {
             this._wordwrap = value;
             if (value) {
-                this.textRenderer.whiteSpace = 'normal';
-                this.textRenderer.overflow = 'visible';
-                this.textRenderer.textOverflow = 'clip';
+                this.textRenderer.whiteSpace = WhiteSpace.NORMAL;
+                this.textRenderer.overflowX = Overflow.VISIBLE;
+                this.textRenderer.textOverflow = TextOverflow.CLIP;
             } else {
-                this.textRenderer.whiteSpace = 'nowrap';
-                this.textRenderer.overflow = 'hidden';
-                this.textRenderer.textOverflow = 'ellipsis';
+                this.textRenderer.whiteSpace = WhiteSpace.NO_WRAP;
+                this.textRenderer.overflowX = Overflow.HIDDEN;
+                this.textRenderer.textOverflow = TextOverflow.ELLIPSIS;
             }
             this.invalidateDisplay();
         }
@@ -181,17 +187,12 @@ export default class TextElement extends DisplayElement implements TextElementIn
         return this._wordwrap;
     }
 
-    private _color = '';
-
-    public set color(value: string) {
-        if (this._color !== value) {
-            this._color = value;
-            this.textRenderer.color = value;
-        }
+    public set textColor(value: string) {
+        this.textRenderer.textColor = value;
     }
 
-    public get color(): string {
-        return this._color;
+    public get textColor(): string {
+        return this.textRenderer.textColor;
     }
 
     private _fontWeight = NaN;
@@ -222,10 +223,14 @@ export default class TextElement extends DisplayElement implements TextElementIn
         return this._letterSpacing;
     }
 
-    private _textRenderer: TextRendererInterface = new TextRenderer();
+    private textRenderer: TextRendererInterface = new TextRenderer();
 
-    protected get textRenderer(): TextRendererInterface {
-        return this._textRenderer;
+    public set textAlign(value: TextAlign) {
+        this.textRenderer.textAlign = value;
+    }
+
+    public get textAlign(): TextAlign {
+        return this.textRenderer.textAlign;
     }
 }
 customElements.define('text-element', TextElement);

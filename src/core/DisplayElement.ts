@@ -1,6 +1,7 @@
 import DisplayElementInterface from './DisplayElementInterface';
 import LayoutElement from './LayoutElement';
-import Overflow from '../consts/Overflow';
+import { Overflow } from '../enums/Overflow';
+import { Cursor } from '../enums/Cursor';
 
 export default class DisplayElement extends LayoutElement implements DisplayElementInterface {
     public constructor() {
@@ -46,9 +47,9 @@ export default class DisplayElement extends LayoutElement implements DisplayElem
         return this._enabled;
     }
 
-    private _overflow = Overflow.VISIBLE;
+    private _overflow: Overflow = Overflow.VISIBLE;
 
-    public set overflow(value: string) {
+    public set overflow(value: Overflow) {
         if (this._overflow !== value) {
             this._overflow = value;
             this._overflowX = value;
@@ -57,33 +58,33 @@ export default class DisplayElement extends LayoutElement implements DisplayElem
         }
     }
 
-    public get overflow(): string {
+    public get overflow(): Overflow {
         return this._overflow;
     }
 
-    private _overflowX = Overflow.VISIBLE;
+    private _overflowX: Overflow = Overflow.VISIBLE;
 
-    public set overflowX(value: string) {
+    public set overflowX(value: Overflow) {
         if (this._overflowX !== value) {
             this._overflowX = value;
             this.style.overflowX = value;
         }
     }
 
-    public get overflowX(): string {
+    public get overflowX(): Overflow {
         return this._overflowX;
     }
 
-    private _overflowY = Overflow.VISIBLE;
+    private _overflowY: Overflow = Overflow.VISIBLE;
 
-    public set overflowY(value: string) {
+    public set overflowY(value: Overflow) {
         if (this._overflowY !== value) {
             this._overflowY = value;
             this.style.overflowY = value;
         }
     }
 
-    public get overflowY(): string {
+    public get overflowY(): Overflow {
         return this._overflowY;
     }
 
@@ -118,30 +119,30 @@ export default class DisplayElement extends LayoutElement implements DisplayElem
         return this._borderRadius;
     }
 
-    private _cursor = '';
+    private _cursor: Cursor = Cursor.NONE;
 
-    public set cursor(value: string) {
+    public set cursor(value: Cursor) {
         if (this._cursor !== value) {
             this._cursor = value;
             this.style.cursor = value;
         }
     }
 
-    public get cursor(): string {
+    public get cursor(): Cursor {
         return this._cursor;
     }
 
-    private _backgoundColor = '';
+    private _backgroundColor = '';
 
     public set backgroundColor(value: string) {
-        if (this._backgoundColor !== value) {
-            this._backgoundColor = value;
+        if (this._backgroundColor !== value) {
+            this._backgroundColor = value;
             this.style.backgroundColor = value;
         }
     }
 
     public get backgroundColor(): string {
-        return this._backgoundColor;
+        return this._backgroundColor;
     }
 
     private _visible = true;

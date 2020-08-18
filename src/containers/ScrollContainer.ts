@@ -4,10 +4,10 @@ import DisplayContainerInterface from './DisplayContainerInterface';
 import DisplayContainer from './DisplayContainer';
 import LayoutElementInterface from '../core/LayoutElementInterface';
 import LayoutInterface from '../layouts/LayoutInterface';
-import ScrollPolicy from '../consts/ScrollPolicy';
+import { ScrollPolicy } from '../enums/ScrollPolicy';
 import SizeElement from '../core/SizeElement';
 import LayoutElement from '../core/LayoutElement';
-import Overflow from '../consts/Overflow';
+import { Overflow } from '../enums/Overflow';
 
 export default class ScrollContainer extends DisplayElement implements ScrollContainerInterface {
     public constructor() {

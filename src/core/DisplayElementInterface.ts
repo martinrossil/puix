@@ -1,10 +1,11 @@
 import LayoutElementInterface from './LayoutElementInterface';
+import { Overflow } from '../enums/Overflow';
 
 export default interface DisplayElementInterface extends LayoutElementInterface {
     opacity: number;
-    overflow: string;
-    overflowX: string;
-    overflowY: string;
+    overflow: Overflow;
+    overflowX: Overflow;
+    overflowY: Overflow;
     enabled: boolean;
     borderRadius: number;
     shadow: string;
