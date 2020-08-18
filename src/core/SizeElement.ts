@@ -28,6 +28,9 @@ export default class SizeElement extends PositionElement implements SizeElementI
     private _percentWidth = NaN;
 
     public set percentWidth(value: number) {
+        if (isNaN(this._percentWidth) && isNaN(value)) {
+            return;
+        }
         if (this._percentWidth !== value) {
             if (!isNaN(value)) {
                 if (value < 0) {
@@ -53,6 +56,9 @@ export default class SizeElement extends PositionElement implements SizeElementI
     private _percentHeight = NaN;
 
     public set percentHeight(value: number) {
+        if (isNaN(this._percentHeight) && isNaN(value)) {
+            return;
+        }
         if (this._percentHeight !== value) {
             if (!isNaN(value)) {
                 if (value < 0) {
@@ -257,6 +263,9 @@ export default class SizeElement extends PositionElement implements SizeElementI
     private _width = NaN;
 
     public set width(value: number) {
+        if (isNaN(this._width) && isNaN(value)) {
+            return;
+        }
         if (this._width === value) {
             return;
         }
@@ -400,6 +409,9 @@ export default class SizeElement extends PositionElement implements SizeElementI
     private _height = NaN;
 
     public set height(value: number) {
+        if (isNaN(this._height) && isNaN(value)) {
+            return;
+        }
         if (this._height === value) {
             return;
         }
