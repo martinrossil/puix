@@ -47,6 +47,7 @@ module.exports = function karma(config) {
             },
             exclude: [
                 'node_modules',
+                'dist',
                 '*spec.ts',
             ],
             coverageOptions: {
