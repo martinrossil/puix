@@ -12,10 +12,6 @@ export default class State implements StateInterface {
         return this;
     }
 
-    public enter: Function | null = null;
-
-    public exit: Function | null = null;
-
     public getState(type: string): StateInterface {
         const target: StateInterface | undefined = this.targets.get(type);
         if (target !== undefined) {
