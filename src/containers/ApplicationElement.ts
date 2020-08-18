@@ -1,8 +1,9 @@
 import DisplayContainer from './DisplayContainer';
-import Events from '../consts/Events';
 import AnchorLayout from '../layouts/AnchorLayout';
 
 export default class ApplicationElement extends DisplayContainer {
+    public static APPLICATION_COMPLETE = 'applicationComplete';
+
     public constructor() {
         super();
         this.name = 'ApplicationElement';
@@ -21,7 +22,7 @@ export default class ApplicationElement extends DisplayContainer {
 
     protected connectedCallback(): void {
         super.connectedCallback();
-        this.dispatchEventWith(Events.APPLICATION_COMPLETE);
+        this.dispatchEventWith(ApplicationElement.APPLICATION_COMPLETE);
     }
 
     public set backgroundColor(value: string) {
