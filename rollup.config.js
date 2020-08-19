@@ -7,7 +7,7 @@ export default [
         input: 'src/index.ts',
         output: {
             file: pkg.module,
-            format: 'es',
+            format: 'esm',
             sourcemap: true
         },
         plugins: [typescript({tsconfig: "tsconfig.json"})]

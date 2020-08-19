@@ -33,7 +33,7 @@ export default {
     output: [
         {
             file: './public/es6.'  + version + '.js',
-            format: 'es',
+            format: 'esm',
             plugins: [
                 compiler({
                     language_in: "ECMASCRIPT_NEXT",
