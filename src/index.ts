@@ -25,6 +25,9 @@ export { default as PositionElementInterface } from './core/PositionElementInter
 export { default as SizeElement } from './core/SizeElement';
 export { default as SizeElementInterface } from './core/SizeElementInterface';
 
+export { default as ArrayList } from './data/ArrayList';
+export { default as ArrayListInterface } from './data/ArrayListInterface';
+
 export { default as IconElement } from './elements/IconElement';
 export { default as IconElementInterface } from './elements/IconElementInterface';
 export { default as RippleElement } from './elements/RippleElement';
@@ -66,6 +69,10 @@ export { default as TextElement } from './text/TextElement';
 export { default as TextElementInterface } from './text/TextElementInterface';
 export { default as TextRenderer } from './text/TextRenderer';
 export { default as TextRendererInterface } from './text/TextRendererInterface';
+
+export { default as Color } from './theme/Color';
+export { default as ColorInterface } from './theme/ColorInterface';
+export { default as Theme } from './theme/Theme';
 
 export { default as Point } from './vo/Point';
 export { default as PointInterface } from './vo/PointInterface';
