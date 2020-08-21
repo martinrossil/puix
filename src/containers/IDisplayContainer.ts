@@ -1,6 +1,6 @@
 import IDisplayElement from '../core/IDisplayElement';
 import ILayoutElement from '../core/ILayoutElement';
-import LayoutInterface from '../layouts/LayoutInterface';
+import ILayout from '../layouts/ILayout';
 
 export default interface IDisplayContainer extends IDisplayElement {
     addElement(element: ILayoutElement): void;
@@ -9,5 +9,5 @@ export default interface IDisplayContainer extends IDisplayElement {
     removeElement(element: ILayoutElement): void;
     getElementAt(index: number): ILayoutElement | null;
     readonly elements: ILayoutElement[];
-    layout: LayoutInterface;
+    layout: ILayout;
 }

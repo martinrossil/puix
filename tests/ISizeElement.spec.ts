@@ -1,9 +1,9 @@
 import { assert } from 'chai';
 import { describe, it, beforeEach } from 'mocha';
-import SizeElementInterface from '../src/core/SizeElementInterface';
+import ISizeElement from '../src/core/ISizeElement';
 import SizeElement from '../src/core/SizeElement';
 
-const sizeElement: SizeElementInterface = new SizeElement();
+const sizeElement: ISizeElement = new SizeElement();
 document.body.appendChild(sizeElement as unknown as Node);
 
 beforeEach(() => {

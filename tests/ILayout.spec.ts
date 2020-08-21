@@ -1,12 +1,12 @@
 import { assert } from 'chai';
 import { describe, it, beforeEach } from 'mocha';
-import LayoutInterface from '../src/layouts/LayoutInterface';
-import DisplayContainerInterface from '../src/containers/DisplayContainerInterface';
+import ILayout from '../src/layouts/ILayout';
+import IDisplayContainer from '../src/containers/IDisplayContainer';
 import DisplayContainer from '../src/containers/DisplayContainer';
 import { Layout } from '../src';
 
-const displayContainer: DisplayContainerInterface = new DisplayContainer();
-const baseLayout: LayoutInterface = new Layout();
+const displayContainer: IDisplayContainer = new DisplayContainer();
+const baseLayout: ILayout = new Layout();
 displayContainer.layout = baseLayout;
 document.body.appendChild(displayContainer as unknown as Node);
 

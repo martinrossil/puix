@@ -1,6 +1,6 @@
 import IDisplayContainer from '../containers/IDisplayContainer';
 
-export default interface LayoutInterface {
+export default interface ILayout {
     updateLayout(container: IDisplayContainer): void;
     padding: number;
     paddingLeft: number;

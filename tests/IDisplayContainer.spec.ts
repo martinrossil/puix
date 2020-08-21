@@ -1,16 +1,16 @@
 import { assert } from 'chai';
 import { describe, it } from 'mocha';
-import DisplayContainerInterface from '../src/containers/DisplayContainerInterface';
+import IDisplayContainer from '../src/containers/IDisplayContainer';
 import DisplayContainer from '../src/containers/DisplayContainer';
-import DisplayElementInterface from '../src/core/DisplayElementInterface';
+import IDisplayElement from '../src/core/IDisplayElement';
 import DisplayElement from '../src/core/DisplayElement';
 
-const displayContainer: DisplayContainerInterface = new DisplayContainer();
-const child1: DisplayElementInterface = new DisplayElement();
+const displayContainer: IDisplayContainer = new DisplayContainer();
+const child1: IDisplayElement = new DisplayElement();
 child1.setSize(300, 50);
-const child2: DisplayElementInterface = new DisplayElement();
+const child2: IDisplayElement = new DisplayElement();
 child2.setSize(50, 300);
-const elements: DisplayElementInterface[] = [child1, child2];
+const elements: IDisplayElement[] = [child1, child2];
 document.body.appendChild(displayContainer as unknown as Node);
 
 describe('DisplayContainerInterface interface', () => {

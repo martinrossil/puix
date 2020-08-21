@@ -1,9 +1,9 @@
 import { assert } from 'chai';
 import { describe, it, beforeEach } from 'mocha';
-import DisplayElementInterface from '../src/core/DisplayElementInterface';
+import IDisplayElement from '../src/core/IDisplayElement';
 import DisplayElement from '../src/core/DisplayElement';
 
-const displayElement: DisplayElementInterface = new DisplayElement();
+const displayElement: IDisplayElement = new DisplayElement();
 
 beforeEach(() => {
     displayElement.opacity = 1;

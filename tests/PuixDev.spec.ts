@@ -1,9 +1,9 @@
 import { assert } from 'chai';
 import { describe, it } from 'mocha';
-import DisplayContainerInterface from '../src/containers/DisplayContainerInterface';
+import IDisplayContainer from '../src/containers/IDisplayContainer';
 import PuixDev from '../src/PuixDev';
 
-const puixDev: DisplayContainerInterface = new PuixDev();
+const puixDev: IDisplayContainer = new PuixDev();
 document.body.appendChild(puixDev as unknown as Node);
 
 describe('PuixDev class', () => {

@@ -1,6 +1,6 @@
 import { assert } from 'chai';
 import { describe, it } from 'mocha';
-import EventDispatcherInterface from '../src/core/EventDispatcherInterface';
+import IEventDispatcher from '../src/core/IEventDispatcher';
 import EventDispatcherElement from '../src/core/EventDispatcherElement';
 import EventDispatcher from '../src/core/EventDispatcher';
 
@@ -12,10 +12,10 @@ const handler: Function = () => {
 const handler2: Function = () => {
     handlerHasBeenCalled2 = true;
 };
-const eventDispatcherElement: EventDispatcherInterface = new EventDispatcherElement();
+const eventDispatcherElement: IEventDispatcher = new EventDispatcherElement();
 eventDispatcherElement.addEventListener('test', handler);
 
-const eventDispatcher: EventDispatcherInterface = new EventDispatcher();
+const eventDispatcher: IEventDispatcher = new EventDispatcher();
 eventDispatcher.addEventListener('test', handler2);
 
 describe('EventDispatcherInterface interface', () => {

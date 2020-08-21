@@ -1,6 +1,6 @@
-import LayoutInterface from './LayoutInterface';
+import ILayout from './ILayout';
 
-export default interface IHorizontalLayout extends LayoutInterface {
+export default interface IHorizontalLayout extends ILayout {
     horizontalGap: number;
     verticalAlign: string;
 }

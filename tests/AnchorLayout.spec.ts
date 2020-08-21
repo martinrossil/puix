@@ -1,16 +1,16 @@
 import { assert } from 'chai';
 import { describe, it, beforeEach } from 'mocha';
 
-import DisplayContainerInterface from '../src/containers/DisplayContainerInterface';
-import DisplayElementInterface from '../src/core/DisplayElementInterface';
+import IDisplayContainer from '../src/containers/IDisplayContainer';
+import IDisplayElement from '../src/core/IDisplayElement';
 import DisplayContainer from '../src/containers/DisplayContainer';
 import DisplayElement from '../src/core/DisplayElement';
 import AnchorLayout from '../src/layouts/AnchorLayout';
-import LayoutInterface from '../src/layouts/LayoutInterface';
+import ILayout from '../src/layouts/ILayout';
 
-const displayContainer: DisplayContainerInterface = new DisplayContainer();
-const anchorLayout: LayoutInterface = new AnchorLayout();
-const child100x100: DisplayElementInterface = new DisplayElement();
+const displayContainer: IDisplayContainer = new DisplayContainer();
+const anchorLayout: ILayout = new AnchorLayout();
+const child100x100: IDisplayElement = new DisplayElement();
 child100x100.setSize(100, 100);
 displayContainer.layout = anchorLayout;
 document.body.appendChild(displayContainer as unknown as Node);

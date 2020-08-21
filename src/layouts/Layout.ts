@@ -1,8 +1,8 @@
-import LayoutInterface from './LayoutInterface';
+import ILayout from './ILayout';
 import IDisplayContainer from '../containers/IDisplayContainer';
 import SizeElement from '../core/SizeElement';
 
-export default class Layout implements LayoutInterface {
+export default class Layout implements ILayout {
     public constructor() {
         this.name = 'Layout';
     }

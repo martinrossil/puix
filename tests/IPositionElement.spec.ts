@@ -1,9 +1,9 @@
 import { assert } from 'chai';
 import { describe, it, beforeEach } from 'mocha';
-import PositionElementInterface from '../src/core/PositionElementInterface';
+import IPositionElement from '../src/core/IPositionElement';
 import PositionElement from '../src/core/PositionElement';
 
-const positionElement: PositionElementInterface = new PositionElement();
+const positionElement: IPositionElement = new PositionElement();
 document.body.appendChild(positionElement as unknown as Node);
 
 beforeEach(() => {

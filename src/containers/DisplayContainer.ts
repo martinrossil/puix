@@ -2,7 +2,7 @@ import DisplayElement from '../core/DisplayElement';
 import IDisplayContainer from './IDisplayContainer';
 import ILayoutElement from '../core/ILayoutElement';
 import LayoutElement from '../core/LayoutElement';
-import LayoutInterface from '../layouts/LayoutInterface';
+import ILayout from '../layouts/ILayout';
 import Layout from '../layouts/Layout';
 import SizeElement from '../core/SizeElement';
 
@@ -70,16 +70,16 @@ export default class DisplayContainer extends DisplayElement implements IDisplay
         this.invalidateDisplay();
     }
 
-    private _layout: LayoutInterface = new Layout();
+    private _layout: ILayout = new Layout();
 
-    public set layout(value: LayoutInterface) {
+    public set layout(value: ILayout) {
         if (this._layout !== value) {
             this._layout = value;
             this.invalidateDisplay();
         }
     }
 
-    public get layout(): LayoutInterface {
+    public get layout(): ILayout {
         return this._layout;
     }
 }

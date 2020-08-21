@@ -3,7 +3,7 @@ import IScrollContainer from './IScrollContainer';
 import IDisplayContainer from './IDisplayContainer';
 import DisplayContainer from './DisplayContainer';
 import ILayoutElement from '../core/ILayoutElement';
-import LayoutInterface from '../layouts/LayoutInterface';
+import ILayout from '../layouts/ILayout';
 import { ScrollPolicy } from '../enums/ScrollPolicy';
 import SizeElement from '../core/SizeElement';
 import LayoutElement from '../core/LayoutElement';
@@ -118,11 +118,11 @@ export default class ScrollContainer extends DisplayElement implements IScrollCo
         return this.container.elements;
     }
 
-    public set layout(value: LayoutInterface) {
+    public set layout(value: ILayout) {
         this.container.layout = value;
     }
 
-    public get layout(): LayoutInterface {
+    public get layout(): ILayout {
         return this.container.layout;
     }
 
