@@ -1,6 +1,6 @@
-import PointInterface from './PointInterface';
+import IPoint from './IPoint';
 
-export default class Point implements PointInterface {
+export default class Point implements IPoint {
     public x = 0;
     public y = 0;
 

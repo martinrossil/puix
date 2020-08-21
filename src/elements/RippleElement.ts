@@ -1,7 +1,7 @@
 import RippleElementInterface from './RippleElementInterface';
 import TweenInterface from '../animation/TweenInterface';
 import AttributeTween from '../animation/AttributeTween';
-import PointInterface from '../vo/PointInterface';
+import IPoint from '../vo/IPoint';
 import StyleTween from '../animation/StyleTween';
 import ShapeElement from '../svg/ShapeElement';
 
@@ -19,7 +19,7 @@ export default class RippleElement extends ShapeElement implements RippleElement
         this.appendChild(this.svg);
     }
 
-    public show(point: PointInterface): void {
+    public show(point: IPoint): void {
         this.circle.setAttribute('r', '0');
         this.circle.style.opacity = '0.1';
         this.radiusTween.to(this.circleRadius, 300);

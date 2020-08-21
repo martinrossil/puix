@@ -1,5 +1,5 @@
 import { Cursor } from '../enums/Cursor';
-import PointInterface from '../vo/PointInterface';
+import IPoint from '../vo/IPoint';
 import Point from '../vo/Point';
 import DisplayElement from '../core/DisplayElement';
 
@@ -40,7 +40,7 @@ export default class TouchLayer extends DisplayElement {
             const px: number = touch.pageX;
             const py: number = touch.pageY;
             const cr: ClientRect = this.getBoundingClientRect();
-            const point: PointInterface = new Point(px - cr.left, py - cr.top);
+            const point: IPoint = new Point(px - cr.left, py - cr.top);
             this.dispatchEventWith(TouchLayer.TOUCH_START, point);
         }
     }

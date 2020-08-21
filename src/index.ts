@@ -66,13 +66,17 @@ export { default as SvgElement } from './svg/SvgElement';
 export { default as SvgElementInterface } from './svg/SvgElementInterface';
 
 export { default as TextElement } from './text/TextElement';
-export { default as TextElementInterface } from './text/TextElementInterface';
+export { default as ITextElement } from './text/ITextElement';
 export { default as TextRenderer } from './text/TextRenderer';
-export { default as TextRendererInterface } from './text/TextRendererInterface';
+export { default as ITextRenderer } from './text/ITextRenderer';
 
-export { default as Color } from './theme/Color';
-export { default as ColorInterface } from './theme/ColorInterface';
+export { default as ColorRange } from './theme/ColorRange';
+export { default as Design } from './theme/Design';
+export { default as HSLA } from './theme/HSLA';
+export { default as IColorRange } from './theme/IColorRange';
+export { default as IHSLA } from './theme/IHSLA';
+export { default as ITheme } from './theme/ITheme';
 export { default as Theme } from './theme/Theme';
 
 export { default as Point } from './vo/Point';
-export { default as PointInterface } from './vo/PointInterface';
+export { default as IPoint } from './vo/IPoint';

@@ -28,7 +28,7 @@ module.exports = {
         "semi": "off",
         "space-before-function-paren": "off",
         "@typescript-eslint/no-useless-constructor": "off",
-        // "@typescript-eslint/interface-name-prefix": "off",
+        "@typescript-eslint/interface-name-prefix": "off",
         "@typescript-eslint/no-empty-interface": "off",
         // "@typescript-eslint/no-unused-vars": "off",
         "no-useless-constructor": "off",

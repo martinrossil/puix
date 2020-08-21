@@ -1,7 +1,7 @@
 import DisplayElementInterface from '../core/DisplayElementInterface';
 import { TextAlign } from '../enums/TextAlign';
 import { FontWeight } from '../enums/FontWeight';
-export default interface TextElementInterface extends DisplayElementInterface {
+export default interface ITextElement extends DisplayElementInterface {
     text: string;
     fontFamily: string;
     fontSize: number;

@@ -1,8 +1,8 @@
-import ColorInterface from './ColorInterface';
+import IHSLA from './IHSLA';
 import EventDispatcher from '../core/EventDispatcher';
 
-export default class Color extends EventDispatcher implements ColorInterface {
-    public static COLOR_CHANGED = 'Color.COLOR_CHANGED';
+export default class HSLA extends EventDispatcher implements IHSLA {
+    public static CHANGED = 'HSLA.CHANGED';
 
     public constructor(hue = 0, saturation = 100, lightness = 50, name = '', opacity = 1.0) {
         super();
@@ -122,6 +122,6 @@ export default class Color extends EventDispatcher implements ColorInterface {
     }
 
     private notifyChange(): void {
-        this.dispatchEventWith(Color.COLOR_CHANGED);
+        this.dispatchEventWith(HSLA.CHANGED);
     }
 }

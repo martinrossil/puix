@@ -1,6 +1,6 @@
 import DisplayElement from '../core/DisplayElement';
-import TextElementInterface from './TextElementInterface';
-import TextRendererInterface from './TextRendererInterface';
+import ITextElement from './ITextElement';
+import ITextRenderer from './ITextRenderer';
 import TextRenderer from './TextRenderer';
 import SizeElement from '../core/SizeElement';
 import { FontWeight } from '../enums/FontWeight';
@@ -19,7 +19,7 @@ import { TextOverflow } from '../enums/TextOverflow';
  * SegoeUI 600 capHeight = 0.7, verticalOffset = -0.091, horizontalOffset = 0.123;
  */
 
-export default class TextElement extends DisplayElement implements TextElementInterface {
+export default class TextElement extends DisplayElement implements ITextElement {
     public constructor() {
         super();
         this.name = 'TextElement';
@@ -223,7 +223,7 @@ export default class TextElement extends DisplayElement implements TextElementIn
         return this._letterSpacing;
     }
 
-    private textRenderer: TextRendererInterface = new TextRenderer();
+    private textRenderer: ITextRenderer = new TextRenderer();
 
     public set textAlign(value: TextAlign) {
         this.textRenderer.textAlign = value;

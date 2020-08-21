@@ -1,11 +1,11 @@
 import DisplayElement from '../core/DisplayElement';
-import TextRendererInterface from './TextRendererInterface';
+import ITextRenderer from './ITextRenderer';
 import { FontWeight } from '../enums/FontWeight';
 import { TextAlign } from '../enums/TextAlign';
 import { WhiteSpace } from '../enums/WhiteSpace';
 import { TextOverflow } from '../enums/TextOverflow';
 
-export default class TextRenderer extends DisplayElement implements TextRendererInterface {
+export default class TextRenderer extends DisplayElement implements ITextRenderer {
     public constructor() {
         super();
         this.name = 'TextRenderer';
