@@ -1,19 +1,19 @@
-import StateInterface from './StateInterface';
+import IState from './IState';
 
-export default class State implements StateInterface {
+export default class State implements IState {
     public name: string;
-    protected targets: Map<string, StateInterface> = new Map();
+    protected targets: Map<string, IState> = new Map();
     public constructor(name: string) {
         this.name = name;
     }
 
-    public addTransition(type: string, target: StateInterface): StateInterface {
+    public addTransition(type: string, target: IState): IState {
         this.targets.set(type, target)
         return this;
     }
 
-    public getState(type: string): StateInterface {
-        const target: StateInterface | undefined = this.targets.get(type);
+    public getState(type: string): IState {
+        const target: IState | undefined = this.targets.get(type);
         if (target !== undefined) {
             return target;
         }

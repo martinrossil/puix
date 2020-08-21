@@ -1,12 +1,12 @@
 import ApplicationElement from './containers/ApplicationElement';
 import DisplayElement from './core/DisplayElement';
-import DisplayElementInterface from './core/DisplayElementInterface';
+import IDisplayElement from './core/IDisplayElement';
 
 export default class PuixDev extends ApplicationElement {
     public constructor() {
         super();
         this.name = 'PuixDev';
-        const de: DisplayElementInterface = new DisplayElement();
+        const de: IDisplayElement = new DisplayElement();
         de.setSize(300, 300);
         de.horizontalCenter = 0;
         de.verticalCenter = 0;

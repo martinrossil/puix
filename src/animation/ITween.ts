@@ -1,3 +1,3 @@
-export default interface TweenInterface {
+export default interface ITween {
     to(value: number, duration: number): void;
 }

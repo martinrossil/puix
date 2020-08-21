@@ -1,12 +1,12 @@
 import DisplayElement from '../core/DisplayElement';
-import DisplayContainerInterface from './DisplayContainerInterface';
-import LayoutElementInterface from '../core/LayoutElementInterface';
+import IDisplayContainer from './IDisplayContainer';
+import ILayoutElement from '../core/ILayoutElement';
 import LayoutElement from '../core/LayoutElement';
 import LayoutInterface from '../layouts/LayoutInterface';
 import Layout from '../layouts/Layout';
 import SizeElement from '../core/SizeElement';
 
-export default class DisplayContainer extends DisplayElement implements DisplayContainerInterface {
+export default class DisplayContainer extends DisplayElement implements IDisplayContainer {
     public constructor() {
         super();
         this.name = 'DisplayContainer';
@@ -14,7 +14,7 @@ export default class DisplayContainer extends DisplayElement implements DisplayC
         this.addEventListener(LayoutElement.LAYOUT_DATA_CHANGED, this.childChanged as EventListener);
     }
 
-    public elements: LayoutElementInterface[] = [];
+    public elements: ILayoutElement[] = [];
 
     protected childChanged(e: CustomEvent): void {
         if (e.target !== this) {
@@ -28,13 +28,13 @@ export default class DisplayContainer extends DisplayElement implements DisplayC
         this.layout.updateLayout(this);
     }
 
-    public addElement(element: LayoutElementInterface): void {
+    public addElement(element: ILayoutElement): void {
         this.elements.push(element);
         this.appendChild(element as unknown as Node);
         this.invalidateDisplay();
     }
 
-    public addElementAt(element: LayoutElementInterface, index: number): void {
+    public addElementAt(element: ILayoutElement, index: number): void {
         if (this.elements[index]) {
             const beforeElement: Node = this.elements[index] as unknown as Node;
             this.elements.splice(index, 0, element);
@@ -46,21 +46,21 @@ export default class DisplayContainer extends DisplayElement implements DisplayC
         this.invalidateDisplay();
     }
 
-    public getElementAt(index: number): LayoutElementInterface | null {
+    public getElementAt(index: number): ILayoutElement | null {
         if (this.elements[index]) {
             return this.elements[index];
         }
         return null;
     }
 
-    public removeElement(element: LayoutElementInterface): void {
+    public removeElement(element: ILayoutElement): void {
         const start: number = this.elements.indexOf(element);
         this.elements.splice(start, 1);
         this.removeChild(element as LayoutElement);
         this.invalidateDisplay();
     }
 
-    public addElements(elements: LayoutElementInterface[]): void {
+    public addElements(elements: ILayoutElement[]): void {
         const frag: DocumentFragment = document.createDocumentFragment();
         for (const element of elements) {
             this.elements.push(element);

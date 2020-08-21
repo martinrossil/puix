@@ -1,7 +1,7 @@
 import EventDispatcher from '../core/EventDispatcher';
-import TweenInterface from './TweenInterface';
+import ITween from './ITween';
 
-export default class StyleTween extends EventDispatcher implements TweenInterface {
+export default class StyleTween extends EventDispatcher implements ITween {
     protected target: ElementCSSInlineStyle;
     protected style: string;
     protected duration: number;

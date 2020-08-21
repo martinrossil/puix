@@ -1,7 +1,7 @@
-import LayoutElementInterface from './LayoutElementInterface';
+import ILayoutElement from './ILayoutElement';
 import { Overflow } from '../enums/Overflow';
 
-export default interface DisplayElementInterface extends LayoutElementInterface {
+export default interface IDisplayElement extends ILayoutElement {
     opacity: number;
     overflow: Overflow;
     overflowX: Overflow;

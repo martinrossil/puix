@@ -2,8 +2,9 @@ import { Cursor } from '../enums/Cursor';
 import IPoint from '../vo/IPoint';
 import Point from '../vo/Point';
 import DisplayElement from '../core/DisplayElement';
+import ITouchLayer from './ITouchLayer';
 
-export default class TouchLayer extends DisplayElement {
+export default class TouchLayer extends DisplayElement implements ITouchLayer {
     public static CLICK = 'TouchLayer.CLICK';
     public static MOUSE_OVER = 'TouchLayer.MOUSE_OVER';
     public static MOUSE_LEAVE = 'TouchLayer.MOUSE_LEAVE';

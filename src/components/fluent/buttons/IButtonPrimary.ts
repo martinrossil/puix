@@ -1,6 +1,6 @@
-import DisplayContainerInterface from '../../../containers/DisplayContainerInterface';
+import IDisplayContainer from '../../../containers/IDisplayContainer';
 
-export default interface ButtonPrimaryInterface extends DisplayContainerInterface {
+export default interface IButtonPrimary extends IDisplayContainer {
     text: string;
     textColor: string;
     restingBackgroundColor: string;

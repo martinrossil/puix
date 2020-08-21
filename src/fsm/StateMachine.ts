@@ -1,22 +1,22 @@
 import EventDispatcher from '../core/EventDispatcher';
-import StateMachineInterface from './StateMachineInterface';
-import StateInterface from './StateInterface';
+import IStateMachine from './IStateMachine';
+import IState from './IState';
 
-export default class StateMachine extends EventDispatcher implements StateMachineInterface {
+export default class StateMachine extends EventDispatcher implements IStateMachine {
     public static STATE_CHANGED = 'StateMachine.STATE_CHANGED';
 
-    public initial: StateInterface;
-    public current: StateInterface;
-    public states: Set<StateInterface> = new Set();
+    public initial: IState;
+    public current: IState;
+    public states: Set<IState> = new Set();
 
-    public constructor(initial: StateInterface) {
+    public constructor(initial: IState) {
         super();
         this.initial = initial;
         this.current = initial;
         this.states.add(initial);
     }
 
-    public addState(state: StateInterface): StateMachineInterface {
+    public addState(state: IState): IStateMachine {
         this.states.add(state);
         return this;
     }
@@ -31,7 +31,7 @@ export default class StateMachine extends EventDispatcher implements StateMachin
     }
 
     public send(e: Event): void {
-        const state: StateInterface = this.current.getState(e.type);
+        const state: IState = this.current.getState(e.type);
         if (this.current !== state) {
             this.current = state;
             this.dispatchEventWith(StateMachine.STATE_CHANGED, state);

@@ -1,6 +1,6 @@
 import LayoutInterface from './LayoutInterface';
 
-export default interface HorizontalLayoutInterface extends LayoutInterface {
+export default interface IHorizontalLayout extends LayoutInterface {
     horizontalGap: number;
     verticalAlign: string;
 }

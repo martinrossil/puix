@@ -1,6 +1,6 @@
-import SvgElementInterface from './SvgElementInterface';
+import ISvgElement from './ISvgElement';
 
-export default interface PathElementInterface extends SvgElementInterface {
+export default interface IPathElement extends ISvgElement {
     pathData: string;
     strokeColor: string;
     strokeWidth: number;

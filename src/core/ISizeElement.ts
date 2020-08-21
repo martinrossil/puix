@@ -1,6 +1,6 @@
-import PositionElementInterface from './PositionElementInterface';
+import IPositionElement from './IPositionElement';
 
-export default interface SizeElementInterface extends PositionElementInterface {
+export default interface ISizeElement extends IPositionElement {
     setActualSize(width: number, height: number): void;
     setSize(width: number, height: number): void;
     minWidth: number;

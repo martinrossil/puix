@@ -1,7 +1,7 @@
 import DisplayElement from '../core/DisplayElement';
-import SvgElementInterface from './SvgElementInterface';
+import ISvgElement from './ISvgElement';
 
-export default class SvgElement extends DisplayElement implements SvgElementInterface {
+export default class SvgElement extends DisplayElement implements ISvgElement {
     public constructor() {
         super();
         this.name = 'SvgElement';

@@ -1,6 +1,6 @@
-import EventDispatcherInterface from '../core/EventDispatcherInterface';
+import IEventDispatcher from '../core/IEventDispatcher';
 
-export default interface ITheme extends EventDispatcherInterface {
+export default interface ITheme extends IEventDispatcher {
     // color
     // typography
     // distance

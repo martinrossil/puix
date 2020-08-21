@@ -1,7 +1,7 @@
-import TweenInterface from './TweenInterface';
+import ITween from './ITween';
 import EventDispatcher from '../core/EventDispatcher';
 
-export default class AttributeTween extends EventDispatcher implements TweenInterface {
+export default class AttributeTween extends EventDispatcher implements ITween {
     protected target: Element;
     protected attribute: string;
     protected duration: number;

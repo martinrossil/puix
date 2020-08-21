@@ -1,6 +1,6 @@
-import SizeElementInterface from './SizeElementInterface';
+import ISizeElement from './ISizeElement';
 
-export default interface LayoutElementInterface extends SizeElementInterface {
+export default interface ILayoutElement extends ISizeElement {
     top: number;
     right: number;
     bottom: number;

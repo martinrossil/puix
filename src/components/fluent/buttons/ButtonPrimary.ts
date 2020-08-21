@@ -1,19 +1,19 @@
 import DisplayContainer from '../../../containers/DisplayContainer';
-import ButtonPrimaryInterface from './ButtonPrimaryInterface';
+import IButtonPrimary from './IButtonPrimary';
 import FluentTheme from '../../../FluentTheme';
 import TextElement from '../../../text/TextElement';
-import { TextElementInterface } from '../../..';
 import { FontWeight } from '../../../enums/FontWeight';
 import AnchorLayout from '../../../layouts/AnchorLayout';
 import TouchLayer from '../../../elements/TouchLayer';
-import DisplayElementInterface from '../../../core/DisplayElementInterface';
-import StateMachineInterface from '../../../fsm/StateMachineInterface';
+import IStateMachine from '../../../fsm/IStateMachine';
 import StateMachine from '../../../fsm/StateMachine';
-import StateInterface from '../../../fsm/StateInterface';
+import IState from '../../../fsm/IState';
 import State from '../../../fsm/State';
 import { TextAlign } from '../../../enums/TextAlign';
+import ITextElement from '../../../text/ITextElement';
+import ITouchLayer from '../../../elements/ITouchLayer';
 
-export default class ButtonPrimary extends DisplayContainer implements ButtonPrimaryInterface {
+export default class ButtonPrimary extends DisplayContainer implements IButtonPrimary {
     public constructor() {
         super();
         this.name = 'ButtonPrimary';
@@ -47,9 +47,9 @@ export default class ButtonPrimary extends DisplayContainer implements ButtonPri
         this.style.backgroundColor = 'green';
     }
 
-    private _fsm!: StateMachineInterface;
+    private _fsm!: IStateMachine;
 
-    protected get fsm(): StateMachineInterface {
+    protected get fsm(): IStateMachine {
         if (!this._fsm) {
             this._fsm = new StateMachine(this.restingState);
             this._fsm.addEventListener(StateMachine.STATE_CHANGED, this.stateChanged.bind(this));
@@ -57,7 +57,7 @@ export default class ButtonPrimary extends DisplayContainer implements ButtonPri
         return this._fsm;
     }
 
-    protected stateChanged(state: StateInterface): void {
+    protected stateChanged(state: IState): void {
         console.log(state.name);
         if (state === this.hoveredState) {
             this.backgroundColor = this.hoveredBackgroundColor;
@@ -68,9 +68,9 @@ export default class ButtonPrimary extends DisplayContainer implements ButtonPri
         }
     }
 
-    private _restingState!: StateInterface;
+    private _restingState!: IState;
 
-    protected get restingState(): StateInterface {
+    protected get restingState(): IState {
         if (!this._restingState) {
             this._restingState = new State('resting');
             this._restingState.addTransition(TouchLayer.MOUSE_OVER, this.hoveredState);
@@ -79,9 +79,9 @@ export default class ButtonPrimary extends DisplayContainer implements ButtonPri
         return this._restingState;
     }
 
-    private _hoveredState!: StateInterface;
+    private _hoveredState!: IState;
 
-    protected get hoveredState(): StateInterface {
+    protected get hoveredState(): IState {
         if (!this._hoveredState) {
             this._hoveredState = new State('hovered');
             this._hoveredState.addTransition(TouchLayer.MOUSE_DOWN, this.pressedState);
@@ -90,9 +90,9 @@ export default class ButtonPrimary extends DisplayContainer implements ButtonPri
         return this._hoveredState;
     }
 
-    private _pressedState!: StateInterface;
+    private _pressedState!: IState;
 
-    protected get pressedState(): StateInterface {
+    protected get pressedState(): IState {
         if (!this._pressedState) {
             this._pressedState = new State('pressed');
             this._pressedState.addTransition(TouchLayer.MOUSE_UP, this.hoveredState);
@@ -112,9 +112,9 @@ export default class ButtonPrimary extends DisplayContainer implements ButtonPri
         }
     }
 
-    private _label!: TextElementInterface;
+    private _label!: ITextElement;
 
-    protected get label(): TextElementInterface {
+    protected get label(): ITextElement {
         if (!this._label) {
             this._label = new TextElement();
             this._label.fontSize = 10;
@@ -133,7 +133,7 @@ export default class ButtonPrimary extends DisplayContainer implements ButtonPri
 
     private _touchLayer!: TouchLayer;
 
-    protected get touchLayer(): DisplayElementInterface {
+    protected get touchLayer(): ITouchLayer {
         if (!this._touchLayer) {
             this._touchLayer = new TouchLayer();
             this._touchLayer.percentWidth = 100;

@@ -1,5 +1,5 @@
 import RippleElementInterface from './RippleElementInterface';
-import TweenInterface from '../animation/TweenInterface';
+import ITween from '../animation/ITween';
 import AttributeTween from '../animation/AttributeTween';
 import IPoint from '../vo/IPoint';
 import StyleTween from '../animation/StyleTween';
@@ -49,9 +49,9 @@ export default class RippleElement extends ShapeElement implements RippleElement
 
     private circle: SVGCircleElement = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
 
-    protected radiusTween: TweenInterface = new AttributeTween(this.circle, 'r', 500);
+    protected radiusTween: ITween = new AttributeTween(this.circle, 'r', 500);
 
-    protected opacityTween: TweenInterface = new StyleTween(this.circle, 'opacity', 500);
+    protected opacityTween: ITween = new StyleTween(this.circle, 'opacity', 500);
 
     private _rippleColor = '';
 

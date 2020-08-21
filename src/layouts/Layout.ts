@@ -1,5 +1,5 @@
 import LayoutInterface from './LayoutInterface';
-import DisplayContainerInterface from '../containers/DisplayContainerInterface';
+import IDisplayContainer from '../containers/IDisplayContainer';
 import SizeElement from '../core/SizeElement';
 
 export default class Layout implements LayoutInterface {
@@ -7,18 +7,18 @@ export default class Layout implements LayoutInterface {
         this.name = 'Layout';
     }
 
-    public updateLayout(container: DisplayContainerInterface): void {
+    public updateLayout(container: IDisplayContainer): void {
         this.container = container;
         this.invalidateContainerSize(container);
         this.resizeChildren(container);
         this.layoutChildren(container);
     }
 
-    protected resizeChildren(container: DisplayContainerInterface): void {
+    protected resizeChildren(container: IDisplayContainer): void {
         //
     }
 
-    protected layoutChildren(container: DisplayContainerInterface): void {
+    protected layoutChildren(container: IDisplayContainer): void {
         for (const element of container.elements) {
             if (element.includeInLayout) {
                 element.setPosition(this.paddingLeft, this.paddingTop);
@@ -26,7 +26,7 @@ export default class Layout implements LayoutInterface {
         }
     }
 
-    protected invalidateContainerSize(container: DisplayContainerInterface): void {
+    protected invalidateContainerSize(container: IDisplayContainer): void {
         if (isNaN(container.width) && isNaN(container.height)) {
             if (isNaN(container.percentWidth) && isNaN(container.percentHeight)) {
                 this.setSizeFromChildren(container);
@@ -46,7 +46,7 @@ export default class Layout implements LayoutInterface {
         }
     }
 
-    protected setSizeFromChildren(container: DisplayContainerInterface): void {
+    protected setSizeFromChildren(container: IDisplayContainer): void {
         let width = 0;
         let height = 0;
         for (const element of container.elements) {
@@ -71,7 +71,7 @@ export default class Layout implements LayoutInterface {
         }
     }
 
-    protected setWidthFromChildren(container: DisplayContainerInterface): void {
+    protected setWidthFromChildren(container: IDisplayContainer): void {
         let width = 0;
         for (const element of container.elements) {
             if (element.includeInLayout) {
@@ -89,7 +89,7 @@ export default class Layout implements LayoutInterface {
         }
     }
 
-    protected setHeightFromChildren(container: DisplayContainerInterface): void {
+    protected setHeightFromChildren(container: IDisplayContainer): void {
         let height = 0;
         for (const element of container.elements) {
             if (element.includeInLayout) {
@@ -107,7 +107,7 @@ export default class Layout implements LayoutInterface {
         }
     }
 
-    protected container: DisplayContainerInterface | null = null;
+    protected container: IDisplayContainer | null = null;
 
     protected invalidateLayout(): void {
         if (this.container && this.container.connected) {

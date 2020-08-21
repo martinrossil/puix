@@ -1,39 +1,39 @@
 export { default as AttributeTween } from './animation/AttributeTween';
 export { default as StyleTween } from './animation/StyleTween';
-export { default as TweenInterface } from './animation/TweenInterface';
+export { default as ITween } from './animation/ITween';
 
 export { default as ButtonPrimary } from './components/fluent/buttons/ButtonPrimary';
-export { default as ButtonPrimaryInterface } from './components/fluent/buttons/ButtonPrimaryInterface';
+export { default as IButtonPrimary } from './components/fluent/buttons/IButtonPrimary';
 
 export { default as ApplicationElement } from './containers/ApplicationElement';
 export { default as DisplayContainer } from './containers/DisplayContainer';
-export { default as DisplayContainerInterface } from './containers/DisplayContainerInterface';
+export { default as IDisplayContainer } from './containers/IDisplayContainer';
 export { default as ScrollContainer } from './containers/ScrollContainer';
-export { default as ScrollContainerInterface } from './containers/ScrollContainerInterface';
+export { default as IScrollContainer } from './containers/IScrollContainer';
 
 export { default as DisplayElement } from './core/DisplayElement';
-export { default as DisplayElementInterface } from './core/DisplayElementInterface';
+export { default as IDisplayElement } from './core/IDisplayElement';
 export { default as EventDispatcher } from './core/EventDispatcher';
-export { default as EventDispatcherInterface } from './core/EventDispatcherInterface';
+export { default as IEventDispatcher } from './core/IEventDispatcher';
 export { default as EventDispatcherElement } from './core/EventDispatcherElement';
 export { default as LayoutElement } from './core/LayoutElement';
-export { default as LayoutElementInterface } from './core/LayoutElementInterface';
+export { default as ILayoutElement } from './core/ILayoutElement';
 export { default as LifeCycleElement } from './core/LifeCycleElement';
-export { default as LifeCycleElementInterface } from './core/LifeCycleElementInterface';
+export { default as ILifeCycleElement } from './core/ILifeCycleElement';
 export { default as PositionElement } from './core/PositionElement';
-export { default as PositionElementInterface } from './core/PositionElementInterface';
+export { default as IPositionElement } from './core/IPositionElement';
 export { default as SizeElement } from './core/SizeElement';
-export { default as SizeElementInterface } from './core/SizeElementInterface';
+export { default as ISizeElement } from './core/ISizeElement';
 
 export { default as ArrayList } from './data/ArrayList';
-export { default as ArrayListInterface } from './data/ArrayListInterface';
+export { default as IArrayList } from './data/IArrayList';
 
 export { default as IconElement } from './elements/IconElement';
-export { default as IconElementInterface } from './elements/IconElementInterface';
+export { default as IIconElement } from './elements/IIconElement';
 export { default as RippleElement } from './elements/RippleElement';
 export { default as RippleElementInterface } from './elements/RippleElementInterface';
 export { default as TouchLayer } from './elements/TouchLayer';
-export { default as TouchLayerInterface } from './elements/TouchLayerInterface';
+export { default as ITouchLayer } from './elements/ITouchLayer';
 
 export { Cursor } from './enums/Cursor';
 export { FontWeight } from './enums/FontWeight';
@@ -46,24 +46,24 @@ export { VerticalAlign } from './enums/VerticalAlign';
 export { WhiteSpace } from './enums/WhiteSpace';
 
 export { default as State } from './fsm/State';
-export { default as StateInterface } from './fsm/StateInterface';
+export { default as IState } from './fsm/IState';
 export { default as StateMachine } from './fsm/StateMachine';
-export { default as StateMachineInterface } from './fsm/StateMachineInterface';
+export { default as IStateMachine } from './fsm/IStateMachine';
 
 export { default as AnchorLayout } from './layouts/AnchorLayout';
 export { default as HorizontalLayout } from './layouts/HorizontalLayout';
-export { default as HorizontalLayoutInterface } from './layouts/HorizontalLayoutInterface';
+export { default as IHorizontalLayout } from './layouts/IHorizontalLayout';
 export { default as Layout } from './layouts/Layout';
 export { default as LayoutInterface } from './layouts/LayoutInterface';
 export { default as VerticalLayout } from './layouts/VerticalLayout';
-export { default as VerticalLayoutInterface } from './layouts/VerticalLayoutInterface';
+export { default as IVerticalLayout } from './layouts/IVerticalLayout';
 
 export { default as PathElement } from './svg/PathElement';
-export { default as PathElementInterface } from './svg/PathElementInterface';
+export { default as IPathElement } from './svg/IPathElement';
 export { default as ShapeElement } from './svg/ShapeElement';
-export { default as ShapeElementInterface } from './svg/ShapeElementInterface';
+export { default as IShapeElement } from './svg/IShapeElement';
 export { default as SvgElement } from './svg/SvgElement';
-export { default as SvgElementInterface } from './svg/SvgElementInterface';
+export { default as ISvgElement } from './svg/ISvgElement';
 
 export { default as TextElement } from './text/TextElement';
 export { default as ITextElement } from './text/ITextElement';

@@ -1,7 +1,7 @@
-import ShapeElementInterface from './ShapeElementInterface';
+import IShapeElement from './IShapeElement';
 import PathElement from './PathElement';
 
-export default class ShapeElement extends PathElement implements ShapeElementInterface {
+export default class ShapeElement extends PathElement implements IShapeElement {
     public constructor() {
         super();
         this.name = 'ShapeElement';

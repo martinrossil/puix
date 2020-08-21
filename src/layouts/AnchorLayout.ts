@@ -1,6 +1,6 @@
 import Layout from './Layout';
-import DisplayContainerInterface from '../containers/DisplayContainerInterface';
-import LayoutElementInterface from '../core/LayoutElementInterface';
+import IDisplayContainer from '../containers/IDisplayContainer';
+import ILayoutElement from '../core/ILayoutElement';
 
 export default class AnchorLayout extends Layout {
     public constructor() {
@@ -8,7 +8,7 @@ export default class AnchorLayout extends Layout {
         this.name = 'AnchorLayout';
     }
 
-    protected resizeChildren(container: DisplayContainerInterface): void {
+    protected resizeChildren(container: IDisplayContainer): void {
         const w = container.actualWidth - this.paddingLeft - this.paddingRight;
         const h = container.actualHeight - this.paddingTop - this.paddingBottom;
         for (const element of container.elements) {
@@ -18,7 +18,7 @@ export default class AnchorLayout extends Layout {
         }
     }
 
-    protected layoutChildren(container: DisplayContainerInterface): void {
+    protected layoutChildren(container: IDisplayContainer): void {
         const w = container.actualWidth - this.paddingLeft - this.paddingRight;
         const h = container.actualHeight - this.paddingTop - this.paddingBottom;
         for (const element of container.elements) {
@@ -28,7 +28,7 @@ export default class AnchorLayout extends Layout {
         }
     }
 
-    protected setElementPosition(w: number, h: number, element: LayoutElementInterface): void {
+    protected setElementPosition(w: number, h: number, element: ILayoutElement): void {
         if (!isNaN(element.horizontalCenter)) {
             element.x = this.paddingLeft + w * 0.5 - element.actualWidth * 0.5 + element.horizontalCenter;
         } else if (!isNaN(element.left) && !isNaN(element.right)) {
@@ -53,7 +53,7 @@ export default class AnchorLayout extends Layout {
         }
     }
 
-    protected setElementSize(w: number, h: number, element: LayoutElementInterface): void {
+    protected setElementSize(w: number, h: number, element: ILayoutElement): void {
         if (!isNaN(element.left) && !isNaN(element.right) && !isNaN(element.top) && !isNaN(element.bottom)) {
             element.setActualSize(w - element.left - element.right, h - element.top - element.bottom);
         } else if (!isNaN(element.percentWidth) && !isNaN(element.percentHeight)) {

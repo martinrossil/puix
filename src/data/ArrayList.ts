@@ -1,7 +1,7 @@
 import EventDispatcher from '../core/EventDispatcher';
-import ArrayListInterface from './ArrayListInterface';
+import IArrayList from './IArrayList';
 
-export default class ArrayList<Item> extends EventDispatcher implements ArrayListInterface<Item> {
+export default class ArrayList<Item> extends EventDispatcher implements IArrayList<Item> {
     public static ITEM_ADDED = 'ArrayList.ITEM_ADDED';
     public static ITEMS_ADDED = 'ArrayList.ITEMS_ADDED';
     public static ITEM_REMOVED = 'ArrayList.ITEM_REMOVED';

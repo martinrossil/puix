@@ -1,7 +1,7 @@
-import DisplayContainerInterface from '../containers/DisplayContainerInterface';
+import IDisplayContainer from '../containers/IDisplayContainer';
 
 export default interface LayoutInterface {
-    updateLayout(container: DisplayContainerInterface): void;
+    updateLayout(container: IDisplayContainer): void;
     padding: number;
     paddingLeft: number;
     paddingTop: number;

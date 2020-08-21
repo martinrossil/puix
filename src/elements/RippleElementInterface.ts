@@ -1,7 +1,7 @@
 import IPoint from '../vo/IPoint';
-import ShapeElementInterface from '../svg/ShapeElementInterface';
+import IShapeElement from '../svg/IShapeElement';
 
-export default interface RippleElementInterface extends ShapeElementInterface {
+export default interface RippleElementInterface extends IShapeElement {
     rippleColor: string;
     show(point: IPoint): void;
     hide(): void;

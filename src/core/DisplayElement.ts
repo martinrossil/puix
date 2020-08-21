@@ -1,9 +1,9 @@
-import DisplayElementInterface from './DisplayElementInterface';
+import IDisplayElement from './IDisplayElement';
 import LayoutElement from './LayoutElement';
 import { Overflow } from '../enums/Overflow';
 import { Cursor } from '../enums/Cursor';
 
-export default class DisplayElement extends LayoutElement implements DisplayElementInterface {
+export default class DisplayElement extends LayoutElement implements IDisplayElement {
     public constructor() {
         super();
         this.name = 'DisplayElement';
