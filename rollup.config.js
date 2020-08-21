@@ -1,6 +1,7 @@
 /* eslint-disable */
 import pkg from './package.json'
 import typescript from 'rollup-plugin-typescript2'
+import filesize from 'rollup-plugin-filesize';
 
 export default [
     {
@@ -10,6 +11,8 @@ export default [
             format: 'esm',
             sourcemap: true
         },
-        plugins: [typescript({tsconfig: "tsconfig.json"})]
+        plugins: [
+            typescript({tsconfig: "tsconfig.json"}),
+            filesize({ showBrotliSize: true })]
     }
 ]
