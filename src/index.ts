@@ -54,7 +54,7 @@ export { default as AnchorLayout } from './layouts/AnchorLayout';
 export { default as HorizontalLayout } from './layouts/HorizontalLayout';
 export { default as IHorizontalLayout } from './layouts/IHorizontalLayout';
 export { default as Layout } from './layouts/Layout';
-export { default as LayoutInterface } from './layouts/LayoutInterface';
+export { default as ILayout } from './layouts/ILayout';
 export { default as VerticalLayout } from './layouts/VerticalLayout';
 export { default as IVerticalLayout } from './layouts/IVerticalLayout';
 
