@@ -1,8 +1,6 @@
 import { assert } from 'chai';
 import { describe, it } from 'mocha';
-import IEventDispatcher from '../src/core/IEventDispatcher';
-import EventDispatcherElement from '../src/core/EventDispatcherElement';
-import EventDispatcher from '../src/core/EventDispatcher';
+import { EventDispatcher, EventDispatcherElement, IEventDispatcher } from '../src';
 
 let handlerHasBeenCalled = false;
 let handlerHasBeenCalled2 = false;

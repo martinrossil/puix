@@ -1,9 +1,6 @@
 import { assert } from 'chai';
 import { describe, it } from 'mocha';
-import IDisplayContainer from '../src/containers/IDisplayContainer';
-import DisplayContainer from '../src/containers/DisplayContainer';
-import IDisplayElement from '../src/core/IDisplayElement';
-import DisplayElement from '../src/core/DisplayElement';
+import { DisplayContainer, DisplayElement, IDisplayContainer, IDisplayElement } from '../src';
 
 const displayContainer: IDisplayContainer = new DisplayContainer();
 const child1: IDisplayElement = new DisplayElement();
@@ -15,26 +12,26 @@ document.body.appendChild(displayContainer as unknown as Node);
 
 describe('DisplayContainerInterface interface', () => {
     describe('default values', () => {
-        it('default elements length should be 0', () => {
-            assert.strictEqual(displayContainer.elements.length, 0);
+        it('default numElements should be 0', () => {
+            assert.strictEqual(displayContainer.numElements, 0);
         });
     });
     describe('addElement()', () => {
-        it('given elements.length is 0, when addElement(child), elements.length should be 1', () => {
+        it('given numElements is 0, when addElement(child),numElements should be 1', () => {
             displayContainer.addElement(child1);
-            assert.strictEqual(displayContainer.elements.length, 1);
+            assert.strictEqual(displayContainer.numElements, 1);
         });
     });
     describe('removeElement()', () => {
-        it('given elements.length is 1, when removeElement(child), elements.length should be 0', () => {
+        it('given numElements is 1, when removeElement(child), numElements should be 0', () => {
             displayContainer.removeElement(child1);
-            assert.strictEqual(displayContainer.elements.length, 0);
+            assert.strictEqual(displayContainer.numElements, 0);
         });
     });
     describe('addElements()', () => {
-        it('given children.length is 0, when addElements([child1, child2]), elements.length should be 2', () => {
+        it('given numElements is 0, when addElements([child1, child2]), numElements should be 2', () => {
             displayContainer.addElements(elements);
-            assert.strictEqual(displayContainer.elements.length, 2);
+            assert.strictEqual(displayContainer.numElements, 2);
         });
     });
     describe('resizing from children', () => {

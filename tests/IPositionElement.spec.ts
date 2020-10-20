@@ -1,7 +1,6 @@
 import { assert } from 'chai';
 import { describe, it, beforeEach } from 'mocha';
-import IPositionElement from '../src/core/IPositionElement';
-import PositionElement from '../src/core/PositionElement';
+import { IPositionElement, PositionElement } from '../src';
 
 const positionElement: IPositionElement = new PositionElement();
 document.body.appendChild(positionElement as unknown as Node);
