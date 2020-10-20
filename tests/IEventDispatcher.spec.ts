@@ -1,13 +1,13 @@
 import { assert } from 'chai';
 import { describe, it } from 'mocha';
-import { EventDispatcher, EventDispatcherElement, IEventDispatcher } from '../src';
+import { EventDispatcher, EventDispatcherElement, IEventDispatcher, IEventListener } from '../src';
 
 let handlerHasBeenCalled = false;
 let handlerHasBeenCalled2 = false;
-const handler: Function = () => {
+const handler: IEventListener = () => {
     handlerHasBeenCalled = true;
 };
-const handler2: Function = () => {
+const handler2: IEventListener = () => {
     handlerHasBeenCalled2 = true;
 };
 const eventDispatcherElement: IEventDispatcher = new EventDispatcherElement();

@@ -1,19 +1,32 @@
 import IEventDispatcher from '../interfaces/core/IEventDispatcher';
+import ICustomEventListener from '../interfaces/events/ICustomEventListener';
+import IEventListener from '../interfaces/events/IEventListener';
 
 export default class EventDispatcher implements IEventDispatcher {
-    protected listeners: Map<string, Function[] | undefined> = new Map();
+    protected listeners: Map<string, IEventListener[] | undefined> = new Map();
 
-    public dispatchEventWith(type: string, payload: unknown = null): void {
-        const typeListeners: Function[] | undefined = this.listeners.get(type);
+    public dispatchEvent(event: Event): boolean {
+        const typeListeners: IEventListener[] | undefined = this.listeners.get(event.type);
         if (typeListeners !== undefined) {
             for (const listener of typeListeners) {
-                listener(payload);
+                listener(event);
+            }
+        }
+        return true;
+    }
+
+    public dispatchEventWith<T>(type: string, payload: T | undefined = undefined): void {
+        const typeListeners: ICustomEventListener<T>[] | undefined = this.listeners.get(type);
+        if (typeListeners !== undefined) {
+            const customEvent: CustomEvent<T> = new CustomEvent<T>(type, { detail: payload });
+            for (const listener of typeListeners) {
+                listener(customEvent);
             }
         }
     }
 
-    public addEventListener(type: string, listener: Function): void {
-        let typeListeners: Function[] | undefined = this.listeners.get(type);
+    public addEventListener(type: string, listener: IEventListener): void {
+        let typeListeners: IEventListener[] | undefined = this.listeners.get(type);
         if (typeListeners === undefined) {
             typeListeners = [];
             this.listeners.set(type, typeListeners);
@@ -21,8 +34,8 @@ export default class EventDispatcher implements IEventDispatcher {
         typeListeners.push(listener);
     }
 
-    public removeEventListener(type: string, listener: Function): void {
-        const typeListeners: Function[] | undefined = this.listeners.get(type);
+    public removeEventListener(type: string, listener: IEventListener): void {
+        const typeListeners: IEventListener[] | undefined = this.listeners.get(type);
         if (typeListeners !== undefined) {
             for (const method of typeListeners) {
                 if (method === listener) {
@@ -37,7 +50,9 @@ export default class EventDispatcher implements IEventDispatcher {
     private _name = '';
 
     public set name(value: string) {
-        this._name = value;
+        if (this._name !== value) {
+            this._name = value;
+        }
     }
 
     public get name(): string {

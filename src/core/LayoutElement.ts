@@ -106,7 +106,7 @@ export default class LayoutElement extends SizeElement implements ILayoutElement
 
     protected notifyLayoutDataChanged(): void {
         if (this.connected) {
-            this.dispatchEventWith(Events.LAYOUT_DATA_CHANGED, true);
+            this.dispatchEvent(new Event(Events.LAYOUT_DATA_CHANGED, { bubbles: true }));
         }
     }
 

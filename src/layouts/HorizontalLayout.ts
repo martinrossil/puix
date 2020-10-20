@@ -19,7 +19,7 @@ export default class HorizontalLayout extends BaseLayout {
         height = container.paddingTop + height + container.paddingBottom;
         if (container.actualWidth !== width || container.actualHeight !== height) {
             container.setActualSize(width, height);
-            container.dispatchEventWith(Events.INTERNAL_SIZE_CHANGED, this, true);
+            container.dispatchEvent(new Event(Events.INTERNAL_SIZE_CHANGED, { bubbles: true }));
         }
     }
 
@@ -31,7 +31,7 @@ export default class HorizontalLayout extends BaseLayout {
         width = container.paddingLeft + width - container.horizontalGap + container.paddingRight;
         if (container.actualWidth !== width) {
             container.actualWidth = width;
-            container.dispatchEventWith(Events.INTERNAL_SIZE_CHANGED, this, true);
+            container.dispatchEvent(new Event(Events.INTERNAL_SIZE_CHANGED, { bubbles: true }));
         }
     }
 
@@ -45,7 +45,7 @@ export default class HorizontalLayout extends BaseLayout {
         height = container.paddingTop + height + container.paddingBottom;
         if (container.actualHeight !== height) {
             container.actualHeight = height;
-            container.dispatchEventWith(Events.INTERNAL_SIZE_CHANGED, this, true);
+            container.dispatchEvent(new Event(Events.INTERNAL_SIZE_CHANGED, { bubbles: true }));
         }
     }
 

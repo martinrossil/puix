@@ -5,15 +5,17 @@ export default class EventDispatcherElement extends HTMLElement implements IEven
         super();
     }
 
-    public dispatchEventWith(typeArg: string, payload: unknown = null, bubbles = false): void {
-        const customEvent: CustomEvent = new CustomEvent(typeArg, { bubbles: bubbles, detail: payload });
+    public dispatchEventWith<T>(typeArg: string, payload: T | undefined = undefined, bubbles = false): void {
+        const customEvent: CustomEvent<T> = new CustomEvent<T>(typeArg, { bubbles: bubbles, detail: payload });
         this.dispatchEvent(customEvent);
     }
 
     private _name = '';
 
     public set name(value: string) {
-        this._name = value;
+        if (this._name !== value) {
+            this._name = value;
+        }
     }
 
     public get name(): string {
