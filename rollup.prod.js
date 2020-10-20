@@ -6,6 +6,7 @@ import clear from 'rollup-plugin-clear';
 import copy from 'rollup-plugin-copy';
 import {version} from './package.json';
 import serve from 'rollup-plugin-serve';
+// import resolve from '@rollup/plugin-node-resolve';
 
 export default {
     input: './src/PuixDev.ts',
@@ -24,6 +25,7 @@ export default {
             ]
         }),
         typescript({ tsconfig: "tsconfig.esnext.json" }),
+        // resolve({dedupe: ['xstate']}),
         strip(),
         serve({
             contentBase: 'public',
