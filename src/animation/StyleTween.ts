@@ -1,5 +1,5 @@
 import EventDispatcher from '../core/EventDispatcher';
-import ITween from './ITween';
+import ITween from '../interfaces/animation/ITween';
 
 export default class StyleTween extends EventDispatcher implements ITween {
     protected target: ElementCSSInlineStyle;

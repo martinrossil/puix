@@ -1,6 +1,6 @@
 import IDisplayElement from '../core/IDisplayElement';
-import { TextAlign } from '../enums/TextAlign';
-import { FontWeight } from '../enums/FontWeight';
+import { TextAlign } from '../../enums/TextAlign';
+import { FontWeight } from '../../enums/FontWeight';
 export default interface ITextElement extends IDisplayElement {
     text: string;
     fontFamily: string;

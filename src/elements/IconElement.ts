@@ -1,4 +1,4 @@
-import IIconElement from './IIconElement';
+import IIconElement from '../interfaces/elements/IIconElement';
 import PathElement from '../svg/PathElement';
 
 export default class IconElement extends PathElement implements IIconElement {

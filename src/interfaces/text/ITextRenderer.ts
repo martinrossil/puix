@@ -1,8 +1,8 @@
 import IDisplayElement from '../core/IDisplayElement';
-import { TextAlign } from '../enums/TextAlign';
-import { WhiteSpace } from '../enums/WhiteSpace';
-import { TextOverflow } from '../enums/TextOverflow';
-import { FontWeight } from '../enums/FontWeight';
+import { TextAlign } from '../../enums/TextAlign';
+import { WhiteSpace } from '../../enums/WhiteSpace';
+import { TextOverflow } from '../../enums/TextOverflow';
+import { FontWeight } from '../../enums/FontWeight';
 export default interface ITextRenderer extends IDisplayElement {
     text: string;
     clientWidth: number;

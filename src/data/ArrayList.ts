@@ -1,5 +1,5 @@
 import EventDispatcher from '../core/EventDispatcher';
-import IArrayList from './IArrayList';
+import IArrayList from '../interfaces/data/IArrayList';
 
 export default class ArrayList<Item> extends EventDispatcher implements IArrayList<Item> {
     public static ITEM_ADDED = 'ArrayList.ITEM_ADDED';

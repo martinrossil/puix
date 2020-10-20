@@ -1,6 +1,6 @@
 import EventDispatcher from '../core/EventDispatcher';
-import IStateMachine from './IStateMachine';
-import IState from './IState';
+import IStateMachine from '../interfaces/fsm/IStateMachine';
+import IState from '../interfaces/fsm/IState';
 
 export default class StateMachine extends EventDispatcher implements IStateMachine {
     public static STATE_CHANGED = 'StateMachine.STATE_CHANGED';
@@ -31,9 +31,11 @@ export default class StateMachine extends EventDispatcher implements IStateMachi
     }
 
     public send(e: Event): void {
+        console.log('send', e.type);
         const state: IState = this.current.getState(e.type);
         if (this.current !== state) {
             this.current = state;
+            state.event = e;
             this.dispatchEventWith(StateMachine.STATE_CHANGED, state);
         }
     }

@@ -1,10 +1,11 @@
 import LifeCycleElement from './LifeCycleElement';
-import IPositionElement from './IPositionElement';
+import IPositionElement from '../interfaces/core/IPositionElement';
 
 export default class PositionElement extends LifeCycleElement implements IPositionElement {
     public constructor() {
         super();
         this.name = 'PositionElement';
+        this.style.position = 'absolute';
     }
 
     public setPosition(x: number, y: number): void {

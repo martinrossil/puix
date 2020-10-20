@@ -1,4 +1,4 @@
-import IEventDispatcher from '../core/IEventDispatcher';
+import IEventDispatcher from '../interfaces/core/IEventDispatcher';
 import IHSLA from './IHSLA';
 
 export default interface IColorRange extends IEventDispatcher {

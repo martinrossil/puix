@@ -1,4 +1,4 @@
-import ITween from './ITween';
+import ITween from '../interfaces/animation/ITween';
 import EventDispatcher from '../core/EventDispatcher';
 
 export default class AttributeTween extends EventDispatcher implements ITween {

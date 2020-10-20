@@ -1,5 +1,7 @@
+import { Overflow } from '../../enums/Overflow';
 import ILayoutElement from './ILayoutElement';
-import { Overflow } from '../enums/Overflow';
+import IArrayList from '../data/IArrayList';
+import IDropShadowFilter from '../filters/IDropShadowFilter';
 
 export default interface IDisplayElement extends ILayoutElement {
     opacity: number;
@@ -7,10 +9,10 @@ export default interface IDisplayElement extends ILayoutElement {
     overflowX: Overflow;
     overflowY: Overflow;
     enabled: boolean;
-    borderRadius: number;
+    cornerRadius: number;
     shadow: string;
     tabIndex: number;
     cursor: string;
     backgroundColor: string;
-    visible: boolean;
+    readonly filters: IArrayList<IDropShadowFilter>;
 }

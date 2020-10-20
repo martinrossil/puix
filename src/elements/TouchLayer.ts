@@ -1,8 +1,8 @@
 import { Cursor } from '../enums/Cursor';
-import IPoint from '../vo/IPoint';
+import IPoint from '../interfaces/vo/IPoint';
 import Point from '../vo/Point';
 import DisplayElement from '../core/DisplayElement';
-import ITouchLayer from './ITouchLayer';
+import ITouchLayer from '../interfaces/elements/ITouchLayer';
 
 export default class TouchLayer extends DisplayElement implements ITouchLayer {
     public static CLICK = 'TouchLayer.CLICK';

@@ -1,7 +1,10 @@
-import IDisplayElement from './IDisplayElement';
-import LayoutElement from './LayoutElement';
+import IDisplayElement from '../interfaces/core/IDisplayElement';
 import { Overflow } from '../enums/Overflow';
 import { Cursor } from '../enums/Cursor';
+import LayoutElement from './LayoutElement';
+import IArrayList from '../interfaces/data/IArrayList';
+import IDropShadowFilter from '../interfaces/filters/IDropShadowFilter';
+import ArrayList from '../data/ArrayList';
 
 export default class DisplayElement extends LayoutElement implements IDisplayElement {
     public constructor() {
@@ -101,22 +104,22 @@ export default class DisplayElement extends LayoutElement implements IDisplayEle
         return this._shadow;
     }
 
-    private _borderRadius = 0;
+    private _cornerRadius = 0;
 
-    public set borderRadius(value: number) {
+    public set cornerRadius(value: number) {
         if (isNaN(value) || value < 0) {
-            if (this._borderRadius !== 0) {
-                this._borderRadius = 0;
+            if (this._cornerRadius !== 0) {
+                this._cornerRadius = 0;
                 this.style.borderRadius = '0';
             }
-        } else if (this._borderRadius !== value) {
-            this._borderRadius = value;
+        } else if (this._cornerRadius !== value) {
+            this._cornerRadius = value;
             this.style.borderRadius = value + 'px';
         }
     }
 
-    public get borderRadius(): number {
-        return this._borderRadius;
+    public get cornerRadius(): number {
+        return this._cornerRadius;
     }
 
     private _cursor: Cursor = Cursor.NONE;
@@ -145,21 +148,27 @@ export default class DisplayElement extends LayoutElement implements IDisplayEle
         return this._backgroundColor;
     }
 
-    private _visible = true;
+    private _filters!: IArrayList<IDropShadowFilter>;
 
-    public set visible(value: boolean) {
-        if (this._visible !== value) {
-            this._visible = value;
-            if (value) {
-                this.style.visibility = 'visible';
-            } else {
-                this.style.visibility = 'hidden';
-            }
+    public get filters(): IArrayList<IDropShadowFilter> {
+        if (!this._filters) {
+            this._filters = new ArrayList();
+            this._filters.addEventListener(ArrayList.ITEM_ADDED, this.updateFilters.bind(this));
+            this._filters.addEventListener(ArrayList.ITEMS_ADDED, this.updateFilters.bind(this));
+            this._filters.addEventListener(ArrayList.ITEM_REMOVED, this.updateFilters.bind(this));
         }
+        return this._filters;
     }
 
-    public get visible(): boolean {
-        return this._visible;
+    protected updateFilters(): void {
+        let boxShadow = '';
+        if (this.filters) {
+            for (const dropShadowFilter of this.filters.arrayData) {
+                boxShadow += dropShadowFilter.value + ', ';
+            }
+            boxShadow = boxShadow.slice(0, -2);
+        }
+        this.style.boxShadow = boxShadow;
     }
 }
 customElements.define('display-element', DisplayElement);

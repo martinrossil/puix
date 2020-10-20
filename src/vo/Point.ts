@@ -1,4 +1,4 @@
-import IPoint from './IPoint';
+import IPoint from '../interfaces/vo/IPoint';
 
 export default class Point implements IPoint {
     public x = 0;

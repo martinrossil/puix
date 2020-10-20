@@ -1,8 +1,7 @@
 import DisplayElement from '../core/DisplayElement';
-import ITextElement from './ITextElement';
-import ITextRenderer from './ITextRenderer';
+import ITextElement from '../interfaces/text/ITextElement';
+import ITextRenderer from '../interfaces/text/ITextRenderer';
 import TextRenderer from './TextRenderer';
-import SizeElement from '../core/SizeElement';
 import { FontWeight } from '../enums/FontWeight';
 import { TextAlign } from '../enums/TextAlign';
 import { WhiteSpace } from '../enums/WhiteSpace';
@@ -35,7 +34,7 @@ export default class TextElement extends DisplayElement implements ITextElement 
         this.appendChild(this.textRenderer as unknown as Node);
     }
 
-    protected updateDisplay(): void {
+    /* protected updateDisplay(): void {
         super.updateDisplay();
         this.textRenderer.fontSize = this.fontSize / this.capHeight;
         const topPadding = this.lineHeight - this.fontSize;
@@ -69,7 +68,7 @@ export default class TextElement extends DisplayElement implements ITextElement 
         } else {
             this.textRenderer.setActualSize(this.actualWidth, this.actualHeight);
         }
-    }
+    } */
 
     private _text = '';
 

@@ -1,13 +1,10 @@
 import PositionElement from './PositionElement';
-import ISizeElement from './ISizeElement';
+import ISizeElement from '../interfaces/core/ISizeElement';
 
 export default class SizeElement extends PositionElement implements ISizeElement {
-    static INTERNAL_SIZE_CHANGED = 'SizeElement.internalSizeChanged';
-
     public constructor() {
         super();
         this.name = 'SizeElement';
-        this.invalidateDisplay = this.invalidateDisplay.bind(this);
     }
 
     protected connectedCallback(): void {
@@ -23,62 +20,6 @@ export default class SizeElement extends PositionElement implements ISizeElement
 
     protected updateDisplay(): void {
         // override
-    }
-
-    private _percentWidth = NaN;
-
-    public set percentWidth(value: number) {
-        if (isNaN(this._percentWidth) && isNaN(value)) {
-            return;
-        }
-        if (this._percentWidth !== value) {
-            if (!isNaN(value)) {
-                if (value < 0) {
-                    if (this._percentWidth !== 0) {
-                        this._percentWidth = 0;
-                        this.invalidateDisplay();
-                    }
-                } else {
-                    this._percentWidth = value;
-                    this.invalidateDisplay();
-                }
-            } else {
-                this._percentWidth = value;
-                this.invalidateDisplay();
-            }
-        }
-    }
-
-    public get percentWidth(): number {
-        return this._percentWidth;
-    }
-
-    private _percentHeight = NaN;
-
-    public set percentHeight(value: number) {
-        if (isNaN(this._percentHeight) && isNaN(value)) {
-            return;
-        }
-        if (this._percentHeight !== value) {
-            if (!isNaN(value)) {
-                if (value < 0) {
-                    if (this._percentHeight !== 0) {
-                        this._percentHeight = 0;
-                        this.invalidateDisplay();
-                    }
-                } else {
-                    this._percentHeight = value;
-                    this.invalidateDisplay();
-                }
-            } else {
-                this._percentHeight = value;
-                this.invalidateDisplay();
-            }
-        }
-    }
-
-    public get percentHeight(): number {
-        return this._percentHeight;
     }
 
     public setSize(width: number, height: number): void {
@@ -132,57 +73,43 @@ export default class SizeElement extends PositionElement implements ISizeElement
         if (!isNaN(this.width) && !isNaN(this.height)) {
             return;
         }
-        let widthChanged = false;
         if (isNaN(width) || width < 0) {
             if (this._actualWidth !== this.minWidth) {
-                widthChanged = true;
                 this._actualWidth = this.minWidth;
                 this.style.width = this._actualWidth + 'px';
             }
         } else if (width < this.minWidth) {
             if (this._actualWidth !== this.minWidth) {
-                widthChanged = true;
                 this._actualWidth = this.minWidth;
                 this.style.width = this._actualWidth + 'px';
             }
         } else if (this.maxWidth < width) {
             if (this._actualWidth !== this.maxWidth) {
-                widthChanged = true;
                 this._actualWidth = this.maxWidth;
                 this.style.width = this._actualWidth + 'px';
             }
         } else if (this._actualWidth !== width) {
-            widthChanged = true;
             this._actualWidth = width;
             this.style.width = this._actualWidth + 'px';
         }
-        let heightChanged = false;
         if (isNaN(height) || height < 0) {
             if (this._actualHeight !== this.minHeight) {
-                heightChanged = true;
                 this._actualHeight = this.minHeight;
                 this.style.height = this._actualHeight + 'px';
             }
         } else if (height < this.minHeight) {
             if (this._actualHeight !== this.minHeight) {
-                heightChanged = true;
                 this._actualHeight = this.minHeight;
                 this.style.height = this._actualHeight + 'px';
             }
         } else if (this.maxHeight < height) {
             if (this._actualHeight !== this.maxHeight) {
-                heightChanged = true;
                 this._actualHeight = this.maxHeight;
                 this.style.height = this._actualHeight + 'px';
             }
         } else if (this._actualHeight !== height) {
-            heightChanged = true;
             this._actualHeight = height;
             this.style.height = this._actualHeight + 'px';
-        }
-
-        if (widthChanged || heightChanged) {
-            this.invalidateDisplay();
         }
     }
 

@@ -1,4 +1,4 @@
-import IShapeElement from './IShapeElement';
+import IShapeElement from '../interfaces/svg/IShapeElement';
 import PathElement from './PathElement';
 
 export default class ShapeElement extends PathElement implements IShapeElement {

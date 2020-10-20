@@ -1,11 +1,11 @@
-import RippleElementInterface from './RippleElementInterface';
-import ITween from '../animation/ITween';
+import IRippleElement from '../interfaces/elements/IRippleElement';
+import ITween from '../interfaces/animation/ITween';
 import AttributeTween from '../animation/AttributeTween';
-import IPoint from '../vo/IPoint';
+import IPoint from '../interfaces/vo/IPoint';
 import StyleTween from '../animation/StyleTween';
 import ShapeElement from '../svg/ShapeElement';
 
-export default class RippleElement extends ShapeElement implements RippleElementInterface {
+export default class RippleElement extends ShapeElement implements IRippleElement {
     public constructor() {
         super();
         this.name = 'RippleElement';

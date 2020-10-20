@@ -1,27 +1,19 @@
 import DisplayElement from '../core/DisplayElement';
-import IScrollContainer from './IScrollContainer';
-import IDisplayContainer from './IDisplayContainer';
-import DisplayContainer from './DisplayContainer';
-import ILayoutElement from '../core/ILayoutElement';
-import ILayout from '../layouts/ILayout';
-import { ScrollPolicy } from '../enums/ScrollPolicy';
-import SizeElement from '../core/SizeElement';
-import LayoutElement from '../core/LayoutElement';
-import { Overflow } from '../enums/Overflow';
+import IScrollContainer from '../interfaces/containers/IScrollContainer';
 
 export default class ScrollContainer extends DisplayElement implements IScrollContainer {
     public constructor() {
         super();
         this.name = 'ScrollContainer';
-        const styleContainer: ElementCSSInlineStyle = this.container as unknown as ElementCSSInlineStyle;
+        /* const styleContainer: ElementCSSInlineStyle = this.container as unknown as ElementCSSInlineStyle;
         styleContainer.style.willChange = 'transform'; // this will boost scroll performance, no repaints
         this.overflow = Overflow.HIDDEN;
         this.appendChild(this.container as unknown as Node);
-        this.addEventListener(SizeElement.INTERNAL_SIZE_CHANGED, this.childChanged as EventListener);
-        this.addEventListener(LayoutElement.LAYOUT_DATA_CHANGED, this.childChanged as EventListener);
+        this.addEventListener(SizeElement.INTERNAL_SIZE_CHANGED, this.childChanged as EventListener); */
+        // this.addEventListener(LayoutElement.LAYOUT_DATA_CHANGED, this.childChanged as EventListener);
     }
 
-    protected childChanged(e: CustomEvent): void {
+    /* protected childChanged(e: CustomEvent): void {
         if (e.target !== this) {
             e.stopImmediatePropagation();
             this.invalidateDisplay();
@@ -126,10 +118,10 @@ export default class ScrollContainer extends DisplayElement implements IScrollCo
         return this.container.layout;
     }
 
-    private _container: IDisplayContainer = new DisplayContainer();
+    private _container: ILayoutContainer = new LayoutContainer();
 
-    protected get container(): IDisplayContainer {
+    protected get container(): ILayoutContainer {
         return this._container;
-    }
+    } */
 }
 customElements.define('scroll-container', ScrollContainer);

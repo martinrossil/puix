@@ -1,7 +1,8 @@
-import IState from './IState';
+import IState from '../interfaces/fsm/IState';
 
 export default class State implements IState {
     public name: string;
+    public event: Event | null = null;
     protected targets: Map<string, IState> = new Map();
     public constructor(name: string) {
         this.name = name;
@@ -13,10 +14,6 @@ export default class State implements IState {
     }
 
     public getState(type: string): IState {
-        const target: IState | undefined = this.targets.get(type);
-        if (target !== undefined) {
-            return target;
-        }
-        return this;
+        return this.targets.get(type) || this;
     }
 }

@@ -1,4 +1,4 @@
-import IEventDispatcher from '../core/IEventDispatcher';
+import IEventDispatcher from '../interfaces/core/IEventDispatcher';
 
 export default interface ITheme extends IEventDispatcher {
     // color

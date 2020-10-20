@@ -1,5 +1,5 @@
 import DisplayElement from '../core/DisplayElement';
-import ITextRenderer from './ITextRenderer';
+import ITextRenderer from '../interfaces/text/ITextRenderer';
 import { FontWeight } from '../enums/FontWeight';
 import { TextAlign } from '../enums/TextAlign';
 import { WhiteSpace } from '../enums/WhiteSpace';

@@ -1,9 +1,8 @@
-import IEventDispatcher from './IEventDispatcher';
+import IEventDispatcher from '../interfaces/core/IEventDispatcher';
 
 export default class EventDispatcherElement extends HTMLElement implements IEventDispatcher {
     public constructor() {
         super();
-        this.style.position = 'absolute';
     }
 
     public dispatchEventWith(typeArg: string, payload: unknown = null, bubbles = false): void {
