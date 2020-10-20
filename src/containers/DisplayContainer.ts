@@ -14,8 +14,8 @@ export default class DisplayContainer extends DisplayElement implements IDisplay
     public constructor() {
         super();
         this.name = 'DisplayContainer';
-        this.addEventListener(Events.INTERNAL_SIZE_CHANGED, this.childChanged as EventListener);
-        this.addEventListener(Events.LAYOUT_DATA_CHANGED, this.childChanged as EventListener);
+        this.addEventListener(Events.INTERNAL_SIZE_CHANGED, this.childChanged);
+        this.addEventListener(Events.LAYOUT_DATA_CHANGED, this.childChanged);
     }
 
     public addElement(element: ILayoutElement): void {
@@ -79,7 +79,7 @@ export default class DisplayContainer extends DisplayElement implements IDisplay
         return this._layout;
     }
 
-    protected childChanged(e: CustomEvent): void {
+    protected childChanged(e: Event): void {
         if (e.target !== this) {
             e.stopImmediatePropagation();
             this.invalidateDisplay();
@@ -226,7 +226,7 @@ export default class DisplayContainer extends DisplayElement implements IDisplay
 
     private _padding = 0;
 
-    public set padding(value) {
+    public set padding(value: number) {
         if (isNaN(value)) {
             this._padding = 0;
             this._paddingLeft = 0;
@@ -258,7 +258,7 @@ export default class DisplayContainer extends DisplayElement implements IDisplay
 
     private _paddingLeft = 0;
 
-    public set paddingLeft(value) {
+    public set paddingLeft(value: number) {
         if (isNaN(value)) {
             if (this._paddingLeft !== 0) {
                 this._paddingLeft = 0;
@@ -280,7 +280,7 @@ export default class DisplayContainer extends DisplayElement implements IDisplay
 
     private _paddingTop = 0;
 
-    public set paddingTop(value) {
+    public set paddingTop(value: number) {
         if (isNaN(value)) {
             if (this._paddingTop !== 0) {
                 this._paddingTop = 0;
@@ -302,7 +302,7 @@ export default class DisplayContainer extends DisplayElement implements IDisplay
 
     private _paddingRight = 0;
 
-    public set paddingRight(value) {
+    public set paddingRight(value: number) {
         if (isNaN(value)) {
             if (this._paddingRight !== 0) {
                 this._paddingRight = 0;
@@ -324,7 +324,7 @@ export default class DisplayContainer extends DisplayElement implements IDisplay
 
     private _paddingBottom = 0;
 
-    public set paddingBottom(value) {
+    public set paddingBottom(value: number) {
         if (isNaN(value)) {
             if (this._paddingBottom !== 0) {
                 this._paddingBottom = 0;

@@ -40,7 +40,7 @@ export default class TouchLayer extends DisplayElement implements ITouchLayer {
             const touch: Touch = e.changedTouches[0];
             const px: number = touch.pageX;
             const py: number = touch.pageY;
-            const cr: ClientRect = this.getBoundingClientRect();
+            const cr: DOMRect = this.getBoundingClientRect();
             const point: IPoint = new Point(px - cr.left, py - cr.top);
             this.dispatchEventWith(TouchLayer.TOUCH_START, point);
         }

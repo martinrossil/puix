@@ -1,8 +1,9 @@
 import EventDispatcher from '../core/EventDispatcher';
 import ITween from '../interfaces/animation/ITween';
+import IElementCSSInlineStyle from '../interfaces/style/IElementCSSInlineStyle';
 
 export default class StyleTween extends EventDispatcher implements ITween {
-    protected target: ElementCSSInlineStyle;
+    protected target: IElementCSSInlineStyle;
     protected style: string;
     protected duration: number;
     protected value = 0;
@@ -13,7 +14,7 @@ export default class StyleTween extends EventDispatcher implements ITween {
     protected requestId = 0;
     protected progress = 0;
 
-    public constructor(target: ElementCSSInlineStyle, style: string, duration: number) {
+    public constructor(target: IElementCSSInlineStyle, style: string, duration: number) {
         super();
         this.name = 'StyleTween';
         this.target = target;
