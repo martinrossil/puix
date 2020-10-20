@@ -1,178 +1,141 @@
-import Layout from './Layout';
-import IHorizontalLayout from './IHorizontalLayout';
+import { Events } from '../enums/Events';
+import { HorizontalAlign } from '../enums/HorizontalAlign';
 import { VerticalAlign } from '../enums/VerticalAlign';
-import IDisplayContainer from '../containers/IDisplayContainer';
-import SizeElement from '../core/SizeElement';
+import IDisplayContainer from '../interfaces/containers/IDisplayContainer';
+import ILayoutElement from '../interfaces/core/ILayoutElement';
+import BaseLayout from './BaseLayout';
 
-export default class HorizontalLayout extends Layout implements IHorizontalLayout {
-    public constructor(horizontalGap = 0, verticalAlign = VerticalAlign.TOP) {
-        super();
-        this.name = 'HorizontalLayout';
-        this.horizontalGap = horizontalGap;
-        this.verticalAlign = verticalAlign;
-    }
-
-    protected setSizeFromChildren(container: IDisplayContainer): void {
+export default class HorizontalLayout extends BaseLayout {
+    protected setInternalSize(container: IDisplayContainer, elements: ILayoutElement[]): void {
         let width = 0;
         let height = 0;
-        for (const element of container.elements) {
-            if (element.includeInLayout) {
-                if (height < element.actualHeight) {
-                    height = element.actualHeight;
-                }
-                width += element.actualWidth + this.horizontalGap;
+        for (const element of elements) {
+            if (height < element.actualHeight) {
+                height = element.actualHeight;
             }
+            width += element.actualWidth + container.horizontalGap;
         }
-        width = this.paddingLeft + width - this.horizontalGap + this.paddingRight;
-        height = this.paddingTop + height + this.paddingBottom;
+        width = container.paddingLeft + width - container.horizontalGap + container.paddingRight;
+        height = container.paddingTop + height + container.paddingBottom;
         if (container.actualWidth !== width || container.actualHeight !== height) {
             container.setActualSize(width, height);
-            container.dispatchEventWith(SizeElement.INTERNAL_SIZE_CHANGED, container, true);
+            container.dispatchEventWith(Events.INTERNAL_SIZE_CHANGED, this, true);
         }
     }
 
-    protected setWidthFromChildren(container: IDisplayContainer): void {
+    protected setInternalWidth(container: IDisplayContainer, elements: ILayoutElement[]): void {
         let width = 0;
-        for (const element of container.elements) {
-            if (element.includeInLayout) {
-                width += element.actualWidth + this.horizontalGap;
-            }
+        for (const element of elements) {
+            width += element.actualWidth + container.horizontalGap;
         }
-        width = this.paddingLeft + width - this.horizontalGap + this.paddingRight;
+        width = container.paddingLeft + width - container.horizontalGap + container.paddingRight;
         if (container.actualWidth !== width) {
             container.actualWidth = width;
-            container.dispatchEventWith(SizeElement.INTERNAL_SIZE_CHANGED, container, true);
+            container.dispatchEventWith(Events.INTERNAL_SIZE_CHANGED, this, true);
         }
     }
 
-    protected resizeChildren(container: IDisplayContainer): void {
-        if (!isNaN(container.width) || !isNaN(container.percentWidth)) {
-            this.setElementsSize(container);
-        } else {
-            this.setElementsHeight(container);
+    protected setInternalHeight(container: IDisplayContainer, elements: ILayoutElement[]): void {
+        let height = 0;
+        for (const element of elements) {
+            if (height < element.actualHeight) {
+                height = element.actualHeight;
+            }
+        }
+        height = container.paddingTop + height + container.paddingBottom;
+        if (container.actualHeight !== height) {
+            container.actualHeight = height;
+            container.dispatchEventWith(Events.INTERNAL_SIZE_CHANGED, this, true);
         }
     }
 
-    protected setElementsSize(container: IDisplayContainer): void {
+    protected resizeElements(container: IDisplayContainer, elements: ILayoutElement[]): void {
         let widthSum = 0;
         let percentWidthSum = 0;
-        for (const element of container.elements) {
-            if (element.includeInLayout) {
-                if (isNaN(element.percentWidth)) {
-                    widthSum += element.actualWidth;
-                } else {
-                    percentWidthSum += element.percentWidth;
-                }
-            }
-        }
-        const actualWidth = container.actualWidth - this.paddingLeft - this.paddingRight;
-        const actualHeight = container.actualHeight - this.paddingTop - this.paddingBottom;
-        const horizontalGapSumWidth = this.horizontalGap * (container.elements.length - 1);
-        const actualWidthLeftForPercentWidth = actualWidth - widthSum - horizontalGapSumWidth;
-        const pixelPercentRatio = actualWidthLeftForPercentWidth / percentWidthSum;
-        for (const element of container.elements) {
-            if (element.includeInLayout) {
-                if (!isNaN(element.percentHeight)) {
-                    element.actualHeight = actualHeight * element.percentHeight / 100;
-                } else if (this.verticalAlign === VerticalAlign.FILL) {
-                    element.actualHeight = actualHeight;
-                }
-                if (!isNaN(element.percentWidth)) {
-                    element.actualWidth = pixelPercentRatio * element.percentWidth;
-                }
-            }
-        }
-    }
-
-    protected setElementsHeight(container: IDisplayContainer): void {
-        const h = container.actualHeight - this.paddingTop - this.paddingBottom;
-        for (const element of container.elements) {
-            if (element.includeInLayout) {
-                if (!isNaN(element.percentHeight)) {
-                    element.actualHeight = h * element.percentHeight / 100;
-                } else if (this.verticalAlign === VerticalAlign.FILL) {
-                    element.actualHeight = h;
-                }
-            }
-        }
-    }
-
-    protected layoutChildren(container: IDisplayContainer): void {
-        if (this.verticalAlign === VerticalAlign.TOP) {
-            this.layoutTop(container);
-        } else if (this.verticalAlign === VerticalAlign.MIDDLE) {
-            this.layoutMiddle(container);
-        } else if (this.verticalAlign === VerticalAlign.BOTTOM) {
-            this.layoutBottom(container);
-        } else if (this.verticalAlign === VerticalAlign.FILL) {
-            this.layoutMiddle(container);
-        }
-    }
-
-    protected layoutTop(container: IDisplayContainer): void {
-        let x = this.paddingLeft;
-        for (const element of container.elements) {
-            if (element.includeInLayout) {
-                element.setPosition(x, this.paddingTop);
-                x += element.actualWidth + this.horizontalGap;
-            }
-        }
-    }
-
-    protected layoutMiddle(container: IDisplayContainer): void {
-        let x = this.paddingLeft;
-        for (const element of container.elements) {
-            if (element.includeInLayout) {
-                element.setPosition(x, container.actualHeight * 0.5 - element.actualHeight * 0.5);
-                x += element.actualWidth + this.horizontalGap;
-            }
-        }
-    }
-
-    protected layoutBottom(container: IDisplayContainer): void {
-        let x = this.paddingLeft;
-        let y = 0;
-        for (const element of container.elements) {
-            if (element.includeInLayout) {
-                y = container.actualHeight - this.paddingBottom - element.actualHeight;
-                element.setPosition(x, y);
-                x += element.actualWidth + this.horizontalGap;
-            }
-        }
-    }
-
-    private _horizontalGap = 0;
-
-    public set horizontalGap(value: number) {
-        if (isNaN(value)) {
-            if (this._horizontalGap !== 0) {
-                this._horizontalGap = 0;
-                this.invalidateLayout();
-            }
-        } else if (this._horizontalGap !== value) {
-            if (value < 0) {
-                this._horizontalGap = 0;
+        for (const element of elements) {
+            if (isNaN(element.percentWidth)) {
+                widthSum += element.actualWidth;
             } else {
-                this._horizontalGap = value;
+                percentWidthSum += element.percentWidth;
             }
-            this.invalidateLayout();
+        }
+        const actualWidth = container.actualWidth - container.paddingLeft - container.paddingRight;
+        const actualHeight = container.actualHeight - container.paddingTop - container.paddingBottom;
+        const horizontalGapSumWidth = container.horizontalGap * (elements.length - 1);
+        const actualWidthLeftForPercentWidth = actualWidth - widthSum - horizontalGapSumWidth;
+        let pixelPercentRatio;
+        if (percentWidthSum > 100) {
+            pixelPercentRatio = actualWidthLeftForPercentWidth / percentWidthSum;
+        } else {
+            pixelPercentRatio = actualWidthLeftForPercentWidth / 100;
+        }
+        for (const element of elements) {
+            if (!isNaN(element.percentHeight)) {
+                element.actualHeight = actualHeight * element.percentHeight / 100;
+            } else if (container.verticalAlign === VerticalAlign.FILL) {
+                element.actualHeight = actualHeight;
+            }
+            if (!isNaN(element.percentWidth)) {
+                element.actualWidth = pixelPercentRatio * element.percentWidth;
+            }
         }
     }
 
-    public get horizontalGap(): number {
-        return this._horizontalGap;
-    }
-
-    private _verticalAlign: string = VerticalAlign.TOP;
-
-    public set verticalAlign(value: string) {
-        if (this._verticalAlign !== value) {
-            this._verticalAlign = value;
-            this.invalidateLayout();
+    protected layoutElements(container: IDisplayContainer, elements: ILayoutElement[]): void {
+        if (container.verticalAlign === VerticalAlign.TOP) {
+            this.layoutElementsTop(container, elements);
+        } else if (container.verticalAlign === VerticalAlign.MIDDLE) {
+            this.layoutElementsMiddle(container, elements);
+        } else if (container.verticalAlign === VerticalAlign.BOTTOM) {
+            this.layoutElementsBottom(container, elements);
+        } else if (container.verticalAlign === VerticalAlign.FILL) {
+            this.layoutElementsMiddle(container, elements);
         }
     }
 
-    public get verticalAlign(): string {
-        return this._verticalAlign;
+    protected getHorizontalXStartValue(container: IDisplayContainer, elements: ILayoutElement[]): number {
+        let x = container.paddingLeft;
+        if (container.horizontalAlign === HorizontalAlign.CENTER || container.horizontalAlign === HorizontalAlign.RIGHT) {
+            const actualWidth = container.actualWidth - container.paddingLeft - container.paddingRight;
+            let elementsWidthSum = 0;
+            for (const element of elements) {
+                elementsWidthSum += element.actualWidth;
+            }
+            const horizontalGapSumWidth = container.horizontalGap * (elements.length - 1);
+            if (container.horizontalAlign === HorizontalAlign.CENTER) {
+                x += (actualWidth - elementsWidthSum - horizontalGapSumWidth) * 0.5;
+            } else {
+                x += (actualWidth - elementsWidthSum - horizontalGapSumWidth);
+            }
+        }
+        return x;
+    }
+
+    private layoutElementsTop(container: IDisplayContainer, elements: ILayoutElement[]): void {
+        let x = this.getHorizontalXStartValue(container, elements);
+        for (const element of elements) {
+            element.setPosition(x, container.paddingTop);
+            x += element.actualWidth + container.horizontalGap;
+        }
+    }
+
+    private layoutElementsMiddle(container: IDisplayContainer, elements: ILayoutElement[]): void {
+        let x = this.getHorizontalXStartValue(container, elements);
+        let y = 0;
+        for (const element of elements) {
+            y = container.actualHeight * 0.5 - element.actualHeight * 0.5;
+            element.setPosition(x, y);
+            x += element.actualWidth + container.horizontalGap;
+        }
+    }
+
+    private layoutElementsBottom(container: IDisplayContainer, elements: ILayoutElement[]): void {
+        let x = this.getHorizontalXStartValue(container, elements);
+        let y = 0;
+        for (const element of elements) {
+            y = container.actualHeight - container.paddingBottom - element.actualHeight;
+            element.setPosition(x, y);
+            x += element.actualWidth + container.horizontalGap;
+        }
     }
 }
