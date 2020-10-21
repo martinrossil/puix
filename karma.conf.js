@@ -6,12 +6,13 @@ module.exports = function karma(config) {
         frameworks: [
             'karma-typescript',
             'mocha',
-            'chai',
+            'chai'
         ],
         files: [
             { pattern: 'src/**/*.ts', include: true },
             { pattern: 'tests/**/*.ts', include: true }
-            // { pattern: 'tests/EventDispatcherInterface.spec.ts', include: true }
+            // { pattern: 'tests/IArrayList.spec.ts', include: true }
+            // { pattern: 'tests/IApplicationElement.spec.ts', include: true }
             // { pattern: 'tests/AnchorLayout.spec.ts' },
             // { pattern: 'tests/DisplayContainerInterface.spec.ts' },
             // { pattern: 'tests/DisplayElementInterface.spec.ts' },
@@ -57,8 +58,20 @@ module.exports = function karma(config) {
             },
         },
         browsers: [
-            'ChromeHeadless',
+            'ChromeHeadless'
+            // 'mobile',
+            // 'desktop'
         ],
+        customLaunchers: {
+            mobile: {
+              base: "ChromeHeadless",
+              flags: ["--window-size=500,1024"]
+            },
+            desktop: {
+              base: "ChromeHeadless",
+              flags: ["--window-size=2048,1536"]
+            }
+        },
         // possible values: config.LOG_DISABLE || config.LOG_ERROR ||
         // config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
         logLevel: config.LOG_INFO,
