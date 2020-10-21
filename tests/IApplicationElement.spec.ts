@@ -28,6 +28,14 @@ describe('IApplicationElement interface', () => {
             assert.isTrue(hasBeenDispatched);
         });
     });
+    describe('physical size', () => {
+        it('given applicationElement has been added to DOM, physical size should be same as window inner size', () => {
+            const applicationHTMLElement: HTMLElement = applicationElement as unknown as HTMLElement;
+            const domRect: DOMRect = applicationHTMLElement.getBoundingClientRect();
+            assert.strictEqual(domRect.width, window.innerWidth);
+            assert.strictEqual(domRect.height, window.innerHeight);
+        });
+    });
     describe('backgroundColor', () => {
         it('given backgroundColor = "red", backgroundColor should be "red"', () => {
             applicationElement.backgroundColor = 'red';
