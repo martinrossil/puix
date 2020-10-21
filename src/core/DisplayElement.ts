@@ -5,6 +5,7 @@ import LayoutElement from './LayoutElement';
 import IArrayList from '../interfaces/data/IArrayList';
 import IDropShadowFilter from '../interfaces/filters/IDropShadowFilter';
 import ArrayList from '../data/ArrayList';
+import { Events } from '../enums/Events';
 
 export default class DisplayElement extends LayoutElement implements IDisplayElement {
     public constructor() {
@@ -153,9 +154,10 @@ export default class DisplayElement extends LayoutElement implements IDisplayEle
     public get filters(): IArrayList<IDropShadowFilter> {
         if (!this._filters) {
             this._filters = new ArrayList();
-            this._filters.addEventListener(ArrayList.ITEM_ADDED, this.updateFilters.bind(this));
-            this._filters.addEventListener(ArrayList.ITEMS_ADDED, this.updateFilters.bind(this));
-            this._filters.addEventListener(ArrayList.ITEM_REMOVED, this.updateFilters.bind(this));
+            this._filters.addEventListener(Events.ITEM_ADDED, this.updateFilters.bind(this));
+            this._filters.addEventListener(Events.ITEMS_ADDED, this.updateFilters.bind(this));
+            this._filters.addEventListener(Events.ITEM_REMOVED, this.updateFilters.bind(this));
+            this._filters.addEventListener(Events.RESET, this.updateFilters.bind(this));
         }
         return this._filters;
     }
