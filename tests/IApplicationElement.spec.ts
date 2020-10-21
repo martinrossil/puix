@@ -14,8 +14,8 @@ describe('IApplicationElement interface', () => {
         it('overflow should be ' + Overflow.HIDDEN, () => {
             assert.strictEqual(applicationElement.overflow, Overflow.HIDDEN);
         });
-        it('backgroundColor should be ""', () => {
-            assert.strictEqual(applicationElement.backgroundColor, '');
+        it('backgroundColor should be rgb(247, 250, 252)', () => {
+            assert.strictEqual(applicationElement.backgroundColor, 'rgb(247, 250, 252)');
         });
     });
     describe('dispatch APPLICATION_COMPLETE', () => {
