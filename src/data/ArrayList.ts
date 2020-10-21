@@ -1,11 +1,8 @@
 import EventDispatcher from '../core/EventDispatcher';
+import { Events } from '../enums/Events';
 import IArrayList from '../interfaces/data/IArrayList';
 
 export default class ArrayList<Item> extends EventDispatcher implements IArrayList<Item> {
-    public static ITEM_ADDED = 'ArrayList.ITEM_ADDED';
-    public static ITEMS_ADDED = 'ArrayList.ITEMS_ADDED';
-    public static ITEM_REMOVED = 'ArrayList.ITEM_REMOVED';
-
     public constructor() {
         super();
         this.name = 'ArrayList';
@@ -13,12 +10,12 @@ export default class ArrayList<Item> extends EventDispatcher implements IArrayLi
 
     public addItem(item: Item): void {
         this.arrayData.push(item);
-        this.dispatchEventWith(ArrayList.ITEM_ADDED, item);
+        this.dispatchEventWith(Events.ITEM_ADDED, item);
     }
 
     public addItems(items: Item[]): void {
         this._arrayData = this.arrayData.concat(items);
-        this.dispatchEventWith(ArrayList.ITEMS_ADDED, items);
+        this.dispatchEventWith(Events.ITEMS_ADDED, items);
     }
 
     public getItemIndex(item: Item): number {
@@ -36,7 +33,7 @@ export default class ArrayList<Item> extends EventDispatcher implements IArrayLi
         const index = this.arrayData.indexOf(item);
         if (index > -1) {
             this.arrayData.splice(index, 1);
-            this.dispatchEventWith(ArrayList.ITEM_REMOVED, item);
+            this.dispatchEventWith(Events.ITEM_REMOVED, item);
         }
     }
 
@@ -44,7 +41,14 @@ export default class ArrayList<Item> extends EventDispatcher implements IArrayLi
         const item = this.getItemAt(index);
         if (item) {
             this.arrayData.splice(index, 1);
-            this.dispatchEventWith(ArrayList.ITEM_REMOVED, item);
+            this.dispatchEventWith(Events.ITEM_REMOVED, item);
+        }
+    }
+
+    public removeAll(): void {
+        if (this.length > 0) {
+            this.arrayData.length = 0;
+            this.dispatchEventWith(Events.RESET);
         }
     }
 
