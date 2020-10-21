@@ -1,24 +1,29 @@
+import { Events } from '../enums/Events';
 import { Overflow } from '../enums/Overflow';
+import IApplicationElement from '../interfaces/containers/IApplicationElement';
 import DisplayContainer from './DisplayContainer';
 
-export default class ApplicationElement extends DisplayContainer {
-    public static APPLICATION_COMPLETE = 'applicationComplete';
-
+export default class ApplicationElement extends DisplayContainer implements IApplicationElement {
     public constructor() {
         super();
         this.name = 'ApplicationElement';
-        // document.body.style.cssText = '*{position: absolute;margin: 0}';
         document.body.style.setProperty('position', 'absolute');
         document.body.style.setProperty('-webkit-overflow-scrolling', 'touch');
         document.body.style.setProperty('-webkit-tap-highlight-color', 'transparent');
         document.body.style.setProperty('-moz-tap-highlight-color', 'transparent');
         document.body.style.setProperty('margin', '0');
         this.overflow = Overflow.HIDDEN;
-        window.addEventListener('resize', () => {
-            this.setSize(window.innerWidth, window.innerHeight);
-        });
+        window.addEventListener('resize', this.updateSize.bind(this));
+        this.updateSize();
+    }
+
+    public connectedCallback(): void {
+        super.connectedCallback();
+        this.dispatchEventWith(Events.APPLICATION_COMPLETE);
+    }
+
+    private updateSize(): void {
         this.setSize(window.innerWidth, window.innerHeight);
-        this.dispatchEventWith(ApplicationElement.APPLICATION_COMPLETE);
     }
 
     public set backgroundColor(value: string) {
