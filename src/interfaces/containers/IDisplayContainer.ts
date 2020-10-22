@@ -10,6 +10,7 @@ export default interface IDisplayContainer extends IDisplayElement {
     addElements(elements: ILayoutElement[]): void;
     removeElement(element: ILayoutElement): void;
     getElementAt(index: number): ILayoutElement | null;
+    removeAllElements(): void;
     layout: Layout.ANCHOR | Layout.HORIZONTAL | Layout.VERTICAL | Layout.WRAP | Layout.GRID;
     padding: number;
     paddingLeft: number;
