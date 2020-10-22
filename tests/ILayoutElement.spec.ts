@@ -4,7 +4,7 @@ import { ILayoutElement, LayoutElement } from '../src';
 
 const layoutElement: ILayoutElement = new LayoutElement();
 
-describe('LayoutElementInterface interface', () => {
+describe('ILayoutElement interface', () => {
     beforeEach(() => {
         layoutElement.percentWidth = NaN;
         layoutElement.percentHeight = NaN;

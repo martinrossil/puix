@@ -17,7 +17,7 @@ beforeEach(() => {
     sizeElement.height = NaN;
 });
 
-describe('SizeElementInterface interface', () => {
+describe('ISizeElement interface', () => {
     describe('default values', () => {
         it('default minWidth should be 0', () => {
             assert.strictEqual(sizeElement.minWidth, 0);

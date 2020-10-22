@@ -8,7 +8,7 @@ beforeEach(() => {
     displayElement.opacity = 1;
 });
 
-describe('DisplayElementInterface interface', () => {
+describe('IDisplayElement interface', () => {
     describe('opacity', () => {
         it('given opacity is 1, when opacity = -1, opacity should be 0', () => {
             displayElement.opacity = -1;

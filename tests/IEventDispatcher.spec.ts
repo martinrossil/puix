@@ -16,7 +16,7 @@ eventDispatcherElement.addEventListener('test', handler);
 const eventDispatcher: IEventDispatcher = new EventDispatcher();
 eventDispatcher.addEventListener('test', handler2);
 
-describe('EventDispatcherInterface interface', () => {
+describe('IEventDispatcher interface', () => {
     describe('default values', () => {
         it('default name should be ""', () => {
             assert.strictEqual(eventDispatcherElement.name, '');

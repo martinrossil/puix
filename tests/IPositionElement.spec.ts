@@ -9,7 +9,7 @@ beforeEach(() => {
     positionElement.setPosition(NaN, NaN);
 });
 
-describe('PositionElementInterface interface', () => {
+describe('IPositionElement interface', () => {
     describe('default values', () => {
         it('default x should be NaN', () => {
             assert.isNaN(positionElement.x);
