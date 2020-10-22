@@ -73,43 +73,56 @@ export default class SizeElement extends PositionElement implements ISizeElement
         if (!isNaN(this.width) && !isNaN(this.height)) {
             return;
         }
+        let widthChanged = false;
+        let heightChanged = false;
         if (isNaN(width) || width < 0) {
             if (this._actualWidth !== this.minWidth) {
                 this._actualWidth = this.minWidth;
                 this.style.width = this._actualWidth + 'px';
+                widthChanged = true;
             }
         } else if (width < this.minWidth) {
             if (this._actualWidth !== this.minWidth) {
                 this._actualWidth = this.minWidth;
                 this.style.width = this._actualWidth + 'px';
+                widthChanged = true;
             }
         } else if (this.maxWidth < width) {
             if (this._actualWidth !== this.maxWidth) {
                 this._actualWidth = this.maxWidth;
                 this.style.width = this._actualWidth + 'px';
+                widthChanged = true;
             }
         } else if (this._actualWidth !== width) {
             this._actualWidth = width;
             this.style.width = this._actualWidth + 'px';
+            widthChanged = true;
         }
         if (isNaN(height) || height < 0) {
             if (this._actualHeight !== this.minHeight) {
                 this._actualHeight = this.minHeight;
                 this.style.height = this._actualHeight + 'px';
+                heightChanged = true;
             }
         } else if (height < this.minHeight) {
             if (this._actualHeight !== this.minHeight) {
                 this._actualHeight = this.minHeight;
                 this.style.height = this._actualHeight + 'px';
+                heightChanged = true;
             }
         } else if (this.maxHeight < height) {
             if (this._actualHeight !== this.maxHeight) {
                 this._actualHeight = this.maxHeight;
                 this.style.height = this._actualHeight + 'px';
+                heightChanged = true;
             }
         } else if (this._actualHeight !== height) {
             this._actualHeight = height;
             this.style.height = this._actualHeight + 'px';
+            heightChanged = true;
+        }
+        if (widthChanged || heightChanged) {
+            this.invalidateDisplay();
         }
     }
 
