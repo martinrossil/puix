@@ -295,7 +295,7 @@ export default class DisplayContainer extends DisplayElement implements IDisplay
     private _paddingTop = 0;
 
     public set paddingTop(value: number) {
-        if (isNaN(value) ||value < 0) {
+        if (isNaN(value) || value < 0) {
             if (this._paddingTop !== 0) {
                 this._paddingTop = 0;
                 this.invalidateDisplay();
@@ -331,7 +331,7 @@ export default class DisplayContainer extends DisplayElement implements IDisplay
     private _paddingBottom = 0;
 
     public set paddingBottom(value: number) {
-        if (isNaN(value) ||value < 0) {
+        if (isNaN(value) || value < 0) {
             if (this._paddingBottom !== 0) {
                 this._paddingBottom = 0;
                 this.invalidateDisplay();
