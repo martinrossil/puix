@@ -1,7 +1,7 @@
 export const enum Layout {
-    ANCHOR = 'a',
-    HORIZONTAL = 'b',
-    VERTICAL = 'c',
-    WRAP = 'd',
-    GRID = 'e'
+    ANCHOR = 1,
+    HORIZONTAL = 2,
+    VERTICAL = 3,
+    WRAP = 4,
+    GRID = 5
 }

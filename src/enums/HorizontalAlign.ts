@@ -1,6 +1,6 @@
 export const enum HorizontalAlign {
-    LEFT = 'left',
-    CENTER = 'center',
-    RIGHT = 'right',
-    FILL = 'justify'
+    LEFT = 1,
+    CENTER = 2,
+    RIGHT = 3,
+    FILL = 4
 }

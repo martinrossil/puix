@@ -1,6 +1,6 @@
 export const enum VerticalAlign {
-    TOP = 'top',
-    MIDDLE = 'middle',
-    BOTTOM = 'bottom',
-    FILL = 'fill'
+    TOP = 1,
+    MIDDLE = 2,
+    BOTTOM = 3,
+    FILL = 4
 }
