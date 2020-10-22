@@ -16,7 +16,9 @@ export default class PuixDev extends ApplicationElement {
         d.setSize(200, 200);
         d.backgroundColor = 'red';
         const d2: IDisplayElement = new DisplayElement();
-        d2.setSize(100, 100);
+        // d2.setSize(100, 100);
+        d2.percentWidth = 100;
+        d2.height = 100;
         d2.backgroundColor = 'blue';
         const dc: IDisplayContainer = new DisplayContainer();
         dc.backgroundColor = 'green';
@@ -29,14 +31,17 @@ export default class PuixDev extends ApplicationElement {
         d3.setSize(150, 150);
         d3.backgroundColor = 'black';
         const d4: IDisplayElement = new DisplayElement();
-        d4.setSize(50, 50);
+        // d4.setSize(50, 50);
+        d4.height = 50;
+        d4.percentWidth = 50;
         d4.backgroundColor = 'cyan';
         const dc2: IDisplayContainer = new DisplayContainer();
         dc2.backgroundColor = 'purple';
         dc2.layout = Layout.HORIZONTAL;
-        dc2.verticalAlign = VerticalAlign.MIDDLE;
+        dc2.verticalAlign = VerticalAlign.FILL;
         dc2.padding = 20;
         dc2.gap = 20;
+        dc2.percentWidth = 100;
         dc2.addElements([d3, d4]);
         const dc3: IDisplayContainer = new DisplayContainer();
         dc3.backgroundColor = 'yellow';
@@ -45,7 +50,9 @@ export default class PuixDev extends ApplicationElement {
         dc3.padding = 20;
         dc3.gap = 20;
         dc3.layout = Layout.VERTICAL;
-        dc3.horizontalAlign = HorizontalAlign.CENTER;
+        dc3.horizontalAlign = HorizontalAlign.FILL;
+        dc3.percentWidth = 80;
+        // dc3.width = 400;
         dc3.addElements([dc, dc2]);
         this.addElement(dc3);
     }
