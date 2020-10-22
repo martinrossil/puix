@@ -5,7 +5,15 @@ export default class Point implements IPoint {
     public y = 0;
 
     public constructor(x = 0, y = 0) {
-        this.x = x;
-        this.y = y;
+        if (isNaN(x)) {
+            this.x = 0;
+        } else {
+            this.x = x;
+        }
+        if (isNaN(y)) {
+            this.y = 0;
+        } else {
+            this.y = y;
+        }
     }
 }
