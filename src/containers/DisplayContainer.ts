@@ -29,18 +29,16 @@ export default class DisplayContainer extends DisplayElement implements IDisplay
             const beforeElement: Node = this.elements[index] as unknown as Node;
             this.elements.splice(index, 0, element);
             this.insertBefore(element as unknown as Node, beforeElement);
-        } else {
-            this.elements.push(element);
-            this.appendChild(element as unknown as Node);
+            this.invalidateDisplay();
+            return;
         }
+        this.elements.push(element);
+        this.appendChild(element as unknown as Node);
         this.invalidateDisplay();
     }
 
     public getElementAt(index: number): ILayoutElement | null {
-        if (this.elements[index]) {
-            return this.elements[index];
-        }
-        return null;
+        return this.elements[index] || null;
     }
 
     public removeElement(element: ILayoutElement): void {
@@ -48,6 +46,13 @@ export default class DisplayContainer extends DisplayElement implements IDisplay
         this.elements.splice(start, 1);
         this.removeChild(element as unknown as Node);
         this.invalidateDisplay();
+    }
+
+    public removeAllElements(): void {
+        this.elements.length = 0;
+        while (this.lastChild) {
+            this.removeChild(this.lastChild);
+        }
     }
 
     public addElements(elements: ILayoutElement[]): void {
@@ -60,30 +65,34 @@ export default class DisplayContainer extends DisplayElement implements IDisplay
         this.invalidateDisplay();
     }
 
-    private _layout: Layout.ANCHOR | Layout.HORIZONTAL | Layout.VERTICAL | Layout.WRAP | Layout.GRID = Layout.ANCHOR;
+    private _layout: Layout = Layout.ANCHOR;
 
-    public set layout(value: Layout.ANCHOR | Layout.HORIZONTAL | Layout.VERTICAL | Layout.WRAP | Layout.GRID) {
-        if (this._layout !== value) {
-            this._layout = value;
-            if (this._layout === Layout.ANCHOR) {
-                this.currentLayout = this.anchorLayout;
-            } else if (this._layout === Layout.VERTICAL) {
-                this.currentLayout = this.verticalLayout;
-            } else if (this._layout === Layout.HORIZONTAL) {
-                this.currentLayout = this.horizontalLayout;
-            }
+    public set layout(value: Layout) {
+        if (this._layout === value) {
+            return;
         }
+        this._layout = value;
+        if (this._layout === Layout.ANCHOR) {
+            this.currentLayout = this.anchorLayout;
+            return;
+        }
+        if (this._layout === Layout.HORIZONTAL) {
+            this.currentLayout = this.horizontalLayout;
+            return;
+        }
+        this.currentLayout = this.verticalLayout;
     }
 
-    public get layout(): Layout.ANCHOR | Layout.HORIZONTAL | Layout.VERTICAL | Layout.WRAP | Layout.GRID {
+    public get layout(): Layout {
         return this._layout;
     }
 
     protected childChanged(e: Event): void {
-        if (e.target !== this) {
-            e.stopImmediatePropagation();
-            this.invalidateDisplay();
+        if (e.target === this) {
+            return;
         }
+        e.stopImmediatePropagation();
+        this.invalidateDisplay();
     }
 
     protected updateDisplay(): void {
@@ -96,43 +105,41 @@ export default class DisplayContainer extends DisplayElement implements IDisplay
     private _currentLayout!: ILayout;
 
     private set currentLayout(value: ILayout) {
-        if (this._currentLayout !== value) {
-            this._currentLayout = value;
-            this.invalidateDisplay();
-        }
+        this._currentLayout = value;
+        this.invalidateDisplay();
     }
 
     private get currentLayout(): ILayout {
-        if (!this._currentLayout) {
-            this._currentLayout = this.anchorLayout;
-        }
-        return this._currentLayout;
+        return this._currentLayout || this.anchorLayout;
     }
 
     private _anchorLayout!: ILayout;
 
     private get anchorLayout(): ILayout {
-        if (!this._anchorLayout) {
-            this._anchorLayout = new AnchorLayout();
+        if (this._anchorLayout) {
+            return this._anchorLayout;
         }
+        this._anchorLayout = new AnchorLayout();
         return this._anchorLayout;
     }
 
     private _verticalLayout!: ILayout;
 
     private get verticalLayout(): ILayout {
-        if (!this._verticalLayout) {
-            this._verticalLayout = new VerticalLayout();
+        if (this._verticalLayout) {
+            return this._verticalLayout;
         }
+        this._verticalLayout = new VerticalLayout();
         return this._verticalLayout;
     }
 
     private _horizontalLayout!: ILayout;
 
     private get horizontalLayout(): ILayout {
-        if (!this._horizontalLayout) {
-            this._horizontalLayout = new HorizontalLayout();
+        if (this._horizontalLayout) {
+            return this._horizontalLayout;
         }
+        this._horizontalLayout = new HorizontalLayout();
         return this._horizontalLayout;
     }
 
@@ -143,19 +150,22 @@ export default class DisplayContainer extends DisplayElement implements IDisplay
     private _gap = 0;
 
     public set gap(value: number) {
+        if (this._gap === value) {
+            return;
+        }
         if (isNaN(value) || value < 0) {
             if (this._gap !== 0) {
                 this._gap = 0;
+                this._horizontalGap = 0;
+                this._verticalGap = 0;
+                this.invalidateDisplay();
             }
-            this._horizontalGap = 0;
-            this._verticalGap = 0;
-            this.invalidateDisplay();
-        } else if (this._gap !== value) {
-            this._gap = value;
-            this._horizontalGap = value;
-            this._verticalGap = value;
-            this.invalidateDisplay();
+            return;
         }
+        this._gap = value;
+        this._horizontalGap = this._gap;
+        this._verticalGap = this._gap;
+        this.invalidateDisplay();
     }
 
     public get gap(): number {
@@ -165,15 +175,18 @@ export default class DisplayContainer extends DisplayElement implements IDisplay
     private _horizontalGap = 0;
 
     public set horizontalGap(value: number) {
+        if (this._horizontalGap === value) {
+            return;
+        }
         if (isNaN(value) || value < 0) {
             if (this._horizontalGap !== 0) {
                 this._horizontalGap = 0;
                 this.invalidateDisplay();
             }
-        } else if (this._horizontalGap !== value) {
-            this._horizontalGap = value;
-            this.invalidateDisplay();
+            return;
         }
+        this._horizontalGap = value;
+        this.invalidateDisplay();
     }
 
     public get horizontalGap(): number {
@@ -183,73 +196,75 @@ export default class DisplayContainer extends DisplayElement implements IDisplay
     private _verticalGap = 0;
 
     public set verticalGap(value: number) {
+        if (this._verticalGap === value) {
+            return;
+        }
         if (isNaN(value) || value < 0) {
             if (this._verticalGap !== 0) {
                 this._verticalGap = 0;
                 this.invalidateDisplay();
             }
-        } else if (this._verticalGap !== value) {
-            this._verticalGap = value;
-            this.invalidateDisplay();
+            return;
         }
+        this._verticalGap = value;
+        this.invalidateDisplay();
     }
 
     public get verticalGap(): number {
         return this._verticalGap;
     }
 
-    private _horizontalAlign: HorizontalAlign.LEFT | HorizontalAlign.CENTER | HorizontalAlign.RIGHT | HorizontalAlign.FILL = HorizontalAlign.LEFT;
+    private _horizontalAlign: HorizontalAlign = HorizontalAlign.LEFT;
 
-    public set horizontalAlign(value: HorizontalAlign.LEFT | HorizontalAlign.CENTER | HorizontalAlign.RIGHT | HorizontalAlign.FILL) {
-        if (this._horizontalAlign !== value) {
-            this._horizontalAlign = value;
-            this.invalidateDisplay();
+    public set horizontalAlign(value: HorizontalAlign) {
+        if (this._horizontalAlign === value) {
+            return;
         }
+        this._horizontalAlign = value;
+        this.invalidateDisplay();
     }
 
-    public get horizontalAlign(): HorizontalAlign.LEFT | HorizontalAlign.CENTER | HorizontalAlign.RIGHT | HorizontalAlign.FILL {
+    public get horizontalAlign(): HorizontalAlign {
         return this._horizontalAlign;
     }
 
-    private _verticalAlign: VerticalAlign.TOP | VerticalAlign.MIDDLE | VerticalAlign.BOTTOM | VerticalAlign.FILL = VerticalAlign.TOP;
+    private _verticalAlign: VerticalAlign = VerticalAlign.TOP;
 
-    public set verticalAlign(value: VerticalAlign.TOP | VerticalAlign.MIDDLE | VerticalAlign.BOTTOM | VerticalAlign.FILL) {
-        if (this._verticalAlign !== value) {
-            this._verticalAlign = value;
-            this.invalidateDisplay();
+    public set verticalAlign(value: VerticalAlign) {
+        if (this._verticalAlign === value) {
+            return;
         }
+        this._verticalAlign = value;
+        this.invalidateDisplay();
     }
 
-    public get verticalAlign(): VerticalAlign.TOP | VerticalAlign.MIDDLE | VerticalAlign.BOTTOM | VerticalAlign.FILL {
+    public get verticalAlign(): VerticalAlign {
         return this._verticalAlign;
     }
 
     private _padding = 0;
 
     public set padding(value: number) {
-        if (isNaN(value)) {
-            this._padding = 0;
-            this._paddingLeft = 0;
-            this._paddingTop = 0;
-            this._paddingRight = 0;
-            this._paddingBottom = 0;
-            this.invalidateDisplay();
-        } else if (this._padding !== value) {
-            if (value < 0) {
+        if (this._padding === value) {
+            return;
+        }
+        if (isNaN(value) || value < 0) {
+            if (this._padding !== 0) {
                 this._padding = 0;
                 this._paddingLeft = 0;
                 this._paddingTop = 0;
                 this._paddingRight = 0;
                 this._paddingBottom = 0;
-            } else {
-                this._padding = value;
-                this._paddingLeft = value;
-                this._paddingTop = value;
-                this._paddingRight = value;
-                this._paddingBottom = value;
+                this.invalidateDisplay();
             }
-            this.invalidateDisplay();
+            return;
         }
+        this._padding = value;
+        this._paddingLeft = value;
+        this._paddingTop = value;
+        this._paddingRight = value;
+        this._paddingBottom = value;
+        this.invalidateDisplay();
     }
 
     public get padding(): number {
@@ -259,19 +274,18 @@ export default class DisplayContainer extends DisplayElement implements IDisplay
     private _paddingLeft = 0;
 
     public set paddingLeft(value: number) {
-        if (isNaN(value)) {
+        if (this._paddingLeft === value) {
+            return;
+        }
+        if (isNaN(value) || value < 0) {
             if (this._paddingLeft !== 0) {
                 this._paddingLeft = 0;
                 this.invalidateDisplay();
             }
-        } else if (this._paddingLeft !== value) {
-            if (value < 0) {
-                this._paddingLeft = 0;
-            } else {
-                this._paddingLeft = value;
-            }
-            this.invalidateDisplay();
+            return;
         }
+        this._paddingLeft = value;
+        this.invalidateDisplay();
     }
 
     public get paddingLeft(): number {
@@ -281,19 +295,15 @@ export default class DisplayContainer extends DisplayElement implements IDisplay
     private _paddingTop = 0;
 
     public set paddingTop(value: number) {
-        if (isNaN(value)) {
+        if (isNaN(value) ||value < 0) {
             if (this._paddingTop !== 0) {
                 this._paddingTop = 0;
                 this.invalidateDisplay();
             }
-        } else if (this._paddingTop !== value) {
-            if (value < 0) {
-                this._paddingTop = 0;
-            } else {
-                this._paddingTop = value;
-            }
-            this.invalidateDisplay();
+            return;
         }
+        this._paddingTop = value;
+        this.invalidateDisplay();
     }
 
     public get paddingTop(): number {
@@ -303,19 +313,15 @@ export default class DisplayContainer extends DisplayElement implements IDisplay
     private _paddingRight = 0;
 
     public set paddingRight(value: number) {
-        if (isNaN(value)) {
+        if (isNaN(value) || value < 0) {
             if (this._paddingRight !== 0) {
                 this._paddingRight = 0;
                 this.invalidateDisplay();
             }
-        } else if (this._paddingRight !== value) {
-            if (value < 0) {
-                this._paddingRight = 0;
-            } else {
-                this._paddingRight = value;
-            }
-            this.invalidateDisplay();
+            return;
         }
+        this._paddingRight = value;
+        this.invalidateDisplay();
     }
 
     public get paddingRight(): number {
@@ -325,19 +331,15 @@ export default class DisplayContainer extends DisplayElement implements IDisplay
     private _paddingBottom = 0;
 
     public set paddingBottom(value: number) {
-        if (isNaN(value)) {
+        if (isNaN(value) ||value < 0) {
             if (this._paddingBottom !== 0) {
                 this._paddingBottom = 0;
                 this.invalidateDisplay();
             }
-        } else if (this._paddingBottom !== value) {
-            if (value < 0) {
-                this._paddingBottom = 0;
-            } else {
-                this._paddingBottom = value;
-            }
-            this.invalidateDisplay();
+            return;
         }
+        this._paddingBottom = value;
+        this.invalidateDisplay();
     }
 
     public get paddingBottom(): number {
