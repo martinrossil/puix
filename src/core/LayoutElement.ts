@@ -165,17 +165,5 @@ export default class LayoutElement extends SizeElement implements ILayoutElement
     public get percentHeight(): number {
         return this._percentHeight;
     }
-
-    public get hasExplicitWidth(): boolean {
-        return !isNaN(this.width) || !isNaN(this.percentWidth) || (!isNaN(this.left) && !isNaN(this.right));
-    }
-
-    public get hasExplicitHeight(): boolean {
-        return !isNaN(this.height) || !isNaN(this.percentHeight) || (!isNaN(this.top) && !isNaN(this.bottom));
-    }
-
-    public get hasExplicitSize(): boolean {
-        return this.hasExplicitWidth && this.hasExplicitHeight;
-    }
 }
 customElements.define('layout-element', LayoutElement);

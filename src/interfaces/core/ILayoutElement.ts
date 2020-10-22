@@ -9,7 +9,4 @@ export default interface ILayoutElement extends ISizeElement {
     verticalCenter: number;
     percentWidth: number;
     percentHeight: number;
-    hasExplicitWidth: boolean;
-    hasExplicitHeight: boolean;
-    hasExplicitSize: boolean;
 }
