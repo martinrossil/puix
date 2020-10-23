@@ -35,12 +35,7 @@ export default class BaseLayout implements ILayout {
         }
         const node: Node = container as unknown as Node;
         const parent: IDisplayContainer = node.parentNode as unknown as IDisplayContainer;
-        if (parent) {
-            if (parent.horizontalAlign === HorizontalAlign.FILL) {
-                return true;
-            }
-        }
-        return false;
+        return parent.horizontalAlign === HorizontalAlign.FILL;
     }
 
     private hasExplicitHeight(container: IDisplayContainer): boolean {
@@ -55,12 +50,7 @@ export default class BaseLayout implements ILayout {
         }
         const node: Node = container as unknown as Node;
         const parent: IDisplayContainer = node.parentNode as unknown as IDisplayContainer;
-        if (parent) {
-            if (parent.verticalAlign === VerticalAlign.FILL) {
-                return true;
-            }
-        }
-        return false;
+        return parent.verticalAlign === VerticalAlign.FILL;
     }
 
      // eslint-disable-next-line
