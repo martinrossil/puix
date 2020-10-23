@@ -75,12 +75,4 @@ export { default as SvgElement } from './svg/SvgElement';
 export { default as TextElement } from './text/TextElement';
 export { default as TextRenderer } from './text/TextRenderer';
 
-export { default as ColorRange } from './theme/ColorRange';
-export { default as Design } from './theme/Design';
-export { default as HSLA } from './theme/HSLA';
-export { default as IColorRange } from './theme/IColorRange';
-export { default as IHSLA } from './theme/IHSLA';
-export { default as ITheme } from './theme/ITheme';
-export { default as Theme } from './theme/Theme';
-
 export { default as Point } from './vo/Point';
