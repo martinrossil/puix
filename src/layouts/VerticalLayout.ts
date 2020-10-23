@@ -71,7 +71,11 @@ export default class VerticalLayout extends BaseLayout {
         }
         for (const element of elements) {
             if (!isNaN(element.percentWidth)) {
-                element.actualWidth = actualWidth * element.percentWidth / 100;
+                if (element.percentWidth > 100) {
+                    element.actualWidth = actualWidth;
+                } else {
+                    element.actualWidth = actualWidth * element.percentWidth / 100;
+                }
             } else if (container.horizontalAlign === HorizontalAlign.FILL) {
                 element.actualWidth = actualWidth;
             }
