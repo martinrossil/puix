@@ -8,39 +8,11 @@ export default class AnchorLayout extends BaseLayout {
         let width = 0;
         let height = 0;
         for (const element of elements) {
-            if (!isNaN(element.left) && !isNaN(element.right)) {
-                if (width < element.left + element.actualWidth + element.right) {
-                    width = element.left + element.actualWidth + element.right;
-                }
-            } else if (!isNaN(element.left) && isNaN(element.right)) {
-                if (width < element.left + element.actualWidth) {
-                    width = element.left + element.actualWidth;
-                }
-            } else if (isNaN(element.left) && !isNaN(element.right)) {
-                if (width < element.actualWidth + element.right) {
-                    width = element.actualWidth + element.right;
-                }
-            } else {
-                if (width < element.actualWidth) {
-                    width = element.actualWidth;
-                }
+            if (width < element.actualWidth) {
+                width = element.actualWidth;
             }
-            if (!isNaN(element.top) && !isNaN(element.bottom)) {
-                if (height < element.top + element.actualHeight + element.bottom) {
-                    height = element.top + element.actualHeight + element.bottom;
-                }
-            } else if (!isNaN(element.top) && isNaN(element.bottom)) {
-                if (height < element.top + element.actualHeight) {
-                    height = element.top + element.actualHeight;
-                }
-            } else if (isNaN(element.top) && !isNaN(element.bottom)) {
-                if (height < element.actualHeight + element.bottom) {
-                    height = element.actualHeight + element.bottom;
-                }
-            } else {
-                if (height < element.actualHeight) {
-                    height = element.actualHeight;
-                }
+            if (height < element.actualHeight) {
+                height = element.actualHeight;
             }
         }
         width = container.paddingLeft + width + container.paddingRight;
@@ -106,22 +78,8 @@ export default class AnchorLayout extends BaseLayout {
     protected setInternalWidth(container: IDisplayContainer, elements: ILayoutElement[]): void {
         let width = 0;
         for (const element of elements) {
-            if (!isNaN(element.left) && !isNaN(element.right)) {
-                if (width < element.left + element.actualWidth + element.right) {
-                    width = element.left + element.actualWidth + element.right;
-                }
-            } else if (!isNaN(element.left) && isNaN(element.right)) {
-                if (width < element.left + element.actualWidth) {
-                    width = element.left + element.actualWidth;
-                }
-            } else if (isNaN(element.left) && !isNaN(element.right)) {
-                if (width < element.actualWidth + element.right) {
-                    width = element.actualWidth + element.right;
-                }
-            } else {
-                if (width < element.actualWidth) {
-                    width = element.actualWidth;
-                }
+            if (width < element.actualWidth) {
+                width = element.actualWidth;
             }
         }
         width = container.paddingLeft + width + container.paddingRight;
@@ -134,22 +92,8 @@ export default class AnchorLayout extends BaseLayout {
     protected setInternalHeight(container: IDisplayContainer, elements: ILayoutElement[]): void {
         let height = 0;
         for (const element of elements) {
-            if (!isNaN(element.top) && !isNaN(element.bottom)) {
-                if (height < element.top + element.actualHeight + element.bottom) {
-                    height = element.top + element.actualHeight + element.bottom;
-                }
-            } else if (!isNaN(element.top) && isNaN(element.bottom)) {
-                if (height < element.top + element.actualHeight) {
-                    height = element.top + element.actualHeight;
-                }
-            } else if (isNaN(element.top) && !isNaN(element.bottom)) {
-                if (height < element.actualHeight + element.bottom) {
-                    height = element.actualHeight + element.bottom;
-                }
-            } else {
-                if (height < element.actualHeight) {
-                    height = element.actualHeight;
-                }
+            if (height < element.actualHeight) {
+                height = element.actualHeight;
             }
         }
         height = container.paddingTop + height + container.paddingBottom;
