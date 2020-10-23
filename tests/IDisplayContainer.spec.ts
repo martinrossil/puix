@@ -8,7 +8,7 @@ child1.setSize(300, 50);
 const child2: IDisplayElement = new DisplayElement();
 child2.setSize(50, 300);
 const elements: IDisplayElement[] = [child1, child2];
-document.body.appendChild(displayContainer as unknown as Node); 
+document.body.appendChild(displayContainer as unknown as Node);
 
 describe('IDisplayContainer interface', () => {
     describe('default values', () => {
