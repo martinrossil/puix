@@ -84,13 +84,13 @@ export default class VerticalLayout extends BaseLayout {
     protected layoutElements(container: IDisplayContainer, elements: ILayoutElement[]): void {
         if (container.horizontalAlign === HorizontalAlign.LEFT) {
             this.layoutElementsLeft(container, elements);
-        } else if (container.horizontalAlign === HorizontalAlign.CENTER) {
-            this.layoutElementsCenter(container, elements);
-        } else if (container.horizontalAlign === HorizontalAlign.RIGHT) {
-            this.layoutElementsRight(container, elements);
-        } else if (container.horizontalAlign === HorizontalAlign.FILL) {
-            this.layoutElementsCenter(container, elements);
+            return;
         }
+        if (container.horizontalAlign === HorizontalAlign.RIGHT) {
+            this.layoutElementsRight(container, elements);
+            return;
+        }
+        this.layoutElementsCenter(container, elements);
     }
 
     private getVerticalYStartValue(container: IDisplayContainer, elements: ILayoutElement[]): number {
