@@ -5,6 +5,7 @@ import BaseLayout from './BaseLayout';
 
 export default class AnchorLayout extends BaseLayout {
     protected setInternalSize(container: IDisplayContainer, elements: ILayoutElement[]): void {
+        super.setInternalSize(container, elements);
         let width = 0;
         let height = 0;
         for (const element of elements) {
@@ -24,6 +25,7 @@ export default class AnchorLayout extends BaseLayout {
     }
 
     protected resizeElements(container: IDisplayContainer, elements: ILayoutElement[]): void {
+        super.resizeElements(container, elements);
         const w = container.actualWidth - container.paddingLeft - container.paddingRight;
         const h = container.actualHeight - container.paddingTop - container.paddingBottom;
         for (const element of elements) {
@@ -45,6 +47,7 @@ export default class AnchorLayout extends BaseLayout {
     }
 
     protected layoutElements(container: IDisplayContainer, elements: ILayoutElement[]): void {
+        super.layoutElements(container, elements);
         const w = container.actualWidth - container.paddingLeft - container.paddingRight;
         const h = container.actualHeight - container.paddingTop - container.paddingBottom;
         for (const element of elements) {
@@ -76,6 +79,7 @@ export default class AnchorLayout extends BaseLayout {
     }
 
     protected setInternalWidth(container: IDisplayContainer, elements: ILayoutElement[]): void {
+        super.setInternalWidth(container, elements);
         let width = 0;
         for (const element of elements) {
             if (width < element.actualWidth) {
@@ -90,6 +94,7 @@ export default class AnchorLayout extends BaseLayout {
     }
 
     protected setInternalHeight(container: IDisplayContainer, elements: ILayoutElement[]): void {
+        super.setInternalHeight(container, elements);
         let height = 0;
         for (const element of elements) {
             if (height < element.actualHeight) {
