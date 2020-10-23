@@ -285,6 +285,20 @@ describe('Physical Sizing', () => {
                     document.body.removeChild(container as unknown as Node);
                 });
             });
+            describe('given container size 300, 300 and innerContainer percentWidth 100', () => {
+                it('innerContainer width should be 300', () => {
+                    const outer: IDisplayContainer = new DisplayContainer();
+                    outer.setSize(300, 300);
+                    const inner: IDisplayContainer = new DisplayContainer();
+                    inner.percentWidth = 100;
+                    outer.addElement(inner);
+                    document.body.appendChild(outer as unknown as Node);
+                    const innerHTMLElement: HTMLElement = inner as unknown as HTMLElement;
+                    const domRect: DOMRect = innerHTMLElement.getBoundingClientRect();
+                    assert.strictEqual(domRect.width, 300);
+                    document.body.removeChild(outer as unknown as Node);
+                });
+            });
         });
     });
 });
