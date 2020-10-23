@@ -3,6 +3,7 @@ import { describe, it } from 'mocha';
 import { DisplayContainer, DisplayElement, IDisplayContainer, IDisplayElement } from '../src';
 
 let container: IDisplayContainer;
+let innerContainer: IDisplayContainer;
 const child200X200: IDisplayElement = new DisplayElement();
 child200X200.setSize(200, 200);
 const child100X100: IDisplayElement = new DisplayElement();
@@ -31,10 +32,11 @@ child100X100T20.top = 20;
 const child100X100B20: IDisplayElement = new DisplayElement();
 child100X100B20.setSize(100, 100);
 child100X100B20.bottom = 20;
-
 const child100X100B20R20: IDisplayElement = new DisplayElement();
 child100X100B20R20.setSize(100, 100);
 child100X100B20R20.bottom = child100X100B20R20.right = 20;
+const childL0R0H100: IDisplayElement = new DisplayElement();
+childL0R0H100.left = childL0R0H100.right = 0;
 
 describe('Physical Sizing', () => {
     describe('AnchorLayout internal sizing of container', () => {
@@ -239,6 +241,48 @@ describe('Physical Sizing', () => {
                         assert.strictEqual(domRect.y, 100);
                         document.body.removeChild(container as unknown as Node);
                     });
+                });
+            });
+            describe('given container size 300, 300 and innerContainer has left /right 0', () => {
+                it('innerContainer width should be 300', () => {
+                    container = new DisplayContainer();
+                    container.setSize(300, 300);
+                    innerContainer = new DisplayContainer();
+                    innerContainer.left = innerContainer.right = 0;
+                    container.addElement(innerContainer);
+                    document.body.appendChild(container as unknown as Node);
+                    const innerContainerHTMLElement: HTMLElement = innerContainer as unknown as HTMLElement;
+                    const domRect: DOMRect = innerContainerHTMLElement.getBoundingClientRect();
+                    assert.strictEqual(domRect.width, 300);
+                    document.body.removeChild(container as unknown as Node);
+                });
+            });
+            describe('given container size 300, 300 and innerContainer has percentHeight 100', () => {
+                it('innerContainer width should be 300', () => {
+                    container = new DisplayContainer();
+                    container.setSize(300, 300);
+                    innerContainer = new DisplayContainer();
+                    innerContainer.percentHeight = 100;
+                    container.addElement(innerContainer);
+                    document.body.appendChild(container as unknown as Node);
+                    const innerContainerHTMLElement: HTMLElement = innerContainer as unknown as HTMLElement;
+                    const domRect: DOMRect = innerContainerHTMLElement.getBoundingClientRect();
+                    assert.strictEqual(domRect.height, 300);
+                    document.body.removeChild(container as unknown as Node);
+                });
+            });
+            describe('given container size 300, 300 and innerContainer has top / bottom 0', () => {
+                it('innerContainer height should be 300', () => {
+                    container = new DisplayContainer();
+                    container.setSize(300, 300);
+                    innerContainer = new DisplayContainer();
+                    innerContainer.top = innerContainer.bottom = 0;
+                    container.addElement(innerContainer);
+                    document.body.appendChild(container as unknown as Node);
+                    const innerContainerHTMLElement: HTMLElement = innerContainer as unknown as HTMLElement;
+                    const domRect: DOMRect = innerContainerHTMLElement.getBoundingClientRect();
+                    assert.strictEqual(domRect.height, 300);
+                    document.body.removeChild(container as unknown as Node);
                 });
             });
         });
