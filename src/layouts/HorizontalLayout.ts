@@ -71,7 +71,11 @@ export default class HorizontalLayout extends BaseLayout {
         }
         for (const element of elements) {
             if (!isNaN(element.percentHeight)) {
-                element.actualHeight = actualHeight * element.percentHeight / 100;
+                if (element.percentHeight > 100) {
+                    element.actualHeight = actualHeight;
+                } else {
+                    element.actualHeight = actualHeight * element.percentHeight / 100;
+                }
             } else if (container.verticalAlign === VerticalAlign.FILL) {
                 element.actualHeight = actualHeight;
             }
@@ -84,13 +88,13 @@ export default class HorizontalLayout extends BaseLayout {
     protected layoutElements(container: IDisplayContainer, elements: ILayoutElement[]): void {
         if (container.verticalAlign === VerticalAlign.TOP) {
             this.layoutElementsTop(container, elements);
-        } else if (container.verticalAlign === VerticalAlign.MIDDLE) {
-            this.layoutElementsMiddle(container, elements);
-        } else if (container.verticalAlign === VerticalAlign.BOTTOM) {
-            this.layoutElementsBottom(container, elements);
-        } else if (container.verticalAlign === VerticalAlign.FILL) {
-            this.layoutElementsMiddle(container, elements);
+            return;
         }
+        if (container.verticalAlign === VerticalAlign.BOTTOM) {
+            this.layoutElementsBottom(container, elements);
+            return;
+        }
+        this.layoutElementsMiddle(container, elements);
     }
 
     protected getHorizontalXStartValue(container: IDisplayContainer, elements: ILayoutElement[]): number {
