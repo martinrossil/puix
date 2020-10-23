@@ -6,15 +6,28 @@ import ILayout from '../interfaces/layouts/ILayout';
 
 export default class BaseLayout implements ILayout {
     public updateLayout(container: IDisplayContainer, elements: ILayoutElement[]): void {
-        if (!this.hasExplicitSize(container)) {
-            if (!this.hasExplicitWidth(container) && !this.hasExplicitHeight(container)) {
-                this.setInternalSize(container, elements);
-            } else if (!this.hasExplicitWidth(container) && this.hasExplicitHeight(container)) {
-                this.setInternalWidth(container, elements);
-            } else if (this.hasExplicitWidth(container) && !this.hasExplicitHeight(container)) {
-                this.setInternalHeight(container, elements);
-            }
+        const hasExplicitSize = this.hasExplicitSize(container);
+        if (hasExplicitSize) {
+            this.resizeAndLayoutElements(container, elements);
+            return;
         }
+        const hasExplicitWidth = this.hasExplicitWidth(container);
+        const hasExplicitHeight = this.hasExplicitHeight(container);
+        if (!hasExplicitWidth && !hasExplicitHeight) {
+            this.setInternalSize(container, elements);
+            this.resizeAndLayoutElements(container, elements);
+            return;
+        }
+        if (!hasExplicitWidth && hasExplicitHeight) {
+            this.setInternalWidth(container, elements);
+            this.resizeAndLayoutElements(container, elements);
+            return;
+        }
+        this.setInternalHeight(container, elements);
+        this.resizeAndLayoutElements(container, elements);
+    }
+
+    private resizeAndLayoutElements(container: IDisplayContainer, elements: ILayoutElement[]): void {
         this.resizeElements(container, elements);
         this.layoutElements(container, elements);
     }
