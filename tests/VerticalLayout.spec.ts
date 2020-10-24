@@ -113,5 +113,21 @@ describe('VerticalLayout', () => {
                 assert.strictEqual(rect.height, 200);
             });
         });
+        describe('given container with explicit width 400 and childP15X200', () => {
+            it('childP150X200 size should 400, 200', () => {
+                const container: IDisplayContainer = new DisplayContainer();
+                container.width = 400;
+                container.layout = Layout.VERTICAL;
+                const childP150X200: IDisplayElement = new DisplayElement();
+                childP150X200.percentWidth = 150;
+                childP150X200.height = 200;
+                container.addElement(childP150X200);
+                document.body.appendChild(container as unknown as Node);
+                const childP150X200Element: HTMLElement = childP150X200 as unknown as HTMLElement;
+                const rect: DOMRect = childP150X200Element.getBoundingClientRect();
+                assert.strictEqual(rect.width, 400);
+                assert.strictEqual(rect.height, 200);
+            });
+        });
     });
 });
