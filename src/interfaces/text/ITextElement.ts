@@ -5,7 +5,7 @@ export default interface ITextElement extends IDisplayElement {
     text: string;
     fontFamily: string;
     fontSize: number;
-    wordwrap: boolean;
+    // wordwrap: boolean;
     textColor: string;
     fontWeight: FontWeight;
     lineHeight: number;

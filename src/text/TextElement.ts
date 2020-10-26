@@ -4,9 +4,6 @@ import ITextRenderer from '../interfaces/text/ITextRenderer';
 import TextRenderer from './TextRenderer';
 import { FontWeight } from '../enums/FontWeight';
 import { TextAlign } from '../enums/TextAlign';
-import { WhiteSpace } from '../enums/WhiteSpace';
-import { Overflow } from '../enums/Overflow';
-import { TextOverflow } from '../enums/TextOverflow';
 
 /**
  * Verdana 400 capHeight = 0.73, verticalOffset = 0.044, horizontalOffset = 0.13;
@@ -164,7 +161,7 @@ export default class TextElement extends DisplayElement implements ITextElement 
         return this._lineHeight;
     }
 
-    private _wordwrap = true;
+    /* private _wordwrap = true;
 
     public set wordwrap(value: boolean) {
         if (this._wordwrap !== value) {
@@ -184,7 +181,7 @@ export default class TextElement extends DisplayElement implements ITextElement 
 
     public get wordwrap(): boolean {
         return this._wordwrap;
-    }
+    } */
 
     public set textColor(value: string) {
         this.textRenderer.textColor = value;
