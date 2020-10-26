@@ -1,6 +1,6 @@
 import { assert } from 'chai';
 import { describe, it } from 'mocha';
-import { ApplicationElement, Events, Overflow } from '../src';
+import { ApplicationElement, Events } from '../src';
 import IApplicationElement from '../src/interfaces/containers/IApplicationElement';
 
 const applicationElement: IApplicationElement = new ApplicationElement();
@@ -11,8 +11,8 @@ describe('IApplicationElement interface', () => {
             assert.strictEqual(applicationElement.actualWidth, window.innerWidth);
             assert.strictEqual(applicationElement.actualHeight, window.innerHeight);
         });
-        it('overflow should be ' + Overflow.HIDDEN, () => {
-            assert.strictEqual(applicationElement.overflow, Overflow.HIDDEN);
+        it('clip should be true', () => {
+            assert.isTrue(applicationElement.clip);
         });
         it('backgroundColor should be rgb(247, 250, 252)', () => {
             assert.strictEqual(applicationElement.backgroundColor, 'rgb(247, 250, 252)');

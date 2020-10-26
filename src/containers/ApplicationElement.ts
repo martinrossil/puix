@@ -1,5 +1,4 @@
 import { Events } from '../enums/Events';
-import { Overflow } from '../enums/Overflow';
 import IApplicationElement from '../interfaces/containers/IApplicationElement';
 import DisplayContainer from './DisplayContainer';
 
@@ -12,7 +11,7 @@ export default class ApplicationElement extends DisplayContainer implements IApp
         document.body.style.setProperty('-webkit-tap-highlight-color', 'transparent');
         document.body.style.setProperty('-moz-tap-highlight-color', 'transparent');
         document.body.style.setProperty('margin', '0');
-        this.overflow = Overflow.HIDDEN;
+        this.clip = true;
         window.addEventListener('resize', this.updateSize.bind(this));
         this.updateSize();
     }

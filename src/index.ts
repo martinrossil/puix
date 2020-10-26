@@ -24,7 +24,6 @@ export { Events } from './enums/Events';
 export { FontWeight } from './enums/FontWeight';
 export { HorizontalAlign } from './enums/HorizontalAlign';
 export { Layout } from './enums/Layout';
-export { Overflow } from './enums/Overflow';
 export { ScrollPolicy } from './enums/ScrollPolicy';
 export { TextAlign } from './enums/TextAlign';
 export { TextOverflow } from './enums/TextOverflow';
