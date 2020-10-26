@@ -23,138 +23,127 @@ export default class SizeElement extends PositionElement implements ISizeElement
     }
 
     public setSize(width: number, height: number): void {
+        if (isNaN(this._width) && isNaN(width) && isNaN(this._height) && isNaN(height)) {
+            return;
+        }
         if (this._width === width && this._height === height) {
             return;
         }
-        let widthChanged = false;
-        if (isNaN(width)) {
-            widthChanged = true;
-            this._width = width;
-        } else {
-            if (width < 0) {
-                if (this._width !== 0) {
-                    widthChanged = true;
-                    this._width = 0;
-                }
-            } else {
-                widthChanged = true;
-                this._width = width;
-                this._minWidth = width;
-                this._actualWidth = width;
-                this._maxWidth = width;
-                this.style.width = this._actualWidth + 'px';
-            }
-        }
-        let heightChanged = false;
-        if (isNaN(height)) {
-            heightChanged = true;
-            this._height = height;
-        } else {
-            if (height < 0) {
-                if (this._height !== 0) {
-                    heightChanged = true;
-                    this._height = 0;
-                }
-            } else {
-                heightChanged = true;
-                this._height = height;
-                this._minHeight = height;
-                this._actualHeight = height;
-                this._maxHeight = height;
-                this.style.height = this._actualHeight + 'px';
-            }
-        }
-        if (widthChanged || heightChanged) {
+        if (isNaN(width) && (isNaN(height))) {
+            this._width = NaN;
+            this._height = NaN;
+            this._actualWidth = 0;
+            this._actualHeight = 0;
+            this.style.width = this._actualWidth + 'px';
+            this.style.height = this._actualHeight + 'px';
             this.invalidateDisplay();
+            return;
         }
+        if (!isNaN(width) && (isNaN(height))) {
+            this._width = this._actualWidth = this.getValidMinMaxWidth(width);
+            this._height = NaN;
+            this.style.width = this._actualWidth + 'px';
+            this.invalidateDisplay();
+            return;
+        }
+        if (isNaN(width) && (!isNaN(height))) {
+            this._height = this._actualHeight = this.getValidMinMaxHeight(height);
+            this._width = NaN;
+            this.style.height = this._actualHeight + 'px';
+            this.invalidateDisplay();
+            return;
+        }
+        this._width = this._actualWidth = this.getValidMinMaxWidth(width);
+        this._height = this._actualHeight = this.getValidMinMaxHeight(height);
+        this.style.width = this._actualWidth + 'px';
+        this.style.height = this._actualHeight + 'px';
+        this.invalidateDisplay();
+    }
+
+    private getValidMinMaxWidth(width: number): number {
+        if (width < this.minWidth) {
+            return this.minWidth;
+        }
+        if (width > this.maxWidth) {
+            return this.maxWidth;
+        }
+        return width;
+    }
+
+    private getValidMinMaxHeight(height: number): number {
+        if (height < this.minHeight) {
+            return this.minHeight;
+        }
+        if (height > this.maxHeight) {
+            return this.maxHeight;
+        }
+        return height;
     }
 
     public setActualSize(width: number, height: number): void {
         if (!isNaN(this.width) && !isNaN(this.height)) {
             return;
         }
-        let widthChanged = false;
-        let heightChanged = false;
-        if (isNaN(width) || width < 0) {
-            if (this._actualWidth !== this.minWidth) {
-                this._actualWidth = this.minWidth;
-                this.style.width = this._actualWidth + 'px';
-                widthChanged = true;
-            }
-        } else if (width < this.minWidth) {
-            if (this._actualWidth !== this.minWidth) {
-                this._actualWidth = this.minWidth;
-                this.style.width = this._actualWidth + 'px';
-                widthChanged = true;
-            }
-        } else if (this.maxWidth < width) {
-            if (this._actualWidth !== this.maxWidth) {
-                this._actualWidth = this.maxWidth;
-                this.style.width = this._actualWidth + 'px';
-                widthChanged = true;
-            }
-        } else if (this._actualWidth !== width) {
-            this._actualWidth = width;
+        if (this._actualWidth === width && this._actualHeight === height) {
+            return;
+        }
+        if (isNaN(width) && (isNaN(height))) {
+            this._actualWidth = this.minWidth;
+            this._actualHeight = this.minHeight;
             this.style.width = this._actualWidth + 'px';
-            widthChanged = true;
-        }
-        if (isNaN(height) || height < 0) {
-            if (this._actualHeight !== this.minHeight) {
-                this._actualHeight = this.minHeight;
-                this.style.height = this._actualHeight + 'px';
-                heightChanged = true;
-            }
-        } else if (height < this.minHeight) {
-            if (this._actualHeight !== this.minHeight) {
-                this._actualHeight = this.minHeight;
-                this.style.height = this._actualHeight + 'px';
-                heightChanged = true;
-            }
-        } else if (this.maxHeight < height) {
-            if (this._actualHeight !== this.maxHeight) {
-                this._actualHeight = this.maxHeight;
-                this.style.height = this._actualHeight + 'px';
-                heightChanged = true;
-            }
-        } else if (this._actualHeight !== height) {
-            this._actualHeight = height;
             this.style.height = this._actualHeight + 'px';
-            heightChanged = true;
-        }
-        if (widthChanged || heightChanged) {
             this.invalidateDisplay();
+            return;
         }
+        if (!isNaN(width) && (isNaN(height))) {
+            this._actualWidth = this.getValidMinMaxWidth(width);
+            this._actualHeight = this.minHeight;
+            this.style.width = this._actualWidth + 'px';
+            this.style.height = this._actualHeight + 'px';
+            this.invalidateDisplay();
+            return;
+        }
+        if (isNaN(width) && (!isNaN(height))) {
+            this._actualWidth = this.minWidth;
+            this._actualHeight = this.getValidMinMaxHeight(height);
+            this.style.width = this._actualWidth + 'px';
+            this.style.height = this._actualHeight + 'px';
+            this.invalidateDisplay();
+            return;
+        }
+        this._actualWidth = this.getValidMinMaxWidth(width);
+        this._actualHeight = this.getValidMinMaxHeight(height);
+        this.style.width = this._actualWidth + 'px';
+        this.style.height = this._actualHeight + 'px';
+        this.invalidateDisplay();
     }
 
     private _minWidth = 0;
 
     public set minWidth(value: number) {
-        if (this._minWidth === value || !isNaN(this.width)) {
+        if (isNaN(value)) {
+            this._minWidth = 0;
+            this.invalidateDisplay();
             return;
         }
-        let changed = false;
-        if (isNaN(value) || value < 0) {
-            if (this._minWidth !== 0) {
-                changed = true;
-                this._minWidth = 0;
-            }
-        } else if (value > this.maxWidth) {
-            if (this._minWidth !== this.maxWidth) {
-                changed = true;
-                this._minWidth = this.maxWidth;
-            }
+        if (this._minWidth === value) {
+            return;
+        }
+        if (value < 0) {
+            this._minWidth = 0;
         } else {
-            changed = true;
             this._minWidth = value;
         }
-        if (this._actualWidth < this._minWidth) {
-            changed = true;
+        if (!isNaN(this.width)) {
+            if (this.width < this._minWidth) {
+                this._width = this._minWidth;
+            }
+        }
+        if (this.actualWidth < this._minWidth) {
             this._actualWidth = this._minWidth;
             this.style.width = this._actualWidth + 'px';
         }
-        if (changed) {
-            this.invalidateDisplay();
-        }
+        this.invalidateDisplay();
     }
 
     public get minWidth(): number {
@@ -164,36 +153,21 @@ export default class SizeElement extends PositionElement implements ISizeElement
     private _actualWidth = 0;
 
     public set actualWidth(value: number) {
-        if (this._actualWidth === value || !isNaN(this.width)) {
+        if (!isNaN(this.width)) {
             return;
         }
-        let changed = false;
-        if (isNaN(value) || value < 0) {
-            if (this._actualWidth !== this.minWidth) {
-                changed = true;
-                this._actualWidth = this.minWidth;
-                this.style.width = this._actualWidth + 'px';
-            }
-        } else if (value < this.minWidth) {
-            if (this._actualWidth !== this.minWidth) {
-                changed = true;
-                this._actualWidth = this.minWidth;
-                this.style.width = this._actualWidth + 'px';
-            }
-        } else if (this.maxWidth < value) {
-            if (this._actualWidth !== this.maxWidth) {
-                changed = true;
-                this._actualWidth = this.maxWidth;
-                this.style.width = this._actualWidth + 'px';
-            }
-        } else if (this._actualWidth !== value) {
-            changed = true;
-            this._actualWidth = value;
+        if (this._actualWidth === value) {
+            return;
+        }
+        if (isNaN(value)) {
+            this._actualWidth = this.minWidth;
             this.style.width = this._actualWidth + 'px';
-        }
-        if (changed) {
             this.invalidateDisplay();
+            return;
         }
+        this._actualWidth = this.getValidMinMaxWidth(value);
+        this.style.width = this._actualWidth + 'px';
+        this.invalidateDisplay();
     }
 
     public get actualWidth(): number {
@@ -209,28 +183,14 @@ export default class SizeElement extends PositionElement implements ISizeElement
         if (this._width === value) {
             return;
         }
-        let changed = false;
         if (isNaN(value)) {
-            changed = true;
             this._width = value;
-        } else {
-            if (value < 0) {
-                if (this._width !== 0) {
-                    changed = true;
-                    this._width = 0;
-                }
-            } else {
-                changed = true;
-                this._width = value;
-                this._minWidth = value;
-                this._actualWidth = value;
-                this._maxWidth = value;
-                this.style.width = this._actualWidth + 'px';
-            }
-        }
-        if (changed) {
             this.invalidateDisplay();
+            return;
         }
+        this._width = this._actualWidth = this.getValidMinMaxWidth(value);
+        this.style.width = this._actualWidth + 'px';
+        this.invalidateDisplay();
     }
 
     public get width(): number {
@@ -240,32 +200,29 @@ export default class SizeElement extends PositionElement implements ISizeElement
     private _maxWidth = Infinity;
 
     public set maxWidth(value: number) {
-        if (this._maxWidth === value || !isNaN(this.width)) {
+        if (isNaN(value)) {
+            this._maxWidth = Infinity;
+            this.invalidateDisplay();
             return;
         }
-        let changed = false;
-        if (isNaN(value)) {
-            if (this._maxWidth !== Infinity) {
-                changed = true;
-                this._maxWidth = Infinity;
-            }
-        } else if (value < this.minWidth) {
-            if (this._maxWidth !== this.minWidth) {
-                changed = true;
-                this._maxWidth = this.minWidth;
-            }
+        if (this._maxWidth === value) {
+            return;
+        }
+        if (value < 0) {
+            this._maxWidth = 0;
         } else {
-            changed = true;
             this._maxWidth = value;
         }
-        if (this._actualWidth > this._maxWidth) {
-            changed = true;
+        if (!isNaN(this.width)) {
+            if (this.width > this._maxWidth) {
+                this._width = this._maxWidth;
+            }
+        }
+        if (this.actualWidth > this._maxWidth) {
             this._actualWidth = this._maxWidth;
             this.style.width = this._actualWidth + 'px';
         }
-        if (changed) {
-            this.invalidateDisplay();
-        }
+        this.invalidateDisplay();
     }
 
     public get maxWidth(): number {
@@ -275,32 +232,29 @@ export default class SizeElement extends PositionElement implements ISizeElement
     private _minHeight = 0;
 
     public set minHeight(value: number) {
-        if (this._minHeight === value || !isNaN(this.height)) {
+        if (isNaN(value)) {
+            this._minHeight = 0;
+            this.invalidateDisplay();
             return;
         }
-        let changed = false;
-        if (isNaN(value)) {
-            if (this._minHeight !== Infinity) {
-                changed = true;
-                this._minHeight = Infinity;
-            }
-        } else if (value > this.maxHeight) {
-            if (this._minHeight !== this.maxHeight) {
-                changed = true;
-                this._minHeight = this.maxHeight;
-            }
+        if (this._minHeight === value) {
+            return;
+        }
+        if (value < 0) {
+            this._minHeight = 0;
         } else {
-            changed = true;
             this._minHeight = value;
         }
-        if (this._actualHeight < this._minHeight) {
-            changed = true;
+        if (!isNaN(this.height)) {
+            if (this.height < this._minHeight) {
+                this._height = this._minHeight;
+            }
+        }
+        if (this.actualHeight < this._minHeight) {
             this._actualHeight = this._minHeight;
             this.style.height = this._actualHeight + 'px';
         }
-        if (changed) {
-            this.invalidateDisplay();
-        }
+        this.invalidateDisplay();
     }
 
     public get minHeight(): number {
@@ -310,36 +264,21 @@ export default class SizeElement extends PositionElement implements ISizeElement
     private _actualHeight = 0;
 
     public set actualHeight(value: number) {
-        if (this._actualHeight === value || !isNaN(this.height)) {
+        if (!isNaN(this.height)) {
             return;
         }
-        let changed = false;
-        if (isNaN(value) || value < 0) {
-            if (this._actualHeight !== this.minHeight) {
-                changed = true;
-                this._actualHeight = this.minHeight;
-                this.style.height = this._actualHeight + 'px';
-            }
-        } else if (value < this.minHeight) {
-            if (this._actualHeight !== this.minHeight) {
-                changed = true;
-                this._actualHeight = this.minHeight;
-                this.style.height = this._actualHeight + 'px';
-            }
-        } else if (this.maxHeight < value) {
-            if (this._actualHeight !== this.maxHeight) {
-                changed = true;
-                this._actualHeight = this.maxHeight;
-                this.style.height = this._actualHeight + 'px';
-            }
-        } else if (this._actualHeight !== value) {
-            changed = true;
-            this._actualHeight = value;
+        if (this._actualHeight === value) {
+            return;
+        }
+        if (isNaN(value)) {
+            this._actualHeight = this.minHeight;
             this.style.height = this._actualHeight + 'px';
-        }
-        if (changed) {
             this.invalidateDisplay();
+            return;
         }
+        this._actualHeight = this.getValidMinMaxHeight(value);
+        this.style.height = this._actualHeight + 'px';
+        this.invalidateDisplay();
     }
 
     public get actualHeight(): number {
@@ -355,28 +294,14 @@ export default class SizeElement extends PositionElement implements ISizeElement
         if (this._height === value) {
             return;
         }
-        let changed = false;
         if (isNaN(value)) {
-            changed = true;
             this._height = value;
-        } else {
-            if (value < 0) {
-                if (this._height !== 0) {
-                    changed = true;
-                    this._height = 0;
-                }
-            } else {
-                changed = true;
-                this._height = value;
-                this._minHeight = value;
-                this._actualHeight = value;
-                this._maxHeight = value;
-                this.style.height = this._actualHeight + 'px';
-            }
-        }
-        if (changed) {
             this.invalidateDisplay();
+            return;
         }
+        this._height = this._actualHeight = this.getValidMinMaxHeight(value);
+        this.style.height = this._actualHeight + 'px';
+        this.invalidateDisplay();
     }
 
     public get height(): number {
@@ -386,32 +311,29 @@ export default class SizeElement extends PositionElement implements ISizeElement
     private _maxHeight = Infinity;
 
     public set maxHeight(value: number) {
-        if (this._maxHeight === value || !isNaN(this.height)) {
+        if (isNaN(value)) {
+            this._maxHeight = Infinity;
+            this.invalidateDisplay();
             return;
         }
-        let changed = false;
-        if (isNaN(value)) {
-            if (this._maxWidth !== Infinity) {
-                changed = true;
-                this._maxHeight = Infinity;
-            }
-        } else if (value < this.minHeight) {
-            if (this._maxHeight !== this.minHeight) {
-                changed = true;
-                this._maxHeight = this.minHeight;
-            }
+        if (this._maxHeight === value) {
+            return;
+        }
+        if (value < 0) {
+            this._maxHeight = 0;
         } else {
-            changed = true;
             this._maxHeight = value;
         }
-        if (this._actualHeight > this._maxHeight) {
-            changed = true;
+        if (!isNaN(this.height)) {
+            if (this.height > this._maxHeight) {
+                this._height = this._maxHeight;
+            }
+        }
+        if (this.actualHeight > this._maxHeight) {
             this._actualHeight = this._maxHeight;
             this.style.height = this._actualHeight + 'px';
         }
-        if (changed) {
-            this.invalidateDisplay();
-        }
+        this.invalidateDisplay();
     }
 
     public get maxHeight(): number {
