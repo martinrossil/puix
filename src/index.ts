@@ -30,8 +30,6 @@ export { TextOverflow } from './enums/TextOverflow';
 export { VerticalAlign } from './enums/VerticalAlign';
 export { WhiteSpace } from './enums/WhiteSpace';
 
-export { default as DropShadowFilter } from './filters/DropShadowFilter';
-
 export { default as State } from './fsm/State';
 export { default as StateMachine } from './fsm/StateMachine';
 
