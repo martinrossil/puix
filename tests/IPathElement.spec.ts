@@ -2,7 +2,7 @@ import { assert } from 'chai';
 import { describe, it } from 'mocha';
 import { IPathElement, PathElement } from '../src';
 
-describe('IIconElement', () => {
+describe('IPathElement', () => {
     describe('default values', () => {
         it('default pathData should be ""', () => {
             const pathElement: IPathElement = new PathElement();
