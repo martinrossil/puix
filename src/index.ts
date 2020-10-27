@@ -17,7 +17,6 @@ export { default as ArrayList } from './data/ArrayList';
 
 export { default as IconElement } from './elements/IconElement';
 export { default as RippleElement } from './elements/RippleElement';
-export { default as TouchLayer } from './elements/TouchLayer';
 
 export { Cursor } from './enums/Cursor';
 export { Events } from './enums/Events';
@@ -45,10 +44,8 @@ export { default as ISizeElement } from './interfaces/core/ISizeElement';
 export { default as IArrayList } from './interfaces/data/IArrayList';
 export { default as IIconElement } from './interfaces/elements/IIconElement';
 export { default as IRippleElement } from './interfaces/elements/IRippleElement';
-export { default as ITouchLayer } from './interfaces/elements/ITouchLayer';
 export { default as ICustomEventListener } from './interfaces/events/ICustomEventListener';
 export { default as IEventListener } from './interfaces/events/IEventListener';
-export { default as IDropShadowFilter } from './interfaces/filters/IDropShadowFilter';
 export { default as IState } from './interfaces/fsm/IState';
 export { default as IStateMachine } from './interfaces/fsm/IStateMachine';
 export { default as ILayout } from './interfaces/layouts/ILayout';

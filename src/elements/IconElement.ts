@@ -12,10 +12,11 @@ export default class IconElement extends PathElement implements IIconElement {
     private _icon = '';
 
     public set icon(value: string) {
-        if (this._icon !== value) {
-            this._icon = value;
-            this.pathData = value;
+        if (this._icon === value) {
+            return;
         }
+        this._icon = value;
+        this.pathData = value;
     }
 
     public get icon(): string {
@@ -25,10 +26,11 @@ export default class IconElement extends PathElement implements IIconElement {
     private _color = '';
 
     public set color(value: string) {
-        if (this._color !== value) {
-            this._color = value;
-            this.fillColor = value;
+        if (this._color === value) {
+            return;
         }
+        this._color = value;
+        this.fillColor = value;
     }
 
     public get color(): string {

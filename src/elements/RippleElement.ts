@@ -41,25 +41,26 @@ export default class RippleElement extends ShapeElement implements IRippleElemen
         this.circleRadius = Math.hypot(this.actualWidth, this.actualHeight);
     }
 
-    protected circleRadius = 0;
+    private circleRadius = 0;
 
-    protected maskId = Math.random().toString();
+    private maskId = Math.random().toString();
 
     private mask: SVGMaskElement = document.createElementNS('http://www.w3.org/2000/svg', 'mask');
 
     private circle: SVGCircleElement = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
 
-    protected radiusTween: ITween = new AttributeTween(this.circle, 'r', 500);
+    private radiusTween: ITween = new AttributeTween(this.circle, 'r', 500);
 
-    protected opacityTween: ITween = new StyleTween(this.circle, 'opacity', 500);
+    private opacityTween: ITween = new StyleTween(this.circle, 'opacity', 500);
 
     private _rippleColor = '';
 
     public set rippleColor(value: string) {
-        if (this._rippleColor !== value) {
-            this._rippleColor = value;
-            this.circle.style.fill = value;
+        if (this._rippleColor === value) {
+            return;
         }
+        this._rippleColor = value;
+        this.circle.style.fill = value;
     }
 
     public get rippleColor(): string {
