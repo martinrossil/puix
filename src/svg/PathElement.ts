@@ -11,10 +11,11 @@ export default class PathElement extends SvgElement implements IPathElement {
     private _pathData = '';
 
     public set pathData(value: string) {
-        if (this._pathData !== value) {
-            this._pathData = value;
-            this.path.setAttribute('d', value);
+        if (this._pathData === value) {
+            return;
         }
+        this._pathData = value;
+        this.path.setAttribute('d', value);
     }
 
     public get pathData(): string {
@@ -24,10 +25,11 @@ export default class PathElement extends SvgElement implements IPathElement {
     private _strokeColor = '';
 
     public set strokeColor(value: string) {
-        if (this._strokeColor !== value) {
-            this._strokeColor = value;
-            this.path.setAttribute('stroke', value);
+        if (this._strokeColor === value) {
+            return;
         }
+        this._strokeColor = value;
+        this.path.setAttribute('stroke', value);
     }
 
     public get strokeColor(): string {
@@ -37,10 +39,15 @@ export default class PathElement extends SvgElement implements IPathElement {
     private _strokeWidth = 0;
 
     public set strokeWidth(value: number) {
-        if (this._strokeWidth !== value) {
-            this._strokeWidth = value;
-            this.path.setAttribute('stroke-width', value.toString());
+        if (this._strokeWidth === value) {
+            return;
         }
+        if (isNaN(value) || value < 0) {
+            this._strokeWidth = 0;
+        } else {
+            this._strokeWidth = value;
+        }
+        this.path.setAttribute('stroke-width', value.toString());
     }
 
     public get strokeWidth(): number {
@@ -50,11 +57,14 @@ export default class PathElement extends SvgElement implements IPathElement {
     private _strokeOpacity = 1;
 
     public set strokeOpacity(value: number) {
-        if (value < 0) {
-            this._strokeOpacity = 0;
-        } else if (value > 1) {
+        if (this._strokeOpacity === value) {
+            return;
+        }
+        if (isNaN(value) || value > 1) {
             this._strokeOpacity = 1;
-        } else if (this._strokeOpacity !== value) {
+        } else if (value < 0) {
+            this._strokeOpacity = 0;
+        } else {
             this._strokeOpacity = value;
         }
         this.path.setAttribute('stroke-opacity', this._strokeOpacity.toString());
@@ -67,10 +77,11 @@ export default class PathElement extends SvgElement implements IPathElement {
     private _fillColor = '';
 
     public set fillColor(value: string) {
-        if (this._fillColor !== value) {
-            this._fillColor = value;
-            this.path.setAttribute('fill', value);
+        if (this._fillColor === value) {
+            return;
         }
+        this._fillColor = value;
+        this.path.setAttribute('fill', value);
     }
 
     public get fillColor(): string {
@@ -80,11 +91,14 @@ export default class PathElement extends SvgElement implements IPathElement {
     private _fillOpacity = 1;
 
     public set fillOpacity(value: number) {
-        if (value < 0) {
-            this._fillOpacity = 0;
-        } else if (value > 1) {
+        if (this._fillOpacity === value) {
+            return;
+        }
+        if (isNaN(value) || value > 0) {
             this._fillOpacity = 1;
-        } else if (this._fillOpacity !== value) {
+        } else if (value < 0) {
+            this._fillOpacity = 0;
+        } else {
             this._fillOpacity = value;
         }
         this.path.setAttribute('fill-opacity', this._fillOpacity.toString());
