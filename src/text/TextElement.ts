@@ -2,7 +2,6 @@ import DisplayElement from '../core/DisplayElement';
 import ITextElement from '../interfaces/text/ITextElement';
 import ITextRenderer from '../interfaces/text/ITextRenderer';
 import TextRenderer from './TextRenderer';
-import { FontWeight } from '../enums/FontWeight';
 import { TextAlign } from '../enums/TextAlign';
 
 /**
@@ -19,15 +18,15 @@ export default class TextElement extends DisplayElement implements ITextElement 
     public constructor() {
         super();
         this.name = 'TextElement';
-        this.enabled = false;
-        this.fontFamily = 'Inter';
-        this.capHeight = 0.7;
-        this.verticalOffset = 0.0;
-        this.horizontalOffset = 0.0;
-        this.fontSize = 11.68;
-        this.lineHeight = 19.2;
-        this.fontWeight = FontWeight.REGULAR_400;
-        this.letterSpacing = 0.0;
+        // this.enabled = false;
+        // this.fontFamily = 'Inter';
+        // this.capHeight = 0.7;
+        // this.verticalOffset = 0.0;
+        // this.horizontalOffset = 0.0;
+        // this.fontSize = 11.68;
+        // this.lineHeight = 19.2;
+        // this.fontWeight = FontWeight.REGULAR_400;
+        // this.letterSpacing = 0.0;
         this.appendChild(this.textRenderer as unknown as Node);
     }
 
@@ -70,18 +69,19 @@ export default class TextElement extends DisplayElement implements ITextElement 
     private _text = '';
 
     public set text(value: string) {
-        if (this._text !== value) {
-            this._text = value;
-            this.textRenderer.text = value;
-            this.invalidateDisplay();
+        if (this._text === value) {
+            return;
         }
+        this._text = value;
+        this.textRenderer.text = value;
+        this.invalidateDisplay();
     }
 
     public get text(): string {
         return this._text;
     }
 
-    private _fontFamily = '';
+    /* private _fontFamily = '';
 
     public set fontFamily(value: string) {
         if (this._fontFamily !== value) {
@@ -132,22 +132,27 @@ export default class TextElement extends DisplayElement implements ITextElement 
             this._horizontalOffset = value;
             this.invalidateDisplay();
         }
-    }
+    } */
 
-    private _fontSize = NaN;
+    private _fontSize = 11.2;
 
     public set fontSize(value: number) {
-        if (this._fontSize !== value) {
-            this._fontSize = value;
-            this.invalidateDisplay();
+        if (this._fontSize === value) {
+            return;
         }
+        if (isNaN(value) || value < 0) {
+            this._fontSize = 11.2;
+        } else {
+            this._fontSize = value;
+        }
+        this.invalidateDisplay();
     }
 
     public get fontSize(): number {
         return this._fontSize;
     }
 
-    private _lineHeight = NaN;
+    /* private _lineHeight = NaN;
 
     public set lineHeight(value: number) {
         if (this._lineHeight !== value) {
@@ -159,7 +164,7 @@ export default class TextElement extends DisplayElement implements ITextElement 
 
     public get lineHeight(): number {
         return this._lineHeight;
-    }
+    } */
 
     /* private _wordwrap = true;
 
@@ -191,7 +196,7 @@ export default class TextElement extends DisplayElement implements ITextElement 
         return this.textRenderer.textColor;
     }
 
-    private _fontWeight = NaN;
+    /* private _fontWeight = NaN;
 
     public set fontWeight(value: number) {
         if (this._fontWeight !== value) {
@@ -203,16 +208,21 @@ export default class TextElement extends DisplayElement implements ITextElement 
 
     public get fontWeight(): number {
         return this._fontWeight;
-    }
+    } */
 
-    private _letterSpacing = NaN;
+    private _letterSpacing = 0;
 
     public set letterSpacing(value: number) {
-        if (this._letterSpacing !== value) {
-            this._letterSpacing = value;
-            this.textRenderer.letterSpacing = value;
-            this.invalidateDisplay();
+        if (this._letterSpacing === value) {
+            return;
         }
+        if (isNaN(value)) {
+            this._letterSpacing = 0;
+        } else {
+            this._letterSpacing = value;
+        }
+        this.textRenderer.letterSpacing = this._letterSpacing;
+        this.invalidateDisplay();
     }
 
     public get letterSpacing(): number {

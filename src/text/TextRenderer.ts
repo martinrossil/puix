@@ -1,34 +1,32 @@
 import DisplayElement from '../core/DisplayElement';
 import ITextRenderer from '../interfaces/text/ITextRenderer';
-import { FontWeight } from '../enums/FontWeight';
 import { TextAlign } from '../enums/TextAlign';
-import { WhiteSpace } from '../enums/WhiteSpace';
-import { TextOverflow } from '../enums/TextOverflow';
 
 export default class TextRenderer extends DisplayElement implements ITextRenderer {
     public constructor() {
         super();
         this.name = 'TextRenderer';
-        this.fontFamily = 'Verdana';
+        /* this.fontFamily = 'Verdana';
         this.fontSize = 11.68;
         this.lineHeight = 19.2;
-        this.letterSpacing = 0.0;
+        this.letterSpacing = 0.0; */
     }
 
     private _text = '';
 
     public set text(value: string) {
-        if (this._text !== value) {
-            this._text = value;
-            this.innerText = value;
+        if (this._text === value) {
+            return;
         }
+        this._text = value;
+        this.innerText = value;
     }
 
     public get text(): string {
         return this._text;
     }
 
-    private _fontFamily = '';
+    /* private _fontFamily = '';
 
     public set fontFamily(value: string) {
         if (this._fontFamily !== value) {
@@ -39,22 +37,27 @@ export default class TextRenderer extends DisplayElement implements ITextRendere
 
     public get fontFamily(): string {
         return this._fontFamily;
-    }
+    } */
 
-    private _fontSize = NaN;
+    private _fontSize = 11.2;
 
     public set fontSize(value: number) {
-        if (this._fontSize !== value) {
-            this._fontSize = value;
-            this.style.fontSize = value + 'px';
+        if (this._fontSize === value) {
+            return;
         }
+        if (isNaN(value) || value < 0) {
+            this._fontSize = 11.2;
+        } else {
+            this._fontSize = value;
+        }
+        this.style.fontSize = this._fontSize + 'px';
     }
 
     public get fontSize(): number {
         return this._fontSize;
     }
 
-    private _whiteSpace: WhiteSpace = WhiteSpace.NORMAL;
+    /* private _whiteSpace: WhiteSpace = WhiteSpace.NORMAL;
 
     public set whiteSpace(value: WhiteSpace) {
         if (this._whiteSpace !== value) {
@@ -78,22 +81,23 @@ export default class TextRenderer extends DisplayElement implements ITextRendere
 
     public get textOverflow(): TextOverflow {
         return this._textOverflow;
-    }
+    } */
 
     private _textColor = '';
 
     public set textColor(value: string) {
-        if (this._textColor !== value) {
-            this._textColor = value;
-            this.style.color = value;
+        if (this._textColor === value) {
+            return;
         }
+        this._textColor = value;
+        this.style.color = value;
     }
 
     public get textColor(): string {
         return this._textColor;
     }
 
-    private _fontWeight: FontWeight = FontWeight.REGULAR_400;
+    /* private _fontWeight: FontWeight = FontWeight.REGULAR_400;
 
     public set fontWeight(value: FontWeight) {
         if (this._fontWeight !== value) {
@@ -117,15 +121,20 @@ export default class TextRenderer extends DisplayElement implements ITextRendere
 
     public get lineHeight(): number {
         return this._lineHeight;
-    }
+    } */
 
-    private _letterSpacing = NaN;
+    private _letterSpacing = 0.0;
 
     public set letterSpacing(value: number) {
-        if (this._letterSpacing !== value) {
-            this._letterSpacing = value;
-            this.style.letterSpacing = value.toString();
+        if (this._letterSpacing === value) {
+            return;
         }
+        if (isNaN(value)) {
+            this._letterSpacing = 0;
+        } else {
+            this._letterSpacing = value;
+        }
+        this.style.letterSpacing = this._letterSpacing.toString();
     }
 
     public get letterSpacing(): number {
@@ -135,10 +144,11 @@ export default class TextRenderer extends DisplayElement implements ITextRendere
     private _textAlign = TextAlign.LEFT;
 
     public set textAlign(value: TextAlign) {
-        if (this._textAlign !== value) {
-            this._textAlign = value;
-            this.style.textAlign = value;
+        if (this._textAlign === value) {
+            return;
         }
+        this._textAlign = value;
+        this.style.textAlign = this._textAlign;
     }
 
     public get textAlign(): TextAlign {

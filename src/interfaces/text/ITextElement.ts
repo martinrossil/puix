@@ -1,17 +1,16 @@
 import IDisplayElement from '../core/IDisplayElement';
 import { TextAlign } from '../../enums/TextAlign';
-import { FontWeight } from '../../enums/FontWeight';
 export default interface ITextElement extends IDisplayElement {
     text: string;
-    fontFamily: string;
+    // fontFamily: string;
     fontSize: number;
     // wordwrap: boolean;
     textColor: string;
-    fontWeight: FontWeight;
-    lineHeight: number;
+    // fontWeight: FontWeight;
+    // lineHeight: number;
     letterSpacing: number;
-    capHeight: number;
-    verticalOffset: number;
-    horizontalOffset: number;
+    // capHeight: number;
+    // verticalOffset: number;
+    // horizontalOffset: number;
     textAlign: TextAlign;
 }
