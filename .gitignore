@@ -3,3 +3,4 @@ dist/
 development/
 coverage/
 public/
+debug.log
