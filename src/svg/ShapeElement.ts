@@ -45,15 +45,15 @@ export default class ShapeElement extends PathElement implements IShapeElement {
     private _cornerRadius = 0;
 
     public set cornerRadius(value: number) {
-        if (isNaN(value) || value < 0) {
-            if (this._cornerRadius !== 0) {
-                this._cornerRadius = 0;
-                this.invalidateDisplay();
-            }
-        } else if (this._cornerRadius !== value) {
-            this._cornerRadius = value;
-            this.invalidateDisplay();
+        if (this._cornerRadius === value) {
+            return;
         }
+        if (isNaN(value) || value < 0) {
+            this._cornerRadius = 0;
+        } else {
+            this._cornerRadius = value;
+        }
+        this.invalidateDisplay();
     }
 
     public get cornerRadius(): number {
