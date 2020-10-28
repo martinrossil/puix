@@ -1,15 +1,17 @@
 import DisplayElement from '../core/DisplayElement';
 import ITextRenderer from '../interfaces/text/ITextRenderer';
 import { TextAlign } from '../enums/TextAlign';
+import { WhiteSpace } from '../enums/WhiteSpace';
+import { FontWeight } from '../enums/FontWeight';
+import { TextOverflow } from '../enums/TextOverflow';
 
 export default class TextRenderer extends DisplayElement implements ITextRenderer {
     public constructor() {
         super();
         this.name = 'TextRenderer';
-        /* this.fontFamily = 'Verdana';
-        this.fontSize = 11.68;
-        this.lineHeight = 19.2;
-        this.letterSpacing = 0.0; */
+        this.style.fontFamily = 'Arial';
+        this.style.fontSize = '11.2px';
+        this.style.lineHeight = '1.2';
     }
 
     private _text = '';
@@ -26,18 +28,19 @@ export default class TextRenderer extends DisplayElement implements ITextRendere
         return this._text;
     }
 
-    /* private _fontFamily = '';
+    private _fontFamily = 'Arial';
 
     public set fontFamily(value: string) {
-        if (this._fontFamily !== value) {
-            this._fontFamily = value;
-            this.style.fontFamily = value;
+        if (this._fontFamily === value) {
+            return;
         }
+        this._fontFamily = value;
+        this.style.fontFamily = this._fontFamily;
     }
 
     public get fontFamily(): string {
         return this._fontFamily;
-    } */
+    }
 
     private _fontSize = 11.2;
 
@@ -57,13 +60,14 @@ export default class TextRenderer extends DisplayElement implements ITextRendere
         return this._fontSize;
     }
 
-    /* private _whiteSpace: WhiteSpace = WhiteSpace.NORMAL;
+    private _whiteSpace: WhiteSpace = WhiteSpace.NORMAL;
 
     public set whiteSpace(value: WhiteSpace) {
-        if (this._whiteSpace !== value) {
-            this._whiteSpace = value;
-            this.style.whiteSpace = value;
+        if (this._whiteSpace === value) {
+            return;
         }
+        this._whiteSpace = value;
+        this.style.whiteSpace = value;
     }
 
     public get whiteSpace(): WhiteSpace {
@@ -73,15 +77,16 @@ export default class TextRenderer extends DisplayElement implements ITextRendere
     private _textOverflow: TextOverflow = TextOverflow.CLIP;
 
     public set textOverflow(value: TextOverflow) {
-        if (this._textOverflow !== value) {
-            this._textOverflow = value;
-            this.style.textOverflow = value;
+        if (this._textOverflow === value) {
+            return;
         }
+        this._textOverflow = value;
+        this.style.textOverflow = value;
     }
 
     public get textOverflow(): TextOverflow {
         return this._textOverflow;
-    } */
+    }
 
     private _textColor = '';
 
@@ -97,31 +102,37 @@ export default class TextRenderer extends DisplayElement implements ITextRendere
         return this._textColor;
     }
 
-    /* private _fontWeight: FontWeight = FontWeight.REGULAR_400;
+    private _fontWeight: FontWeight = FontWeight.REGULAR_400;
 
     public set fontWeight(value: FontWeight) {
-        if (this._fontWeight !== value) {
-            this._fontWeight = value;
-            this.style.fontWeight = value.toString();
+        if (this._fontWeight === value) {
+            return;
         }
+        this._fontWeight = value;
+        this.style.fontWeight = this._fontWeight.toString();
     }
 
     public get fontWeight(): FontWeight {
         return this._fontWeight;
     }
 
-    private _lineHeight = NaN;
+    private _lineHeight = 1.2;
 
     public set lineHeight(value: number) {
-        if (this._lineHeight !== value) {
-            this._lineHeight = value;
-            this.style.lineHeight = value + 'px';
+        if (this._lineHeight === value) {
+            return;
         }
+        if (isNaN(value) || value < 0) {
+            this._lineHeight = 1.2;
+        } else {
+            this._lineHeight = value;
+        }
+        this.style.lineHeight = this._lineHeight.toString();
     }
 
     public get lineHeight(): number {
         return this._lineHeight;
-    } */
+    }
 
     private _letterSpacing = 0.0;
 
