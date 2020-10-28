@@ -1,6 +1,6 @@
 import { assert } from 'chai';
 import { describe, it } from 'mocha';
-import { ITextRenderer, TextAlign, TextRenderer } from '../src';
+import { FontWeight, ITextRenderer, TextAlign, TextOverflow, TextRenderer, WhiteSpace } from '../src';
 
 describe('ItextRenderer', () => {
     describe('default values', () => {
@@ -23,6 +23,26 @@ describe('ItextRenderer', () => {
         it('textAlign should be TextAlign.LEFT', () => {
             const textRenderer: ITextRenderer = new TextRenderer();
             assert.strictEqual(textRenderer.textAlign, TextAlign.LEFT);
+        });
+        it('fontFamily should be "Arial"', () => {
+            const textRenderer: ITextRenderer = new TextRenderer();
+            assert.strictEqual(textRenderer.fontFamily, 'Arial');
+        });
+        it('whiteSpace should be WhiteSpace.NORMAL', () => {
+            const textRenderer: ITextRenderer = new TextRenderer();
+            assert.strictEqual(textRenderer.whiteSpace, WhiteSpace.NORMAL);
+        });
+        it('textOverflow should be TextOverflow.CLIP', () => {
+            const textRenderer: ITextRenderer = new TextRenderer();
+            assert.strictEqual(textRenderer.textOverflow, TextOverflow.CLIP);
+        });
+        it('fontWeight should be FontWeight.REGULAR_400', () => {
+            const textRenderer: ITextRenderer = new TextRenderer();
+            assert.strictEqual(textRenderer.fontWeight, FontWeight.REGULAR_400);
+        });
+        it('lineHeight should be 1.2', () => {
+            const textRenderer: ITextRenderer = new TextRenderer();
+            assert.strictEqual(textRenderer.lineHeight, 1.2);
         });
     });
     describe('text', () => {
@@ -103,6 +123,71 @@ describe('ItextRenderer', () => {
             const textRenderer: ITextRenderer = new TextRenderer();
             textRenderer.textAlign = TextAlign.CENTER;
             assert.strictEqual(textRenderer.textAlign, TextAlign.CENTER);
+        });
+    });
+    describe('fontFamily', () => {
+        it('given fontFamily is "Arial", when fontFamily = "Arial", fontFamily should be "Arial"', () => {
+            const textRenderer: ITextRenderer = new TextRenderer();
+            textRenderer.fontFamily = 'Arial';
+            assert.strictEqual(textRenderer.fontFamily, 'Arial');
+        });
+        it('given fontFamily is "Arial", when fontFamily = "Verdana", fontFamily should be "Verdana"', () => {
+            const textRenderer: ITextRenderer = new TextRenderer();
+            textRenderer.fontFamily = 'Verdana';
+            assert.strictEqual(textRenderer.fontFamily, 'Verdana');
+        });
+    });
+    describe('whiteSpace', () => {
+        it('given whiteSpace is WhiteSpace.NORMAL, when whiteSpace = WhiteSpace.NORMAL, whiteSpace should be WhiteSpace.NORMAL', () => {
+            const textRenderer: ITextRenderer = new TextRenderer();
+            textRenderer.whiteSpace = WhiteSpace.NORMAL;
+            assert.strictEqual(textRenderer.whiteSpace, WhiteSpace.NORMAL);
+        });
+        it('given whiteSpace is WhiteSpace.NORMAL, when whiteSpace = WhiteSpace.NO_WRAP, whiteSpace should be WhiteSpace.NO_WRAP', () => {
+            const textRenderer: ITextRenderer = new TextRenderer();
+            textRenderer.whiteSpace = WhiteSpace.NO_WRAP;
+            assert.strictEqual(textRenderer.whiteSpace, WhiteSpace.NO_WRAP);
+        });
+    });
+    describe('textOverflow', () => {
+        it('given textOverflow is TextOverFlow.CLIP, when textOverflow = TextOverFlow.CLIP, textOverflow should be TextOverFlow.CLIP', () => {
+            const textRenderer: ITextRenderer = new TextRenderer();
+            textRenderer.textOverflow = TextOverflow.CLIP;
+            assert.strictEqual(textRenderer.textOverflow, TextOverflow.CLIP);
+        });
+        it('given textOverflow is TextOverFlow.CLIP, when textOverflow = TextOverFlow.ELLIPSIS, textOverflow should be TextOverFlow.ELLIPSIS', () => {
+            const textRenderer: ITextRenderer = new TextRenderer();
+            textRenderer.textOverflow = TextOverflow.ELLIPSIS;
+            assert.strictEqual(textRenderer.textOverflow, TextOverflow.ELLIPSIS);
+        });
+    });
+    describe('fontWeight', () => {
+        it('given fontWeight is FontWeight.REGULAR_400, when fontWeight = FontWeight.REGULAR_400, fontWeight should be FontWeight.REGULAR_400', () => {
+            const textRenderer: ITextRenderer = new TextRenderer();
+            textRenderer.fontWeight = FontWeight.REGULAR_400;
+            assert.strictEqual(textRenderer.fontWeight, FontWeight.REGULAR_400);
+        });
+        it('given fontWeight is FontWeight.REGULAR_400, when fontWeight = FontWeight.BOLD_700, fontWeight should be FontWeight.BOLD_700', () => {
+            const textRenderer: ITextRenderer = new TextRenderer();
+            textRenderer.fontWeight = FontWeight.BOLD_700;
+            assert.strictEqual(textRenderer.fontWeight, FontWeight.BOLD_700);
+        });
+    });
+    describe('lineHeight', () => {
+        it('given lineHeight is 1.2, when lineHeight = 1.2, lineHeight should be 1.2', () => {
+            const textRenderer: ITextRenderer = new TextRenderer();
+            textRenderer.lineHeight = 1.2;
+            assert.strictEqual(textRenderer.lineHeight, 1.2);
+        });
+        it('given lineHeight is 1.2, when lineHeight = NaN, lineHeight should be 1.2', () => {
+            const textRenderer: ITextRenderer = new TextRenderer();
+            textRenderer.lineHeight = NaN;
+            assert.strictEqual(textRenderer.lineHeight, 1.2);
+        });
+        it('given lineHeight is 1.2, when lineHeight = -1.2, lineHeight should be 1.2', () => {
+            const textRenderer: ITextRenderer = new TextRenderer();
+            textRenderer.lineHeight = -1.2;
+            assert.strictEqual(textRenderer.lineHeight, 1.2);
         });
     });
 });
