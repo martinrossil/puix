@@ -53,8 +53,11 @@ export { default as IElementCSSInlineStyle } from './interfaces/style/IElementCS
 export { default as IPathElement } from './interfaces/svg/IPathElement';
 export { default as IShapeElement } from './interfaces/svg/IShapeElement';
 export { default as ISvgElement } from './interfaces/svg/ISvgElement';
+export { default as IBaseText } from './interfaces/text/IBaseText';
+export { default as ILabelElement } from './interfaces/text/ILabelElement';
 export { default as ITextElement } from './interfaces/text/ITextElement';
 export { default as ITextRenderer } from './interfaces/text/ITextRenderer';
+export { default as ITypeFace } from './interfaces/text/ITypeFace';
 export { default as IPoint } from './interfaces/vo/IPoint';
 
 export { default as AnchorLayout } from './layouts/AnchorLayout';
@@ -66,7 +69,10 @@ export { default as PathElement } from './svg/PathElement';
 export { default as ShapeElement } from './svg/ShapeElement';
 export { default as SvgElement } from './svg/SvgElement';
 
+export { default as BaseText } from './text/BaseText';
+export { default as LabelElement } from './text/LabelElement';
 export { default as TextElement } from './text/TextElement';
 export { default as TextRenderer } from './text/TextRenderer';
+export { default as TypeFace } from './text/TypeFace';
 
 export { default as Point } from './vo/Point';
