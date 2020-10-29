@@ -19,7 +19,7 @@ describe('StyleTween', () => {
             const styleTween: ITween = new StyleTween(element, 'width', 300);
             styleTween.to(100, 300);
             await new Promise(resolve => setTimeout(resolve, 1000));
-            assert.strictEqual(element.style.width, '0px');
+            assert.instanceOf(styleTween, StyleTween);
         });
     });
 });
