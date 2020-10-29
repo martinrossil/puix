@@ -11,7 +11,7 @@ export default class StyleTween extends EventDispatcher implements ITween {
     protected currentValue = 0;
     protected difference = 0;
     protected start = 0;
-    protected requestId = 0;
+    protected requestId = NaN;
     protected progress = 0;
 
     public constructor(target: IElementCSSInlineStyle, style: string, duration: number) {
@@ -23,7 +23,7 @@ export default class StyleTween extends EventDispatcher implements ITween {
         this.animationFrame = this.animationFrame.bind(this);
     }
 
-    public to(value: number, duration = NaN): void {
+    public to(value: number, duration: number): void {
         if (!isNaN(this.requestId)) {
             cancelAnimationFrame(this.requestId);
         }
@@ -53,6 +53,7 @@ export default class StyleTween extends EventDispatcher implements ITween {
             this.requestId = requestAnimationFrame(this.animationFrame);
         } else {
             this.currentValue = this.startValue = this.value;
+            this.requestId = NaN;
         }
         this.target.style.setProperty(this.style, this.currentValue.toString());
     }

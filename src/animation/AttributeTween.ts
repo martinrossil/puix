@@ -22,7 +22,7 @@ export default class AttributeTween extends EventDispatcher implements ITween {
         this.animationFrame = this.animationFrame.bind(this);
     }
 
-    public to(value: number, duration = NaN): void {
+    public to(value: number, duration: number): void {
         if (!isNaN(this.requestId)) {
             cancelAnimationFrame(this.requestId);
         }
@@ -52,6 +52,7 @@ export default class AttributeTween extends EventDispatcher implements ITween {
             this.requestId = requestAnimationFrame(this.animationFrame);
         } else {
             this.currentValue = this.startValue = this.value;
+            this.requestId = NaN;
         }
         this.target.setAttribute(this.attribute, this.currentValue.toString());
     }
