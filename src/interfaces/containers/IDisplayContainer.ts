@@ -11,7 +11,7 @@ export default interface IDisplayContainer extends IDisplayElement {
     removeElement(element: ILayoutElement): void;
     getElementAt(index: number): ILayoutElement | null;
     removeAllElements(): void;
-    layout: Layout.ANCHOR | Layout.HORIZONTAL | Layout.VERTICAL | Layout.WRAP | Layout.GRID;
+    layout: Layout.ANCHOR | Layout.HORIZONTAL | Layout.VERTICAL;
     padding: number;
     paddingLeft: number;
     paddingTop: number;
