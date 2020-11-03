@@ -1,6 +1,7 @@
-import IDisplayElement from '../core/IDisplayElement';
+import IDisplayContainer from './IDisplayContainer';
 
-export default interface IScrollContainer extends IDisplayElement { // IDisplayContainer {
-    /* horizontalScrollPolicy: string;
-    verticalScrollPolicy: string; */
+export default interface IScrollContainer extends IDisplayContainer {
+    scrollEnabled: boolean;
+    horizontalScrollEnabled: boolean;
+    verticalScrollEnabled: boolean;
 }
