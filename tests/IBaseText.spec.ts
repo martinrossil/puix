@@ -1,6 +1,6 @@
 import { assert } from 'chai';
 import { describe, it } from 'mocha';
-import { BaseText, IBaseText, TextAlign } from '../src';
+import { BaseText, IBaseText, TextAlign, TypeFace } from '../src';
 describe('IBaseText', () => {
     describe('default values', () => {
         it('text should be ""', () => {
@@ -102,6 +102,12 @@ describe('IBaseText', () => {
             const textElement: IBaseText = new BaseText();
             textElement.textAlign = TextAlign.CENTER;
             assert.strictEqual(textElement.textAlign, TextAlign.CENTER);
+        });
+    });
+    describe('typeFace', () => {
+        it('given default typeFace, when typeFace = new TypeFace(), typeFace should be covered', () => {
+            const textElement: IBaseText = new BaseText();
+            textElement.typeFace = new TypeFace();
         });
     });
 });
