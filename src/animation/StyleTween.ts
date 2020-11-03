@@ -43,11 +43,7 @@ export default class StyleTween extends EventDispatcher implements ITween {
     }
 
     protected animationFrame(time: number): void {
-        let step = time;
-        if (step < this.start) {
-            step = this.start;
-        }
-        this.progress = (step - this.start) / this.duration;
+        this.progress = Math.abs(time - this.start) / this.duration;
         if (this.progress < 1) {
             this.currentValue = (this.difference * this.progress) + this.startValue;
             this.requestId = requestAnimationFrame(this.animationFrame);
