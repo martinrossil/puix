@@ -1,5 +1,5 @@
 import { assert } from 'chai';
-import { describe, it, beforeEach } from 'mocha';
+import { describe, it } from 'mocha';
 import { IPoint, Point } from '../src';
 
 describe('IPoint interface', () => {
