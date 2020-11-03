@@ -1,6 +1,7 @@
 import IDisplayElement from '../interfaces/core/IDisplayElement';
 import { Cursor } from '../enums/Cursor';
 import LayoutElement from './LayoutElement';
+import { Overflow } from '../enums/Overflow';
 
 export default class DisplayElement extends LayoutElement implements IDisplayElement {
     public constructor() {
@@ -50,22 +51,46 @@ export default class DisplayElement extends LayoutElement implements IDisplayEle
         return this._enabled;
     }
 
-    private _clip = false;
+    private _overflow: Overflow = Overflow.VISIBLE;
 
-    public set clip(value: boolean) {
-        if (this._clip === value) {
+    public set overflow(value: Overflow) {
+        if (this._overflow === value) {
             return;
         }
-        this._clip = value;
-        if (this._clip) {
-            this.style.overflow = 'hidden';
-        } else {
-            this.style.overflow = 'visible';
-        }
+        this._overflow = value;
+        this.style.overflow = value;
     }
 
-    public get clip(): boolean {
-        return this._clip;
+    public get overflow(): Overflow {
+        return this._overflow;
+    }
+
+    private _overflowX: Overflow = Overflow.VISIBLE;
+
+    public set overflowX(value: Overflow) {
+        if (this._overflowX === value) {
+            return;
+        }
+        this._overflowX = value;
+        this.style.overflowX = value;
+    }
+
+    public get overflowX(): Overflow {
+        return this._overflowX;
+    }
+
+    private _overflowY: Overflow = Overflow.VISIBLE;
+
+    public set overflowY(value: Overflow) {
+        if (this._overflowY === value) {
+            return;
+        }
+        this._overflowY = value;
+        this.style.overflowY = value;
+    }
+
+    public get overflowY(): Overflow {
+        return this._overflowY;
     }
 
     private _cornerRadius = 0;

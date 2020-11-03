@@ -1,3 +1,4 @@
+import { Overflow } from '../enums/Overflow';
 import { TextOverflow } from '../enums/TextOverflow';
 import { WhiteSpace } from '../enums/WhiteSpace';
 import ILabelElement from '../interfaces/text/ILabelElement';
@@ -9,7 +10,7 @@ export default class LabelElement extends BaseText implements ILabelElement {
         this.name = 'LabelElement';
         this.textRenderer.whiteSpace = WhiteSpace.NO_WRAP;
         this.textRenderer.textOverflow = TextOverflow.ELLIPSIS;
-        this.textRenderer.clip = true;
+        this.textRenderer.overflow = Overflow.HIDDEN;
         this.appendChild(this.textRenderer as unknown as Node);
     }
 

@@ -1,6 +1,6 @@
 import { assert } from 'chai';
 import { describe, it } from 'mocha';
-import { Cursor, DisplayElement, IDisplayElement } from '../src';
+import { Cursor, DisplayElement, IDisplayElement, Overflow } from '../src';
 
 describe('IDisplayElement interface', () => {
     describe('default values', () => {
@@ -12,9 +12,17 @@ describe('IDisplayElement interface', () => {
             const displayElement: IDisplayElement = new DisplayElement();
             assert.isTrue(displayElement.enabled);
         });
-        it('default clip should be false', () => {
+        it('default overflow should be Overflow.VISIBLE', () => {
             const displayElement: IDisplayElement = new DisplayElement();
-            assert.isFalse(displayElement.clip);
+            assert.strictEqual(displayElement.overflow, Overflow.VISIBLE);
+        });
+        it('default overflowX should be Overflow.VISIBLE', () => {
+            const displayElement: IDisplayElement = new DisplayElement();
+            assert.strictEqual(displayElement.overflowX, Overflow.VISIBLE);
+        });
+        it('default overflowY should be Overflow.VISIBLE', () => {
+            const displayElement: IDisplayElement = new DisplayElement();
+            assert.strictEqual(displayElement.overflowY, Overflow.VISIBLE);
         });
         it('default cornerRadius should be 0', () => {
             const displayElement: IDisplayElement = new DisplayElement();
@@ -70,18 +78,55 @@ describe('IDisplayElement interface', () => {
             assert.isTrue(displayElement.enabled);
         });
     });
-    describe('clip', () => {
-        it('given clip is false, when clip = true, clip should be true', () => {
+    describe('overflow', () => {
+        it('given overflow is Overflow.VISIBLE, when overflow = Overflow.VISIBLE, overflow should be Overflow.VISIBLE', () => {
             const displayElement: IDisplayElement = new DisplayElement();
-            displayElement.clip = false;
-            displayElement.clip = true;
-            assert.isTrue(displayElement.clip);
+            displayElement.overflow = Overflow.VISIBLE;
+            assert.strictEqual(displayElement.overflow, Overflow.VISIBLE);
         });
-        it('given clip is true, when clip = false, clip should be false', () => {
+        it('given overflow is Overflow.VISIBLE, when overflow = Overflow.HIDDEN, overflow should be overflow.HIDDEN', () => {
             const displayElement: IDisplayElement = new DisplayElement();
-            displayElement.clip = true;
-            displayElement.clip = false;
-            assert.isFalse(displayElement.clip);
+            displayElement.overflow = Overflow.HIDDEN;
+            assert.strictEqual(displayElement.overflow, Overflow.HIDDEN);
+        });
+        it('given overflow is Overflow.VISIBLE, when overflow = Overflow.SCROLL, overflow should be overflow.SCROLL', () => {
+            const displayElement: IDisplayElement = new DisplayElement();
+            displayElement.overflow = Overflow.SCROLL;
+            assert.strictEqual(displayElement.overflow, Overflow.SCROLL);
+        });
+    });
+    describe('overflowX', () => {
+        it('given overflowX is Overflow.VISIBLE, when overflowX = Overflow.VISIBLE, overflowX should be Overflow.VISIBLE', () => {
+            const displayElement: IDisplayElement = new DisplayElement();
+            displayElement.overflowX = Overflow.VISIBLE;
+            assert.strictEqual(displayElement.overflowX, Overflow.VISIBLE);
+        });
+        it('given overflowX is Overflow.VISIBLE, when overflowX = Overflow.HIDDEN, overflowX should be overflow.HIDDEN', () => {
+            const displayElement: IDisplayElement = new DisplayElement();
+            displayElement.overflowX = Overflow.HIDDEN;
+            assert.strictEqual(displayElement.overflowX, Overflow.HIDDEN);
+        });
+        it('given overflowX is Overflow.VISIBLE, when overflowX = Overflow.SCROLL, overflowX should be overflow.SCROLL', () => {
+            const displayElement: IDisplayElement = new DisplayElement();
+            displayElement.overflowX = Overflow.SCROLL;
+            assert.strictEqual(displayElement.overflowX, Overflow.SCROLL);
+        });
+    });
+    describe('overflowY', () => {
+        it('given overflowY is Overflow.VISIBLE, when overflowY = Overflow.VISIBLE, overflowY should be Overflow.VISIBLE', () => {
+            const displayElement: IDisplayElement = new DisplayElement();
+            displayElement.overflowY = Overflow.VISIBLE;
+            assert.strictEqual(displayElement.overflowY, Overflow.VISIBLE);
+        });
+        it('given overflowY is Overflow.VISIBLE, when overflowY = Overflow.HIDDEN, overflowY should be overflow.HIDDEN', () => {
+            const displayElement: IDisplayElement = new DisplayElement();
+            displayElement.overflowY = Overflow.HIDDEN;
+            assert.strictEqual(displayElement.overflowY, Overflow.HIDDEN);
+        });
+        it('given overflowY is Overflow.VISIBLE, when overflowY = Overflow.SCROLL, overflowY should be overflow.SCROLL', () => {
+            const displayElement: IDisplayElement = new DisplayElement();
+            displayElement.overflowY = Overflow.SCROLL;
+            assert.strictEqual(displayElement.overflowY, Overflow.SCROLL);
         });
     });
     describe('cornerRadius', () => {
