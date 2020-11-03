@@ -1,5 +1,9 @@
 import PositionElement from './PositionElement';
 import ISizeElement from '../interfaces/core/ISizeElement';
+import ILayoutElement from '../interfaces/core/ILayoutElement';
+import IDisplayContainer from '../interfaces/containers/IDisplayContainer';
+import { HorizontalAlign } from '../enums/HorizontalAlign';
+import { VerticalAlign } from '../enums/VerticalAlign';
 
 export default class SizeElement extends PositionElement implements ISizeElement {
     public constructor() {
@@ -338,6 +342,40 @@ export default class SizeElement extends PositionElement implements ISizeElement
 
     public get maxHeight(): number {
         return this._maxHeight;
+    }
+
+    protected hasExplicitSize(element: ILayoutElement): boolean {
+        return this.hasExplicitWidth(element) && this.hasExplicitHeight(element);
+    }
+
+    protected hasExplicitWidth(element: ILayoutElement): boolean {
+        if (!isNaN(element.width)) {
+            return true;
+        }
+        if (!isNaN(element.percentWidth)) {
+            return true;
+        }
+        if (!isNaN(element.left) && !isNaN(element.right)) {
+            return true;
+        }
+        const node: Node = element as unknown as Node;
+        const parent: IDisplayContainer = node.parentNode as unknown as IDisplayContainer;
+        return parent.horizontalAlign === HorizontalAlign.FILL;
+    }
+
+    protected hasExplicitHeight(element: ILayoutElement): boolean {
+        if (!isNaN(element.height)) {
+            return true;
+        }
+        if (!isNaN(element.percentHeight)) {
+            return true;
+        }
+        if (!isNaN(element.top) && !isNaN(element.bottom)) {
+            return true;
+        }
+        const node: Node = element as unknown as Node;
+        const parent: IDisplayContainer = node.parentNode as unknown as IDisplayContainer;
+        return parent.verticalAlign === VerticalAlign.FILL;
     }
 }
 customElements.define('size-element', SizeElement);

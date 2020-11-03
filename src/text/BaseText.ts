@@ -1,9 +1,6 @@
 import DisplayElement from '../core/DisplayElement';
 import { Events } from '../enums/Events';
-import { HorizontalAlign } from '../enums/HorizontalAlign';
 import { TextAlign } from '../enums/TextAlign';
-import { VerticalAlign } from '../enums/VerticalAlign';
-import IDisplayContainer from '../interfaces/containers/IDisplayContainer';
 import IBaseText from '../interfaces/text/IBaseText';
 import ITextRenderer from '../interfaces/text/ITextRenderer';
 import ITypeFace from '../interfaces/text/ITypeFace';
@@ -22,40 +19,6 @@ export default class BaseText extends DisplayElement implements IBaseText {
             this._textRenderer = new TextRenderer();
         }
         return this._textRenderer;
-    }
-
-    protected get hasExplicitSize(): boolean {
-        return this.hasExplicitWidth && this.hasExplicitHeight;
-    }
-
-    protected get hasExplicitWidth(): boolean {
-        if (!isNaN(this.width)) {
-            return true;
-        }
-        if (!isNaN(this.percentWidth)) {
-            return true;
-        }
-        if (!isNaN(this.left) && !isNaN(this.right)) {
-            return true;
-        }
-        const node: Node = this as unknown as Node;
-        const parent: IDisplayContainer = node.parentNode as unknown as IDisplayContainer;
-        return parent.horizontalAlign === HorizontalAlign.FILL;
-    }
-
-    protected get hasExplicitHeight(): boolean {
-        if (!isNaN(this.height)) {
-            return true;
-        }
-        if (!isNaN(this.percentHeight)) {
-            return true;
-        }
-        if (!isNaN(this.top) && !isNaN(this.bottom)) {
-            return true;
-        }
-        const node: Node = this as unknown as Node;
-        const parent: IDisplayContainer = node.parentNode as unknown as IDisplayContainer;
-        return parent.verticalAlign === VerticalAlign.FILL;
     }
 
     public set text(value: string) {
@@ -128,17 +91,17 @@ export default class BaseText extends DisplayElement implements IBaseText {
     }
 
     protected invalidateInternalSize(topPadding: number, offsetX: number): void {
-        if (this.hasExplicitSize) {
+        if (this.hasExplicitSize(this)) {
             this.textRenderer.setActualSize(this.actualWidth, this.actualHeight);
             return;
         }
-        if (this.hasExplicitWidth && !this.hasExplicitHeight) {
+        if (this.hasExplicitWidth(this) && !this.hasExplicitHeight(this)) {
             this.textRenderer.actualWidth = this.actualWidth;
             this.actualHeight = Math.ceil(this.textRenderer.clientHeight - topPadding);
             this.dispatchEventWith(Events.INTERNAL_SIZE_CHANGED, this, true);
             return;
         }
-        if (!this.hasExplicitWidth && this.hasExplicitHeight) {
+        if (!this.hasExplicitWidth(this) && this.hasExplicitHeight(this)) {
             this.textRenderer.actualHeight = this.actualHeight;
             this.actualWidth = Math.ceil(this.textRenderer.clientWidth - offsetX * 2);
             this.dispatchEventWith(Events.INTERNAL_SIZE_CHANGED, this, true);
