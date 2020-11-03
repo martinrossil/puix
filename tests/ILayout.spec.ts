@@ -301,4 +301,30 @@ describe('Physical Sizing', () => {
             });
         });
     });
+    describe('AnchorLayout', () => {
+        describe('Given container size 500, 500', () => {
+            describe('Given child size 300, 300', () => {
+                it('when child.horizontalCenter = 0, child.x should be 100', () => {
+                    const container: IDisplayContainer = new DisplayContainer();
+                    container.setSize(500, 500);
+                    const child: IDisplayElement = new DisplayElement();
+                    child.setSize(300, 300);
+                    child.horizontalCenter = 0;
+                    container.addElement(child);
+                    document.body.appendChild(container as unknown as Node);
+                    assert.strictEqual(child.x, 100);
+                });
+                it('when child.verticalCenter = 0, child.y should be 100', () => {
+                    const container: IDisplayContainer = new DisplayContainer();
+                    container.setSize(500, 500);
+                    const child: IDisplayElement = new DisplayElement();
+                    child.setSize(300, 300);
+                    child.verticalCenter = 0;
+                    container.addElement(child);
+                    document.body.appendChild(container as unknown as Node);
+                    assert.strictEqual(child.y, 100);
+                });
+            });
+        });
+    });
 });
