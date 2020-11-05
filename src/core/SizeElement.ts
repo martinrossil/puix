@@ -169,7 +169,11 @@ export default class SizeElement extends PositionElement implements ISizeElement
             this.invalidateDisplay();
             return;
         }
-        this._actualWidth = this.getValidMinMaxWidth(value);
+        const validWidth = this.getValidMinMaxWidth(value);
+        if (this._actualWidth === validWidth) {
+            return;
+        }
+        this._actualWidth = validWidth;
         this.style.width = this._actualWidth + 'px';
         this.invalidateDisplay();
     }
@@ -192,7 +196,11 @@ export default class SizeElement extends PositionElement implements ISizeElement
             this.invalidateDisplay();
             return;
         }
-        this._width = this._actualWidth = this.getValidMinMaxWidth(value);
+        const validWidth = this.getValidMinMaxWidth(value);
+        if (this._width === validWidth) {
+            return;
+        }
+        this._width = this._actualWidth = validWidth;
         this.style.width = this._actualWidth + 'px';
         this.invalidateDisplay();
     }
@@ -280,7 +288,11 @@ export default class SizeElement extends PositionElement implements ISizeElement
             this.invalidateDisplay();
             return;
         }
-        this._actualHeight = this.getValidMinMaxHeight(value);
+        const validHeight = this.getValidMinMaxHeight(value);
+        if (this._actualHeight === validHeight) {
+            return;
+        }
+        this._actualHeight = validHeight;
         this.style.height = this._actualHeight + 'px';
         this.invalidateDisplay();
     }
@@ -303,7 +315,11 @@ export default class SizeElement extends PositionElement implements ISizeElement
             this.invalidateDisplay();
             return;
         }
-        this._height = this._actualHeight = this.getValidMinMaxHeight(value);
+        const validHeight = this.getValidMinMaxHeight(value);
+        if (this._height === validHeight) {
+            return;
+        }
+        this._height = this._actualHeight = validHeight;
         this.style.height = this._actualHeight + 'px';
         this.invalidateDisplay();
     }
