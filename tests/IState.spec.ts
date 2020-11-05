@@ -9,10 +9,5 @@ describe('IState', () => {
             const state: IState = new State(name);
             assert.strictEqual(state.name, name);
         });
-        it('event should be null', () => {
-            const name = 'state name';
-            const state: IState = new State(name);
-            assert.isNull(state.event);
-        });
     });
 });
