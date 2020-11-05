@@ -1,5 +1,5 @@
 import ILifeCycleElement from '../interfaces/core/ILifeCycleElement';
-import EventDispatcherElement from './EventDispatcherElement';
+import EventDispatcherElement from '../events/EventDispatcherElement';
 
 export default class LifeCycleElement extends EventDispatcherElement implements ILifeCycleElement {
     public constructor() {

@@ -1,4 +1,4 @@
-import IEventDispatcher from '../core/IEventDispatcher';
+import IEventDispatcher from '../events/IEventDispatcher';
 
 export default interface IArrayList<Item> extends IEventDispatcher {
     addItem(item: Item): void;

@@ -1,4 +1,4 @@
-import EventDispatcher from '../core/EventDispatcher';
+import EventDispatcher from '../events/EventDispatcher';
 import ITween from '../interfaces/animation/ITween';
 import IElementCSSInlineStyle from '../interfaces/style/IElementCSSInlineStyle';
 

@@ -1,11 +1,11 @@
-import IEventDispatcher from '../interfaces/core/IEventDispatcher';
+import IEventDispatcher from '../interfaces/events/IEventDispatcher';
 
 export default class EventDispatcherElement extends HTMLElement implements IEventDispatcher {
     public constructor() {
         super();
     }
 
-    public dispatchEventWith<T>(typeArg: string, payload: T | undefined = undefined, bubbles = false): void {
+    public dispatchCustomEvent<T>(typeArg: string, payload: T | undefined = undefined, bubbles = false): void {
         const customEvent: CustomEvent<T> = new CustomEvent<T>(typeArg, { bubbles: bubbles, detail: payload });
         this.dispatchEvent(customEvent);
     }

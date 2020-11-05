@@ -19,7 +19,7 @@ export default class ApplicationElement extends DisplayContainer implements IApp
 
     public connectedCallback(): void {
         super.connectedCallback();
-        this.dispatchEventWith(Events.APPLICATION_COMPLETE);
+        this.dispatchCustomEvent(Events.APPLICATION_COMPLETE);
     }
 
     private updateSize(): void {

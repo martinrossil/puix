@@ -1,5 +1,4 @@
-import IEventDispatcher from '../interfaces/core/IEventDispatcher';
-import ICustomEventListener from '../interfaces/events/ICustomEventListener';
+import IEventDispatcher from '../interfaces/events/IEventDispatcher';
 import IEventListener from '../interfaces/events/IEventListener';
 
 export default class EventDispatcher implements IEventDispatcher {
@@ -15,10 +14,10 @@ export default class EventDispatcher implements IEventDispatcher {
         return true;
     }
 
-    public dispatchEventWith<T>(type: string, payload: T | undefined = undefined): void {
-        const typeListeners: ICustomEventListener<T>[] | undefined = this.listeners.get(type);
+    public dispatchCustomEvent<Item>(type: string, payload: Item | undefined = undefined): void {
+        const typeListeners: IEventListener[] | undefined = this.listeners.get(type);
         if (typeListeners !== undefined) {
-            const customEvent: CustomEvent<T> = new CustomEvent<T>(type, { detail: payload });
+            const customEvent: CustomEvent<Item> = new CustomEvent<Item>(type, { detail: payload });
             for (const listener of typeListeners) {
                 listener(customEvent);
             }
