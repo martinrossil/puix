@@ -41,8 +41,8 @@ describe('IEventDispatcher interface', () => {
             eventDispatcher.addEventListener('test', () => {
                 handlerHasBeenCalled2 = true;
             });
-            eventDispatcherElement.dispatchEventWith('test', this, false);
-            eventDispatcher.dispatchEventWith('test', this, false);
+            eventDispatcherElement.dispatchCustomEvent('test', this, false);
+            eventDispatcher.dispatchCustomEvent('test', this, false);
             assert.isTrue(handlerHasBeenCalled);
             assert.isTrue(handlerHasBeenCalled2);
         });
@@ -80,8 +80,8 @@ describe('IEventDispatcher interface', () => {
             eventDispatcher.addEventListener('test', eventHandler2);
             eventDispatcherElement.removeEventListener('test', eventHandler);
             eventDispatcher.removeEventListener('test', eventHandler2);
-            eventDispatcherElement.dispatchEventWith('test', this, false);
-            eventDispatcher.dispatchEventWith('test', this, false);
+            eventDispatcherElement.dispatchCustomEvent('test', this, false);
+            eventDispatcher.dispatchCustomEvent('test', this, false);
             assert.isFalse(handlerHasBeenCalled);
             assert.isFalse(handlerHasBeenCalled2);
         });
