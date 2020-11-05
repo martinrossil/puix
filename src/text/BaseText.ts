@@ -91,24 +91,24 @@ export default class BaseText extends DisplayElement implements IBaseText {
     }
 
     protected invalidateInternalSize(topPadding: number, offsetX: number): void {
-        if (this.hasExplicitSize(this)) {
+        if (this.hasExplicitWidth(this) && this.hasExplicitHeight(this)) {
             this.textRenderer.setActualSize(this.actualWidth, this.actualHeight);
             return;
         }
         if (this.hasExplicitWidth(this) && !this.hasExplicitHeight(this)) {
             this.textRenderer.actualWidth = this.actualWidth;
             this.actualHeight = Math.ceil(this.textRenderer.clientHeight - topPadding);
-            this.dispatchEventWith(Events.INTERNAL_SIZE_CHANGED, this, true);
+            this.dispatchCustomEvent(Events.INTERNAL_SIZE_CHANGED, this, true);
             return;
         }
         if (!this.hasExplicitWidth(this) && this.hasExplicitHeight(this)) {
             this.textRenderer.actualHeight = this.actualHeight;
             this.actualWidth = Math.ceil(this.textRenderer.clientWidth - offsetX * 2);
-            this.dispatchEventWith(Events.INTERNAL_SIZE_CHANGED, this, true);
+            this.dispatchCustomEvent(Events.INTERNAL_SIZE_CHANGED, this, true);
             return;
         }
         this.setActualSize(Math.ceil(this.textRenderer.clientWidth - offsetX * 2), Math.ceil(this.textRenderer.clientHeight - topPadding));
-        this.dispatchEventWith(Events.INTERNAL_SIZE_CHANGED, this, true);
+        this.dispatchCustomEvent(Events.INTERNAL_SIZE_CHANGED, this, true);
     }
 }
 customElements.define('base-text', BaseText);
