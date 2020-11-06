@@ -5,6 +5,7 @@ export default class TextElement extends BaseText implements ITextElement {
     public constructor() {
         super();
         this.name = 'TextElement';
+        this.enabled = false;
         this.appendChild(this.textRenderer as unknown as Node);
     }
 

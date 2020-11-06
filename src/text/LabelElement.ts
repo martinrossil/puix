@@ -8,6 +8,7 @@ export default class LabelElement extends BaseText implements ILabelElement {
     public constructor() {
         super();
         this.name = 'LabelElement';
+        this.enabled = false;
         this.textRenderer.whiteSpace = WhiteSpace.NO_WRAP;
         this.textRenderer.textOverflow = TextOverflow.ELLIPSIS;
         this.textRenderer.overflow = Overflow.HIDDEN;
