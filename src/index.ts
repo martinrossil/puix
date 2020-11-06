@@ -13,7 +13,7 @@ export { default as SizeElement } from './core/SizeElement';
 
 export { default as ArrayList } from './data/ArrayList';
 
-export { default as DefaultItemRenderer } from './elements/DefaultItemRenderer';
+export { default as BaseItemRenderer } from './elements/BaseItemRenderer';
 export { default as IconElement } from './elements/IconElement';
 export { default as ListElement } from './elements/ListElement';
 export { default as RippleElement } from './elements/RippleElement';
