@@ -1,4 +1,3 @@
-import { Events } from '../enums/Events';
 import EventDispatcher from '../events/EventDispatcher';
 import IEventDispatcher from '../interfaces/events/IEventDispatcher';
 import IFSM from '../interfaces/fsm/IFSM';
@@ -6,35 +5,33 @@ import IState from '../interfaces/fsm/IState';
 import State from './State';
 
 export default class FSM extends EventDispatcher implements IFSM {
-    protected host: IEventDispatcher;
+    public static STATE_CHANGED = 'stateChanged';
     public current: IState;
-    private states: Set<IState> = new Set();
+    protected host: IEventDispatcher;
+
     public constructor(host: IEventDispatcher) {
         super();
         this.host = host;
         this.current = this.initial;
-        this.addState(this.initial);
         this.send = this.send.bind(this);
     }
 
     protected readonly initial: IState = new State('initial');
 
-    protected addState(state: IState): void {
-        this.states.add(state);
-    }
-
     protected send(e: Event): void {
         const state: IState = this.current.getState(e.type);
         if (this.current !== state) {
-            if (this.current.exitState) {
-                this.current.exitState(state, e);
+            if (this.current.exit) {
+                this.current.exit(e);
             }
-            const previous: IState = this.current;
             this.current = state;
-            if (this.current.enterState) {
-                this.current.enterState(previous, e);
+            if (this.current.enter) {
+                this.current.enter(e);
             }
-            this.dispatchCustomEvent(Events.STATE_CHANGED, state);
+            this.dispatchCustomEvent(FSM.STATE_CHANGED, state);
+            if (this.current.on) {
+                this.current.on(e);
+            }
         }
     }
 }
