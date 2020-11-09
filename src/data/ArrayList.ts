@@ -3,9 +3,14 @@ import IArrayList from '../interfaces/data/IArrayList';
 import EventDispatcher from '../events/EventDispatcher';
 
 export default class ArrayList<Item> extends EventDispatcher implements IArrayList<Item> {
-    public constructor() {
+    public constructor(items: Item[] | null = null) {
         super();
         this.name = 'ArrayList';
+        if (items) {
+            this._arrayData = items;
+            return;
+        }
+        this._arrayData = [];
     }
 
     public addItem(item: Item): void {
@@ -19,10 +24,17 @@ export default class ArrayList<Item> extends EventDispatcher implements IArrayLi
     }
 
     public getItemIndex(item: Item): number {
-        return this.arrayData.indexOf(item);
+        const index = this.arrayData.indexOf(item);
+        if (index === -1) {
+            return NaN;
+        }
+        return index;
     }
 
     public getItemAt(index: number): Item | null {
+        if (index < 0) {
+            return null;
+        }
         if (index < this.arrayData.length) {
             return this.arrayData[index];
         }
@@ -56,7 +68,7 @@ export default class ArrayList<Item> extends EventDispatcher implements IArrayLi
         return this.arrayData.length;
     }
 
-    private _arrayData: Item[] = [];
+    private _arrayData: Item[];
 
     public get arrayData(): Item[] {
         return this._arrayData;
