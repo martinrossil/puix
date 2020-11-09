@@ -1,4 +1,3 @@
-import ArrayList from '../data/ArrayList';
 import { Events } from '../enums/Events';
 import IListElement from '../interfaces/containers/IListElement';
 import IArrayList from '../interfaces/data/IArrayList';
@@ -8,6 +7,7 @@ import ScrollContainer from '../containers/ScrollContainer';
 import IEventListener from '../interfaces/events/IEventListener';
 
 export default class ListElement<Item> extends ScrollContainer implements IListElement<Item> {
+    public static SELECTED_ITEM_CHANGED = 'selectedItemChanged';
     private dataRendererLookup: Map<Item, IItemRenderer<Item> | undefined> = new Map();
     public constructor() {
         super();
@@ -21,8 +21,18 @@ export default class ListElement<Item> extends ScrollContainer implements IListE
 
     private listItemClicked(e: CustomEvent<Item>): void {
         e.stopImmediatePropagation();
-        this.selectedIndex = this.dataProvider.getItemIndex(e.detail);
-        this.dispatchCustomEvent(Events.SELECTED_INDEX_CHANGED, this.selectedIndex);
+        let itemIndex = NaN;
+        if (this.dataProvider) {
+            itemIndex = this.dataProvider.getItemIndex(e.detail);
+        }
+        if (isNaN(this.selectedIndex) && isNaN(itemIndex)) {
+            return;
+        }
+        if (this.selectedIndex === itemIndex) {
+            return;
+        }
+        this.selectedIndex = itemIndex;
+        this.dispatchCustomEvent(ListElement.SELECTED_ITEM_CHANGED, this.selectedItem);
     }
 
     private updateSelectedItemRenderer(): void {
@@ -30,7 +40,7 @@ export default class ListElement<Item> extends ScrollContainer implements IListE
             if (itemRenderer) {
                 itemRenderer.selected = false;
             }
-        })
+        });
         if (this.selectedItemRenderer) {
             this.selectedItemRenderer.selected = true;
         }
@@ -62,8 +72,12 @@ export default class ListElement<Item> extends ScrollContainer implements IListE
     }
 
     private itemsAdded(e: CustomEvent<Item[]>): void {
+        this.addItemRenderers(e.detail);
+    }
+
+    private addItemRenderers(items: Item[]): void {
         const itemRenderers: IItemRenderer<Item>[] = [];
-        for (const item of e.detail) {
+        for (const item of items) {
             const itemRenderer: IItemRenderer<Item> = new this.ItemRenderer();
             itemRenderer.data = item;
             this.dataRendererLookup.set(item, itemRenderer);
@@ -73,26 +87,45 @@ export default class ListElement<Item> extends ScrollContainer implements IListE
         this.updateSelectedItemRenderer();
     }
 
-    private itemRemoved<Item>(e: CustomEvent<Item>): void {
-        console.log(e.type, e.detail);
+    private itemRemoved(e: CustomEvent<Item>): void {
+        const itemRenderer: IItemRenderer<Item> | undefined = this.dataRendererLookup.get(e.detail);
+        if (itemRenderer) {
+            this.removeElement(itemRenderer);
+        }
         this.updateSelectedItemRenderer();
     }
 
     private reset(): void {
-        console.log('reset');
-        this.updateSelectedItemRenderer();
+        this.removeAllElements();
+        this.dataRendererLookup.clear();
+        if (this.dataProvider) {
+            this.addItemRenderers(this.dataProvider.arrayData);
+        }
     }
 
-    private _dataProvider!: IArrayList<Item>;
+    private _dataProvider: IArrayList<Item> | null = null;
 
-    public get dataProvider(): IArrayList<Item> {
-        if (!this._dataProvider) {
-            this._dataProvider = new ArrayList<Item>();
+    public set dataProvider(value: IArrayList<Item> | null) {
+        if (this._dataProvider === value) {
+            return;
+        }
+        if (this._dataProvider) {
+            this._dataProvider.removeEventListener(Events.ITEM_ADDED, this.itemAdded as IEventListener);
+            this._dataProvider.removeEventListener(Events.ITEMS_ADDED, this.itemsAdded as IEventListener);
+            this._dataProvider.removeEventListener(Events.ITEM_REMOVED, this.itemRemoved as IEventListener);
+            this._dataProvider.removeEventListener(Events.RESET, this.reset);
+        }
+        this._dataProvider = value;
+        if (this._dataProvider) {
             this._dataProvider.addEventListener(Events.ITEM_ADDED, this.itemAdded as IEventListener);
             this._dataProvider.addEventListener(Events.ITEMS_ADDED, this.itemsAdded as IEventListener);
             this._dataProvider.addEventListener(Events.ITEM_REMOVED, this.itemRemoved as IEventListener);
             this._dataProvider.addEventListener(Events.RESET, this.reset);
         }
+        this.reset();
+    }
+
+    public get dataProvider(): IArrayList<Item> | null{
         return this._dataProvider;
     }
 
@@ -104,7 +137,10 @@ export default class ListElement<Item> extends ScrollContainer implements IListE
     }
 
     public get selectedItem(): Item | null {
-        return this.dataProvider.getItemAt(this.selectedIndex);
+        if (this.dataProvider) {
+            return this.dataProvider.getItemAt(this.selectedIndex);
+        }
+        return null;
     }
 
     private _selectedIndex = NaN;
