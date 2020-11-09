@@ -1,10 +1,28 @@
 import DisplayContainer from '../containers/DisplayContainer'
+import FSM from '../fsm/FSM';
+import TouchMouseFSM from '../fsm/TouchMouseFSM';
 import IItemRenderer from '../interfaces/data/IItemRenderer';
+import IEventListener from '../interfaces/events/IEventListener';
+import IState from '../interfaces/fsm/IState';
 
 export default class BaseItemRenderer<Item> extends DisplayContainer implements IItemRenderer<Item> {
     public constructor() {
         super();
-        this.name = 'BaseItemRenderer'
+        this.name = 'BaseItemRenderer';
+        this.touchMouseFSM.addEventListener(FSM.STATE_CHANGED, this.stateChanged.bind(this) as IEventListener);
+    }
+
+    public get currentState(): IState {
+        return this.touchMouseFSM.current;
+    }
+
+    private _touchMouseFSM!: TouchMouseFSM;
+
+    private get touchMouseFSM(): TouchMouseFSM {
+        if (!this._touchMouseFSM) {
+            this._touchMouseFSM = new TouchMouseFSM(this);
+        }
+        return this._touchMouseFSM;
     }
 
     protected dataChanged(): void {
@@ -12,6 +30,10 @@ export default class BaseItemRenderer<Item> extends DisplayContainer implements 
     }
 
     protected selectedChanged(): void {
+        // override
+    }
+
+    protected stateChanged(): void {
         // override
     }
 
