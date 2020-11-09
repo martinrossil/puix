@@ -1,10 +1,10 @@
-import IEnterState from './IEnterState';
-import IExitState from './IExitState';
+import IEventListener from '../events/IEventListener';
 
 export default interface IState {
     name: string;
-    enterState: IEnterState | null;
-    exitState: IExitState | null;
+    enter: IEventListener | null;
+    on: IEventListener | null;
+    exit: IEventListener | null;
     addTransition(type: string, target: IState): void;
     getState(type: string): IState;
 }
