@@ -8,6 +8,6 @@ export default interface IArrayList<Item> extends IEventDispatcher {
     removeItem(item: Item): void;
     removeItemAt(index: number): void;
     removeAll(): void;
-    arrayData: Item[];
+    readonly arrayData: Item[];
     readonly length: number;
 }
