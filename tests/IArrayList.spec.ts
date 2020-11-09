@@ -87,10 +87,10 @@ describe('IArrayList interface', () => {
             const aliceIndex = arrayList.getItemIndex('alice');
             assert.strictEqual(aliceIndex, 1);
         });
-        it('when getItemIndex("not in array"), index should be -1', () => {
+        it('when getItemIndex("not in array"), index should be NaN', () => {
             const arrayList: IArrayList<string> = new ArrayList();
             const notIndex = arrayList.getItemIndex('not in array');
-            assert.strictEqual(notIndex, -1);
+            assert.isNaN(notIndex);
         });
     });
     describe('getItemAt(index: number): Item | null, given the IArrayList includes "bob" and "alice"', () => {
