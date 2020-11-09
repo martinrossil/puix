@@ -3,8 +3,8 @@ import IItemRenderer from '../data/IItemRenderer';
 import IScrollContainer from './IScrollContainer';
 
 export default interface IListElement<Item> extends IScrollContainer {
-    readonly dataProvider: IArrayList<Item>;
+    dataProvider: IArrayList<Item> | null;
     ItemRenderer: new () => IItemRenderer<Item>;
-    readonly selectedItem: Item | null;
     selectedIndex: number;
+    readonly selectedItem: Item | null;
 }
