@@ -34,8 +34,8 @@ export { default as EventDispatcher } from './events/EventDispatcher';
 export { default as EventDispatcherElement } from './events/EventDispatcherElement';
 
 export { default as FSM } from './fsm/FSM';
-export { default as InteractiveMachine } from './fsm/InteractiveMachine';
 export { default as State } from './fsm/State';
+export { default as TouchMouseFSM } from './fsm/TouchMouseFSM';
 
 export { default as ITween } from './interfaces/animation/ITween';
 
@@ -51,7 +51,6 @@ export { default as IPositionElement } from './interfaces/core/IPositionElement'
 export { default as ISizeElement } from './interfaces/core/ISizeElement';
 
 export { default as IArrayList } from './interfaces/data/IArrayList';
-export { default as IData } from './interfaces/data/IData';
 export { default as IItemRenderer } from './interfaces/data/IItemRenderer';
 
 export { default as IIconElement } from './interfaces/elements/IIconElement';
@@ -60,8 +59,7 @@ export { default as IRippleElement } from './interfaces/elements/IRippleElement'
 export { default as IEventDispatcher } from './interfaces/events/IEventDispatcher';
 export { default as IEventListener } from './interfaces/events/IEventListener';
 
-export { default as IEnterState } from './interfaces/fsm/IEnterState';
-export { default as IExitState } from './interfaces/fsm/IExitState';
+export { default as IFSM } from './interfaces/fsm/IFSM';
 export { default as IState } from './interfaces/fsm/IState';
 
 export { default as ILayout } from './interfaces/layouts/ILayout';
@@ -96,3 +94,8 @@ export { default as TextRenderer } from './text/TextRenderer';
 export { default as TypeFace } from './text/TypeFace';
 
 export { default as Point } from './vo/Point';
+
+export { Icons } from './zapp/Icons';
+export { default as IMenuItem } from './zapp/IMenuItem';
+export { default as MenuItem } from './zapp/MenuItem';
+export { default as MenuItemRenderer } from './zapp/MenuItemRenderer';
