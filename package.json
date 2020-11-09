@@ -1,6 +1,6 @@
 {
   "name": "puix",
-  "version": "0.7.10",
+  "version": "0.7.11",
   "description": "Pure UI framework",
   "sideEffects": false,
   "main": "dist/index.js",
