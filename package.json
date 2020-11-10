@@ -3,6 +3,7 @@
   "version": "0.7.11",
   "description": "Pure UI framework",
   "sideEffects": false,
+  "type": "module",
   "main": "dist/index.js",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
