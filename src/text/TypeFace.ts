@@ -2,16 +2,24 @@ import { FontWeight } from '../enums/FontWeight';
 
 /**
  * Verdana 400 capHeight = 0.73, verticalOffset = 0.044, horizontalOffset = 0.13;
- * Inter 400 capHeight = 0.727, verticalOffset = 0.002, horizontalOffset = 0.121;
- * Inter 500 capHeight = 0.727, verticalOffset = 0.000, horizontalOffset = 0.11;
- * Inter 700 capHeight = 0.727, verticalOffset = 0.002, horizontalOffset = 0.086;
  * Montserrat 400 capHeight = 0.7, verticalOffset = -0.013, horizontalOffset = 0.163;
  * SegoeUI 400 capHeight = 0.7, verticalOffset = -0.091, horizontalOffset = 0.13;
  * SegoeUI 600 capHeight = 0.7, verticalOffset = -0.091, horizontalOffset = 0.123;
+ *
+ * new TypeFace('Arial', FontWeight.REGULAR_400, 0.715, 0.11, 0.015);
+ * new TypeFace('Arial', FontWeight.MEDIUM_500, 0.715, 0.11, 0.015);
+ * new TypeFace('Arial', FontWeight.BOLD_700, 0.715, 0.11, 0.015);
+ *
+ * new TypeFace('Inter', FontWeight.REGULAR_400, 0.727, 0.12, 0.0);
+ * new TypeFace('Inter', FontWeight.MEDIUM_500, 0.727, 0.11, 0.0);
+ * new TypeFace('Inter', FontWeight.BOLD_700, 0.727, 0.09, 0.0);
+ *
+ * new TypeFace('Eurostile', FontWeight.REGULAR_400, 0.67, 0.1, 0.01);
+ * new TypeFace('Eurostile', FontWeight.BOLD_700, 0.67, 0.09, -0.003);
  */
 
 export default class TypeFace {
-    public constructor(fontFamily = 'Arial', fontWeight: FontWeight = FontWeight.REGULAR_400, capHeight = 0.715, xOffset = 0.11, yOffset = 0.027) {
+    public constructor(fontFamily = 'Arial', fontWeight: FontWeight = FontWeight.REGULAR_400, capHeight = 0.715, xOffset = 0.11, yOffset = 0.015) {
         this.fontFamily = fontFamily;
         this.fontWeight = fontWeight;
         this.capHeight = capHeight;
@@ -79,14 +87,14 @@ export default class TypeFace {
         return this._xOffset;
     }
 
-    private _yOffset = 0.027;
+    private _yOffset = 0.015;
 
     public set yOffset(value: number) {
         if (this._yOffset === value) {
             return;
         }
         if (isNaN(value)) {
-            this._yOffset = 0.027;
+            this._yOffset = 0.015;
         } else {
             this._yOffset = value;
         }
