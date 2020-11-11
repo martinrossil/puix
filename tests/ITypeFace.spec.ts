@@ -2,7 +2,7 @@ import { assert } from 'chai';
 import { describe, it } from 'mocha';
 import { FontWeight, ITypeFace, TypeFace } from '../src';
 
-describe('ItextRenderer', () => {
+describe('ITypeFace', () => {
     describe('default values', () => {
         it('fontFamily should be "Arial"', () => {
             const typeFace: ITypeFace = new TypeFace();
@@ -20,9 +20,9 @@ describe('ItextRenderer', () => {
             const typeFace: ITypeFace = new TypeFace();
             assert.strictEqual(typeFace.xOffset, 0.11);
         });
-        it('yOffset should be 0.027', () => {
+        it('yOffset should be 0.015', () => {
             const typeFace: ITypeFace = new TypeFace();
-            assert.strictEqual(typeFace.yOffset, 0.027);
+            assert.strictEqual(typeFace.yOffset, 0.015);
         });
     });
     describe('fontFamily', () => {
@@ -89,17 +89,17 @@ describe('ItextRenderer', () => {
         });
     });
     describe('yOffset', () => {
-        it('given yOffset is 0.027, when yOffset = 0.027, yOffset should be 0.027', () => {
+        it('given yOffset is 0.015, when yOffset = 0.015, yOffset should be 0.015', () => {
             const typeFace: ITypeFace = new TypeFace();
-            typeFace.yOffset = 0.027;
-            assert.strictEqual(typeFace.yOffset, 0.027);
+            typeFace.yOffset = 0.015;
+            assert.strictEqual(typeFace.yOffset, 0.015);
         });
-        it('given yOffset is 0.027, when yOffset = NaN, yOffset should be 0.027', () => {
+        it('given yOffset is 0.015, when yOffset = NaN, yOffset should be 0.027', () => {
             const typeFace: ITypeFace = new TypeFace();
             typeFace.yOffset = NaN;
-            assert.strictEqual(typeFace.yOffset, 0.027);
+            assert.strictEqual(typeFace.yOffset, 0.015);
         });
-        it('given yOffset is 0.027, when yOffset = 0.03, yOffset should be 0.03', () => {
+        it('given yOffset is 0.015, when yOffset = 0.03, yOffset should be 0.03', () => {
             const typeFace: ITypeFace = new TypeFace();
             typeFace.yOffset = 0.03;
             assert.strictEqual(typeFace.yOffset, 0.03);
