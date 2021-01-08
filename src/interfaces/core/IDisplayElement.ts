@@ -11,5 +11,4 @@ export default interface IDisplayElement extends ILayoutElement {
     tabIndex: number;
     cursor: string;
     backgroundColor: string;
-    shadow: string;
 }
