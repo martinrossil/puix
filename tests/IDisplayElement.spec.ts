@@ -169,7 +169,7 @@ describe('IDisplayElement interface', () => {
             assert.strictEqual(displayElement.cursor, Cursor.NONE);
         });
     });
-    describe('shadow', () => {
+    /* describe('shadow', () => {
         it('given shadow is "", when shadow = "", shadow should be ""', () => {
             const displayElement: IDisplayElement = new DisplayElement();
             displayElement.shadow = '';
@@ -186,7 +186,7 @@ describe('IDisplayElement interface', () => {
             displayElement.shadow = '';
             assert.strictEqual(displayElement.shadow, '');
         });
-    });
+    }); */
     describe('backgroundColor', () => {
         it('given backgroundColor is "", when backgroundColor = "", backgroundColor should be ""', () => {
             const displayElement: IDisplayElement = new DisplayElement();
